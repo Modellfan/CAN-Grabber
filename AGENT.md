@@ -1,18 +1,18 @@
 # Implementierungs-Reihenfolge für AI-Agenten (Arduino + PlatformIO, ESP32-S3)
 
 ## Phase 0 – Projektgerüst & Build-Sicherheit (Foundation)
-- [ ] PlatformIO Projekt aufsetzen
-- [ ] Arduino Framework, ESP32-S3 Board
-- [ ] Library-Management (SD, WiFi, Webserver, mDNS, OTA, JSON)
-- [ ] Build-Konfigurationen: debug + release
-- [ ] Modul-/Ordnerstruktur anlegen
-- [ ] `/hardware`, `/can`, `/logging`, `/storage`, `/web`, `/rest`, `/gvret`, `/net`, `/ota`, `/upload`, `/influx`, `/dbc`, `/monitoring`
-- [ ] Schnittstellen (Header) definieren, aber noch ohne Logik
-- [ ] Zentrale Hardware-Definitionsdatei
-- [ ] `hardware_config.h` (oder `.hpp`)
-- [ ] GPIOs, SPI/I2C, CAN-CS/INT, Termination Pins, SD, RTC
-- [ ] Keine Logik, nur Definitionen
-- [ ] Done wenn: Firmware kompiliert, startet, Version/Build-Info über Serial ausgibt.
+- [x] PlatformIO Projekt aufsetzen
+- [x] Arduino Framework, ESP32-S3 Board
+- [x] Library-Management (SD, WiFi, Webserver, mDNS, OTA, JSON)
+- [x] Build-Konfigurationen: debug + release
+- [x] Modul-/Ordnerstruktur anlegen
+- [x] `/hardware`, `/can`, `/logging`, `/storage`, `/web`, `/rest`, `/gvret`, `/net`, `/ota`, `/upload`, `/influx`, `/dbc`, `/monitoring`
+- [x] Schnittstellen (Header) definieren, aber noch ohne Logik
+- [x] Zentrale Hardware-Definitionsdatei
+- [x] `hardware_config.h` (oder `.hpp`)
+- [x] GPIOs, SPI/I2C, CAN-CS/INT, Termination Pins, SD, RTC
+- [x] Keine Logik, nur Definitionen
+- [x] Done wenn: Firmware kompiliert, startet, Version/Build-Info über Serial ausgibt.
 
 ## Phase 1 – Kern-Datenpfad: CAN RX → Puffer → SD (kritischster Teil)
 - [ ] Konfigurationsmodell (in RAM) + Persistenz (NVS)
@@ -157,6 +157,10 @@
 - [ ] Update + Verify
 - [ ] Status UI/REST
 - [ ] Done wenn: OTA sicher läuft, ohne Konfig-/Log-Verlust.
+
+## Debugging notes
+- Use the full PlatformIO path with quotes in PowerShell: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" ...`
+- COM9 was missing; serial monitor should use COM10 at 115200.
 
 ## Querschnitt: Definition of Done (für jedes Issue)
 - [ ] Kompiliert in PlatformIO (debug+release)
