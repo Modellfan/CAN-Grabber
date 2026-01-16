@@ -1,11 +1,11 @@
-ï»¿# CAN-Grabber
+# CAN-Grabber
 
 Funktionale Beschreibung und Anforderungen.
 
 ## Inhaltsverzeichnis
 - [1. Ziel des Systems](#1-ziel-des-systems)
-- [2. Begriffe und AbkÃ¼rzungen](#2-begriffe-und-abkurzungen)
-- [3. SystemÃ¼bersicht](#3-systemubersicht)
+- [2. Begriffe und Abkürzungen](#2-begriffe-und-abkurzungen)
+- [3. Systemübersicht](#3-systemubersicht)
   - [3.1 Gesamtarchitektur](#31-gesamtarchitektur)
   - [3.2 Hauptfunktionen](#32-hauptfunktionen)
   - [3.3 Betriebsmodi](#33-betriebsmodi)
@@ -13,7 +13,7 @@ Funktionale Beschreibung und Anforderungen.
   - [4.1 Zentrale Recheneinheit](#41-zentrale-recheneinheit)
   - [4.2 CAN-Bus-Schnittstellen](#42-can-bus-schnittstellen)
   - [4.3 CAN-Transceiver und Isolation](#43-can-transceiver-und-isolation)
-  - [4.4 AbschlusswiderstÃ¤nde (CAN-Termination)](#44-abschlusswiderstande-can-termination)
+  - [4.4 Abschlusswiderstände (CAN-Termination)](#44-abschlusswiderstande-can-termination)
   - [4.5 Echtzeituhr (RTC)](#45-echtzeituhr-rtc)
   - [4.6 Massenspeicher (MicroSD)](#46-massenspeicher-microsd)
   - [4.7 USB-Schnittstelle](#47-usb-schnittstelle)
@@ -30,13 +30,13 @@ Funktionale Beschreibung und Anforderungen.
   - [6.4 Interne Kommunikation](#64-interne-kommunikation)
   - [6.5 Zeitstempelung](#65-zeitstempelung)
   - [6.6 Persistente Konfiguration](#66-persistente-konfiguration)
-- [7. CAN-Bus-FunktionalitÃ¤t](#7-can-bus-funktionalitat)
+- [7. CAN-Bus-Funktionalität](#7-can-bus-funktionalitat)
   - [7.1 Allgemeines](#71-allgemeines)
   - [7.2 CAN-Bus-Konfiguration](#72-can-bus-konfiguration)
   - [7.3 Bitraten](#73-bitraten)
   - [7.4 Empfang von CAN-Nachrichten](#74-empfang-von-can-nachrichten)
   - [7.5 Senden von CAN-Nachrichten](#75-senden-von-can-nachrichten)
-  - [7.6 Zeit-Synchronisation Ã¼ber CAN](#76-zeit-synchronisation-uber-can)
+  - [7.6 Zeit-Synchronisation über CAN](#76-zeit-synchronisation-uber-can)
 - [8. Datenlogging](#8-datenlogging)
   - [8.1 Logging-Grundprinzip](#81-logging-grundprinzip)
   - [8.2 Log-Dateistruktur](#82-log-dateistruktur)
@@ -46,20 +46,20 @@ Funktionale Beschreibung und Anforderungen.
   - [8.6 Logging gesendeter Nachrichten](#86-logging-gesendeter-nachrichten)
   - [8.7 Fehlerbehandlung beim Logging](#87-fehlerbehandlung-beim-logging)
 - [9. Speicherverwaltung](#9-speicherverwaltung)
-  - [9.1 SD-Karten-UnterstÃ¼tzung](#91-sd-karten-unterstutzung)
-  - [9.2 Initialisierung und VerfÃ¼gbarkeit](#92-initialisierung-und-verfugbarkeit)
-  - [9.3 SpeicherÃ¼berwachung](#93-speicheruberwachung)
-  - [9.4 Ãœberschreibstrategie](#94-uberschreibstrategie)
+  - [9.1 SD-Karten-Unterstützung](#91-sd-karten-unterstutzung)
+  - [9.2 Initialisierung und Verfügbarkeit](#92-initialisierung-und-verfugbarkeit)
+  - [9.3 Speicherüberwachung](#93-speicheruberwachung)
+  - [9.4 Überschreibstrategie](#94-uberschreibstrategie)
   - [9.5 Konsistenz und Datensicherheit](#95-konsistenz-und-datensicherheit)
   - [9.6 Fehlerbehandlung](#96-fehlerbehandlung)
 - [10. USB-CAN-Interface](#10-usb-can-interface)
   - [10.1 Allgemeines](#101-allgemeines)
   - [10.2 Protokoll: GVRET](#102-protokoll-gvret)
-  - [10.3 Mehrkanal-UnterstÃ¼tzung](#103-mehrkanal-unterstutzung)
-  - [10.4 Empfang Ã¼ber USB](#104-empfang-uber-usb)
-  - [10.5 Logging Ã¼ber USB gesendeter Frames](#105-logging-uber-usb-gesendeter-frames)
+  - [10.3 Mehrkanal-Unterstützung](#103-mehrkanal-unterstutzung)
+  - [10.4 Empfang über USB](#104-empfang-uber-usb)
+  - [10.5 Logging über USB gesendeter Frames](#105-logging-uber-usb-gesendeter-frames)
   - [10.6 Fehlerbehandlung USB](#106-fehlerbehandlung-usb)
-- [11. Netzwerk & KonnektivitÃ¤t](#11-netzwerk--konnektivitat)
+- [11. Netzwerk & Konnektivität](#11-netzwerk--konnektivitat)
   - [11.1 WLAN-Grundlagen](#111-wlan-grundlagen)
   - [11.2 Mehrere WLAN-Netzwerke](#112-mehrere-wlan-netzwerke)
   - [11.3 Verbindungslogik](#113-verbindungslogik)
@@ -70,13 +70,13 @@ Funktionale Beschreibung und Anforderungen.
   - [12.1 Allgemeine Anforderungen](#121-allgemeine-anforderungen)
   - [12.2 Design und Struktur](#122-design-und-struktur)
   - [12.3 Konfigurationsfunktionen](#123-konfigurationsfunktionen)
-  - [12.4 Status- und Ãœbersichtsseiten](#124-status--und-ubersichtsseiten)
+  - [12.4 Status- und Übersichtsseiten](#124-status--und-ubersichtsseiten)
   - [12.5 Dateiverwaltung](#125-dateiverwaltung)
 - [13. REST-Schnittstelle](#13-rest-schnittstelle)
   - [13.1 Allgemeines](#131-allgemeines)
   - [13.2 Authentifizierung](#132-authentifizierung)
   - [13.3 REST-Funktionsumfang](#133-rest-funktionsumfang)
-  - [13.4 Dateiverwaltung Ã¼ber REST](#134-dateiverwaltung-uber-rest)
+  - [13.4 Dateiverwaltung über REST](#134-dateiverwaltung-uber-rest)
   - [13.5 Fehlerbehandlung](#135-fehlerbehandlung)
   - [13.6 DBC-JSON (Signalbeschreibung)](#136-dbc-json-signalbeschreibung)
     - [13.6.1 Ziel](#1361-ziel)
@@ -84,7 +84,7 @@ Funktionale Beschreibung und Anforderungen.
     - [13.6.3 Mindest-Schema (normativ)](#1363-mindest-schema-normativ)
     - [13.6.4 Interpretation](#1364-interpretation)
     - [13.6.5 Versionierung](#1365-versionierung)
-  - [13.7 REST/Web ErgÃ¤nzungen (kurz)](#137-restweb-erganzungen-kurz)
+  - [13.7 REST/Web Ergänzungen (kurz)](#137-restweb-erganzungen-kurz)
 - [14. Automatischer Daten-Upload](#14-automatischer-daten-upload)
   - [14.1 Allgemeines](#141-allgemeines)
   - [14.2 Upload-Trigger](#142-upload-trigger)
@@ -97,19 +97,19 @@ Funktionale Beschreibung und Anforderungen.
     - [14.6.3 Datenquelle](#1463-datenquelle)
     - [14.6.4 Interpretationspipeline](#1464-interpretationspipeline)
     - [14.6.5 Upload-Format (InfluxDB)](#1465-upload-format-influxdb)
-    - [14.6.6 Status und RÃ¼ckmeldung](#1466-status-und-ruckmeldung)
+    - [14.6.6 Status und Rückmeldung](#1466-status-und-ruckmeldung)
     - [14.6.7 Fehlerbehandlung](#1467-fehlerbehandlung)
 - [15. OTA-Firmware-Update](#15-ota-firmware-update)
   - [15.1 Allgemeines](#151-allgemeines)
   - [15.2 OTA-Aktivierung](#152-ota-aktivierung)
-  - [15.3 Verhalten wÃ¤hrend OTA](#153-verhalten-wahrend-ota)
-  - [15.4 Sicherheit und IntegritÃ¤t](#154-sicherheit-und-integritat)
+  - [15.3 Verhalten während OTA](#153-verhalten-wahrend-ota)
+  - [15.4 Sicherheit und Integrität](#154-sicherheit-und-integritat)
   - [15.5 Statusanzeige](#155-statusanzeige)
 - [16. Zeitmanagement](#16-zeitmanagement)
   - [16.1 Zeitquellen](#161-zeitquellen)
   - [16.2 Manuelle Zeitsetzung](#162-manuelle-zeitsetzung)
-  - [16.3 Zeit-Synchronisation Ã¼ber CAN](#163-zeit-synchronisation-uber-can)
-  - [16.4 Zeitstempel-QualitÃ¤t](#164-zeitstempel-qualitat)
+  - [16.3 Zeit-Synchronisation über CAN](#163-zeit-synchronisation-uber-can)
+  - [16.4 Zeitstempel-Qualität](#164-zeitstempel-qualitat)
 - [17. Systemstatus & Monitoring](#17-systemstatus--monitoring)
   - [17.1 Laufzeitstatus](#171-laufzeitstatus)
   - [17.2 CAN-Statistiken](#172-can-statistiken)
@@ -120,17 +120,19 @@ Funktionale Beschreibung und Anforderungen.
   - [18.2 Speicherfehler](#182-speicherfehler)
   - [18.3 Netzwerkfehler](#183-netzwerkfehler)
   - [18.4 Wiederanlaufstrategien](#184-wiederanlaufstrategien)
-  - [18.5 Watchdog fÃ¼r Ringpuffer-Ãœberlauf](#185-watchdog-fur-ringpuffer-uberlauf)
+  - [18.5 Watchdog für Ringpuffer-Überlauf](#185-watchdog-fur-ringpuffer-uberlauf)
     - [18.5.1 Ziel](#1851-ziel)
-    - [18.5.2 Ãœberwachte Komponenten](#1852-uberwachte-komponenten)
+    - [18.5.2 Überwachte Komponenten](#1852-uberwachte-komponenten)
     - [18.5.3 Metriken](#1853-metriken)
-    - [18.5.4 Verhalten bei drohendem Ãœberlauf](#1854-verhalten-bei-drohendem-uberlauf)
-    - [18.5.5 Verhalten bei tatsÃ¤chlichem Overflow](#1855-verhalten-bei-tatsachlichem-overflow)
+    - [18.5.4 Verhalten bei drohendem Überlauf](#1854-verhalten-bei-drohendem-uberlauf)
+    - [18.5.5 Verhalten bei tatsächlichem Overflow](#1855-verhalten-bei-tatsachlichem-overflow)
     - [18.5.6 Testkriterien](#1856-testkriterien)
+    - [18.5.7 SD Speed Test (Development)](#1857-sd-speed-test-development)
+    - [18.5.8 RX Load Test (Development)](#1858-rx-load-test-development)
 - [19. Sicherheit](#19-sicherheit)
   - [19.1 Zugriffsschutz](#191-zugriffsschutz)
   - [19.2 Netzwerk-Sicherheit](#192-netzwerk-sicherheit)
-  - [19.3 Firmware-IntegritÃ¤t](#193-firmware-integritat)
+  - [19.3 Firmware-Integrität](#193-firmware-integritat)
 - [20. Erweiterbarkeit](#20-erweiterbarkeit)
   - [20.1 Hardware-Erweiterungen](#201-hardware-erweiterungen)
   - [20.2 Software-Erweiterungen](#202-software-erweiterungen)
@@ -143,14 +145,14 @@ Funktionale Beschreibung und Anforderungen.
 
 ## 1. Ziel des Systems
 
-Ziel dieses Projekts ist die Entwicklung eines modularen, mehrkanaligen CAN-Bus-Datenloggers fÃ¼r den Einsatz im Fahrzeugumfeld.
+Ziel dieses Projekts ist die Entwicklung eines modularen, mehrkanaligen CAN-Bus-Datenloggers für den Einsatz im Fahrzeugumfeld.
 
 Das System soll:
-- bis zu sechs unabhÃ¤ngige CAN-Busse parallel erfassen,
-- CAN-Daten zuverlÃ¤ssig und zeitgestempelt auf einer SD-Karte speichern,
-- eine Konfiguration und Ãœberwachung Ã¼ber ein Web-Interface ermÃ¶glichen,
-- CAN-Daten Ã¼ber USB (GVRET-kompatibel) an einen PC weiterleiten,
-- sowie eine automatisierte Weiterverarbeitung der Daten Ã¼ber Netzwerkfunktionen (REST, HTTP Upload) erlauben.
+- bis zu sechs unabhängige CAN-Busse parallel erfassen,
+- CAN-Daten zuverlässig und zeitgestempelt auf einer SD-Karte speichern,
+- eine Konfiguration und Überwachung über ein Web-Interface ermöglichen,
+- CAN-Daten über USB (GVRET-kompatibel) an einen PC weiterleiten,
+- sowie eine automatisierte Weiterverarbeitung der Daten über Netzwerkfunktionen (REST, HTTP Upload) erlauben.
 
 Die Funktionsbeschreibung ist so formuliert, dass sie:
 - eindeutig,
@@ -158,7 +160,7 @@ Die Funktionsbeschreibung ist so formuliert, dass sie:
 - und automatisiert implementierbar (z. B. durch AI-Agenten)
 ist.
 
-## 2. Begriffe und AbkÃ¼rzungen
+## 2. Begriffe und Abkürzungen
 
 | Begriff | Beschreibung |
 | --- | --- |
@@ -171,10 +173,10 @@ ist.
 | GVRET | CAN-over-Serial-Protokoll (SavvyCAN kompatibel) |
 | OTA | Over-the-Air Firmware Update |
 | REST | HTTP-basierte Programmierschnittstelle |
-| mDNS / Bonjour | Netzwerkdienst zur NamensauflÃ¶sung |
+| mDNS / Bonjour | Netzwerkdienst zur Namensauflösung |
 | Bitrate | CAN-Bus-Geschwindigkeit (z. B. 500 kbit/s) |
 
-## 3. SystemÃ¼bersicht
+## 3. Systemübersicht
 
 ### 3.1 Gesamtarchitektur
 
@@ -184,8 +186,8 @@ Das System besteht aus folgenden Hauptkomponenten:
   - MCP2515 (CAN-Controller)
   - Externem CAN-Transceiver (optional galvanisch isoliert)
 - RTC- und MicroSD-Erweiterung zur Zeitstempelung und Datenspeicherung
-- USB-Schnittstelle fÃ¼r GVRET / SavvyCAN
-- WLAN-Schnittstelle fÃ¼r Web-Interface, REST, Upload und OTA
+- USB-Schnittstelle für GVRET / SavvyCAN
+- WLAN-Schnittstelle für Web-Interface, REST, Upload und OTA
 
 Alle Komponenten werden durch eine einheitliche Firmware gesteuert, die auf der Arduino-Plattform unter PlatformIO basiert und FreeRTOS nutzt.
 
@@ -197,8 +199,8 @@ Das System stellt folgende Hauptfunktionen bereit:
 - Zeitgestempeltes Datenlogging auf SD-Karte
 - Dateirotation und Speicherverwaltung
 - USB-CAN-Interface (GVRET)
-- Web-Interface fÃ¼r Konfiguration und Status
-- REST-Schnittstelle fÃ¼r Automatisierung
+- Web-Interface für Konfiguration und Status
+- REST-Schnittstelle für Automatisierung
 - OTA-Firmware-Updates
 - Automatischer Upload von Log-Dateien
 
@@ -212,11 +214,11 @@ Das System kennt folgende logische Betriebsmodi:
 - Logging gestoppt
   - Dateien geschlossen, System weiterhin erreichbar
 - Upload aktiv
-  - Log-Dateien werden Ã¼ber HTTP Ã¼bertragen
+  - Log-Dateien werden über HTTP übertragen
 - OTA-Modus
   - Logging deaktiviert, Firmware-Update aktiv
 - Fehlerzustand
-  - Kritische Fehler (z. B. SD-Karte nicht verfÃ¼gbar)
+  - Kritische Fehler (z. B. SD-Karte nicht verfügbar)
 
 ## 4. Hardware
 
@@ -225,10 +227,10 @@ Das System kennt folgende logische Betriebsmodi:
 Mikrocontroller: ESP32-S3
 
 Anforderungen:
-- WLAN-FunktionalitÃ¤t
-- USB Device UnterstÃ¼tzung
-- FreeRTOS-UnterstÃ¼tzung
-- Ausreichender RAM fÃ¼r Pufferung mehrerer CAN-Busse
+- WLAN-Funktionalität
+- USB Device Unterstützung
+- FreeRTOS-Unterstützung
+- Ausreichender RAM für Pufferung mehrerer CAN-Busse
 
 ### 4.2 CAN-Bus-Schnittstellen
 
@@ -236,12 +238,12 @@ Anzahl: 1 bis 6 CAN-Busse
 
 Pro CAN-Bus:
 - Ein MCP2515 CAN-Controller
-- Anbindung Ã¼ber SPI
+- Anbindung über SPI
 
 Anforderungen:
-- UnabhÃ¤ngige Konfiguration pro Bus
+- Unabhängige Konfiguration pro Bus
 - Gleichzeitiger Betrieb aller Busse
-- UnterstÃ¼tzung hoher Buslasten
+- Unterstützung hoher Buslasten
 
 ### 4.3 CAN-Transceiver und Isolation
 
@@ -250,31 +252,31 @@ Externe CAN-Transceiver-Module:
 - Bevorzugt als fertige Module (z. B. von AliExpress)
 
 Optionale galvanische Trennung:
-- UnterstÃ¼tzung isolierter CAN-Module (z. B. WE-ACT)
+- Unterstützung isolierter CAN-Module (z. B. WE-ACT)
 
 Die Firmware darf:
-- Keine Annahmen Ã¼ber konkrete Transceiver-Typen treffen
+- Keine Annahmen über konkrete Transceiver-Typen treffen
 - Nur logische CAN-Schnittstellen abstrahieren
 
-### 4.4 AbschlusswiderstÃ¤nde (CAN-Termination)
+### 4.4 Abschlusswiderstände (CAN-Termination)
 
 Pro CAN-Bus muss ein 120-Ohm-Abschlusswiderstand vorhanden sein.
 
 Anforderungen:
 - Softwareseitig schaltbar (Ein / Aus)
-- Steuerung Ã¼ber GPIO
-- Konfiguration Ã¼ber Web-Interface und REST
+- Steuerung über GPIO
+- Konfiguration über Web-Interface und REST
 - Zustand persistent speicherbar
 
 ### 4.5 Echtzeituhr (RTC)
 
-Externe RTC Ã¼ber Erweiterungsmodul.
+Externe RTC über Erweiterungsmodul.
 
 Anforderungen:
-- Zeitstempel fÃ¼r alle Log-Daten
+- Zeitstempel für alle Log-Daten
 - Batteriegepuffert
 - Manuell setzbar
-- Synchronisierbar Ã¼ber CAN-Nachrichten
+- Synchronisierbar über CAN-Nachrichten
 
 ### 4.6 Massenspeicher (MicroSD)
 
@@ -282,13 +284,13 @@ Speichermedium:
 - MicroSD-Karte
 
 Anforderungen:
-- UnterstÃ¼tzung von Karten â‰¥ 64 GB
+- Unterstützung von Karten ? 64 GB
 - FAT-kompatibles Dateisystem
 - Dauerbetrieb bei hoher Schreiblast
 
-Die SD-Karte dient ausschlieÃŸlich:
+Die SD-Karte dient ausschließlich:
 - Dem Speichern von Log-Dateien
-- TemporÃ¤ren Metadaten
+- Temporären Metadaten
 
 ### 4.7 USB-Schnittstelle
 
@@ -304,21 +306,21 @@ Protokoll:
 
 ### 5.1 Zentrale Hardware-Definitionsdatei
 
-Alle hardwareabhÃ¤ngigen Definitionen mÃ¼ssen:
+Alle hardwareabhängigen Definitionen müssen:
 - In einer zentralen Datei zusammengefasst sein
 
-Diese Datei enthÃ¤lt ausschlieÃŸlich:
+Diese Datei enthält ausschließlich:
 - GPIO-Zuordnungen
 - Bus-Zuordnungen
 - Hardware-Konstanten
 
 ### 5.2 Inhalt der Hardware-Datei
 
-Beispiele fÃ¼r zu definierende Parameter:
+Beispiele für zu definierende Parameter:
 - SPI-Bus-Konfiguration
 - Chip-Select-Pins der MCP2515
 - Interrupt-Pins der CAN-Controller
-- GPIOs fÃ¼r TerminierungswiderstÃ¤nde
+- GPIOs für Terminierungswiderstände
 - SD-Karten-Pins
 - RTC-Pins
 - USB-Konfiguration (falls notwendig)
@@ -327,7 +329,7 @@ Beispiele fÃ¼r zu definierende Parameter:
 
 Die Hardware-Definitionsdatei darf:
 - Keine Logik enthalten
-- Keine ZustÃ¤nde verwalten
+- Keine Zustände verwalten
 
 Ziel:
 - Austauschbarkeit der Hardware
@@ -338,7 +340,7 @@ Ziel:
 
 Neue CAN-Busse oder Hardware-Revisionen sollen:
 - Durch Anpassung der Hardware-Definitionsdatei integrierbar sein
-- Keine Ã„nderungen an der Applikationslogik erfordern
+- Keine Änderungen an der Applikationslogik erfordern
 
 ## 6. Firmware-Grundlagen
 
@@ -373,17 +375,19 @@ Die Firmware verwendet ein taskbasiertes Modell auf Basis von FreeRTOS, um zeitk
 
 ### 6.3 Task-Priorisierung
 
-- CAN RX Tasks: hÃ¶chste PrioritÃ¤t
-- CAN TX Tasks: hohe PrioritÃ¤t
-- Log Writer Task: mittelhohe PrioritÃ¤t
-- GVRET Task: mittlere PrioritÃ¤t
-- Netzwerk, Web, Upload, OTA: niedrigere PrioritÃ¤t
+- CAN RX Tasks: höchste Priorität
+- CAN TX Tasks: hohe Priorität
+- Log Writer Task: mittelhohe Priorität
+- GVRET Task: mittlere Priorität
+- Netzwerk, Web, Upload, OTA: niedrigere Priorität
 
-Zeitkritische CAN-Funktionen dÃ¼rfen nicht durch Netzwerk- oder Dateisystemzugriffe blockiert werden.
+Zeitkritische CAN-Funktionen dürfen nicht durch Netzwerk- oder Dateisystemzugriffe blockiert werden.
+
+- Core assignment (current firmware): CAN RX tasks pinned to core 0, Log Writer task pinned to core 1.
 
 ### 6.4 Interne Kommunikation
 
-Tasks kommunizieren ausschlieÃŸlich Ã¼ber:
+Tasks kommunizieren ausschließlich über:
 - FreeRTOS Queues
 - Ringbuffer
 - Event-Gruppen
@@ -397,9 +401,9 @@ Der Log Writer Task liest aus diesen Puffern.
 
 ### 6.5 Zeitstempelung
 
-Jeder CAN-Frame erhÃ¤lt unmittelbar beim Empfang:
+Jeder CAN-Frame erhält unmittelbar beim Empfang:
 - Einen Zeitstempel basierend auf RTC
-- Bei nicht verfÃ¼gbarer RTC: Fallback auf Systemzeit (Millis seit Start)
+- Bei nicht verfügbarer RTC: Fallback auf Systemzeit (Millis seit Start)
 
 Zeitquelle ist zentral abstrahiert.
 
@@ -414,69 +418,70 @@ Persistente Daten umfassen:
 - Logging-Parameter
 - Upload- und REST-Konfiguration
 
-## 7. CAN-Bus-FunktionalitÃ¤t
+## 7. CAN-Bus-Funktionalität
 
 ### 7.1 Allgemeines
 
-Das System unterstÃ¼tzt:
-- Bis zu 6 unabhÃ¤ngige CAN-Busse
+Das System unterstützt:
+- Bis zu 6 unabhängige CAN-Busse
 
 Jeder CAN-Bus ist:
-- Logisch vollstÃ¤ndig getrennt
-- UnabhÃ¤ngig konfigurierbar
+- Logisch vollständig getrennt
+- Unabhängig konfigurierbar
 
 ### 7.2 CAN-Bus-Konfiguration
 
-FÃ¼r jeden CAN-Bus sind folgende Parameter konfigurierbar:
+Für jeden CAN-Bus sind folgende Parameter konfigurierbar:
 - Aktiviert / Deaktiviert
 - CAN-Bitrate
 - Abschlusswiderstand: Ein / Aus
 - Betriebsmodus: Read-Only, Senden erlaubt
+- Busname (user-defined, ueberschreibt Standardnamen wie "can0")
 
-Alle Parameter mÃ¼ssen:
-- Ãœber Web-Interface und REST setzbar sein
+Alle Parameter müssen:
+- Über Web-Interface und REST setzbar sein
 - Persistent gespeichert werden
 
 ### 7.3 Bitraten
 
-UnterstÃ¼tzte CAN-Bitraten (mindestens):
+Unterstützte CAN-Bitraten (mindestens):
 - 125 kbit/s
 - 250 kbit/s
 - 500 kbit/s
 - 1 Mbit/s
 
-Erweiterbarkeit fÃ¼r weitere Bitraten muss vorgesehen sein.
+Erweiterbarkeit für weitere Bitraten muss vorgesehen sein.
 
 ### 7.4 Empfang von CAN-Nachrichten
 
 CAN-Nachrichten werden:
-- Ãœber MCP2515 empfangen
+- Über MCP2515 empfangen
 - Per SPI ausgelesen
 
 Empfang erfolgt:
 - Interrupt-basiert oder Polling
 
-Empfangene Frames mÃ¼ssen:
+Empfangene Frames müssen:
 - Zeitgestempelt
-- UnverÃ¤ndert weiterverarbeitet werden
+- Unverändert weiterverarbeitet werden
 
 ### 7.5 Senden von CAN-Nachrichten
 
-CAN-Nachrichten kÃ¶nnen gesendet werden durch:
+CAN-Nachrichten können gesendet werden durch:
 - GVRET (USB)
 - Web / REST
 
 Senden ist nur erlaubt, wenn:
 - Der jeweilige CAN-Bus nicht als Read-Only konfiguriert ist
 
-Gesendete Frames mÃ¼ssen:
+Gesendete Frames müssen:
 - Zeitgestempelt
 - Geloggt werden
 
-### 7.6 Zeit-Synchronisation Ã¼ber CAN
+### 7.6 Zeit-Synchronisation über CAN
 
-Das System unterstÃ¼tzt:
-- Eine vordefinierte CAN-Nachricht zur ZeitÃ¼bertragung
+Das System unterstützt:
+- Eine vordefinierte CAN-Nachricht zur Zeitübertragung
 
 Anforderungen:
 - Empfang auf allen CAN-Bussen
@@ -491,7 +496,7 @@ CAN-Daten werden:
 - Pro CAN-Bus getrennt geloggt
 
 Logging erfolgt:
-- Parallel fÃ¼r alle aktivierten CAN-Busse
+- Parallel für alle aktivierten CAN-Busse
 
 Logging darf:
 - Keine CAN-Frames verlieren
@@ -500,15 +505,21 @@ Logging darf:
 ### 8.2 Log-Dateistruktur
 
 Pro CAN-Bus existiert:
-- Ein eigener Ordner oder Dateinamespace
+- Eine eigene Log-Datei pro aktivem Bus (SavvyCAN ASCII)
 
-Dateinamen enthalten:
-- CAN-Bus-ID
-- Startzeit
+Dateinamen folgen dem Muster:
+- `/log_<millis>_bus<N>.sav`
+- `<millis>` ist die Startzeit in Millisekunden seit Boot
+- `<N>` ist der 1-basierte Bus-Index (bus 1, bus 2, ...)
 
-Aktive Log-Dateien werden:
-- Ãœber eine spezielle Dateiendung markiert
+Log-Inhalt (eine Zeile pro Frame):
+- `<sec>.<usec6> <bus>R11|R29 <8hexID> <b0> ... <b7>`
+- `bus` ist 1-basiert
+- ID ist null-auf-8-hex gepaddet
+- Datenbytes sind immer 8 Felder (fehlende Bytes werden als `00` gepaddet)
 
+Optional:
+- Header-Zeilen beginnen mit `#` und werden von SavvyCAN ignoriert
 ### 8.3 Aktive Log-Dateien
 
 Pro CAN-Bus darf:
@@ -520,15 +531,15 @@ Aktive Dateien:
 
 ### 8.4 Dateirotation
 
-Maximale DateigrÃ¶ÃŸe ist:
+Maximale Dateigröße ist:
 - Konfigurierbar
 
-Bei Erreichen der GrÃ¶ÃŸe:
+Bei Erreichen der Größe:
 - Aktive Datei wird geschlossen
 - Neue Datei wird erzeugt
 
-ZusÃ¤tzlich:
-- Manuelles SchlieÃŸen Ã¼ber Web / REST
+Zusätzlich:
+- Manuelles Schließen über Web / REST
 
 ### 8.5 Download- und Upload-Status
 
@@ -537,26 +548,26 @@ Jede Log-Datei besitzt Statusinformationen:
 - Heruntergeladen
 - Hochgeladen
 
-Statusinformationen mÃ¼ssen:
+Statusinformationen müssen:
 - Persistent gespeichert werden
 
-Beim Ãœberschreiben von Dateien:
-- Bereits heruntergeladene / hochgeladene Dateien haben PrioritÃ¤t
+Beim Überschreiben von Dateien:
+- Bereits heruntergeladene / hochgeladene Dateien haben Priorität
 
 ### 8.6 Logging gesendeter Nachrichten
 
 CAN-Nachrichten, die:
-- Ãœber USB (GVRET)
-- Ãœber Web / REST
+- Über USB (GVRET)
+- Über Web / REST
 - Vom System selbst
 
-gesendet werden, mÃ¼ssen:
+gesendet werden, müssen:
 - Wie empfangene Nachrichten geloggt werden
 - Mit korrektem Zeitstempel versehen sein
 
 ### 8.7 Fehlerbehandlung beim Logging
 
-FehlerfÃ¤lle:
+Fehlerfälle:
 - SD-Karte entfernt
 - SD-Karte voll
 - Schreibfehler
@@ -568,64 +579,64 @@ Verhalten:
 
 ## 9. Speicherverwaltung
 
-### 9.1 SD-Karten-UnterstÃ¼tzung
+### 9.1 SD-Karten-Unterstützung
 
-Das System verwendet eine MicroSD-Karte als primÃ¤ren Massenspeicher.
+Das System verwendet eine MicroSD-Karte als primären Massenspeicher.
 
-UnterstÃ¼tzte Eigenschaften:
-- KapazitÃ¤t: mindestens 64 GB
-- Dateisystem: FAT / FAT32 / exFAT (abhÃ¤ngig von BibliotheksunterstÃ¼tzung)
+Unterstützte Eigenschaften:
+- Kapazität: mindestens 64 GB
+- Dateisystem: FAT / FAT32 / exFAT (abhängig von Bibliotheksunterstützung)
 
-Die SD-Karte wird ausschlieÃŸlich verwendet fÃ¼r:
+Die SD-Karte wird ausschließlich verwendet für:
 - CAN-Log-Dateien
 - Log-Metadaten (Statusinformationen)
 
-### 9.2 Initialisierung und VerfÃ¼gbarkeit
+### 9.2 Initialisierung und Verfügbarkeit
 
 Beim Systemstart muss:
 - Die SD-Karte initialisiert werden
-- Die VerfÃ¼gbarkeit geprÃ¼ft werden
+- Die Verfügbarkeit geprüft werden
 
-Falls keine SD-Karte verfÃ¼gbar ist:
+Falls keine SD-Karte verfügbar ist:
 - Logging darf nicht starten
-- System bleibt Ã¼ber Web / REST / USB erreichbar
+- System bleibt über Web / REST / USB erreichbar
 - Fehlerstatus wird angezeigt
 
-### 9.3 SpeicherÃ¼berwachung
+### 9.3 Speicherüberwachung
 
-Das System muss kontinuierlich Ã¼berwachen:
-- GesamtkapazitÃ¤t der SD-Karte
+Das System muss kontinuierlich überwachen:
+- Gesamtkapazität der SD-Karte
 - Freien Speicherplatz
 
-Diese Informationen mÃ¼ssen:
+Diese Informationen müssen:
 - Im Web-Interface angezeigt werden
-- Ãœber REST abrufbar sein
+- Über REST abrufbar sein
 
-### 9.4 Ãœberschreibstrategie
+### 9.4 Überschreibstrategie
 
-Wenn der verfÃ¼gbare Speicher unter einen definierten Schwellwert fÃ¤llt:
-- Alte Log-Dateien dÃ¼rfen Ã¼berschrieben werden
+Wenn der verfügbare Speicher unter einen definierten Schwellwert fällt:
+- Alte Log-Dateien dürfen überschrieben werden
 
-Reihenfolge beim Ãœberschreiben:
+Reihenfolge beim Überschreiben:
 - Dateien, die als heruntergeladen oder hochgeladen markiert sind
-- Ã„lteste Dateien
+- Älteste Dateien
 
 Dateien ohne Download-/Upload-Markierung sollen:
-- MÃ¶glichst nicht Ã¼berschrieben werden
+- Möglichst nicht überschrieben werden
 
 ### 9.5 Konsistenz und Datensicherheit
 
-Schreibzugriffe auf die SD-Karte mÃ¼ssen:
+Schreibzugriffe auf die SD-Karte müssen:
 - Sequenziell erfolgen
-- Ãœber den Log Writer Task zentralisiert sein
+- Über den Log Writer Task zentralisiert sein
 
 Bei Stromverlust:
-- Dateisystemkorruption ist mÃ¶glichst zu vermeiden
-- Aktive Dateien dÃ¼rfen unvollstÃ¤ndig sein, mÃ¼ssen aber erkennbar bleiben
+- Dateisystemkorruption ist möglichst zu vermeiden
+- Aktive Dateien dürfen unvollständig sein, müssen aber erkennbar bleiben
 
 ### 9.6 Fehlerbehandlung
 
-FehlerfÃ¤lle:
+Fehlerfälle:
 - SD-Karte entfernt
 - Schreibfehler
 - Dateisystemfehler
@@ -633,13 +644,13 @@ FehlerfÃ¤lle:
 Verhalten:
 - Logging stoppen oder pausieren
 - Fehlerstatus setzen
-- System funktionsfÃ¤hig halten (Web / REST / USB)
+- System funktionsfähig halten (Web / REST / USB)
 
 ## 10. USB-CAN-Interface
 
 ### 10.1 Allgemeines
 
-Das System stellt Ã¼ber USB ein virtuelles serielles Interface bereit.
+Das System stellt über USB ein virtuelles serielles Interface bereit.
 
 Zweck:
 - CAN-Kommunikation mit einem PC
@@ -650,36 +661,36 @@ Zweck:
 Verwendetes Protokoll:
 - GVRET (General Vehicle Reverse Engineering Tool)
 
-KompatibilitÃ¤t:
+Kompatibilität:
 - Voll kompatibel mit SavvyCAN
 
 Das System muss:
 - GVRET-Kommandos empfangen und interpretieren
-- CAN-Frames Ã¼ber GVRET senden und empfangen
+- CAN-Frames über GVRET senden und empfangen
 
-### 10.3 Mehrkanal-UnterstÃ¼tzung
+### 10.3 Mehrkanal-Unterstützung
 
-CAN-Frames mÃ¼ssen:
+CAN-Frames müssen:
 - Dem jeweiligen CAN-Bus eindeutig zugeordnet sein
 
-GVRET-Frames mÃ¼ssen:
+GVRET-Frames müssen:
 - Informationen enthalten, welcher CAN-Bus betroffen ist
 
-Falls das Protokoll keine native Mehrkanal-UnterstÃ¼tzung bietet:
+Falls das Protokoll keine native Mehrkanal-Unterstützung bietet:
 - Eine interne Zuordnung muss erfolgen
 
-### 10.4 Empfang Ã¼ber USB
+### 10.4 Empfang über USB
 
 Vom PC empfangene CAN-Nachrichten:
 - Werden validiert
 - In eine CAN-TX-Queue eingestellt
 
-Voraussetzung fÃ¼r das Senden:
+Voraussetzung für das Senden:
 - Der betroffene CAN-Bus ist nicht als Read-Only konfiguriert
 
-### 10.5 Logging Ã¼ber USB gesendeter Frames
+### 10.5 Logging über USB gesendeter Frames
 
-Alle Ã¼ber GVRET gesendeten CAN-Nachrichten mÃ¼ssen:
+Alle über GVRET gesendeten CAN-Nachrichten müssen:
 - Zeitgestempelt werden
 - Wie empfangene Frames geloggt werden
 
@@ -688,19 +699,19 @@ Es darf kein Unterschied im Log:
 
 ### 10.6 Fehlerbehandlung USB
 
-FehlerfÃ¤lle:
+Fehlerfälle:
 - USB-Verbindung getrennt
-- UngÃ¼ltige GVRET-Kommandos
+- Ungültige GVRET-Kommandos
 
 Verhalten:
-- Keine BeeintrÃ¤chtigung des CAN-Loggings
+- Keine Beeinträchtigung des CAN-Loggings
 - USB-Verbindung kann jederzeit neu aufgebaut werden
 
-## 11. Netzwerk & KonnektivitÃ¤t
+## 11. Netzwerk & Konnektivität
 
 ### 11.1 WLAN-Grundlagen
 
-Das System nutzt WLAN fÃ¼r:
+Das System nutzt WLAN für:
 - Web-Interface
 - REST-Schnittstelle
 - OTA-Updates
@@ -712,7 +723,7 @@ Betriebsmodus:
 
 ### 11.2 Mehrere WLAN-Netzwerke
 
-Es kÃ¶nnen bis zu drei WLAN-Netzwerke konfiguriert werden:
+Es können bis zu drei WLAN-Netzwerke konfiguriert werden:
 - SSID
 - Passwort
 
@@ -723,7 +734,7 @@ Netzwerke sind priorisiert:
 
 Beim Systemstart:
 - Versuch der Verbindung mit Netzwerk 1
-- Bei Fehlschlag â†’ Netzwerk 2 â†’ Netzwerk 3
+- Bei Fehlschlag ? Netzwerk 2 ? Netzwerk 3
 
 Bei Verbindungsverlust:
 - Automatischer Reconnect-Versuch
@@ -733,7 +744,7 @@ Erfolgreiche Verbindung bleibt aktiv, bis sie verloren geht.
 ### 11.4 mDNS / Bonjour
 
 Das System muss:
-- Ãœber mDNS / Bonjour im Netzwerk auffindbar sein
+- Über mDNS / Bonjour im Netzwerk auffindbar sein
 
 Anforderungen:
 - Fester Hostname (z. B. canlogger.local)
@@ -741,11 +752,11 @@ Anforderungen:
 
 ### 11.5 Netzwerkstatus
 
-Folgende Informationen mÃ¼ssen verfÃ¼gbar sein:
+Folgende Informationen müssen verfügbar sein:
 - Verbindungsstatus
 - Aktive SSID
 - IP-Adresse
-- WLAN-SignalstÃ¤rke in Prozent
+- WLAN-Signalstärke in Prozent
 
 Anzeige:
 - Web-Interface
@@ -753,12 +764,12 @@ Anzeige:
 
 ### 11.6 Robustheit
 
-Netzwerkprobleme dÃ¼rfen:
+Netzwerkprobleme dürfen:
 - Das CAN-Logging nicht beeinflussen
 
 Alle Netzwerkfunktionen laufen:
 - In separaten Tasks
-- Mit niedrigerer PrioritÃ¤t als CAN und Logging
+- Mit niedrigerer Priorität als CAN und Logging
 
 ## 12. Web-Interface
 
@@ -766,15 +777,15 @@ Alle Netzwerkfunktionen laufen:
 
 Das System stellt ein browserbasiertes Web-Interface bereit.
 
-Zugriff erfolgt Ã¼ber:
+Zugriff erfolgt über:
 - WLAN
 - HTTP
 
-Das Web-Interface dient ausschlieÃŸlich der menschlichen Bedienung.
+Das Web-Interface dient ausschließlich der menschlichen Bedienung.
 
-Alle Funktionen des Web-Interfaces mÃ¼ssen:
+Alle Funktionen des Web-Interfaces müssen:
 - Nicht-blockierend implementiert sein
-- Das CAN-Logging nicht beeintrÃ¤chtigen
+- Das CAN-Logging nicht beeinträchtigen
 
 ### 12.2 Design und Struktur
 
@@ -783,12 +794,12 @@ Das Web-Interface orientiert sich:
 
 Anforderungen:
 - Schlankes HTML/CSS/JavaScript
-- Keine externen Online-AbhÃ¤ngigkeiten
+- Keine externen Online-Abhängigkeiten
 - Alle Assets lokal im Flash gespeichert
 
 ### 12.3 Konfigurationsfunktionen
 
-Ãœber das Web-Interface mÃ¼ssen folgende Einstellungen mÃ¶glich sein:
+Über das Web-Interface müssen folgende Einstellungen möglich sein:
 
 CAN-Bus (pro Bus):
 - Aktiviert / Deaktiviert
@@ -797,8 +808,8 @@ CAN-Bus (pro Bus):
 - Abschlusswiderstand (Ein / Aus)
 
 Logging:
-- Maximale Log-DateigrÃ¶ÃŸe
-- Manuelles SchlieÃŸen aktiver Log-Dateien
+- Maximale Log-Dateigröße
+- Manuelles Schließen aktiver Log-Dateien
 
 Zeit:
 - Manuelle Zeit- und Datumseinstellung
@@ -809,37 +820,37 @@ Netzwerk:
 
 Upload-Zieladresse (HTTP POST).
 
-### 12.4 Status- und Ãœbersichtsseiten
+### 12.4 Status- und Übersichtsseiten
 
 Das Web-Interface muss folgende Informationen anzeigen:
 - Aktuelle Uhrzeit
 - Systemzustand
 - WLAN-Verbindungsstatus
-- WLAN-SignalstÃ¤rke in Prozent
-- SD-Karten-GesamtkapazitÃ¤t
+- WLAN-Signalstärke in Prozent
+- SD-Karten-Gesamtkapazität
 - Freier Speicherplatz
 - Anzahl geloggter CAN-Nachrichten seit Start (pro CAN-Bus)
 - Liste aller Log-Dateien:
   - CAN-Bus-Zuordnung
-  - DateigrÃ¶ÃŸe
+  - Dateigröße
   - Status (aktiv / abgeschlossen / heruntergeladen / hochgeladen)
 
 ### 12.5 Dateiverwaltung
 
-Log-Dateien mÃ¼ssen:
-- Ãœber das Web-Interface herunterladbar sein
+Log-Dateien müssen:
+- Über das Web-Interface herunterladbar sein
 
 Download einer Datei:
 - Markiert die Datei als "heruntergeladen"
 
 Aktive Log-Dateien:
-- DÃ¼rfen nicht gelÃ¶scht werden
+- Dürfen nicht gelöscht werden
 
 ## 13. REST-Schnittstelle
 
 ### 13.1 Allgemeines
 
-Das System stellt eine REST-Schnittstelle Ã¼ber HTTP bereit.
+Das System stellt eine REST-Schnittstelle über HTTP bereit.
 
 Zweck:
 - Automatisierung
@@ -850,10 +861,10 @@ REST und Web-Interface greifen:
 
 ### 13.2 Authentifizierung
 
-REST-Zugriffe mÃ¼ssen:
+REST-Zugriffe müssen:
 - Authentifiziert sein
 
-UnterstÃ¼tzte Verfahren (konfigurierbar):
+Unterstützte Verfahren (konfigurierbar):
 - HTTP Basic Authentication
 - Token-basierte Authentifizierung
 
@@ -876,20 +887,20 @@ Konfiguration (Lesen und Schreiben):
 
 Steuerung:
 - Start / Stop Logging
-- SchlieÃŸen aktiver Log-Dateien
+- Schließen aktiver Log-Dateien
 
-### 13.4 Dateiverwaltung Ã¼ber REST
+### 13.4 Dateiverwaltung über REST
 
-REST-Endpunkte mÃ¼ssen:
+REST-Endpunkte müssen:
 - Log-Dateien auflisten
-- Metadaten bereitstellen (GrÃ¶ÃŸe, Zeitbereich, Status)
+- Metadaten bereitstellen (Größe, Zeitbereich, Status)
 
 Optional:
 - Download einzelner Dateien
 
 ### 13.5 Fehlerbehandlung
 
-REST-Antworten mÃ¼ssen:
+REST-Antworten müssen:
 - Sinnvolle HTTP-Statuscodes verwenden
 - Fehler eindeutig beschreiben
 
@@ -898,29 +909,29 @@ REST-Antworten mÃ¼ssen:
 
 #### 13.6.1 Ziel
 
-Das System muss eine DBC-Datei in einer JSON-ReprÃ¤sentation abbilden, um Dekodierung auf dem GerÃ¤t zu ermÃ¶glichen.
+Das System muss eine DBC-Datei in einer JSON-Repräsentation abbilden, um Dekodierung auf dem Gerät zu ermöglichen.
 
 #### 13.6.2 Quelle und Speicherung
 
 DBC-JSON wird:
-- Ãœber Web/REST hochgeladen oder auf SD abgelegt
+- Über Web/REST hochgeladen oder auf SD abgelegt
 
 Die aktive DBC-JSON Konfiguration ist:
 - Persistente Einstellung (welche Datei aktiv ist)
 
 #### 13.6.3 Mindest-Schema (normativ)
 
-Die JSON-ReprÃ¤sentation muss mindestens enthalten:
+Die JSON-Repräsentation muss mindestens enthalten:
 - messages[]: id (CAN Identifier, int), is_extended (bool), name (string), dlc (int), signals[] (list)
 - signals[]: name (string), start_bit (int), length (int), byte_order (intel/motorola), is_signed (bool), factor (number), offset (number), min (number, optional), max (number, optional), unit (string, optional), enum (object optional: value->label)
 
 #### 13.6.4 Interpretation
 
-FÃ¼r jedes geloggte Frame:
+Für jedes geloggte Frame:
 - Passende Message per id + is_extended suchen
 - Signale dekodieren
 - Skalierung anwenden: value = raw * factor + offset
-- Signedness und Byteorder korrekt berÃ¼cksichtigen
+- Signedness und Byteorder korrekt berücksichtigen
 
 #### 13.6.5 Versionierung
 
@@ -930,21 +941,21 @@ DBC-JSON muss ein Feld enthalten:
 Firmware muss:
 - Unbekannte schema_version ablehnen (mit Fehlermeldung)
 
-### 13.7 REST/Web ErgÃ¤nzungen (kurz)
+### 13.7 REST/Web Ergänzungen (kurz)
 
-REST-Endpunkte (ErgÃ¤nzungsvorschlag, normativ):
-- GET `/api/buffers` â†’ Ringpufferstatus pro Bus (fill, high-water, overflows)
-- POST `/api/dump/influx` â†’ Start Dump (Datei/Bus/Zeitraum Parameter)
-- GET `/api/dump/status` â†’ Dump-Status
-- POST `/api/dbc` â†’ Upload/Set active DBC-JSON
-- GET `/api/dbc` â†’ Info Ã¼ber aktive DBC-JSON
+REST-Endpunkte (Ergänzungsvorschlag, normativ):
+- GET `/api/buffers` ? Ringpufferstatus pro Bus (fill, high-water, overflows)
+- POST `/api/dump/influx` ? Start Dump (Datei/Bus/Zeitraum Parameter)
+- GET `/api/dump/status` ? Dump-Status
+- POST `/api/dbc` ? Upload/Set active DBC-JSON
+- GET `/api/dbc` ? Info über aktive DBC-JSON
 ## 14. Automatischer Daten-Upload
 
 ### 14.1 Allgemeines
 
-Das System unterstÃ¼tzt einen automatischen Upload von Log-Dateien.
+Das System unterstützt einen automatischen Upload von Log-Dateien.
 
-Upload erfolgt Ã¼ber:
+Upload erfolgt über:
 - HTTP POST
 
 Zieladresse:
@@ -953,29 +964,29 @@ Zieladresse:
 
 ### 14.2 Upload-Trigger
 
-Der Upload kann ausgelÃ¶st werden durch:
+Der Upload kann ausgelöst werden durch:
 - Abschluss einer Log-Datei
-- Manuelle AuslÃ¶sung Ã¼ber Web-Interface
-- Manuelle AuslÃ¶sung Ã¼ber REST
+- Manuelle Auslösung über Web-Interface
+- Manuelle Auslösung über REST
 
 ### 14.3 Upload-Inhalt
 
-Beim Upload mÃ¼ssen Ã¼bertragen werden:
+Beim Upload müssen übertragen werden:
 - Eine oder mehrere Log-Dateien
 - Metadaten:
   - CAN-Bus
   - Start- und Endzeit
-  - DateigrÃ¶ÃŸe
+  - Dateigröße
   - Dateiname
 
 ### 14.4 Upload-Status
 
-FÃ¼r jede Log-Datei wird gespeichert:
+Für jede Log-Datei wird gespeichert:
 - Upload erfolgreich / fehlgeschlagen
 
 Erfolgreich hochgeladene Dateien:
 - Werden als "hochgeladen" markiert
-- Gelten als bevorzugt Ã¼berschreibbar
+- Gelten als bevorzugt überschreibbar
 
 ### 14.5 Fehlerbehandlung und Wiederholung
 
@@ -983,7 +994,7 @@ Bei Upload-Fehlern:
 - Muss ein Wiederholungsmechanismus existieren
 - Wiederholungen mit zeitlichem Abstand (Backoff)
 
-Upload-Fehler dÃ¼rfen:
+Upload-Fehler dürfen:
 - Das CAN-Logging nicht beeinflussen
 
 
@@ -991,17 +1002,17 @@ Upload-Fehler dÃ¼rfen:
 
 #### 14.6.1 Ziel
 
-Das System muss eine Funktion bereitstellen, um geloggte rohe CAN-Daten (RAW-Frames) nachtrÃ¤glich oder unmittelbar zu interpretieren und als Messwerte in eine InfluxDB hochzuladen.
+Das System muss eine Funktion bereitstellen, um geloggte rohe CAN-Daten (RAW-Frames) nachträglich oder unmittelbar zu interpretieren und als Messwerte in eine InfluxDB hochzuladen.
 
 #### 14.6.2 Konfiguration
 
-Folgende Parameter mÃ¼ssen konfigurierbar sein (Web/REST):
-- InfluxDB Base URL (z. B. http(s)://â€¦)
+Folgende Parameter müssen konfigurierbar sein (Web/REST):
+- InfluxDB Base URL (z. B. http(s)://.)
 - Organization (InfluxDB 2.x) oder User/DB (1.x)
 - Bucket (2.x) oder Database (1.x)
 - Authentifizierung: Token (2.x) / User+Pass (1.x) / API Key (wenn genutzt)
 - Measurement Name (Default)
-- Default Tags (z. B. Fahrzeug, GerÃ¤t, CAN-Bus)
+- Default Tags (z. B. Fahrzeug, Gerät, CAN-Bus)
 - Upload-Modus: Manuell (per UI/REST), automatisch nach File-Close (optional)
 - Retry/Backoff Parameter
 
@@ -1012,11 +1023,11 @@ Dump-Quelle ist:
 - Optional: ein Zeitbereich oder Dateiliste
 
 Aktive Log-Dateien:
-- DÃ¼rfen nicht in den Dump einbezogen werden (oder nur snapshot-basiert, falls implementiert)
+- Dürfen nicht in den Dump einbezogen werden (oder nur snapshot-basiert, falls implementiert)
 
 #### 14.6.4 Interpretationspipeline
 
-Beim Dump mÃ¼ssen folgende Schritte erfolgen:
+Beim Dump müssen folgende Schritte erfolgen:
 - Log-Datei lesen (RAW CAN Frames)
 - Zeitstempel extrahieren
 - Frame anhand DBC-Signalen dekodieren
@@ -1026,17 +1037,17 @@ Beim Dump mÃ¼ssen folgende Schritte erfolgen:
 
 #### 14.6.5 Upload-Format (InfluxDB)
 
-Upload erfolgt Ã¼ber InfluxDB Write API.
+Upload erfolgt über InfluxDB Write API.
 
 Zu erzeugende Struktur:
 - measurement: konfigurierbar (Default)
 - tags: can_bus (0..5), can_id (hex oder dec), signal (Signalname), optional weitere (device_id, vehicle, etc.)
 - fields: value (float/int/bool), optional raw (hex) oder status (enum)
-- timestamp: aus RTC-Zeitstempel der Frames, definierte PrÃ¤zision (z. B. ns/us/ms) konfigurierbar
+- timestamp: aus RTC-Zeitstempel der Frames, definierte Präzision (z. B. ns/us/ms) konfigurierbar
 
-#### 14.6.6 Status und RÃ¼ckmeldung
+#### 14.6.6 Status und Rückmeldung
 
-FÃ¼r jeden Dump-Lauf mÃ¼ssen Statusinfos vorhanden sein:
+Für jeden Dump-Lauf müssen Statusinfos vorhanden sein:
 - gestartet/aktiv/abgeschlossen/fehlgeschlagen
 - Anzahl gelesener Frames
 - Anzahl dekodierter Signale
@@ -1053,60 +1064,60 @@ Bei Netzwerkfehlern:
 - Retry mit Backoff
 
 Bei DBC/Decode-Fehlern:
-- Frame wird Ã¼bersprungen
-- FehlerzÃ¤hler erhÃ¶ht
-- Dump lÃ¤uft weiter
+- Frame wird übersprungen
+- Fehlerzähler erhöht
+- Dump läuft weiter
 ## 15. OTA-Firmware-Update
 
 ### 15.1 Allgemeines
 
-Das System unterstÃ¼tzt Firmware-Updates over-the-Air (OTA).
+Das System unterstützt Firmware-Updates over-the-Air (OTA).
 
 OTA erfolgt:
-- Ãœber WLAN
-- Ãœber HTTP oder HTTPS
+- Über WLAN
+- Über HTTP oder HTTPS
 
 ### 15.2 OTA-Aktivierung
 
-OTA kann ausgelÃ¶st werden durch:
+OTA kann ausgelöst werden durch:
 - Web-Interface
 - REST-Aufruf
 
 OTA darf nur gestartet werden:
-- Wenn ausreichend Speicher verfÃ¼gbar ist
+- Wenn ausreichend Speicher verfügbar ist
 - Wenn kein kritischer Fehlerzustand vorliegt
 
-### 15.3 Verhalten wÃ¤hrend OTA
+### 15.3 Verhalten während OTA
 
 Vor Beginn eines OTA-Updates:
 - Aktives Logging wird gestoppt
 - Aktive Log-Dateien werden sauber geschlossen
 
-WÃ¤hrend OTA:
+Während OTA:
 - Keine CAN-Kommunikation
 - Keine SD-Schreibzugriffe
 
-### 15.4 Sicherheit und IntegritÃ¤t
+### 15.4 Sicherheit und Integrität
 
-OTA-Updates mÃ¼ssen:
-- Verifiziert werden (z. B. PrÃ¼fsumme)
+OTA-Updates müssen:
+- Verifiziert werden (z. B. Prüfsumme)
 
 Bei fehlgeschlagenem Update:
-- System muss auf vorherige Firmware zurÃ¼ckfallen
-- Keine Konfigurations- oder Log-Daten dÃ¼rfen verloren gehen
+- System muss auf vorherige Firmware zurückfallen
+- Keine Konfigurations- oder Log-Daten dürfen verloren gehen
 
 ### 15.5 Statusanzeige
 
-OTA-Fortschritt und Ergebnis mÃ¼ssen:
+OTA-Fortschritt und Ergebnis müssen:
 - Im Web-Interface angezeigt werden
-- Ãœber REST abrufbar sein
+- Über REST abrufbar sein
 
 ## 16. Zeitmanagement
 
 ### 16.1 Zeitquellen
 
 Das System verwendet folgende Zeitquellen:
-- Externe RTC (primÃ¤re Zeitquelle)
+- Externe RTC (primäre Zeitquelle)
 - CAN-basierte Zeit-Synchronisation
 - Interne Systemzeit (Fallback)
 
@@ -1114,20 +1125,20 @@ Die Priorisierung ist fest definiert und konfigurierbar.
 
 ### 16.2 Manuelle Zeitsetzung
 
-Datum und Uhrzeit kÃ¶nnen:
-- Ãœber das Web-Interface
-- Ãœber REST
+Datum und Uhrzeit können:
+- Über das Web-Interface
+- Über REST
 
 manuell gesetzt werden.
 
 Manuelle Zeitsetzung:
-- Ãœberschreibt die aktuelle RTC-Zeit
+- Überschreibt die aktuelle RTC-Zeit
 - Wird persistent gespeichert
 
-### 16.3 Zeit-Synchronisation Ã¼ber CAN
+### 16.3 Zeit-Synchronisation über CAN
 
-Das System unterstÃ¼tzt eine:
-- Vordefinierte CAN-Nachricht zur ZeitÃ¼bertragung
+Das System unterstützt eine:
+- Vordefinierte CAN-Nachricht zur Zeitübertragung
 
 Anforderungen:
 - Empfang auf allen CAN-Bussen
@@ -1137,7 +1148,7 @@ Anforderungen:
 Die Funktion ist:
 - Aktivierbar / deaktivierbar
 
-### 16.4 Zeitstempel-QualitÃ¤t
+### 16.4 Zeitstempel-Qualität
 
 Jeder geloggte CAN-Frame muss enthalten:
 - Absoluten Zeitstempel (Datum + Uhrzeit)
@@ -1157,18 +1168,18 @@ Das System muss kontinuierlich folgende Statusinformationen erfassen:
 
 ### 17.2 CAN-Statistiken
 
-Pro CAN-Bus mÃ¼ssen erfasst werden:
+Pro CAN-Bus müssen erfasst werden:
 - Anzahl empfangener Frames
 - Anzahl gesendeter Frames
-- FehlerzÃ¤hler
+- Fehlerzähler
 
 Statistiken werden:
 - Im Web-Interface angezeigt
-- Ãœber REST bereitgestellt
+- Über REST bereitgestellt
 
 ### 17.3 Netzwerk- und Systemparameter
 
-WLAN-SignalstÃ¤rke (in Prozent)
+WLAN-Signalstärke (in Prozent)
 
 Aktive SSID
 
@@ -1182,9 +1193,9 @@ Freier RAM (optional)
 
 Das System muss:
 - Kritische Fehler erkennen
-- Einen globalen Fehlerstatus fÃ¼hren
+- Einen globalen Fehlerstatus führen
 
-FehlerzustÃ¤nde mÃ¼ssen:
+Fehlerzustände müssen:
 - Sichtbar sein
 - Eindeutig klassifiziert werden
 
@@ -1199,11 +1210,11 @@ Erkennung von:
 
 Verhalten:
 - Fehlerstatus setzen
-- Logging fortsetzen, sofern mÃ¶glich
+- Logging fortsetzen, sofern möglich
 
 ### 18.2 Speicherfehler
 
-FehlerfÃ¤lle:
+Fehlerfälle:
 - SD-Karte entfernt
 - Schreibfehler
 - Kein freier Speicher
@@ -1215,7 +1226,7 @@ Verhalten:
 
 ### 18.3 Netzwerkfehler
 
-FehlerfÃ¤lle:
+Fehlerfälle:
 - WLAN-Verbindung verloren
 - Upload-Server nicht erreichbar
 
@@ -1233,13 +1244,13 @@ System darf:
 - Nicht dauerhaft in einem Fehlerzustand verharren
 
 
-### 18.5 Watchdog fÃ¼r Ringpuffer-Ãœberlauf
+### 18.5 Watchdog für Ringpuffer-Überlauf
 
 #### 18.5.1 Ziel
 
-Das System muss einen Watchdog implementieren, der Ringpuffer-/Queue-ÃœberlÃ¤ufe in der CAN-Datenpipeline erkennt und behandelt, um stille Datenverluste zu vermeiden.
+Das System muss einen Watchdog implementieren, der Ringpuffer-/Queue-Überläufe in der CAN-Datenpipeline erkennt und behandelt, um stille Datenverluste zu vermeiden.
 
-#### 18.5.2 Ãœberwachte Komponenten
+#### 18.5.2 Überwachte Komponenten
 
 Pro CAN-Bus: RX-Ringpuffer / RX-Queue (Frames vom MCP2515)
 
@@ -1249,85 +1260,117 @@ Optional:
 
 #### 18.5.3 Metriken
 
-Pro Ã¼berwachten Puffer mÃ¼ssen mindestens erfasst werden:
+Pro überwachten Puffer müssen mindestens erfasst werden:
 - Aktuelle Belegung (Bytes/Frames)
 - High-Water-Mark (Maximum seit Boot)
 - Anzahl Overflows (Drop-Ereignisse)
 - Letzter Overflow-Zeitstempel
 
-#### 18.5.4 Verhalten bei drohendem Ãœberlauf
+#### 18.5.4 Verhalten bei drohendem Überlauf
 
 Wenn Belegung > konfigurierbarer Schwellenwert (z. B. 80%):
 - System setzt einen Warnstatus (Web/REST)
 - System kann optional:
-- Logging-Flush aggressiver betreiben (grÃ¶ÃŸere SchreibblÃ¶cke)
+- Logging-Flush aggressiver betreiben (größere Schreibblöcke)
 - Nicht-kritische Tasks drosseln (Upload/Web), ohne CAN-Logging zu blockieren
 
-#### 18.5.5 Verhalten bei tatsÃ¤chlichem Overflow
+#### 18.5.5 Verhalten bei tatsächlichem Overflow
 
 Bei Overflow muss das System:
-- Einen FehlerzÃ¤hler erhÃ¶hen (per Bus)
+- Einen Fehlerzähler erhöhen (per Bus)
 - Das Ereignis persistent protokollieren (z. B. in Meta-Datei / NVS)
-- Den Fehlerzustand Ã¼ber Web/REST sichtbar machen
+- Den Fehlerzustand über Web/REST sichtbar machen
 
 Optional (konfigurierbar):
-- Automatischen Neustart auslÃ¶sen, wenn Overflows pro Zeitfenster > Grenzwert
+- Automatischen Neustart auslösen, wenn Overflows pro Zeitfenster > Grenzwert
 
 #### 18.5.6 Testkriterien
 
-Bei kÃ¼nstlich erzeugter Last muss:
+Bei künstlich erzeugter Last muss:
 - Overflow erkannt werden
-- ZÃ¤hler und Zeitstempel korrekt sein
+- Zähler und Zeitstempel korrekt sein
 - Web/REST Anzeige aktualisiert werden
+#### 18.5.7 SD Speed Test (Development)
+
+Setup:
+- Test file: 16 MB, SPI mode, HSPI
+
+Results:
+- Baseline (SD.h, 4 KB buffer, default SPI): 0.35 MB/s
+- Step 1 (SD.h, 20 MHz SPI): 0.90 MB/s
+- Step 2 (SD.h, 32 KB buffer): 1.53 MB/s
+- Step 3 (SD.h, 32 KB buffer + preallocate): 1.55 MB/s
+- Step 4 (SdFat, 20 MHz SPI, preallocate): 0.54 MB/s
+- Step 5 (SD.h, 40 MHz SPI, 32 KB buffer): 1.41 MB/s
+
+Takeaways:
+- Biggest gains come from SPI clock and larger write buffers.
+- Preallocation helped only slightly on this card.
+- SdFat was slower in this setup; keep SD.h for now unless further tuning proves faster.
+- 40 MHz SPI was slightly slower than 20 MHz on this setup.
+#### 18.5.8 RX Load Test (Development)
+
+Purpose:
+- Simulate the CAN RX ring buffer load in isolation to find the max sustainable frame rate before drops.
+
+Setup:
+- PlatformIO env: `rx_load_test`
+- Source: `dev/rx_load_test.cpp`
+- Serial (115200): `f <fps>` sets target rate, `r` resets counters
+
+Metrics (serial output):
+- Produced/s, Consumed/s
+- Drops (ring overflow count)
+- High-water (max ring fill level)
 ## 19. Sicherheit
 
 ### 19.1 Zugriffsschutz
 
-Web-Interface und REST mÃ¼ssen:
-- GeschÃ¼tzt sein
+Web-Interface und REST müssen:
+- Geschützt sein
 
-UnterstÃ¼tzte Mechanismen:
+Unterstützte Mechanismen:
 - Passwort
 - Token-basierter Zugriff
 
 ### 19.2 Netzwerk-Sicherheit
 
 OTA- und Upload-Verbindungen sollen:
-- HTTPS unterstÃ¼tzen
+- HTTPS unterstützen
 
-Zugangsdaten mÃ¼ssen:
-- VerschlÃ¼sselt gespeichert werden
+Zugangsdaten müssen:
+- Verschlüsselt gespeichert werden
 
-### 19.3 Firmware-IntegritÃ¤t
+### 19.3 Firmware-Integrität
 
-Firmware-Images mÃ¼ssen:
+Firmware-Images müssen:
 - Verifiziert werden
 
 Manipulierte Firmware darf:
-- Nicht ausgefÃ¼hrt werden
+- Nicht ausgeführt werden
 
 ## 20. Erweiterbarkeit
 
 ### 20.1 Hardware-Erweiterungen
 
 Das System muss:
-- Erweiterbar auf zusÃ¤tzliche CAN-Busse sein
+- Erweiterbar auf zusätzliche CAN-Busse sein
 
 Hardware-Anpassungen sollen:
-- Ãœber die Hardware-Definitionsdatei erfolgen
+- Über die Hardware-Definitionsdatei erfolgen
 
 ### 20.2 Software-Erweiterungen
 
 Neue Funktionen sollen:
-- Als eigenstÃ¤ndige Module integrierbar sein
+- Als eigenständige Module integrierbar sein
 
-Bestehende Funktionen dÃ¼rfen:
-- Nicht beeintrÃ¤chtigt werden
+Bestehende Funktionen dürfen:
+- Nicht beeinträchtigt werden
 
 ### 20.3 Log-Formate
 
-UnterstÃ¼tzung zusÃ¤tzlicher Log-Formate:
-- Muss mÃ¶glich sein
+Unterstützung zusätzlicher Log-Formate:
+- Muss möglich sein
 
 Das Log-System soll:
 - Formatagnostisch aufgebaut sein
@@ -1335,11 +1378,11 @@ Das Log-System soll:
 ## 21. Nicht-Ziele / Abgrenzungen
 
 Das System ist kein:
-- Echtzeit-SteuergerÃ¤t
-- Sicherheitskritisches FahrzeugsteuergerÃ¤t
+- Echtzeit-Steuergerät
+- Sicherheitskritisches Fahrzeugsteuergerät
 
 Es ersetzt keine:
-- OEM-DiagnosegerÃ¤te
+- OEM-Diagnosegeräte
 
 Der Fokus liegt auf:
 - Datenerfassung
@@ -1352,6 +1395,7 @@ Der Fokus liegt auf:
 
 - CAN_BAUDRATE_BUS_X
 - CAN_TERMINATION_BUS_X
+- CAN_BUS_NAME_X
 - LOG_FILE_SIZE_MAX
 - WIFI_SSID_X
 - WIFI_PASSWORD_X
@@ -1361,14 +1405,11 @@ Der Fokus liegt auf:
 
 ```
 /sdcard
-â”œâ”€â”€ can0/
-â”‚   â”œâ”€â”€ 2026-01-15_10-00.log
-â”‚   â””â”€â”€ 2026-01-15_10-15.log
-â”œâ”€â”€ can1/
-â””â”€â”€ meta/
-    â””â”€â”€ file_status.json
+ÃÄÄ log_1234567_bus1.sav
+ÃÄÄ log_1234567_bus2.sav
+ÀÄÄ meta/
+    ÀÄÄ file_status.json
 ```
-
 ### 22.3 Referenzen
 
 - SavvyCAN / GVRET

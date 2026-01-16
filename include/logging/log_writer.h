@@ -6,6 +6,17 @@
 
 namespace logging {
 
+struct Stats {
+  uint64_t total_bytes;
+  uint32_t bytes_per_sec;
+  uint32_t loop_count;
+  uint32_t pop_count;
+  uint32_t last_write_ms;
+  uint32_t open_failures;
+  uint8_t active_buses;
+  bool started;
+};
+
 struct Frame {
   uint32_t timestamp_sec;
   uint32_t timestamp_usec;
@@ -21,6 +32,7 @@ void init();
 void start();
 void stop();
 bool enqueue(const Frame& frame);
+Stats get_stats();
 
 } // namespace logging
 

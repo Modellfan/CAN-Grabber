@@ -1,6 +1,12 @@
+#if !defined(SD_SPEED_TEST) && !defined(RX_LOAD_TEST)
+
 #include <Arduino.h>
 
+#include "can/can_manager.h"
+#include "config/app_config.h"
 #include "hardware/hardware_config.h"
+#include "logging/log_writer.h"
+#include "storage/storage_manager.h"
 
 #ifndef APP_NAME
 #define APP_NAME "CAN-Grabber"
@@ -34,8 +40,16 @@ void setup() {
   digitalWrite(STATUS_LED_PIN, LOW);
 
   printBuildInfo();
+
+  config::init();
+  storage::init();
+  can::init();
+  logging::init();
+  logging::start();
 }
 
 void loop() {
   delay(1000);
 }
+
+#endif // !SD_SPEED_TEST && !RX_LOAD_TEST

@@ -1,5 +1,7 @@
 # Implementierungs-Reihenfolge für AI-Agenten (Arduino + PlatformIO, ESP32-S3)
 
+- Update immer AGENT.md und README.md, wenn der Nutzer definitionen macht, die eine Änderung bedeuten. Frage vorher um Erlaubnis.
+
 ## Phase 0 – Projektgerüst & Build-Sicherheit (Foundation)
 - [x] PlatformIO Projekt aufsetzen
 - [x] Arduino Framework, ESP32-S3 Board
@@ -16,7 +18,7 @@
 
 ## Phase 1 – Kern-Datenpfad: CAN RX → Puffer → SD (kritischster Teil)
 - [ ] Konfigurationsmodell (in RAM) + Persistenz (NVS)
-- [ ] Struktur: pro Bus: enabled, bitrate, read-only, termination, logging
+- [ ] Struktur: pro Bus: enabled, bitrate, read-only, termination, logging, name (user-defined override)
 - [ ] global: max file size, wifi list, upload url, influx config, dbc selection
 - [ ] Save/Load + Defaultwerte
 - [ ] SD-Karte: Mount, Info, Verzeichnisse
@@ -26,9 +28,9 @@
 - [ ] CAN Treiber (MCP2515) für 1 Bus
 - [ ] SPI init
 - [ ] Bitrate setzen
-- [ ] RX lesen (Polling oder INT)
-- [ ] Frame struct definieren: timestamp, bus_id, id, ext, dlc, data[8], direction(RX/TX)
-- [ ] Ringpuffer/Queue pro Bus
+- [x] RX lesen (Polling oder INT)
+- [x] Frame struct definieren: timestamp, bus_id, id, ext, dlc, data[8], direction(RX/TX)
+- [x] Ringpuffer/Queue pro Bus
 - [ ] Thread-safe (FreeRTOS)
 - [ ] Overflow-Zähler + High-water
 - [ ] Unit-Test-artige Checks: push/pop, overflow
@@ -40,6 +42,7 @@
 - [ ] Parallelisierung auf 6 Busse
 - [ ] Multi-bus RX (pro Bus Task oder zentral)
 - [ ] pro Bus eigenes Logging-File + state machine
+- [ ] Log-Dateinamen enthalten immer den Bus; Busname ist in der Konfiguration ueberschreibbar
 - [ ] Done wenn: Bei hoher Frame-Rate werden Dateien pro Bus geschrieben, Rotationen funktionieren, keine Blocking-Probleme.
 
 ## Phase 2 – Datei-Management & Status (Download/Upload-Markierung, Überschreiben)

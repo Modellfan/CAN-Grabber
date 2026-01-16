@@ -8,6 +8,7 @@ constexpr uint8_t SD_MOSI_PIN = 35;
 constexpr uint8_t SD_MISO_PIN = 37;
 constexpr uint8_t SD_SCK_PIN = 36;
 constexpr uint8_t SD_CS_PIN = 39;
+constexpr uint32_t SD_SPI_CLOCK_HZ = 20000000UL;
 
 // MCP2515 SPI pins (shared SPI bus for CAN controllers)
 constexpr uint8_t CAN_SPI_SCK_PIN = 12;
