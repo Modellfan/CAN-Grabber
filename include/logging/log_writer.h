@@ -14,6 +14,13 @@ struct Stats {
   uint32_t last_write_ms;
   uint32_t open_failures;
   uint8_t active_buses;
+  uint32_t write_calls;
+  uint32_t write_failures;
+  uint32_t last_write_len;
+  uint32_t prealloc_attempts;
+  uint32_t prealloc_failures;
+  uint32_t reopen_attempts;
+  uint32_t reopen_failures;
   bool started;
 };
 

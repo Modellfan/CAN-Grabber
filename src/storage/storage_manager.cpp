@@ -34,12 +34,14 @@ struct FileStatusEntry {
 FileStatusEntry s_entries[kMaxEntries];
 size_t s_entry_count = 0;
 
+// Create a directory if it does not already exist.
 void ensure_dir(const char* path) {
   if (!SD.exists(path)) {
     SD.mkdir(path);
   }
 }
 
+// Return the index of the status entry matching the path, or -1 if missing.
 int find_entry(const char* path) {
   for (size_t i = 0; i < s_entry_count; ++i) {
     if (strcmp(s_entries[i].path, path) == 0) {
@@ -49,6 +51,7 @@ int find_entry(const char* path) {
   return -1;
 }
 
+// Remove a status entry by index and compact the array.
 void remove_entry(size_t index) {
   if (index >= s_entry_count) {
     return;
@@ -61,6 +64,7 @@ void remove_entry(size_t index) {
   }
 }
 
+// Load file status metadata from disk into memory.
 bool load_status() {
   s_entry_count = 0;
   if (!SD.exists(kStatusPath)) {
@@ -100,6 +104,7 @@ bool load_status() {
   return true;
 }
 
+// Persist current file status metadata to disk.
 bool save_status() {
   ensure_dir(kMetaDir);
   if (SD.exists(kStatusPath)) {
@@ -127,6 +132,7 @@ bool save_status() {
   return true;
 }
 
+// Insert or update a status entry for a log file.
 bool upsert_entry(const char* path,
                   uint8_t bus_id,
                   uint32_t start_ms,
@@ -150,10 +156,12 @@ bool upsert_entry(const char* path,
   return true;
 }
 
+// Rank deletion priority; lower values are deleted first.
 uint8_t delete_priority(const FileStatusEntry& entry) {
   return (entry.flags & (kFlagDownloaded | kFlagUploaded)) ? 0 : 1;
 }
 
+// Choose a non-active file to delete, prioritizing downloaded/uploaded and oldest.
 int pick_deletion_candidate() {
   int best_index = -1;
   uint8_t best_priority = 0;
@@ -174,6 +182,7 @@ int pick_deletion_candidate() {
   return best_index;
 }
 
+// Parse log filename and extract start timestamp if it matches expected pattern.
 bool parse_log_filename(const char* name, uint32_t* start_ms) {
   const char* base = strrchr(name, '/');
   base = base ? base + 1 : name;
@@ -202,6 +211,7 @@ bool parse_log_filename(const char* name, uint32_t* start_ms) {
   return true;
 }
 
+// Scan the root directory for the oldest log filename.
 bool find_oldest_log_file(char* out, size_t out_len) {
   File root = SD.open("/");
   if (!root) {
@@ -234,6 +244,7 @@ bool find_oldest_log_file(char* out, size_t out_len) {
 
 } // namespace
 
+// Initialize the SD card, folders, and file status database.
 void init() {
   s_ready = false;
 
@@ -258,10 +269,12 @@ void init() {
   }
 }
 
+// Report whether storage is initialized and ready for use.
 bool is_ready() {
   return s_ready;
 }
 
+// Read SD capacity and free space stats.
 Stats get_stats() {
   Stats stats{};
   if (!s_ready) {
@@ -274,6 +287,7 @@ Stats get_stats() {
   return stats;
 }
 
+// Ensure at least min_free_bytes are free, deleting old files if needed.
 bool ensure_space(uint64_t min_free_bytes) {
   if (!s_ready) {
     return false;
@@ -312,6 +326,7 @@ bool ensure_space(uint64_t min_free_bytes) {
   return stats.free_bytes >= min_free_bytes;
 }
 
+// Record a newly opened log file as active.
 bool register_log_file(const char* path, uint8_t bus_id, uint32_t start_ms) {
   if (!s_ready || path == nullptr) {
     return false;
@@ -325,6 +340,7 @@ bool register_log_file(const char* path, uint8_t bus_id, uint32_t start_ms) {
   return true;
 }
 
+// Mark a log file as closed and record its final size.
 void finalize_log_file(const char* path, uint64_t size_bytes) {
   if (!s_ready || path == nullptr) {
     return;
@@ -341,6 +357,7 @@ void finalize_log_file(const char* path, uint64_t size_bytes) {
   save_status();
 }
 
+// Mark a file as downloaded in the metadata table.
 void mark_downloaded(const char* path) {
   if (!s_ready || path == nullptr) {
     return;
@@ -357,6 +374,7 @@ void mark_downloaded(const char* path) {
   save_status();
 }
 
+// Mark a file as uploaded in the metadata table.
 void mark_uploaded(const char* path) {
   if (!s_ready || path == nullptr) {
     return;

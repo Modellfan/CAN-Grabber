@@ -120,7 +120,7 @@ Funktionale Beschreibung und Anforderungen.
   - [18.2 Speicherfehler](#182-speicherfehler)
   - [18.3 Netzwerkfehler](#183-netzwerkfehler)
   - [18.4 Wiederanlaufstrategien](#184-wiederanlaufstrategien)
-  - [18.5 Watchdog für Ringpuffer-Überlauf](#185-watchdog-fur-ringpuffer-uberlauf)
+  - [18.5 Watchdog fuer Blockpuffer-Ueberlauf](#185-watchdog-fuer-blockpuffer-ueberlauf)
     - [18.5.1 Ziel](#1851-ziel)
     - [18.5.2 Überwachte Komponenten](#1852-uberwachte-komponenten)
     - [18.5.3 Metriken](#1853-metriken)
@@ -389,13 +389,13 @@ Zeitkritische CAN-Funktionen dürfen nicht durch Netzwerk- oder Dateisystemzugrif
 
 Tasks kommunizieren ausschließlich über:
 - FreeRTOS Queues
-- Ringbuffer
+- Blockpuffer
 - Event-Gruppen
 
 Direkte Funktionsaufrufe zwischen Tasks sind zu vermeiden.
 
 CAN RX Tasks schreiben empfangene Frames in:
-- Pro-Bus-Ringbuffer oder Queue
+- Pro-Bus-Blockpuffer (8192 B x 2 Bloecke)
 
 Der Log Writer Task liest aus diesen Puffern.
 
@@ -944,7 +944,7 @@ Firmware muss:
 ### 13.7 REST/Web Ergänzungen (kurz)
 
 REST-Endpunkte (Ergänzungsvorschlag, normativ):
-- GET `/api/buffers` ? Ringpufferstatus pro Bus (fill, high-water, overflows)
+- GET `/api/buffers` ? Bufferstatus pro Bus (pending bytes, high-water, drops)
 - POST `/api/dump/influx` ? Start Dump (Datei/Bus/Zeitraum Parameter)
 - GET `/api/dump/status` ? Dump-Status
 - POST `/api/dbc` ? Upload/Set active DBC-JSON
@@ -1244,19 +1244,19 @@ System darf:
 - Nicht dauerhaft in einem Fehlerzustand verharren
 
 
-### 18.5 Watchdog für Ringpuffer-Überlauf
+### 18.5 Watchdog fuer Blockpuffer-Ueberlauf
 
 #### 18.5.1 Ziel
 
-Das System muss einen Watchdog implementieren, der Ringpuffer-/Queue-Überläufe in der CAN-Datenpipeline erkennt und behandelt, um stille Datenverluste zu vermeiden.
+Das System muss einen Watchdog implementieren, der Blockpuffer-/Queue-Ueberlaeufe in der CAN-Datenpipeline erkennt und behandelt, um stille Datenverluste zu vermeiden.
 
 #### 18.5.2 Überwachte Komponenten
 
-Pro CAN-Bus: RX-Ringpuffer / RX-Queue (Frames vom MCP2515)
+Pro CAN-Bus: RX-Blockpuffer / RX-Queue (Frames vom MCP2515)
 
 Optional:
 - TX-Queue (Frames zum Senden)
-- Log-Writer Input-Queue (Frames zum SD-Schreiben)
+- Log-Writer Input-Blockpuffer (Bloecke zum SD-Schreiben)
 
 #### 18.5.3 Metriken
 
@@ -1311,7 +1311,7 @@ Takeaways:
 #### 18.5.8 RX Load Test (Development)
 
 Purpose:
-- Simulate the CAN RX ring buffer load in isolation to find the max sustainable frame rate before drops.
+- Simulate the CAN RX block buffer load in isolation to find the max sustainable frame rate before drops.
 
 Setup:
 - PlatformIO env: `rx_load_test`
@@ -1320,8 +1320,8 @@ Setup:
 
 Metrics (serial output):
 - Produced/s, Consumed/s
-- Drops (ring overflow count)
-- High-water (max ring fill level)
+- Drops (block overflow count)
+- High-water (max pending bytes)
 ## 19. Sicherheit
 
 ### 19.1 Zugriffsschutz

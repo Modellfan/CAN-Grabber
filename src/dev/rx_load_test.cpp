@@ -23,9 +23,14 @@ void enable_all_buses() {
 
 void print_stats() {
   const uint32_t fps = load_test::get_fps();
+  if (!logging::get_stats().started && storage::is_ready()) {
+    logging::start();
+  }
   Serial.print("Target FPS per bus: ");
   Serial.println(fps);
-  Serial.print("Queue capacity: ");
+  Serial.print("SD ready: ");
+  Serial.println(storage::is_ready() ? "yes" : "no");
+  Serial.print("Buffer capacity (bytes): ");
   Serial.println(load_test::queue_capacity());
   const logging::Stats log_stats = logging::get_stats();
   Serial.print("Log write rate: ");
@@ -47,6 +52,20 @@ void print_stats() {
   } else {
     Serial.println(millis() - log_stats.last_write_ms);
   }
+  Serial.print("Write calls/failures/last len: ");
+  Serial.print(log_stats.write_calls);
+  Serial.print("/");
+  Serial.print(log_stats.write_failures);
+  Serial.print("/");
+  Serial.println(log_stats.last_write_len);
+  Serial.print("Prealloc attempts/failures: ");
+  Serial.print(log_stats.prealloc_attempts);
+  Serial.print("/");
+  Serial.println(log_stats.prealloc_failures);
+  Serial.print("Reopen attempts/failures: ");
+  Serial.print(log_stats.reopen_attempts);
+  Serial.print("/");
+  Serial.println(log_stats.reopen_failures);
   for (uint8_t bus_id = 0; bus_id < config::kMaxBuses; ++bus_id) {
     Serial.print("Bus ");
     Serial.print(bus_id + 1);
@@ -54,11 +73,17 @@ void print_stats() {
     Serial.print(load_test::produced(bus_id));
     Serial.print(" | Consumed: ");
     Serial.print(load_test::consumed(bus_id));
-    Serial.print(" | Depth: ");
+    Serial.print(" | Buffered bytes: ");
     Serial.print(load_test::queue_depth(bus_id));
+    Serial.print(" | Blocks F/R/U: ");
+    Serial.print(load_test::blocks_free(bus_id));
+    Serial.print("/");
+    Serial.print(load_test::blocks_ready(bus_id));
+    Serial.print("/");
+    Serial.print(load_test::blocks_in_use(bus_id));
     Serial.print(" | Drops: ");
     Serial.print(can::drop_count(bus_id));
-    Serial.print(" | High-water: ");
+    Serial.print(" | High-water bytes: ");
     Serial.println(can::high_water(bus_id));
   }
 }

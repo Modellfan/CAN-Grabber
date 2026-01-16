@@ -9,6 +9,9 @@
 #include "can/can_manager.h"
 #include "config/app_config.h"
 #include "storage/storage_manager.h"
+#ifdef RX_LOAD_TEST
+#include "dev/load_test_control.h"
+#endif
 
 namespace logging {
 
@@ -21,14 +24,14 @@ struct BusLogState {
   uint64_t bytes_written;
   uint32_t start_ms;
   size_t buffered_len;
-  static constexpr size_t kBufferSize = 4096;
+  static constexpr size_t kBufferSize = 2048;
   uint8_t buffer[kBufferSize];
 };
 
 BusLogState s_bus_logs[config::kMaxBuses];
 bool s_started = false;
 TaskHandle_t s_log_task = nullptr;
-constexpr UBaseType_t kLogTaskPriority = configMAX_PRIORITIES - 2;
+constexpr UBaseType_t kLogTaskPriority = configMAX_PRIORITIES - 1;
 constexpr BaseType_t kLogTaskCore = 0;
 portMUX_TYPE s_stats_mux = portMUX_INITIALIZER_UNLOCKED;
 uint64_t s_total_bytes = 0;
@@ -40,7 +43,15 @@ uint32_t s_pop_count = 0;
 uint32_t s_last_write_ms = 0;
 uint32_t s_open_failures = 0;
 uint8_t s_active_buses = 0;
+uint32_t s_write_calls = 0;
+uint32_t s_write_failures = 0;
+uint32_t s_last_write_len = 0;
+uint32_t s_prealloc_attempts = 0;
+uint32_t s_prealloc_failures = 0;
+uint32_t s_reopen_attempts = 0;
+uint32_t s_reopen_failures = 0;
 
+// Format a CAN frame as a SavvyCAN ASCII log line.
 size_t format_savvy_line(const can::Frame& frame, char* out, size_t out_cap) {
   if (out_cap == 0) {
     return 0;
@@ -78,6 +89,7 @@ size_t format_savvy_line(const can::Frame& frame, char* out, size_t out_cap) {
   return static_cast<size_t>(cursor - out);
 }
 
+// Build the log file path for a bus and start timestamp.
 void build_log_path(uint8_t bus_id, uint32_t start_ms, char* out, size_t out_len) {
   if (out_len == 0) {
     return;
@@ -90,6 +102,7 @@ void build_log_path(uint8_t bus_id, uint32_t start_ms, char* out, size_t out_len
   out[out_len - 1] = '\0';
 }
 
+// Write the SavvyCAN header into a newly opened log file.
 size_t write_header(File& file, uint8_t bus_id) {
   size_t written = 0;
   written += file.print("# SavvyCAN ASCII log - bus ");
@@ -97,25 +110,69 @@ size_t write_header(File& file, uint8_t bus_id) {
   return written;
 }
 
+// Update shared statistics after writing bytes to storage.
 void note_bytes_written(size_t len) {
   portENTER_CRITICAL(&s_stats_mux);
   s_total_bytes += len;
   s_window_bytes += static_cast<uint32_t>(len);
   s_last_write_ms = millis();
+  s_last_write_len = static_cast<uint32_t>(len);
   portEXIT_CRITICAL(&s_stats_mux);
 }
 
-void write_bytes(BusLogState& state, const uint8_t* data, size_t len) {
+// Write raw bytes to the active log file and update counters.
+size_t write_bytes(BusLogState& state, const uint8_t* data, size_t len) {
   if (!state.active || len == 0) {
-    return;
+    return 0;
   }
+  portENTER_CRITICAL(&s_stats_mux);
+  s_write_calls++;
+  portEXIT_CRITICAL(&s_stats_mux);
   const size_t out = state.file.write(data, len);
   if (out > 0) {
     state.bytes_written += out;
     note_bytes_written(out);
   }
+  if (out != len) {
+    portENTER_CRITICAL(&s_stats_mux);
+    s_write_failures++;
+    portEXIT_CRITICAL(&s_stats_mux);
+  }
+  return out;
 }
 
+// Reopen a log file and seek to the last known write position.
+bool reopen_log_file(BusLogState& state) {
+  if (!state.path[0]) {
+    return false;
+  }
+  portENTER_CRITICAL(&s_stats_mux);
+  s_reopen_attempts++;
+  portEXIT_CRITICAL(&s_stats_mux);
+
+  if (state.file) {
+    state.file.flush();
+    state.file.close();
+  }
+
+  File file = SD.open(state.path, FILE_WRITE);
+  if (!file) {
+    portENTER_CRITICAL(&s_stats_mux);
+    s_reopen_failures++;
+    portEXIT_CRITICAL(&s_stats_mux);
+    state.active = false;
+    return false;
+  }
+
+  if (state.bytes_written > 0) {
+    file.seek(state.bytes_written);
+  }
+  state.file = file;
+  state.active = true;
+  return true;
+}
+
+// Flush any buffered bytes to the file.
 void flush_buffer(BusLogState& state) {
   if (state.buffered_len == 0) {
     return;
@@ -124,6 +181,7 @@ void flush_buffer(BusLogState& state) {
   state.buffered_len = 0;
 }
 
+// Open a new log file for the given bus, preallocating if configured.
 bool open_log_file(uint8_t bus_id) {
   const config::Config& cfg = config::get();
   const uint32_t max_size = cfg.global.max_file_size_bytes;
@@ -138,6 +196,19 @@ bool open_log_file(uint8_t bus_id) {
   File file = SD.open(path, FILE_WRITE);
   if (!file) {
     return false;
+  }
+
+  if (max_size > 0) {
+    portENTER_CRITICAL(&s_stats_mux);
+    s_prealloc_attempts++;
+    portEXIT_CRITICAL(&s_stats_mux);
+    if (!file.seek(max_size - 1) || file.write(static_cast<uint8_t>(0)) != 1) {
+      portENTER_CRITICAL(&s_stats_mux);
+      s_prealloc_failures++;
+      portEXIT_CRITICAL(&s_stats_mux);
+    }
+    file.flush();
+    file.seek(0);
   }
 
   BusLogState& state = s_bus_logs[bus_id];
@@ -156,6 +227,7 @@ bool open_log_file(uint8_t bus_id) {
   return true;
 }
 
+// Flush and close an active log file, then finalize metadata.
 void close_log_file(uint8_t bus_id) {
   BusLogState& state = s_bus_logs[bus_id];
   if (!state.active) {
@@ -175,6 +247,7 @@ void close_log_file(uint8_t bus_id) {
   state.start_ms = 0;
 }
 
+// Rotate the log file if the next write would exceed max size.
 bool rotate_if_needed(uint8_t bus_id, size_t next_len) {
   const uint32_t max_size = config::get().global.max_file_size_bytes;
   if (max_size == 0) {
@@ -195,6 +268,7 @@ bool rotate_if_needed(uint8_t bus_id, size_t next_len) {
 }
 
 // Single log writer task; lower priority than RX, pinned to core 1.
+// Log writer task that drains per-bus blocks and writes them to SD.
 void log_task(void*) {
   for (;;) {
     if (!s_started) {
@@ -212,38 +286,65 @@ void log_task(void*) {
         continue;
       }
 
-      can::Frame frame{};
-      while (can::pop_rx_frame(bus_id, frame)) {
+#ifdef RX_LOAD_TEST
+      load_test::LogBlock block{};
+      while (load_test::acquire_log_block(bus_id, &block)) {
         portENTER_CRITICAL(&s_stats_mux);
-        s_pop_count++;
+        s_pop_count += block.frames;
         portEXIT_CRITICAL(&s_stats_mux);
-        char line[96];
-        const size_t len = format_savvy_line(frame, line, sizeof(line));
-        if (len == 0) {
-          continue;
-        }
 
-        if (!rotate_if_needed(bus_id, len)) {
-          break;
+        if (!rotate_if_needed(bus_id, block.len)) {
+          load_test::release_log_block(bus_id, block.index, 0);
+          continue;
         }
 
         BusLogState& state = s_bus_logs[bus_id];
         if (!state.active) {
+          load_test::release_log_block(bus_id, block.index, 0);
           continue;
         }
 
-        if (len > BusLogState::kBufferSize) {
-          flush_buffer(state);
-          write_bytes(state, reinterpret_cast<const uint8_t*>(line), len);
-        } else {
-          if (state.buffered_len + len > BusLogState::kBufferSize) {
-            flush_buffer(state);
+        flush_buffer(state);
+        size_t out = write_bytes(state, block.data, block.len);
+        if (out != block.len) {
+          if (reopen_log_file(state)) {
+            out = write_bytes(state, block.data, block.len);
           }
-          memcpy(state.buffer + state.buffered_len, line, len);
-          state.buffered_len += len;
         }
+        const uint32_t flushed_frames = (out == block.len) ? block.frames : 0;
+        load_test::release_log_block(bus_id, block.index, flushed_frames);
         any = true;
       }
+#else
+      can::LogBlock block{};
+      while (can::acquire_log_block(bus_id, &block)) {
+        portENTER_CRITICAL(&s_stats_mux);
+        s_pop_count += block.frames;
+        portEXIT_CRITICAL(&s_stats_mux);
+
+        if (!rotate_if_needed(bus_id, block.len)) {
+          can::release_log_block(bus_id, block.index, 0);
+          continue;
+        }
+
+        BusLogState& state = s_bus_logs[bus_id];
+        if (!state.active) {
+          can::release_log_block(bus_id, block.index, 0);
+          continue;
+        }
+
+        flush_buffer(state);
+        size_t out = write_bytes(state, block.data, block.len);
+        if (out != block.len) {
+          if (reopen_log_file(state)) {
+            out = write_bytes(state, block.data, block.len);
+          }
+        }
+        const uint32_t flushed_frames = (out == block.len) ? block.frames : 0;
+        can::release_log_block(bus_id, block.index, flushed_frames);
+        any = true;
+      }
+#endif
     }
 
     if (s_window_start_ms == 0) {
@@ -266,6 +367,7 @@ void log_task(void*) {
 
 } // namespace
 
+// Initialize log writer state and stats counters.
 void init() {
   for (size_t i = 0; i < config::kMaxBuses; ++i) {
     s_bus_logs[i].active = false;
@@ -284,9 +386,17 @@ void init() {
   s_last_write_ms = 0;
   s_open_failures = 0;
   s_active_buses = 0;
+  s_write_calls = 0;
+  s_write_failures = 0;
+  s_last_write_len = 0;
+  s_prealloc_attempts = 0;
+  s_prealloc_failures = 0;
+  s_reopen_attempts = 0;
+  s_reopen_failures = 0;
   portEXIT_CRITICAL(&s_stats_mux);
 }
 
+// Start logging for enabled buses and spawn the writer task.
 void start() {
   if (!storage::is_ready()) {
     return;
@@ -327,6 +437,7 @@ void start() {
   }
 }
 
+// Stop logging and tear down the writer task.
 void stop() {
   for (size_t i = 0; i < config::kMaxBuses; ++i) {
     close_log_file(static_cast<uint8_t>(i));
@@ -338,11 +449,13 @@ void stop() {
   s_started = false;
 }
 
+// Placeholder for per-frame enqueue; logging is block-based now.
 bool enqueue(const Frame& frame) {
   (void)frame;
   return s_started;
 }
 
+// Snapshot current log writer statistics.
 Stats get_stats() {
   Stats stats{};
   portENTER_CRITICAL(&s_stats_mux);
@@ -353,6 +466,13 @@ Stats get_stats() {
   stats.last_write_ms = s_last_write_ms;
   stats.open_failures = s_open_failures;
   stats.active_buses = s_active_buses;
+  stats.write_calls = s_write_calls;
+  stats.write_failures = s_write_failures;
+  stats.last_write_len = s_last_write_len;
+  stats.prealloc_attempts = s_prealloc_attempts;
+  stats.prealloc_failures = s_prealloc_failures;
+  stats.reopen_attempts = s_reopen_attempts;
+  stats.reopen_failures = s_reopen_failures;
   stats.started = s_started;
   portEXIT_CRITICAL(&s_stats_mux);
   return stats;

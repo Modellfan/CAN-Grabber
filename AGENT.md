@@ -30,7 +30,7 @@
 - [ ] Bitrate setzen
 - [x] RX lesen (Polling oder INT)
 - [x] Frame struct definieren: timestamp, bus_id, id, ext, dlc, data[8], direction(RX/TX)
-- [x] Ringpuffer/Queue pro Bus
+- [x] Blockpuffer (8192 B x 2 Bloecke) pro Bus
 - [ ] Thread-safe (FreeRTOS)
 - [ ] Overflow-Zähler + High-water
 - [ ] Unit-Test-artige Checks: push/pop, overflow
@@ -58,7 +58,7 @@
 - [ ] Schutz: keine active-files löschen
 - [ ] Done wenn: SD wird automatisch "aufgeräumt", ohne aktive Dateien zu zerstören.
 
-## Phase 3 – Watchdog für Ringpuffer-Überlauf (Stabilität)
+## Phase 3 – Watchdog für Blockpuffer-Überlauf (Stabilität)
 - [ ] Buffer Watchdog
 - [ ] Periodisch: fill level + overflow count check
 - [ ] Warn-/Fehlerstatus setzen
