@@ -45,16 +45,16 @@
 - [ ] Done wenn: Bei hoher Frame-Rate werden Dateien pro Bus geschrieben, Rotationen funktionieren, keine Blocking-Probleme.
 
 ## Phase 2 â€“ Datei-Management & Status (Download/Upload-Markierung, Ãœberschreiben)
-- [ ] Datei-Index & Metadaten
-- [ ] `file_status.json` (oder binÃ¤r) in `/meta`
-- [ ] pro Datei: bus, name, size, start/end, downloaded, uploaded, checksum(optional)
-- [ ] Download-Markierung
-- [ ] API: mark_downloaded(file)
-- [ ] Web/REST Download setzt Flag
-- [ ] SpeicherÃ¼berwachungs- und Ãœberschreibstrategie
-- [ ] Low-space threshold
-- [ ] LÃ¶schen nach PrioritÃ¤t: uploaded/downloaded zuerst, dann Ã¤lteste
-- [ ] Schutz: keine active-files lÃ¶schen
+- [x] Datei-Index & Metadaten
+- [x] `file_status.json` (oder binÃ¤r) in `/meta`
+  - [x] pro Datei: bus, name, size, start/end, downloaded, uploaded, checksum(optional)
+- [x] Download-Markierung
+- [x] API: mark_downloaded(file)
+  - [x] Web/REST Download setzt Flag
+- [x] SpeicherÃ¼berwachungs- und Ãœberschreibstrategie
+  - [x] Low-space threshold
+- [x] LÃ¶schen nach PrioritÃ¤t: uploaded/downloaded zuerst, dann Ã¤lteste
+- [x] Schutz: keine active-files lÃ¶schen
 - [ ] Done wenn: SD wird automatisch "aufgerÃ¤umt", ohne aktive Dateien zu zerstÃ¶ren.
 
 ## Phase 3 â€“ Watchdog fÃ¼r Blockpuffer-Ãœberlauf (StabilitÃ¤t)
@@ -68,13 +68,13 @@
 - [ ] Done wenn: ÃœberlÃ¤ufe werden sichtbar + zÃ¤hlen + optional reagieren.
 
 ## Phase 4 â€“ Netzwerk-Basis: WLAN (3 SSIDs) + mDNS
-- [ ] WiFi Manager
-- [ ] 1â€“3 SSIDs mit PrioritÃ¤t
-- [ ] Reconnect
-- [ ] RSSI Prozent ableiten
-- [ ] mDNS/Bonjour
-- [ ] Hostname `canlogger.local`
-- [ ] Service fÃ¼r HTTP
+- [x] WiFi Manager
+- [x] 1â€“3 SSIDs mit PrioritÃ¤t
+- [x] Reconnect
+- [x] RSSI Prozent ableiten
+- [x] mDNS/Bonjour
+- [x] Hostname `canlogger.local`
+- [x] Service fÃ¼r HTTP
 - [ ] Done wenn: GerÃ¤t verbindet sich robust und ist per `.local` erreichbar.
 
 ## Phase 5 â€“ Web-Interface (UI) zuerst read-only, dann write
@@ -94,15 +94,15 @@
 - [ ] Done wenn: Alles konfigurierbar + Status vollstÃ¤ndig.
 
 ## Phase 6 â€“ REST API (Maschinenzugriff)
-- [ ] REST GrundgerÃ¼st + Auth
-- [ ] Basic oder Token
-- [ ] Endpoints: Status & Config
-- [ ] `/api/status`, `/api/config`, `/api/can/*`, `/api/storage/*`, `/api/buffers`
-- [ ] Endpoints: Files
-- [ ] `/api/files`, `/api/files/<id>/download`, `/api/files/<id>/mark_downloaded`
-- [ ] Control Endpoints
-- [ ] start/stop logging
-- [ ] close active file
+- [x] REST GrundgerÃ¼st + Auth
+- [x] Basic oder Token
+- [x] Endpoints: Status & Config
+- [x] `/api/status`, `/api/config`, `/api/can/*`, `/api/storage/*`, `/api/buffers`
+- [x] Endpoints: Files
+- [x] `/api/files`, `/api/files/<id>/download`, `/api/files/<id>/mark_downloaded`
+- [x] Control Endpoints
+- [x] start/stop logging
+- [x] close active file
 - [ ] Done wenn: Alles per REST steuerbar, Web nutzt intern gleiche APIs.
 
 ## Phase 7 â€“ USB: GVRET (SavvyCAN)
@@ -138,7 +138,7 @@
 - [ ] Done wenn: Automatischer Upload robust funktioniert ohne Logging zu stÃ¶ren.
 
 ## Phase 10 â€“ DBC JSON + InfluxDB Dump (Interpretation Pipeline)
-- [ ] DBC-JSON Speicherung & Auswahl
+- [x] DBC-JSON Speicherung & Auswahl
 - [ ] Upload per REST/Web
 - [ ] Schema-Version prÃ¼fen
 - [ ] DBC Decoder

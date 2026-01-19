@@ -31,6 +31,7 @@ struct BusLogState {
   char path[64];
   uint64_t bytes_written;
   uint32_t start_ms;
+  uint32_t checksum;
   size_t buffered_len;
   static constexpr size_t kBufferSize = 2048;
   uint8_t buffer[kBufferSize];
@@ -58,6 +59,21 @@ uint32_t s_prealloc_attempts = 0;
 uint32_t s_prealloc_failures = 0;
 uint32_t s_reopen_attempts = 0;
 uint32_t s_reopen_failures = 0;
+
+uint32_t crc32_update(uint32_t crc, const uint8_t* data, size_t len) {
+  uint32_t value = crc;
+  for (size_t i = 0; i < len; ++i) {
+    value ^= static_cast<uint32_t>(data[i]);
+    for (uint8_t bit = 0; bit < 8; ++bit) {
+      if (value & 1u) {
+        value = (value >> 1) ^ 0xEDB88320u;
+      } else {
+        value >>= 1;
+      }
+    }
+  }
+  return value;
+}
 
 // Format a CAN frame as a SavvyCAN ASCII log line.
 size_t format_savvy_line(const can::Frame& frame, char* out, size_t out_cap) {
@@ -117,11 +133,21 @@ void build_log_path(uint8_t bus_id,
 }
 
 // Write the SavvyCAN header into a newly opened log file.
-size_t write_header(File& file, uint8_t bus_id) {
-  size_t written = 0;
-  written += file.print("# SavvyCAN ASCII log - bus ");
-  written += file.println(static_cast<unsigned>(bus_id + 1));
-  return written;
+size_t write_header(File& file, uint8_t bus_id, uint32_t* checksum) {
+  char header[64];
+  const int len = snprintf(header,
+                           sizeof(header),
+                           "# SavvyCAN ASCII log - bus %u\n",
+                           static_cast<unsigned>(bus_id + 1));
+  if (len <= 0) {
+    return 0;
+  }
+  const size_t out =
+      file.write(reinterpret_cast<const uint8_t*>(header), static_cast<size_t>(len));
+  if (checksum != nullptr && out > 0) {
+    *checksum = crc32_update(*checksum, reinterpret_cast<const uint8_t*>(header), out);
+  }
+  return out;
 }
 
 // Update shared statistics after writing bytes to storage.
@@ -145,6 +171,7 @@ size_t write_bytes(BusLogState& state, const uint8_t* data, size_t len) {
   const size_t out = state.file.write(data, len);
   if (out > 0) {
     state.bytes_written += out;
+    state.checksum = crc32_update(state.checksum, data, out);
     note_bytes_written(out);
   }
   if (out != len) {
@@ -238,11 +265,12 @@ bool open_log_file(uint8_t bus_id) {
   state.state = BusLogState::LogState::kActive;
   state.bytes_written = 0;
   state.start_ms = start_ms;
+  state.checksum = 0xFFFFFFFFu;
   state.buffered_len = 0;
   strncpy(state.path, path, sizeof(state.path));
   state.path[sizeof(state.path) - 1] = '\0';
 
-  const size_t header_bytes = write_header(state.file, bus_id);
+  const size_t header_bytes = write_header(state.file, bus_id, &state.checksum);
   state.bytes_written += header_bytes;
   note_bytes_written(header_bytes);
   storage::register_log_file(state.path, static_cast<uint8_t>(bus_id + 1), start_ms);
@@ -264,12 +292,15 @@ void close_log_file(uint8_t bus_id) {
     state.file.close();
   }
 
-  storage::finalize_log_file(state.path, state.bytes_written);
+  const uint32_t end_ms = millis();
+  const uint32_t checksum = state.checksum ^ 0xFFFFFFFFu;
+  storage::finalize_log_file(state.path, state.bytes_written, end_ms, checksum);
   state.active = false;
   state.state = BusLogState::LogState::kIdle;
   state.path[0] = '\0';
   state.bytes_written = 0;
   state.start_ms = 0;
+  state.checksum = 0;
 }
 
 // Rotate the log file if the next write would exceed max size.
@@ -400,6 +431,7 @@ void init() {
     s_bus_logs[i].path[0] = '\0';
     s_bus_logs[i].bytes_written = 0;
     s_bus_logs[i].start_ms = 0;
+    s_bus_logs[i].checksum = 0;
   }
   s_started = false;
   portENTER_CRITICAL(&s_stats_mux);

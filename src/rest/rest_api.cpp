@@ -62,6 +62,7 @@ void send_json(const JsonDocument& doc, int code = 200) {
 void add_config_json(JsonObject root, const config::Config& cfg) {
   JsonObject global = root.createNestedObject("global");
   global["max_file_size_bytes"] = cfg.global.max_file_size_bytes;
+  global["low_space_threshold_bytes"] = cfg.global.low_space_threshold_bytes;
   global["wifi_count"] = cfg.global.wifi_count;
   global["upload_url"] = cfg.global.upload_url;
   global["influx_url"] = cfg.global.influx_url;
@@ -96,6 +97,10 @@ void apply_config_from_json(const JsonObject& root) {
     JsonObject global = root["global"].as<JsonObject>();
     if (global.containsKey("max_file_size_bytes")) {
       cfg.global.max_file_size_bytes = global["max_file_size_bytes"].as<uint32_t>();
+    }
+    if (global.containsKey("low_space_threshold_bytes")) {
+      cfg.global.low_space_threshold_bytes =
+          global["low_space_threshold_bytes"].as<uint32_t>();
     }
     if (global.containsKey("wifi_count")) {
       config::set_wifi_count(global["wifi_count"].as<uint8_t>());
@@ -317,7 +322,9 @@ void handle_files_list() {
     entry["id"] = i;
     entry["path"] = info.path;
     entry["start_ms"] = info.start_ms;
+    entry["end_ms"] = info.end_ms;
     entry["size_bytes"] = info.size_bytes;
+    entry["checksum"] = info.checksum;
     entry["bus_id"] = info.bus_id;
     entry["flags"] = info.flags;
   }
@@ -378,8 +385,11 @@ void handle_file_download(size_t id) {
   const char* name = base ? base + 1 : info.path;
   String disposition = String("attachment; filename=\"") + name + "\"";
   s_server.sendHeader("Content-Disposition", disposition);
-  s_server.streamFile(file, "application/octet-stream");
+  const size_t sent = s_server.streamFile(file, "application/octet-stream");
   file.close();
+  if (sent > 0) {
+    storage::mark_downloaded(info.path);
+  }
 }
 
 void handle_file_mark_downloaded(size_t id) {

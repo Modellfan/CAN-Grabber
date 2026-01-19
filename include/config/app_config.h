@@ -31,6 +31,7 @@ struct WifiConfig {
 
 struct GlobalConfig {
   uint32_t max_file_size_bytes;
+  uint32_t low_space_threshold_bytes;
   uint8_t wifi_count;
   WifiConfig wifi[3];
   char upload_url[kUrlMaxLen];

@@ -26,7 +26,9 @@ constexpr size_t kMaxEntries = 128;
 struct FileStatusEntry {
   char path[64];
   uint32_t start_ms;
+  uint32_t end_ms;
   uint32_t size_bytes;
+  uint32_t checksum;
   uint8_t bus_id;
   uint8_t flags;
 };
@@ -97,7 +99,9 @@ bool load_status() {
     entry.path[sizeof(entry.path) - 1] = '\0';
     entry.bus_id = static_cast<uint8_t>(obj["bus"] | 0);
     entry.start_ms = static_cast<uint32_t>(obj["start_ms"] | 0);
+    entry.end_ms = static_cast<uint32_t>(obj["end_ms"] | 0);
     entry.size_bytes = static_cast<uint32_t>(obj["size"] | 0);
+    entry.checksum = static_cast<uint32_t>(obj["checksum"] | 0);
     entry.flags = static_cast<uint8_t>(obj["flags"] | 0);
   }
 
@@ -123,7 +127,9 @@ bool save_status() {
     obj["path"] = s_entries[i].path;
     obj["bus"] = s_entries[i].bus_id;
     obj["start_ms"] = s_entries[i].start_ms;
+    obj["end_ms"] = s_entries[i].end_ms;
     obj["size"] = s_entries[i].size_bytes;
+    obj["checksum"] = s_entries[i].checksum;
     obj["flags"] = s_entries[i].flags;
   }
 
@@ -136,7 +142,9 @@ bool save_status() {
 bool upsert_entry(const char* path,
                   uint8_t bus_id,
                   uint32_t start_ms,
+                  uint32_t end_ms,
                   uint32_t size_bytes,
+                  uint32_t checksum,
                   uint8_t flags) {
   int index = find_entry(path);
   if (index < 0) {
@@ -151,7 +159,9 @@ bool upsert_entry(const char* path,
   entry.path[sizeof(entry.path) - 1] = '\0';
   entry.bus_id = bus_id;
   entry.start_ms = start_ms;
+  entry.end_ms = end_ms;
   entry.size_bytes = size_bytes;
+  entry.checksum = checksum;
   entry.flags = flags;
   return true;
 }
@@ -299,7 +309,9 @@ bool get_file_info(size_t index, FileInfo* out) {
   strncpy(out->path, entry.path, sizeof(out->path));
   out->path[sizeof(out->path) - 1] = '\0';
   out->start_ms = entry.start_ms;
+  out->end_ms = entry.end_ms;
   out->size_bytes = entry.size_bytes;
+  out->checksum = entry.checksum;
   out->bus_id = entry.bus_id;
   out->flags = entry.flags;
   return true;
@@ -310,16 +322,21 @@ bool ensure_space(uint64_t min_free_bytes) {
   if (!s_ready) {
     return false;
   }
-  if (min_free_bytes == 0) {
+  const uint64_t threshold = config::get().global.low_space_threshold_bytes;
+  uint64_t required = min_free_bytes;
+  if (threshold > required) {
+    required = threshold;
+  }
+  if (required == 0) {
     return true;
   }
 
   Stats stats = get_stats();
-  if (stats.free_bytes >= min_free_bytes) {
+  if (stats.free_bytes >= required) {
     return true;
   }
 
-  for (uint32_t guard = 0; guard < 64 && stats.free_bytes < min_free_bytes; ++guard) {
+  for (uint32_t guard = 0; guard < 64 && stats.free_bytes < required; ++guard) {
     int index = pick_deletion_candidate();
     if (index >= 0) {
       const char* path = s_entries[index].path;
@@ -341,7 +358,7 @@ bool ensure_space(uint64_t min_free_bytes) {
     break;
   }
 
-  return stats.free_bytes >= min_free_bytes;
+  return stats.free_bytes >= required;
 }
 
 // Record a newly opened log file as active.
@@ -350,7 +367,7 @@ bool register_log_file(const char* path, uint8_t bus_id, uint32_t start_ms) {
     return false;
   }
 
-  if (!upsert_entry(path, bus_id, start_ms, 0, kFlagActive)) {
+  if (!upsert_entry(path, bus_id, start_ms, 0, 0, 0, kFlagActive)) {
     return false;
   }
 
@@ -359,7 +376,10 @@ bool register_log_file(const char* path, uint8_t bus_id, uint32_t start_ms) {
 }
 
 // Mark a log file as closed and record its final size.
-void finalize_log_file(const char* path, uint64_t size_bytes) {
+void finalize_log_file(const char* path,
+                       uint64_t size_bytes,
+                       uint32_t end_ms,
+                       uint32_t checksum) {
   if (!s_ready || path == nullptr) {
     return;
   }
@@ -371,6 +391,8 @@ void finalize_log_file(const char* path, uint64_t size_bytes) {
 
   FileStatusEntry& entry = s_entries[index];
   entry.size_bytes = static_cast<uint32_t>(size_bytes);
+  entry.end_ms = end_ms;
+  entry.checksum = checksum;
   entry.flags &= static_cast<uint8_t>(~kFlagActive);
   save_status();
 }
@@ -383,7 +405,7 @@ void mark_downloaded(const char* path) {
 
   int index = find_entry(path);
   if (index < 0) {
-    if (!upsert_entry(path, 0, 0, 0, kFlagDownloaded)) {
+    if (!upsert_entry(path, 0, 0, 0, 0, 0, kFlagDownloaded)) {
       return;
     }
   } else {
@@ -400,7 +422,7 @@ void mark_uploaded(const char* path) {
 
   int index = find_entry(path);
   if (index < 0) {
-    if (!upsert_entry(path, 0, 0, 0, kFlagUploaded)) {
+    if (!upsert_entry(path, 0, 0, 0, 0, 0, kFlagUploaded)) {
       return;
     }
   } else {

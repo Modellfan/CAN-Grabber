@@ -552,6 +552,9 @@ Jede Log-Datei besitzt Statusinformationen:
 Statusinformationen müssen:
 - Persistent gespeichert werden
 
+Download ueber Web/REST setzt das heruntergeladen-Flag.
+
+
 Beim Überschreiben von Dateien:
 - Bereits heruntergeladene / hochgeladene Dateien haben Priorität
 
@@ -616,6 +619,7 @@ Diese Informationen müssen:
 ### 9.4 Überschreibstrategie
 
 Wenn der verfügbare Speicher unter einen definierten Schwellwert fällt:
+Der Schwellwert ist konfigurierbar (low_space_threshold_bytes).
 - Alte Log-Dateien dürfen überschrieben werden
 
 Reihenfolge beim Überschreiben:
@@ -908,10 +912,13 @@ Implementiert (Stand: aktuelle Firmware):
 
 REST-Endpunkte müssen:
 - Log-Dateien auflisten
-- Metadaten bereitstellen (Größe, Zeitbereich, Status)
+- Metadaten bereitstellen (Groesse, Start/Endzeit, Checksumme (CRC32), Status)
 
 Optional:
 - Download einzelner Dateien
+
+Download markiert die Datei als heruntergeladen.
+
 
 ### 13.5 Fehlerbehandlung
 
@@ -1413,6 +1420,7 @@ Der Fokus liegt auf:
 - CAN_TERMINATION_BUS_X
 - CAN_BUS_NAME_X
 - LOG_FILE_SIZE_MAX
+- LOW_SPACE_THRESHOLD_BYTES
 - WIFI_SSID_X
 - WIFI_PASSWORD_X
 - UPLOAD_URL
