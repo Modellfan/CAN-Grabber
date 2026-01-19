@@ -287,6 +287,24 @@ Stats get_stats() {
   return stats;
 }
 
+size_t file_count() {
+  return s_entry_count;
+}
+
+bool get_file_info(size_t index, FileInfo* out) {
+  if (index >= s_entry_count || out == nullptr) {
+    return false;
+  }
+  const FileStatusEntry& entry = s_entries[index];
+  strncpy(out->path, entry.path, sizeof(out->path));
+  out->path[sizeof(out->path) - 1] = '\0';
+  out->start_ms = entry.start_ms;
+  out->size_bytes = entry.size_bytes;
+  out->bus_id = entry.bus_id;
+  out->flags = entry.flags;
+  return true;
+}
+
 // Ensure at least min_free_bytes are free, deleting old files if needed.
 bool ensure_space(uint64_t min_free_bytes) {
   if (!s_ready) {

@@ -1,8 +1,8 @@
-# Implementierungs-Reihenfolge für AI-Agenten (Arduino + PlatformIO, ESP32-S3)
+﻿# Implementierungs-Reihenfolge fÃ¼r AI-Agenten (Arduino + PlatformIO, ESP32-S3)
 
-- Update immer AGENT.md und README.md, wenn der Nutzer definitionen macht, die eine Änderung bedeuten. Frage vorher um Erlaubnis.
+- Update immer AGENT.md und README.md, wenn der Nutzer definitionen macht, die eine Ã„nderung bedeuten. Frage vorher um Erlaubnis.
 
-## Phase 0 – Projektgerüst & Build-Sicherheit (Foundation)
+## Phase 0 â€“ ProjektgerÃ¼st & Build-Sicherheit (Foundation)
 - [x] PlatformIO Projekt aufsetzen
 - [x] Arduino Framework, ESP32-S3 Board
 - [x] Library-Management (SD, WiFi, Webserver, mDNS, OTA, JSON)
@@ -14,72 +14,71 @@
 - [x] `hardware_config.h` (oder `.hpp`)
 - [x] GPIOs, SPI/I2C, CAN-CS/INT, Termination Pins, SD, RTC
 - [x] Keine Logik, nur Definitionen
-- [x] Done wenn: Firmware kompiliert, startet, Version/Build-Info über Serial ausgibt.
+- [x] Done wenn: Firmware kompiliert, startet, Version/Build-Info Ã¼ber Serial ausgibt.
 
-## Phase 1 – Kern-Datenpfad: CAN RX → Puffer → SD (kritischster Teil)
-- [ ] Konfigurationsmodell (in RAM) + Persistenz (NVS)
-- [ ] Struktur: pro Bus: enabled, bitrate, read-only, termination, logging, name (user-defined override)
-- [ ] global: max file size, wifi list, upload url, influx config, dbc selection
-- [ ] Save/Load + Defaultwerte
-- [ ] SD-Karte: Mount, Info, Verzeichnisse
-- [ ] Mount + freie Kapazität lesen
-- [ ] Basis-Ordner anlegen (`/can0` → `/can5`, `/meta`)
-- [ ] Meta-Datei-Konzept vorbereiten (File-Status)
-- [ ] CAN Treiber (MCP2515) für 1 Bus
-- [ ] SPI init
-- [ ] Bitrate setzen
+## Phase 1 â€“ Kern-Datenpfad: CAN RX â†’ Puffer â†’ SD (kritischster Teil)
+- [x] Konfigurationsmodell (in RAM) + Persistenz (NVS)
+- [x] Struktur: pro Bus: enabled, bitrate, read-only, termination, logging, name (user-defined override)
+- [x] global: max file size, wifi list, upload url, influx config, dbc selection
+- [x] Save/Load + Defaultwerte
+- [x] SD-Karte: Mount, Info, Verzeichnisse
+- [x] Mount + freie KapazitÃ¤t lesen
+- [x] Basis-Ordner anlegen (`/can0` â†’ `/can5`, `/meta`)
+- [x] Meta-Datei-Konzept vorbereiten (File-Status)
+- [x] CAN Treiber (MCP2515) fÃ¼r 1 Bus
+- [x] SPI init
+- [x] Bitrate setzen
 - [x] RX lesen (Polling oder INT)
 - [x] Frame struct definieren: timestamp, bus_id, id, ext, dlc, data[8], direction(RX/TX)
 - [x] Blockpuffer (8192 B x 2 Bloecke) pro Bus
-- [ ] Thread-safe (FreeRTOS)
-- [ ] Overflow-Zähler + High-water
-- [ ] Unit-Test-artige Checks: push/pop, overflow
-- [ ] Log Writer Task (1 Bus)
-- [ ] Active-file Markierung (z. B. `.active`)
-- [ ] Batch-Schreiben
-- [ ] Max-File-Size Rotation
-- [ ] Manuelles close (API)
+- [x] Thread-safe (FreeRTOS)
+- [x] Overflow-ZÃ¤hler + High-water
+- [ ] Unit-Test-artige Checks: block buffer
+- [x] Log Writer Task (1 Bus)
+- [x] Batch-Schreiben
+- [x] Max-File-Size Rotation
+- [x] Manuelles close (API)
 - [ ] Parallelisierung auf 6 Busse
 - [ ] Multi-bus RX (pro Bus Task oder zentral)
-- [ ] pro Bus eigenes Logging-File + state machine
-- [ ] Log-Dateinamen enthalten immer den Bus; Busname ist in der Konfiguration ueberschreibbar
+- [x] pro Bus eigenes Logging-File + state machine
+- [x] Log-Dateinamen enthalten immer den Bus; Busname ist in der Konfiguration ueberschreibbar
 - [ ] Done wenn: Bei hoher Frame-Rate werden Dateien pro Bus geschrieben, Rotationen funktionieren, keine Blocking-Probleme.
 
-## Phase 2 – Datei-Management & Status (Download/Upload-Markierung, Überschreiben)
+## Phase 2 â€“ Datei-Management & Status (Download/Upload-Markierung, Ãœberschreiben)
 - [ ] Datei-Index & Metadaten
-- [ ] `file_status.json` (oder binär) in `/meta`
+- [ ] `file_status.json` (oder binÃ¤r) in `/meta`
 - [ ] pro Datei: bus, name, size, start/end, downloaded, uploaded, checksum(optional)
 - [ ] Download-Markierung
 - [ ] API: mark_downloaded(file)
 - [ ] Web/REST Download setzt Flag
-- [ ] Speicherüberwachungs- und Überschreibstrategie
+- [ ] SpeicherÃ¼berwachungs- und Ãœberschreibstrategie
 - [ ] Low-space threshold
-- [ ] Löschen nach Priorität: uploaded/downloaded zuerst, dann älteste
-- [ ] Schutz: keine active-files löschen
-- [ ] Done wenn: SD wird automatisch "aufgeräumt", ohne aktive Dateien zu zerstören.
+- [ ] LÃ¶schen nach PrioritÃ¤t: uploaded/downloaded zuerst, dann Ã¤lteste
+- [ ] Schutz: keine active-files lÃ¶schen
+- [ ] Done wenn: SD wird automatisch "aufgerÃ¤umt", ohne aktive Dateien zu zerstÃ¶ren.
 
-## Phase 3 – Watchdog für Blockpuffer-Überlauf (Stabilität)
+## Phase 3 â€“ Watchdog fÃ¼r Blockpuffer-Ãœberlauf (StabilitÃ¤t)
 - [ ] Buffer Watchdog
 - [ ] Periodisch: fill level + overflow count check
 - [ ] Warn-/Fehlerstatus setzen
-- [ ] Optional: adaptive Maßnahmen (Upload/Web drosseln)
+- [ ] Optional: adaptive MaÃŸnahmen (Upload/Web drosseln)
 - [ ] Optional: Restart-Policy (konfigurierbar)
 - [ ] Monitoring-API intern
 - [ ] zentraler Statusblock: uptime, mode, wifi rssi, sd free, frames rx/tx, buffer stats, errors
-- [ ] Done wenn: Überläufe werden sichtbar + zählen + optional reagieren.
+- [ ] Done wenn: ÃœberlÃ¤ufe werden sichtbar + zÃ¤hlen + optional reagieren.
 
-## Phase 4 – Netzwerk-Basis: WLAN (3 SSIDs) + mDNS
+## Phase 4 â€“ Netzwerk-Basis: WLAN (3 SSIDs) + mDNS
 - [ ] WiFi Manager
-- [ ] 1–3 SSIDs mit Priorität
+- [ ] 1â€“3 SSIDs mit PrioritÃ¤t
 - [ ] Reconnect
 - [ ] RSSI Prozent ableiten
 - [ ] mDNS/Bonjour
 - [ ] Hostname `canlogger.local`
-- [ ] Service für HTTP
-- [ ] Done wenn: Gerät verbindet sich robust und ist per `.local` erreichbar.
+- [ ] Service fÃ¼r HTTP
+- [ ] Done wenn: GerÃ¤t verbindet sich robust und ist per `.local` erreichbar.
 
-## Phase 5 – Web-Interface (UI) zuerst read-only, dann write
-- [ ] Webserver Grundgerüst
+## Phase 5 â€“ Web-Interface (UI) zuerst read-only, dann write
+- [ ] Webserver GrundgerÃ¼st
 - [ ] Statische Assets (OpenInverter-like) aus Flash
 - [ ] Statusseite (read-only): SD, RSSI, Uhrzeit, counts, buffer stats
 - [ ] Konfigurationsseiten
@@ -88,14 +87,14 @@
 - [ ] Zeit: set manual, can-time sync toggle
 - [ ] WLAN: SSIDs
 - [ ] Upload URL
-- [ ] Dateiübersicht + Download
+- [ ] DateiÃ¼bersicht + Download
 - [ ] Liste + Filter pro Bus
 - [ ] Download einzelner Dateien
 - [ ] Mark downloaded
-- [ ] Done wenn: Alles konfigurierbar + Status vollständig.
+- [ ] Done wenn: Alles konfigurierbar + Status vollstÃ¤ndig.
 
-## Phase 6 – REST API (Maschinenzugriff)
-- [ ] REST Grundgerüst + Auth
+## Phase 6 â€“ REST API (Maschinenzugriff)
+- [ ] REST GrundgerÃ¼st + Auth
 - [ ] Basic oder Token
 - [ ] Endpoints: Status & Config
 - [ ] `/api/status`, `/api/config`, `/api/can/*`, `/api/storage/*`, `/api/buffers`
@@ -106,7 +105,7 @@
 - [ ] close active file
 - [ ] Done wenn: Alles per REST steuerbar, Web nutzt intern gleiche APIs.
 
-## Phase 7 – USB: GVRET (SavvyCAN)
+## Phase 7 â€“ USB: GVRET (SavvyCAN)
 - [ ] USB Serial Device stabil
 - [ ] Device enumeration
 - [ ] GVRET Parser/Encoder
@@ -117,35 +116,35 @@
 - [ ] Alle via GVRET gesendeten Frames werden geloggt
 - [ ] Done wenn: SavvyCAN sieht das Device, RX/TX auf CAN funktioniert, TX erscheint im Log.
 
-## Phase 8 – Zeit (RTC + CAN-Zeitsync)
+## Phase 8 â€“ Zeit (RTC + CAN-Zeitsync)
 - [ ] RTC Treiber
 - [ ] read/set
 - [ ] CAN-Zeitmessage
 - [ ] Parser + Update RTC
 - [ ] Zeitquelle abstrahieren
-- [ ] RTC primär, fallback uptime
+- [ ] RTC primÃ¤r, fallback uptime
 - [ ] UI/REST Integration
 - [ ] set time, status time source
 - [ ] Done wenn: Zeitstempel stabil und reproduzierbar.
 
-## Phase 9 – Auto Upload per HTTP POST
+## Phase 9 â€“ Auto Upload per HTTP POST
 - [ ] Upload Task
 - [ ] Trigger: file closed, manual UI/REST
 - [ ] HTTP POST Upload
 - [ ] Datei + Metadaten
 - [ ] Retry/Backoff
 - [ ] Mark uploaded
-- [ ] uploaded → bevorzugt löschbar
-- [ ] Done wenn: Automatischer Upload robust funktioniert ohne Logging zu stören.
+- [ ] uploaded â†’ bevorzugt lÃ¶schbar
+- [ ] Done wenn: Automatischer Upload robust funktioniert ohne Logging zu stÃ¶ren.
 
-## Phase 10 – DBC JSON + InfluxDB Dump (Interpretation Pipeline)
+## Phase 10 â€“ DBC JSON + InfluxDB Dump (Interpretation Pipeline)
 - [ ] DBC-JSON Speicherung & Auswahl
 - [ ] Upload per REST/Web
-- [ ] Schema-Version prüfen
+- [ ] Schema-Version prÃ¼fen
 - [ ] DBC Decoder
 - [ ] id/ext match, signals decode, byte order, signed, scaling
 - [ ] Dump-Engine
-- [ ] Logfile lesen → dekodieren → points erzeugen
+- [ ] Logfile lesen â†’ dekodieren â†’ points erzeugen
 - [ ] InfluxDB Writer
 - [ ] Line protocol
 - [ ] batching + retry
@@ -153,21 +152,24 @@
 - [ ] progress, counters, errors
 - [ ] Done wenn: Ein Logfile wird dekodiert und als Messwerte in InfluxDB geschrieben.
 
-## Phase 11 – OTA
+## Phase 11 â€“ OTA
 - [ ] OTA Framework integrieren
 - [ ] Exklusivmodus
 - [ ] stop logging, close files
 - [ ] Update + Verify
 - [ ] Status UI/REST
-- [ ] Done wenn: OTA sicher läuft, ohne Konfig-/Log-Verlust.
+- [ ] Done wenn: OTA sicher lÃ¤uft, ohne Konfig-/Log-Verlust.
 
 ## Debugging notes
 - Use the full PlatformIO path with quotes in PowerShell: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" ...`
 - COM9 was missing; serial monitor should use COM10 at 115200.
 
-## Querschnitt: Definition of Done (für jedes Issue)
+## Querschnitt: Definition of Done (fÃ¼r jedes Issue)
 - [ ] Kompiliert in PlatformIO (debug+release)
 - [ ] Keine Blockierung des CAN-Loggings
 - [ ] Web/REST zeigt Status korrekt
-- [ ] Fehlerzustände werden sichtbar gemacht
-- [ ] Minimaler Test: simulierte Last / künstliche Frames / SD voll / WLAN weg
+- [ ] FehlerzustÃ¤nde werden sichtbar gemacht
+- [ ] Minimaler Test: simulierte Last / kÃ¼nstliche Frames / SD voll / WLAN weg
+
+
+

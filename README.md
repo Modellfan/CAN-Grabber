@@ -78,12 +78,6 @@ Funktionale Beschreibung und Anforderungen.
   - [13.3 REST-Funktionsumfang](#133-rest-funktionsumfang)
   - [13.4 Dateiverwaltung über REST](#134-dateiverwaltung-uber-rest)
   - [13.5 Fehlerbehandlung](#135-fehlerbehandlung)
-  - [13.6 DBC-JSON (Signalbeschreibung)](#136-dbc-json-signalbeschreibung)
-    - [13.6.1 Ziel](#1361-ziel)
-    - [13.6.2 Quelle und Speicherung](#1362-quelle-und-speicherung)
-    - [13.6.3 Mindest-Schema (normativ)](#1363-mindest-schema-normativ)
-    - [13.6.4 Interpretation](#1364-interpretation)
-    - [13.6.5 Versionierung](#1365-versionierung)
   - [13.7 REST/Web Ergänzungen (kurz)](#137-restweb-erganzungen-kurz)
 - [14. Automatischer Daten-Upload](#14-automatischer-daten-upload)
   - [14.1 Allgemeines](#141-allgemeines)
@@ -99,6 +93,13 @@ Funktionale Beschreibung und Anforderungen.
     - [14.6.5 Upload-Format (InfluxDB)](#1465-upload-format-influxdb)
     - [14.6.6 Status und Rückmeldung](#1466-status-und-ruckmeldung)
     - [14.6.7 Fehlerbehandlung](#1467-fehlerbehandlung)
+    - [14.6.8 DBC-JSON (Signalbeschreibung)](#1468-dbc-json-signalbeschreibung)
+      - [14.6.8.1 Ziel](#14681-ziel)
+      - [14.6.8.2 Quelle und Speicherung](#14682-quelle-und-speicherung)
+      - [14.6.8.3 Mindest-Schema (normativ)](#14683-mindest-schema-normativ)
+      - [14.6.8.4 Interpretation](#14684-interpretation)
+      - [14.6.8.5 Versionierung](#14685-versionierung)
+
 - [15. OTA-Firmware-Update](#15-ota-firmware-update)
   - [15.1 Allgemeines](#151-allgemeines)
   - [15.2 OTA-Aktivierung](#152-ota-aktivierung)
@@ -889,6 +890,20 @@ Steuerung:
 - Start / Stop Logging
 - Schließen aktiver Log-Dateien
 
+Implementiert (Stand: aktuelle Firmware):
+- Auth: optionales Token, per X-Api-Token oder Authorization: Bearer <token> (nur aktiv, wenn Token gesetzt)
+- GET /api/status
+- GET /api/config
+- PUT /api/config (alternativ POST)
+- GET /api/can/stats
+- GET /api/storage/stats
+- GET /api/buffers
+- GET /api/files
+- GET /api/files/<id>/download
+- POST /api/files/<id>/mark_downloaded
+- POST /api/control/start_logging
+- POST /api/control/stop_logging
+- POST /api/control/close_active_file
 ### 13.4 Dateiverwaltung über REST
 
 REST-Endpunkte müssen:
@@ -904,42 +919,6 @@ REST-Antworten müssen:
 - Sinnvolle HTTP-Statuscodes verwenden
 - Fehler eindeutig beschreiben
 
-
-### 13.6 DBC-JSON (Signalbeschreibung)
-
-#### 13.6.1 Ziel
-
-Das System muss eine DBC-Datei in einer JSON-Repräsentation abbilden, um Dekodierung auf dem Gerät zu ermöglichen.
-
-#### 13.6.2 Quelle und Speicherung
-
-DBC-JSON wird:
-- Über Web/REST hochgeladen oder auf SD abgelegt
-
-Die aktive DBC-JSON Konfiguration ist:
-- Persistente Einstellung (welche Datei aktiv ist)
-
-#### 13.6.3 Mindest-Schema (normativ)
-
-Die JSON-Repräsentation muss mindestens enthalten:
-- messages[]: id (CAN Identifier, int), is_extended (bool), name (string), dlc (int), signals[] (list)
-- signals[]: name (string), start_bit (int), length (int), byte_order (intel/motorola), is_signed (bool), factor (number), offset (number), min (number, optional), max (number, optional), unit (string, optional), enum (object optional: value->label)
-
-#### 13.6.4 Interpretation
-
-Für jedes geloggte Frame:
-- Passende Message per id + is_extended suchen
-- Signale dekodieren
-- Skalierung anwenden: value = raw * factor + offset
-- Signedness und Byteorder korrekt berücksichtigen
-
-#### 13.6.5 Versionierung
-
-DBC-JSON muss ein Feld enthalten:
-- schema_version
-
-Firmware muss:
-- Unbekannte schema_version ablehnen (mit Fehlermeldung)
 
 ### 13.7 REST/Web Ergänzungen (kurz)
 
@@ -1000,7 +979,13 @@ Upload-Fehler dürfen:
 
 ### 14.6 InfluxDB Dump (Interpretation + Upload)
 
-#### 14.6.1 Ziel
+DBC-JSON muss ein Feld enthalten:
+- schema_version
+
+Firmware muss:
+- Unbekannte schema_version ablehnen (mit Fehlermeldung)
+
+\r\n#### 14.6.1 Ziel
 
 Das System muss eine Funktion bereitstellen, um geloggte rohe CAN-Daten (RAW-Frames) nachträglich oder unmittelbar zu interpretieren und als Messwerte in eine InfluxDB hochzuladen.
 
@@ -1067,6 +1052,37 @@ Bei DBC/Decode-Fehlern:
 - Frame wird übersprungen
 - Fehlerzähler erhöht
 - Dump läuft weiter
+#### 14.6.8 DBC-JSON (Signalbeschreibung)
+
+##### 14.6.8.1 Ziel
+
+Das System muss eine DBC-Datei in einer JSON-Repräsentation abbilden, um Dekodierung auf dem Gerät zu ermöglichen.
+
+##### 14.6.8.2 Quelle und Speicherung
+
+DBC-JSON wird:
+- Über Web/REST hochgeladen oder auf SD abgelegt
+
+Die aktive DBC-JSON Konfiguration ist:
+- Persistente Einstellung (welche Datei aktiv ist)
+
+##### 14.6.8.3 Mindest-Schema (normativ)
+
+Die JSON-Repräsentation muss mindestens enthalten:
+- messages[]: id (CAN Identifier, int), is_extended (bool), name (string), dlc (int), signals[] (list)
+- signals[]: name (string), start_bit (int), length (int), byte_order (intel/motorola), is_signed (bool), factor (number), offset (number), min (number, optional), max (number, optional), unit (string, optional), enum (object optional: value->label)
+
+##### 14.6.8.4 Interpretation
+
+Für jedes geloggte Frame:
+- Passende Message per id + is_extended suchen
+- Signale dekodieren
+- Skalierung anwenden: value = raw * factor + offset
+- Signedness und Byteorder korrekt berücksichtigen
+
+##### 14.6.8.5 Versionierung
+
+
 ## 15. OTA-Firmware-Update
 
 ### 15.1 Allgemeines

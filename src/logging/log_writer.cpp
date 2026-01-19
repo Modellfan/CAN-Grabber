@@ -20,6 +20,14 @@ namespace {
 struct BusLogState {
   File file;
   bool active;
+  enum class LogState : uint8_t {
+    kIdle,
+    kOpening,
+    kActive,
+    kClosing,
+    kError,
+  };
+  LogState state;
   char path[64];
   uint64_t bytes_written;
   uint32_t start_ms;
@@ -90,15 +98,21 @@ size_t format_savvy_line(const can::Frame& frame, char* out, size_t out_cap) {
 }
 
 // Build the log file path for a bus and start timestamp.
-void build_log_path(uint8_t bus_id, uint32_t start_ms, char* out, size_t out_len) {
+void build_log_path(uint8_t bus_id,
+                    const char* bus_name,
+                    uint32_t start_ms,
+                    char* out,
+                    size_t out_len) {
   if (out_len == 0) {
     return;
   }
+  const char* name = (bus_name != nullptr && bus_name[0] != '\0') ? bus_name : "bus";
   snprintf(out,
            out_len,
-           "/log_%lu_bus%u.sav",
+           "/log_%lu_bus%u_%s.sav",
            static_cast<unsigned long>(start_ms),
-           static_cast<unsigned>(bus_id + 1));
+           static_cast<unsigned>(bus_id + 1),
+           name);
   out[out_len - 1] = '\0';
 }
 
@@ -146,6 +160,7 @@ bool reopen_log_file(BusLogState& state) {
   if (!state.path[0]) {
     return false;
   }
+  state.state = BusLogState::LogState::kOpening;
   portENTER_CRITICAL(&s_stats_mux);
   s_reopen_attempts++;
   portEXIT_CRITICAL(&s_stats_mux);
@@ -161,6 +176,7 @@ bool reopen_log_file(BusLogState& state) {
     s_reopen_failures++;
     portEXIT_CRITICAL(&s_stats_mux);
     state.active = false;
+    state.state = BusLogState::LogState::kError;
     return false;
   }
 
@@ -169,6 +185,7 @@ bool reopen_log_file(BusLogState& state) {
   }
   state.file = file;
   state.active = true;
+  state.state = BusLogState::LogState::kActive;
   return true;
 }
 
@@ -185,16 +202,21 @@ void flush_buffer(BusLogState& state) {
 bool open_log_file(uint8_t bus_id) {
   const config::Config& cfg = config::get();
   const uint32_t max_size = cfg.global.max_file_size_bytes;
+  BusLogState& state = s_bus_logs[bus_id];
+  state.state = BusLogState::LogState::kOpening;
   if (max_size > 0 && !storage::ensure_space(max_size)) {
+    state.state = BusLogState::LogState::kError;
     return false;
   }
 
   const uint32_t start_ms = millis();
   char path[64];
-  build_log_path(bus_id, start_ms, path, sizeof(path));
+  const char* bus_name = cfg.buses[bus_id].name;
+  build_log_path(bus_id, bus_name, start_ms, path, sizeof(path));
 
   File file = SD.open(path, FILE_WRITE);
   if (!file) {
+    state.state = BusLogState::LogState::kError;
     return false;
   }
 
@@ -211,9 +233,9 @@ bool open_log_file(uint8_t bus_id) {
     file.seek(0);
   }
 
-  BusLogState& state = s_bus_logs[bus_id];
   state.file = file;
   state.active = true;
+  state.state = BusLogState::LogState::kActive;
   state.bytes_written = 0;
   state.start_ms = start_ms;
   state.buffered_len = 0;
@@ -231,9 +253,11 @@ bool open_log_file(uint8_t bus_id) {
 void close_log_file(uint8_t bus_id) {
   BusLogState& state = s_bus_logs[bus_id];
   if (!state.active) {
+    state.state = BusLogState::LogState::kIdle;
     return;
   }
 
+  state.state = BusLogState::LogState::kClosing;
   if (state.file) {
     flush_buffer(state);
     state.file.flush();
@@ -242,6 +266,7 @@ void close_log_file(uint8_t bus_id) {
 
   storage::finalize_log_file(state.path, state.bytes_written);
   state.active = false;
+  state.state = BusLogState::LogState::kIdle;
   state.path[0] = '\0';
   state.bytes_written = 0;
   state.start_ms = 0;
@@ -255,7 +280,7 @@ bool rotate_if_needed(uint8_t bus_id, size_t next_len) {
   }
 
   BusLogState& state = s_bus_logs[bus_id];
-  if (!state.active) {
+  if (!state.active || state.state != BusLogState::LogState::kActive) {
     return false;
   }
 
@@ -371,6 +396,7 @@ void log_task(void*) {
 void init() {
   for (size_t i = 0; i < config::kMaxBuses; ++i) {
     s_bus_logs[i].active = false;
+    s_bus_logs[i].state = BusLogState::LogState::kIdle;
     s_bus_logs[i].path[0] = '\0';
     s_bus_logs[i].bytes_written = 0;
     s_bus_logs[i].start_ms = 0;
@@ -447,6 +473,30 @@ void stop() {
     s_log_task = nullptr;
   }
   s_started = false;
+}
+
+// Close a specific bus log file without stopping the logging task.
+void close_file(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return;
+  }
+  close_log_file(bus_id);
+}
+
+// Close current files and open fresh ones for active buses.
+void rotate_files() {
+  if (!s_started) {
+    return;
+  }
+
+  const config::Config& cfg = config::get();
+  for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
+    close_log_file(i);
+    if (!cfg.buses[i].enabled || !cfg.buses[i].logging) {
+      continue;
+    }
+    open_log_file(i);
+  }
 }
 
 // Placeholder for per-frame enqueue; logging is block-based now.

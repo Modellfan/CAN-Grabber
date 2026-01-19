@@ -9,11 +9,29 @@ namespace config {
 namespace {
 
 constexpr uint32_t kConfigMagic = 0x43414742; // "CAGB"
-constexpr uint16_t kConfigVersion = 1;
+constexpr uint16_t kConfigVersion = 2;
 constexpr const char* kPrefsNamespace = "can-grabber";
 constexpr const char* kPrefsKey = "config";
 
 Config s_config{};
+
+struct GlobalConfigV1 {
+  uint32_t max_file_size_bytes;
+  uint8_t wifi_count;
+  WifiConfig wifi[3];
+  char upload_url[kUrlMaxLen];
+  char influx_url[kUrlMaxLen];
+  char influx_token[kTokenMaxLen];
+  char dbc_name[kDbcNameMaxLen];
+};
+
+struct ConfigV1 {
+  uint32_t magic;
+  uint16_t version;
+  uint16_t reserved;
+  BusConfig buses[kMaxBuses];
+  GlobalConfigV1 global;
+};
 
 void format_default_bus_name(uint8_t bus_id, char* out, size_t out_len) {
   if (out_len == 0) {
@@ -64,6 +82,7 @@ void apply_defaults(Config& cfg) {
 
   cfg.global.max_file_size_bytes = 64UL * 1024UL * 1024UL;
   cfg.global.wifi_count = 0;
+  cfg.global.api_token[0] = '\0';
 
   for (uint8_t i = 0; i < kMaxBuses; ++i) {
     cfg.buses[i].enabled = (i == 0);
@@ -81,20 +100,60 @@ bool load_from_nvs(Config& out_cfg) {
     return false;
   }
 
-  Config temp{};
-  size_t len = prefs.getBytes(kPrefsKey, &temp, sizeof(temp));
+  const size_t len = prefs.getBytesLength(kPrefsKey);
+  if (len == 0) {
+    prefs.end();
+    return false;
+  }
+
+  bool loaded = false;
+  if (len == sizeof(Config)) {
+    Config temp{};
+    if (prefs.getBytes(kPrefsKey, &temp, sizeof(temp)) == sizeof(temp) &&
+        temp.magic == kConfigMagic && temp.version == kConfigVersion) {
+      out_cfg = temp;
+      loaded = true;
+    }
+  } else if (len == sizeof(ConfigV1)) {
+    ConfigV1 temp{};
+    if (prefs.getBytes(kPrefsKey, &temp, sizeof(temp)) == sizeof(temp) &&
+        temp.magic == kConfigMagic && temp.version == 1) {
+      apply_defaults(out_cfg);
+      out_cfg.magic = kConfigMagic;
+      out_cfg.version = kConfigVersion;
+      for (uint8_t i = 0; i < kMaxBuses; ++i) {
+        out_cfg.buses[i] = temp.buses[i];
+      }
+      out_cfg.global.max_file_size_bytes = temp.global.max_file_size_bytes;
+      out_cfg.global.wifi_count = temp.global.wifi_count;
+      for (uint8_t i = 0; i < 3; ++i) {
+        out_cfg.global.wifi[i] = temp.global.wifi[i];
+      }
+      strncpy(out_cfg.global.upload_url, temp.global.upload_url, sizeof(out_cfg.global.upload_url));
+      strncpy(out_cfg.global.influx_url, temp.global.influx_url, sizeof(out_cfg.global.influx_url));
+      strncpy(out_cfg.global.influx_token, temp.global.influx_token, sizeof(out_cfg.global.influx_token));
+      strncpy(out_cfg.global.dbc_name, temp.global.dbc_name, sizeof(out_cfg.global.dbc_name));
+      out_cfg.global.api_token[0] = '\0';
+      loaded = true;
+    }
+  }
+
   prefs.end();
-
-  if (len != sizeof(temp)) {
-    return false;
-  }
-  if (temp.magic != kConfigMagic || temp.version != kConfigVersion) {
+  if (!loaded) {
     return false;
   }
 
-  out_cfg = temp;
   for (uint8_t i = 0; i < kMaxBuses; ++i) {
     out_cfg.buses[i].name[kBusNameMaxLen - 1] = '\0';
+  }
+  out_cfg.global.upload_url[kUrlMaxLen - 1] = '\0';
+  out_cfg.global.influx_url[kUrlMaxLen - 1] = '\0';
+  out_cfg.global.influx_token[kTokenMaxLen - 1] = '\0';
+  out_cfg.global.api_token[kApiTokenMaxLen - 1] = '\0';
+  out_cfg.global.dbc_name[kDbcNameMaxLen - 1] = '\0';
+  for (uint8_t i = 0; i < 3; ++i) {
+    out_cfg.global.wifi[i].ssid[kWifiSsidMaxLen - 1] = '\0';
+    out_cfg.global.wifi[i].password[kWifiPassMaxLen - 1] = '\0';
   }
   return true;
 }
@@ -137,6 +196,35 @@ void set_bus_name(uint8_t bus_id, const char* name) {
     return;
   }
   sanitize_name(name, s_config.buses[bus_id].name, sizeof(s_config.buses[bus_id].name), bus_id);
+}
+
+void set_wifi(uint8_t index, const char* ssid, const char* password) {
+  if (index >= 3) {
+    return;
+  }
+
+  WifiConfig& wifi = s_config.global.wifi[index];
+  if (ssid == nullptr) {
+    wifi.ssid[0] = '\0';
+  } else {
+    strncpy(wifi.ssid, ssid, sizeof(wifi.ssid));
+    wifi.ssid[sizeof(wifi.ssid) - 1] = '\0';
+  }
+
+  if (password == nullptr) {
+    wifi.password[0] = '\0';
+  } else {
+    strncpy(wifi.password, password, sizeof(wifi.password));
+    wifi.password[sizeof(wifi.password) - 1] = '\0';
+  }
+
+  if (wifi.ssid[0] != '\0' && s_config.global.wifi_count <= index) {
+    s_config.global.wifi_count = static_cast<uint8_t>(index + 1);
+  }
+}
+
+void set_wifi_count(uint8_t count) {
+  s_config.global.wifi_count = (count > 3) ? 3 : count;
 }
 
 void reset_defaults() {

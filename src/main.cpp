@@ -6,6 +6,8 @@
 #include "config/app_config.h"
 #include "hardware/hardware_config.h"
 #include "logging/log_writer.h"
+#include "net/net_manager.h"
+#include "rest/rest_api.h"
 #include "storage/storage_manager.h"
 
 #ifndef APP_NAME
@@ -46,9 +48,15 @@ void setup() {
   can::init();
   logging::init();
   logging::start();
+  net::init();
+  net::connect();
+  rest::init();
+  rest::start();
 }
 
 void loop() {
+  net::loop();
+  rest::loop();
   delay(1000);
 }
 

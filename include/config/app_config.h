@@ -13,6 +13,7 @@ constexpr size_t kWifiPassMaxLen = 64;
 constexpr size_t kUrlMaxLen = 128;
 constexpr size_t kTokenMaxLen = 64;
 constexpr size_t kDbcNameMaxLen = 32;
+constexpr size_t kApiTokenMaxLen = 64;
 
 struct BusConfig {
   bool enabled;
@@ -35,6 +36,7 @@ struct GlobalConfig {
   char upload_url[kUrlMaxLen];
   char influx_url[kUrlMaxLen];
   char influx_token[kTokenMaxLen];
+  char api_token[kApiTokenMaxLen];
   char dbc_name[kDbcNameMaxLen];
 };
 
@@ -53,6 +55,8 @@ const Config& get();
 Config& get_mutable();
 
 void set_bus_name(uint8_t bus_id, const char* name);
+void set_wifi(uint8_t index, const char* ssid, const char* password);
+void set_wifi_count(uint8_t count);
 void reset_defaults();
 
 } // namespace config

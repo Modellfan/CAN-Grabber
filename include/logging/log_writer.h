@@ -38,6 +38,8 @@ struct Frame {
 void init();
 void start();
 void stop();
+void close_file(uint8_t bus_id);
+void rotate_files();
 bool enqueue(const Frame& frame);
 Stats get_stats();
 

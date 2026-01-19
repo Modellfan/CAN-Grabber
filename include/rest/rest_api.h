@@ -6,6 +6,7 @@ namespace rest {
 void init();
 void start();
 void stop();
+void loop();
 
 } // namespace rest
 

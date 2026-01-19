@@ -1,6 +1,7 @@
 #ifndef STORAGE_MANAGER_H
 #define STORAGE_MANAGER_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 namespace storage {
@@ -10,9 +11,19 @@ struct Stats {
   uint64_t free_bytes;
 };
 
+struct FileInfo {
+  char path[64];
+  uint32_t start_ms;
+  uint32_t size_bytes;
+  uint8_t bus_id;
+  uint8_t flags;
+};
+
 void init();
 bool is_ready();
 Stats get_stats();
+size_t file_count();
+bool get_file_info(size_t index, FileInfo* out);
 
 bool ensure_space(uint64_t min_free_bytes);
 bool register_log_file(const char* path, uint8_t bus_id, uint32_t start_ms);
