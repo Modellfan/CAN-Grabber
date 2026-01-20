@@ -19,7 +19,6 @@ struct BusConfig {
   bool enabled;
   uint32_t bitrate;
   bool read_only;
-  bool termination;
   bool logging;
   char name[kBusNameMaxLen];
 };
@@ -38,6 +37,8 @@ struct GlobalConfig {
   char influx_url[kUrlMaxLen];
   char influx_token[kTokenMaxLen];
   char api_token[kApiTokenMaxLen];
+  bool can_time_sync;
+  int64_t manual_time_epoch;
   char dbc_name[kDbcNameMaxLen];
 };
 

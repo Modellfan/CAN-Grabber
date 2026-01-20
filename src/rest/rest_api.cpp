@@ -5,6 +5,8 @@
 #include <SD.h>
 #include <WiFi.h>
 #include <WebServer.h>
+#include <sys/time.h>
+#include <time.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -13,6 +15,7 @@
 #include "logging/log_writer.h"
 #include "net/net_manager.h"
 #include "storage/storage_manager.h"
+#include "web/web_assets.h"
 
 namespace rest {
 
@@ -68,6 +71,8 @@ void add_config_json(JsonObject root, const config::Config& cfg) {
   global["influx_url"] = cfg.global.influx_url;
   global["influx_token"] = cfg.global.influx_token;
   global["api_token"] = cfg.global.api_token;
+  global["can_time_sync"] = cfg.global.can_time_sync;
+  global["manual_time_epoch"] = cfg.global.manual_time_epoch;
   global["dbc_name"] = cfg.global.dbc_name;
   JsonArray wifi = global.createNestedArray("wifi");
   for (uint8_t i = 0; i < 3; ++i) {
@@ -84,7 +89,6 @@ void add_config_json(JsonObject root, const config::Config& cfg) {
     obj["enabled"] = bus.enabled;
     obj["bitrate"] = bus.bitrate;
     obj["read_only"] = bus.read_only;
-    obj["termination"] = bus.termination;
     obj["logging"] = bus.logging;
     obj["name"] = bus.name;
   }
@@ -124,6 +128,12 @@ void apply_config_from_json(const JsonObject& root) {
       const char* value = global["api_token"] | "";
       strncpy(cfg.global.api_token, value, sizeof(cfg.global.api_token));
       cfg.global.api_token[sizeof(cfg.global.api_token) - 1] = '\0';
+    }
+    if (global.containsKey("can_time_sync")) {
+      cfg.global.can_time_sync = global["can_time_sync"].as<bool>();
+    }
+    if (global.containsKey("manual_time_epoch")) {
+      cfg.global.manual_time_epoch = global["manual_time_epoch"].as<int64_t>();
     }
     if (global.containsKey("dbc_name")) {
       const char* value = global["dbc_name"] | "";
@@ -165,9 +175,6 @@ void apply_config_from_json(const JsonObject& root) {
       if (bus.containsKey("read_only")) {
         cfg.buses[id].read_only = bus["read_only"].as<bool>();
       }
-      if (bus.containsKey("termination")) {
-        cfg.buses[id].termination = bus["termination"].as<bool>();
-      }
       if (bus.containsKey("logging")) {
         cfg.buses[id].logging = bus["logging"].as<bool>();
       }
@@ -179,6 +186,18 @@ void apply_config_from_json(const JsonObject& root) {
   }
 
   config::save();
+}
+
+void handle_index() {
+  s_server.send_P(200, "text/html", web::kIndexHtml);
+}
+
+void handle_style() {
+  s_server.send_P(200, "text/css", web::kStyleCss);
+}
+
+void handle_app_js() {
+  s_server.send_P(200, "application/javascript", web::kAppJs);
 }
 
 void handle_status() {
@@ -194,6 +213,9 @@ void handle_status() {
   root["ssid"] = WiFi.SSID();
   root["rssi_dbm"] = net::rssi_dbm();
   root["rssi_percent"] = net::rssi_percent();
+  time_t now = time(nullptr);
+  root["time_epoch"] = static_cast<int64_t>(now);
+  root["time_valid"] = now > 100000;
 
   logging::Stats log_stats = logging::get_stats();
   JsonObject log = root.createNestedObject("logging");
@@ -254,6 +276,47 @@ void handle_config_put() {
   JsonObject root = doc.as<JsonObject>();
   apply_config_from_json(root);
   net::connect();
+  s_server.send(200, "application/json", "{\"ok\":true}");
+}
+
+void handle_time_set() {
+  if (!ensure_auth()) {
+    return;
+  }
+
+  const String body = s_server.arg("plain");
+  if (body.length() == 0) {
+    s_server.send(400, "application/json", "{\"error\":\"empty_body\"}");
+    return;
+  }
+
+  DynamicJsonDocument doc(512);
+  DeserializationError err = deserializeJson(doc, body);
+  if (err) {
+    s_server.send(400, "application/json", "{\"error\":\"bad_json\"}");
+    return;
+  }
+
+  if (!doc.containsKey("epoch")) {
+    s_server.send(400, "application/json", "{\"error\":\"missing_epoch\"}");
+    return;
+  }
+
+  const int64_t epoch = doc["epoch"].as<int64_t>();
+  if (epoch <= 0) {
+    s_server.send(400, "application/json", "{\"error\":\"invalid_epoch\"}");
+    return;
+  }
+
+  timeval tv{};
+  tv.tv_sec = static_cast<time_t>(epoch);
+  tv.tv_usec = 0;
+  settimeofday(&tv, nullptr);
+
+  config::Config& cfg = config::get_mutable();
+  cfg.global.manual_time_epoch = epoch;
+  config::save();
+
   s_server.send(200, "application/json", "{\"ok\":true}");
 }
 
@@ -451,10 +514,14 @@ void handle_not_found() {
 } // namespace
 
 void init() {
+  s_server.on("/", HTTP_GET, handle_index);
+  s_server.on("/style.css", HTTP_GET, handle_style);
+  s_server.on("/app.js", HTTP_GET, handle_app_js);
   s_server.on("/api/status", HTTP_GET, handle_status);
   s_server.on("/api/config", HTTP_GET, handle_config_get);
   s_server.on("/api/config", HTTP_PUT, handle_config_put);
   s_server.on("/api/config", HTTP_POST, handle_config_put);
+  s_server.on("/api/time", HTTP_POST, handle_time_set);
   s_server.on("/api/can/stats", HTTP_GET, handle_can_stats);
   s_server.on("/api/storage/stats", HTTP_GET, handle_storage_stats);
   s_server.on("/api/buffers", HTTP_GET, handle_buffers);

@@ -264,10 +264,9 @@ Die Firmware darf:
 Pro CAN-Bus muss ein 120-Ohm-Abschlusswiderstand vorhanden sein.
 
 Anforderungen:
-- Softwareseitig schaltbar (Ein / Aus)
-- Steuerung über GPIO
-- Konfiguration über Web-Interface und REST
-- Zustand persistent speicherbar
+- Physikalisch fest verdrahtet (kein softwareseitiges Schalten)
+- Keine GPIO-Steuerung und keine Konfiguration ueber Web/REST
+- Dokumentiert in der Hardware, aber nicht Teil der Firmware-Konfiguration
 
 ### 4.5 Echtzeituhr (RTC)
 
@@ -321,7 +320,6 @@ Beispiele für zu definierende Parameter:
 - SPI-Bus-Konfiguration
 - Chip-Select-Pins der MCP2515
 - Interrupt-Pins der CAN-Controller
-- GPIOs für Terminierungswiderstände
 - SD-Karten-Pins
 - RTC-Pins
 - USB-Konfiguration (falls notwendig)
@@ -435,7 +433,6 @@ Jeder CAN-Bus ist:
 Für jeden CAN-Bus sind folgende Parameter konfigurierbar:
 - Aktiviert / Deaktiviert
 - CAN-Bitrate
-- Abschlusswiderstand: Ein / Aus
 - Betriebsmodus: Read-Only, Senden erlaubt
 - Busname (user-defined, ueberschreibt Standardnamen wie "can0")
 
@@ -810,7 +807,6 @@ CAN-Bus (pro Bus):
 - Aktiviert / Deaktiviert
 - Bitrate
 - Read-Only / Senden erlaubt
-- Abschlusswiderstand (Ein / Aus)
 
 Logging:
 - Maximale Log-Dateigröße
@@ -899,6 +895,7 @@ Implementiert (Stand: aktuelle Firmware):
 - GET /api/status
 - GET /api/config
 - PUT /api/config (alternativ POST)
+- POST /api/time (set epoch seconds)
 - GET /api/can/stats
 - GET /api/storage/stats
 - GET /api/buffers
@@ -1417,7 +1414,6 @@ Der Fokus liegt auf:
 ### 22.1 Konfigurationsparameter (Beispiele)
 
 - CAN_BAUDRATE_BUS_X
-- CAN_TERMINATION_BUS_X
 - CAN_BUS_NAME_X
 - LOG_FILE_SIZE_MAX
 - LOW_SPACE_THRESHOLD_BYTES

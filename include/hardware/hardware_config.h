@@ -21,9 +21,6 @@ constexpr uint8_t CAN1_INT_PIN = 9;
 constexpr uint8_t CAN2_CS_PIN = 7;
 constexpr uint8_t CAN2_INT_PIN = 8;
 
-// CAN termination control pins (optional; -1 means not wired)
-constexpr int8_t CAN_TERM_PINS[6] = { -1, -1, -1, -1, -1, -1 };
-
 // I2C bus pins (RTC and other peripherals; -1 uses board defaults)
 constexpr int8_t I2C_SDA_PIN = -1;
 constexpr int8_t I2C_SCL_PIN = -1;

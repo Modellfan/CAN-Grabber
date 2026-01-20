@@ -12,7 +12,6 @@ struct BusConfig {
   bool enabled;
   uint32_t bitrate;
   bool read_only;
-  bool termination;
 };
 
 struct Frame {
