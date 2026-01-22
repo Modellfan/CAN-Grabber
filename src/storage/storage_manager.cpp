@@ -431,4 +431,23 @@ void mark_uploaded(const char* path) {
   save_status();
 }
 
+bool delete_file(size_t index) {
+  if (!s_ready || index >= s_entry_count) {
+    return false;
+  }
+
+  const FileStatusEntry entry = s_entries[index];
+  if (entry.flags & kFlagActive) {
+    return false;
+  }
+
+  if (SD.exists(entry.path) && !SD.remove(entry.path)) {
+    return false;
+  }
+
+  remove_entry(index);
+  save_status();
+  return true;
+}
+
 } // namespace storage

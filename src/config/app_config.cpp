@@ -9,7 +9,7 @@ namespace config {
 namespace {
 
 constexpr uint32_t kConfigMagic = 0x43414742; // "CAGB"
-constexpr uint16_t kConfigVersion = 4;
+constexpr uint16_t kConfigVersion = 5;
 constexpr const char* kPrefsNamespace = "can-grabber";
 constexpr const char* kPrefsKey = "config";
 
@@ -48,6 +48,20 @@ struct GlobalConfigV3 {
   char dbc_name[kDbcNameMaxLen];
 };
 
+struct GlobalConfigV4 {
+  uint32_t max_file_size_bytes;
+  uint32_t low_space_threshold_bytes;
+  uint8_t wifi_count;
+  WifiConfig wifi[3];
+  char upload_url[kUrlMaxLen];
+  char influx_url[kUrlMaxLen];
+  char influx_token[kTokenMaxLen];
+  char api_token[kApiTokenMaxLen];
+  bool can_time_sync;
+  int64_t manual_time_epoch;
+  char dbc_name[kDbcNameMaxLen];
+};
+
 struct BusConfigV3 {
   bool enabled;
   uint32_t bitrate;
@@ -79,6 +93,14 @@ struct ConfigV3 {
   uint16_t reserved;
   BusConfigV3 buses[kMaxBuses];
   GlobalConfigV3 global;
+};
+
+struct ConfigV4 {
+  uint32_t magic;
+  uint16_t version;
+  uint16_t reserved;
+  BusConfigV3 buses[kMaxBuses];
+  GlobalConfigV4 global;
 };
 
 void format_default_bus_name(uint8_t bus_id, char* out, size_t out_len) {
@@ -131,6 +153,7 @@ void apply_defaults(Config& cfg) {
   cfg.global.max_file_size_bytes = 64UL * 1024UL * 1024UL;
   cfg.global.low_space_threshold_bytes = 32UL * 1024UL * 1024UL;
   cfg.global.wifi_count = 0;
+  cfg.global.wifi_sta_enabled = false;
   cfg.global.api_token[0] = '\0';
 
   for (uint8_t i = 0; i < kMaxBuses; ++i) {
@@ -163,6 +186,38 @@ bool load_from_nvs(Config& out_cfg) {
     if (prefs.getBytes(kPrefsKey, &temp, sizeof(temp)) == sizeof(temp) &&
         temp.magic == kConfigMagic && temp.version == kConfigVersion) {
       out_cfg = temp;
+      loaded = true;
+    }
+  } else if (len == sizeof(ConfigV4)) {
+    ConfigV4 temp{};
+    if (prefs.getBytes(kPrefsKey, &temp, sizeof(temp)) == sizeof(temp) &&
+        temp.magic == kConfigMagic && temp.version == 4) {
+      apply_defaults(out_cfg);
+      out_cfg.magic = kConfigMagic;
+      out_cfg.version = kConfigVersion;
+      for (uint8_t i = 0; i < kMaxBuses; ++i) {
+        out_cfg.buses[i].enabled = temp.buses[i].enabled;
+        out_cfg.buses[i].bitrate = temp.buses[i].bitrate;
+        out_cfg.buses[i].read_only = temp.buses[i].read_only;
+        out_cfg.buses[i].logging = temp.buses[i].logging;
+        strncpy(out_cfg.buses[i].name, temp.buses[i].name, sizeof(out_cfg.buses[i].name));
+        out_cfg.buses[i].name[sizeof(out_cfg.buses[i].name) - 1] = '\0';
+      }
+      out_cfg.global.max_file_size_bytes = temp.global.max_file_size_bytes;
+      out_cfg.global.low_space_threshold_bytes = temp.global.low_space_threshold_bytes;
+      out_cfg.global.wifi_count = temp.global.wifi_count;
+      for (uint8_t i = 0; i < 3; ++i) {
+        out_cfg.global.wifi[i] = temp.global.wifi[i];
+      }
+      strncpy(out_cfg.global.upload_url, temp.global.upload_url, sizeof(out_cfg.global.upload_url));
+      strncpy(out_cfg.global.influx_url, temp.global.influx_url, sizeof(out_cfg.global.influx_url));
+      strncpy(out_cfg.global.influx_token,
+              temp.global.influx_token,
+              sizeof(out_cfg.global.influx_token));
+      strncpy(out_cfg.global.api_token, temp.global.api_token, sizeof(out_cfg.global.api_token));
+      out_cfg.global.can_time_sync = temp.global.can_time_sync;
+      out_cfg.global.manual_time_epoch = temp.global.manual_time_epoch;
+      strncpy(out_cfg.global.dbc_name, temp.global.dbc_name, sizeof(out_cfg.global.dbc_name));
       loaded = true;
     }
   } else if (len == sizeof(ConfigV3)) {

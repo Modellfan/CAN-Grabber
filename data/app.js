@@ -1,458 +1,12 @@
-#include "web/web_assets.h"
-
-namespace web {
-
-const char kIndexHtml[] PROGMEM = R"HTML(
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CAN-Grabber</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-  <nav id="navbar">
-    <div id="logo">
-      <div class="logo-mark">CAN</div>
-      <div class="logo-sub">Grabber</div>
-    </div>
-    <a class="nav-link active" data-view="status" href="#status">Status</a>
-    <a class="nav-link" data-view="config" href="#config">Config</a>
-    <a class="nav-link" data-view="files" href="#files">Files</a>
-    <div class="nav-token">
-      <label for="api-token">API Token</label>
-      <input id="api-token" type="password" placeholder="optional">
-    </div>
-  </nav>
-
-  <main id="content-wrapper">
-    <section id="view-status" class="view active">
-      <div class="page-title">
-        <h1>Status</h1>
-        <button class="butt" id="refresh-status">Refresh</button>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h2>System</h2>
-          <div class="row"><span>Uptime</span><strong id="uptime">-</strong></div>
-          <div class="row"><span>Time</span><strong id="time-now">-</strong></div>
-          <div class="row"><span>Logging</span><strong id="logging-state">-</strong></div>
-        </div>
-        <div class="card">
-          <h2>Network</h2>
-          <div class="row"><span>SSID</span><strong id="wifi-ssid">-</strong></div>
-          <div class="row"><span>IP</span><strong id="wifi-ip">-</strong></div>
-          <div class="row"><span>RSSI</span><strong id="wifi-rssi">-</strong></div>
-        </div>
-        <div class="card">
-          <h2>Storage</h2>
-          <div class="row"><span>Ready</span><strong id="sd-ready">-</strong></div>
-          <div class="row"><span>Total</span><strong id="sd-total">-</strong></div>
-          <div class="row"><span>Free</span><strong id="sd-free">-</strong></div>
-        </div>
-        <div class="card">
-          <h2>Buffers</h2>
-          <div class="row"><span>Bytes/s</span><strong id="log-rate">-</strong></div>
-          <div class="row"><span>Total</span><strong id="log-total">-</strong></div>
-          <div class="row"><span>Active buses</span><strong id="log-buses">-</strong></div>
-        </div>
-      </div>
-
-      <h2 class="section-title">CAN Stats</h2>
-      <table>
-        <thead>
-          <tr><th>Bus</th><th>Drops</th><th>High Water (bytes)</th></tr>
-        </thead>
-        <tbody id="can-stats-body"></tbody>
-      </table>
-    </section>
-
-    <section id="view-config" class="view">
-      <div class="page-title">
-        <h1>Configuration</h1>
-        <button class="butt" id="refresh-config">Reload</button>
-        <button class="butt" id="save-config">Save</button>
-      </div>
-
-      <h2 class="section-title">CAN Buses</h2>
-      <div id="bus-configs" class="stack"></div>
-
-      <h2 class="section-title">Logging</h2>
-      <div class="form-grid">
-        <label>Max file size (MB)</label>
-        <input id="log-max-size" type="number" min="1">
-        <label>Low space threshold (MB)</label>
-        <input id="log-low-space" type="number" min="0">
-      </div>
-      <div class="button-row">
-        <button class="butt" id="start-logging">Start logging</button>
-        <button class="butt" id="stop-logging">Stop logging</button>
-        <button class="butt" id="close-file">Close active file</button>
-      </div>
-
-      <h2 class="section-title">Time</h2>
-      <div class="form-grid">
-        <label>CAN time sync</label>
-        <div class="switch">
-          <input id="can-time-sync" type="checkbox">
-          <span class="slider"></span>
-        </div>
-        <label>Set time</label>
-        <div class="time-row">
-          <input id="time-set" type="datetime-local">
-          <button class="butt" id="set-time">Set</button>
-        </div>
-      </div>
-
-      <h2 class="section-title">WiFi</h2>
-      <div id="wifi-configs" class="stack"></div>
-
-      <h2 class="section-title">Upload</h2>
-      <div class="form-grid">
-        <label>Upload URL</label>
-        <input id="upload-url" type="text" placeholder="http://...">
-      </div>
-    </section>
-
-    <section id="view-files" class="view">
-      <div class="page-title">
-        <h1>Files</h1>
-        <div class="filters">
-          <label for="file-filter">Bus</label>
-          <select id="file-filter"></select>
-          <button class="butt" id="refresh-files">Refresh</button>
-        </div>
-      </div>
-      <table>
-        <thead>
-          <tr><th>ID</th><th>Bus</th><th>Name</th><th>Size</th><th>Start</th><th>End</th><th>Flags</th><th>Actions</th></tr>
-        </thead>
-        <tbody id="files-body"></tbody>
-      </table>
-    </section>
-  </main>
-
-  <div id="toast" class="toast"></div>
-  <script src="/app.js"></script>
-</body>
-</html>
-)HTML";
-
-const char kStyleCss[] PROGMEM = R"CSS(
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: "Verdana", "Geneva", sans-serif;
-  background: #f4f5f2;
-  color: #1f1f1f;
-}
-
-#navbar {
-  background-color: #4caf50;
-  min-height: 100vh;
-  position: fixed;
-  width: 200px;
-  overflow-y: auto;
-  top: 0;
-  left: 0;
-  padding: 16px 0;
-  border-right: 3px solid #2f7a33;
-}
-
-#logo {
-  text-align: center;
-  color: #0d140d;
-  margin-bottom: 16px;
-}
-
-.logo-mark {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-.logo-sub {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.nav-link {
-  display: block;
-  padding: 12px 16px;
-  color: #0d140d;
-  text-decoration: none;
-  font-weight: 600;
-  border-left: 4px solid transparent;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  background: #f4f5f2;
-  border-left-color: #f19136;
-}
-
-.nav-token {
-  padding: 12px 16px;
-  margin-top: 12px;
-  font-size: 12px;
-}
-
-.nav-token label {
-  display: block;
-  margin-bottom: 6px;
-}
-
-.nav-token input {
-  width: 100%;
-  padding: 6px 8px;
-  border: 2px solid #2f7a33;
-  border-radius: 4px;
-}
-
-#content-wrapper {
-  margin-left: 200px;
-  padding: 24px 32px;
-  min-height: 100vh;
-}
-
-.view {
-  display: none;
-}
-
-.view.active {
-  display: block;
-}
-
-.page-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.page-title h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.butt {
-  background-color: #4caf50;
-  border: 2px solid #2f7a33;
-  color: #0d140d;
-  padding: 6px 12px;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.butt:hover {
-  background-color: #f4f5f2;
-}
-
-.butt.small {
-  padding: 4px 8px;
-  font-size: 12px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  background: #ffffff;
-  border: 2px solid #d6dcd2;
-  border-radius: 10px;
-  padding: 16px;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.card h2 {
-  margin: 0 0 10px 0;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.section-title {
-  margin: 24px 0 10px 0;
-  font-size: 18px;
-  border-bottom: 2px solid #d6dcd2;
-  padding-bottom: 6px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #ffffff;
-}
-
-th, td {
-  padding: 8px;
-  border-bottom: 1px solid #e0e0e0;
-  text-align: left;
-  font-size: 13px;
-}
-
-th {
-  background: #e5e5e5;
-  position: sticky;
-  top: 0;
-}
-
-.stack {
-  display: grid;
-  gap: 10px;
-}
-
-.bus-card,
-.wifi-card {
-  background: #ffffff;
-  border: 2px solid #d6dcd2;
-  border-radius: 8px;
-  padding: 12px;
-  display: grid;
-  gap: 8px;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 8px 16px;
-  align-items: center;
-}
-
-.form-grid input,
-.form-grid select {
-  padding: 6px 8px;
-  border: 2px solid #4caf50;
-  border-radius: 4px;
-}
-
-.button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.filters {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.filters select {
-  padding: 6px 8px;
-  border: 2px solid #4caf50;
-  border-radius: 4px;
-}
-
-.time-row {
-  display: flex;
-  gap: 8px;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 36px;
-  height: 18px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.2s;
-  border-radius: 20px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 12px;
-  width: 12px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.2s;
-  border-radius: 50%;
-}
-
-.switch input:checked + .slider {
-  background-color: #f19136;
-}
-
-.switch input:checked + .slider:before {
-  transform: translateX(18px);
-}
-
-.toast {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  background: #1f1f1f;
-  color: #ffffff;
-  padding: 10px 14px;
-  border-radius: 6px;
-  display: none;
-  font-size: 13px;
-}
-
-@media (max-width: 900px) {
-  #navbar {
-    position: static;
-    width: 100%;
-    min-height: auto;
-    border-right: none;
-    border-bottom: 3px solid #2f7a33;
-  }
-
-  #content-wrapper {
-    margin-left: 0;
-  }
-
-  .page-title {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-)CSS";
-
-const char kAppJs[] PROGMEM = R"JS(
 const state = {
   config: null,
-  token: ""
+  token: "",
+  wifiScan: [],
+  selectedFiles: new Set()
 };
 
-const views = ["status", "config", "files"];
+const views = ["status", "can", "config", "files"];
+const apiBase = "";
 
 function showToast(message, isError) {
   const toast = document.getElementById("toast");
@@ -466,14 +20,15 @@ function showToast(message, isError) {
 
 function setView(name) {
   views.forEach((view) => {
-    const section = document.getElementById(`view-${view}`);
-    const link = document.querySelector(`.nav-link[data-view="${view}"]`);
+    const section = document.getElementById(view);
+    const link = document.querySelector(`.tablink[data-view="${view}"]`);
     if (!section || !link) {
       return;
     }
     const active = view === name;
-    section.classList.toggle("active", active);
-    link.classList.toggle("active", active);
+    const display = section.dataset.display || "block";
+    section.style.display = active ? display : "none";
+    link.style.backgroundColor = active ? "white" : "";
   });
 }
 
@@ -520,7 +75,7 @@ function apiHeaders() {
 }
 
 async function apiGet(path) {
-  const res = await fetch(path, { headers: apiHeaders() });
+  const res = await fetch(`${apiBase}${path}`, { headers: apiHeaders() });
   if (!res.ok) {
     throw new Error(`Request failed: ${res.status}`);
   }
@@ -528,7 +83,7 @@ async function apiGet(path) {
 }
 
 async function apiPost(path, payload) {
-  const res = await fetch(path, {
+  const res = await fetch(`${apiBase}${path}`, {
     method: "POST",
     headers: apiHeaders(),
     body: JSON.stringify(payload || {})
@@ -540,7 +95,7 @@ async function apiPost(path, payload) {
 }
 
 async function apiPut(path, payload) {
-  const res = await fetch(path, {
+  const res = await fetch(`${apiBase}${path}`, {
     method: "PUT",
     headers: apiHeaders(),
     body: JSON.stringify(payload || {})
@@ -606,7 +161,10 @@ function renderWifiConfig(cfg) {
       <strong>Network ${i + 1}</strong>
       <div class="form-grid">
         <label>SSID</label>
-        <input id="wifi-ssid-${i}" type="text" maxlength="32">
+        <input id="wifi-ssid-${i}" type="text" maxlength="32" list="wifi-scan-${i}">
+        <datalist id="wifi-scan-${i}">
+          <option value="">Pick a network...</option>
+        </datalist>
         <label>Password</label>
         <input id="wifi-pass-${i}" type="password" maxlength="64">
       </div>
@@ -614,6 +172,33 @@ function renderWifiConfig(cfg) {
     container.appendChild(wrapper);
     document.getElementById(`wifi-ssid-${i}`).value = entry.ssid || "";
     document.getElementById(`wifi-pass-${i}`).value = entry.password || "";
+  }
+  renderWifiScanOptions();
+}
+
+function renderWifiScanOptions() {
+  for (let i = 0; i < 3; i += 1) {
+    const list = document.getElementById(`wifi-scan-${i}`);
+    if (!list) {
+      continue;
+    }
+    list.innerHTML = `<option value="">Pick a network...</option>`;
+    state.wifiScan.forEach((net) => {
+      const label = `${net.ssid} (${net.rssi_percent}%)`;
+      list.appendChild(new Option(label, net.ssid));
+    });
+  }
+}
+
+async function refreshWifiScan() {
+  try {
+    const data = await apiGet("/api/wifi/scan");
+    state.wifiScan = data
+      .filter((net) => net.ssid)
+      .sort((a, b) => b.rssi_percent - a.rssi_percent);
+    renderWifiScanOptions();
+  } catch (err) {
+    showToast(err.message, true);
   }
 }
 
@@ -653,6 +238,7 @@ function collectConfig() {
       max_file_size_bytes: Math.max(1, maxSizeMb) * 1024 * 1024,
       low_space_threshold_bytes: Math.max(0, lowSpaceMb) * 1024 * 1024,
       wifi_count: wifiCount,
+      wifi_sta_enabled: document.getElementById("wifi-sta-enabled").checked,
       wifi,
       upload_url: document.getElementById("upload-url").value.trim(),
       influx_url: cfg.global.influx_url,
@@ -672,6 +258,7 @@ async function loadStatus() {
     document.getElementById("wifi-ssid").textContent = data.ssid || "-";
     document.getElementById("wifi-ip").textContent = data.ip || "-";
     document.getElementById("wifi-rssi").textContent = `${data.rssi_percent}%`;
+    document.getElementById("wifi-sta-mode").textContent = data.sta_mode_enabled ? "on" : "off";
     document.getElementById("sd-ready").textContent = data.storage.ready ? "yes" : "no";
     document.getElementById("sd-total").textContent = formatBytes(data.storage.total_bytes);
     document.getElementById("sd-free").textContent = formatBytes(data.storage.free_bytes);
@@ -704,10 +291,12 @@ async function loadConfig() {
     state.config = data;
     renderBusConfig(data);
     renderWifiConfig(data);
+    refreshWifiScan();
     document.getElementById("log-max-size").value = Math.round(data.global.max_file_size_bytes / (1024 * 1024));
     document.getElementById("log-low-space").value = Math.round(data.global.low_space_threshold_bytes / (1024 * 1024));
     document.getElementById("upload-url").value = data.global.upload_url || "";
     document.getElementById("can-time-sync").checked = !!data.global.can_time_sync;
+    document.getElementById("wifi-sta-enabled").checked = !!data.global.wifi_sta_enabled;
   } catch (err) {
     showToast(err.message, true);
   }
@@ -735,7 +324,9 @@ async function loadFiles() {
       }
       const row = document.createElement("tr");
       const name = entry.path.split("/").pop();
+      const checked = state.selectedFiles.has(String(entry.id)) ? "checked" : "";
       row.innerHTML = `
+        <td><input type="checkbox" class="file-select" data-id="${entry.id}" ${checked}></td>
         <td>${entry.id}</td>
         <td>${entry.bus_id}</td>
         <td>${name}</td>
@@ -744,11 +335,22 @@ async function loadFiles() {
         <td>${entry.end_ms}</td>
         <td>${formatFlags(entry.flags)}</td>
         <td>
-          <a href="/api/files/${entry.id}/download">Download</a>
+          <a href="${apiBase}/api/files/${entry.id}/download">Download</a>
           <button class="butt small" data-id="${entry.id}">Mark downloaded</button>
         </td>
       `;
       body.appendChild(row);
+    });
+
+    document.querySelectorAll(".file-select").forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const id = checkbox.dataset.id;
+        if (checkbox.checked) {
+          state.selectedFiles.add(id);
+        } else {
+          state.selectedFiles.delete(id);
+        }
+      });
     });
 
     document.querySelectorAll(".butt.small").forEach((btn) => {
@@ -767,8 +369,20 @@ async function loadFiles() {
   }
 }
 
+function selectedFileIds() {
+  return Array.from(state.selectedFiles);
+}
+
+function clearFileSelection() {
+  state.selectedFiles.clear();
+  const selectAll = document.getElementById("select-all-files");
+  if (selectAll) {
+    selectAll.checked = false;
+  }
+}
+
 function wireEvents() {
-  document.querySelectorAll(".nav-link").forEach((link) => {
+  document.querySelectorAll(".tablink").forEach((link) => {
     link.addEventListener("click", (event) => {
       const view = event.currentTarget.dataset.view;
       setView(view);
@@ -780,9 +394,23 @@ function wireEvents() {
 
   document.getElementById("refresh-status").addEventListener("click", loadStatus);
   document.getElementById("refresh-config").addEventListener("click", loadConfig);
+  document.getElementById("refresh-can").addEventListener("click", loadConfig);
   document.getElementById("refresh-files").addEventListener("click", loadFiles);
 
   document.getElementById("save-config").addEventListener("click", async () => {
+    const payload = collectConfig();
+    if (!payload) {
+      return;
+    }
+    try {
+      await apiPut("/api/config", payload);
+      showToast("Config saved");
+      loadConfig();
+    } catch (err) {
+      showToast(err.message, true);
+    }
+  });
+  document.getElementById("save-can").addEventListener("click", async () => {
     const payload = collectConfig();
     if (!payload) {
       return;
@@ -854,6 +482,53 @@ function wireEvents() {
     state.token = tokenInput.value.trim();
     localStorage.setItem("apiToken", state.token);
   });
+
+  document.getElementById("select-all-files").addEventListener("change", (event) => {
+    const checked = event.target.checked;
+    document.querySelectorAll(".file-select").forEach((checkbox) => {
+      checkbox.checked = checked;
+      const id = checkbox.dataset.id;
+      if (checked) {
+        state.selectedFiles.add(id);
+      } else {
+        state.selectedFiles.delete(id);
+      }
+    });
+  });
+
+  document.getElementById("download-selected").addEventListener("click", () => {
+    const ids = selectedFileIds();
+    if (!ids.length) {
+      showToast("Select files first", true);
+      return;
+    }
+    ids.forEach((id, idx) => {
+      setTimeout(() => {
+        window.open(`${apiBase}/api/files/${id}/download`, "_blank");
+      }, idx * 300);
+    });
+  });
+
+  document.getElementById("delete-selected").addEventListener("click", async () => {
+    const ids = selectedFileIds();
+    if (!ids.length) {
+      showToast("Select files first", true);
+      return;
+    }
+    if (!window.confirm(`Delete ${ids.length} file(s)?`)) {
+      return;
+    }
+    try {
+      for (const id of ids) {
+        await apiPost(`/api/files/${id}/delete`, {});
+      }
+      showToast("Files deleted");
+      clearFileSelection();
+      loadFiles();
+    } catch (err) {
+      showToast(err.message, true);
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -867,7 +542,5 @@ document.addEventListener("DOMContentLoaded", () => {
     loadFiles();
   }
   setInterval(loadStatus, 5000);
+  setInterval(refreshWifiScan, 15000);
 });
-)JS";
-
-} // namespace web

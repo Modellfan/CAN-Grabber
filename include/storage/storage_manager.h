@@ -26,6 +26,7 @@ bool is_ready();
 Stats get_stats();
 size_t file_count();
 bool get_file_info(size_t index, FileInfo* out);
+bool delete_file(size_t index);
 
 bool ensure_space(uint64_t min_free_bytes);
 bool register_log_file(const char* path, uint8_t bus_id, uint32_t start_ms);

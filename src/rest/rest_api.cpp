@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <SD.h>
+#include <SPIFFS.h>
 #include <WiFi.h>
 #include <WebServer.h>
 #include <sys/time.h>
@@ -15,7 +16,6 @@
 #include "logging/log_writer.h"
 #include "net/net_manager.h"
 #include "storage/storage_manager.h"
-#include "web/web_assets.h"
 
 namespace rest {
 
@@ -23,9 +23,73 @@ namespace {
 
 WebServer s_server(80);
 bool s_started = false;
+bool s_spiffs_ready = false;
 
 bool token_configured() {
   return config::get().global.api_token[0] != '\0';
+}
+
+void add_cors_headers() {
+  s_server.sendHeader("Access-Control-Allow-Origin", "*");
+  s_server.sendHeader("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
+  s_server.sendHeader("Access-Control-Allow-Headers",
+                      "Content-Type,Authorization,X-Api-Token");
+}
+
+const char* content_type_for_path(const String& path) {
+  if (path.endsWith(".html")) {
+    return "text/html";
+  }
+  if (path.endsWith(".css")) {
+    return "text/css";
+  }
+  if (path.endsWith(".js")) {
+    return "application/javascript";
+  }
+  if (path.endsWith(".png")) {
+    return "image/png";
+  }
+  if (path.endsWith(".gif")) {
+    return "image/gif";
+  }
+  if (path.endsWith(".svg")) {
+    return "image/svg+xml";
+  }
+  if (path.endsWith(".ico")) {
+    return "image/x-icon";
+  }
+  return "text/plain";
+}
+
+void handle_static() {
+  if (!s_spiffs_ready) {
+    s_server.send(500, "text/plain", "SPIFFS mount failed");
+    return;
+  }
+
+  String path = s_server.uri();
+  if (path.endsWith("/")) {
+    path += "index.html";
+  }
+
+  if (!SPIFFS.exists(path)) {
+    s_server.send(404, "text/plain", "Not found");
+    return;
+  }
+
+  File file = SPIFFS.open(path, "r");
+  if (!file) {
+    s_server.send(500, "text/plain", "Failed to open file");
+    return;
+  }
+
+  s_server.streamFile(file, content_type_for_path(path));
+  file.close();
+}
+
+void handle_options() {
+  add_cors_headers();
+  s_server.send(204, "text/plain", "");
 }
 
 bool check_auth() {
@@ -52,6 +116,7 @@ bool ensure_auth() {
   if (check_auth()) {
     return true;
   }
+  add_cors_headers();
   s_server.send(401, "application/json", "{\"error\":\"unauthorized\"}");
   return false;
 }
@@ -59,6 +124,7 @@ bool ensure_auth() {
 void send_json(const JsonDocument& doc, int code = 200) {
   String body;
   serializeJson(doc, body);
+  add_cors_headers();
   s_server.send(code, "application/json", body);
 }
 
@@ -67,6 +133,7 @@ void add_config_json(JsonObject root, const config::Config& cfg) {
   global["max_file_size_bytes"] = cfg.global.max_file_size_bytes;
   global["low_space_threshold_bytes"] = cfg.global.low_space_threshold_bytes;
   global["wifi_count"] = cfg.global.wifi_count;
+  global["wifi_sta_enabled"] = cfg.global.wifi_sta_enabled;
   global["upload_url"] = cfg.global.upload_url;
   global["influx_url"] = cfg.global.influx_url;
   global["influx_token"] = cfg.global.influx_token;
@@ -108,6 +175,9 @@ void apply_config_from_json(const JsonObject& root) {
     }
     if (global.containsKey("wifi_count")) {
       config::set_wifi_count(global["wifi_count"].as<uint8_t>());
+    }
+    if (global.containsKey("wifi_sta_enabled")) {
+      cfg.global.wifi_sta_enabled = global["wifi_sta_enabled"].as<bool>();
     }
     if (global.containsKey("upload_url")) {
       const char* value = global["upload_url"] | "";
@@ -188,19 +258,8 @@ void apply_config_from_json(const JsonObject& root) {
   config::save();
 }
 
-void handle_index() {
-  s_server.send_P(200, "text/html", web::kIndexHtml);
-}
-
-void handle_style() {
-  s_server.send_P(200, "text/css", web::kStyleCss);
-}
-
-void handle_app_js() {
-  s_server.send_P(200, "application/javascript", web::kAppJs);
-}
-
 void handle_status() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -213,6 +272,8 @@ void handle_status() {
   root["ssid"] = WiFi.SSID();
   root["rssi_dbm"] = net::rssi_dbm();
   root["rssi_percent"] = net::rssi_percent();
+  root["sta_mode_enabled"] = config::get().global.wifi_sta_enabled;
+  root["ap_clients"] = net::ap_clients();
   time_t now = time(nullptr);
   root["time_epoch"] = static_cast<int64_t>(now);
   root["time_valid"] = now > 100000;
@@ -245,6 +306,7 @@ void handle_status() {
 }
 
 void handle_config_get() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -256,6 +318,7 @@ void handle_config_get() {
 }
 
 void handle_config_put() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -280,6 +343,7 @@ void handle_config_put() {
 }
 
 void handle_time_set() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -320,7 +384,32 @@ void handle_time_set() {
   s_server.send(200, "application/json", "{\"ok\":true}");
 }
 
+void handle_wifi_scan() {
+  add_cors_headers();
+  if (!ensure_auth()) {
+    return;
+  }
+
+  DynamicJsonDocument doc(2048);
+  JsonArray arr = doc.to<JsonArray>();
+  const size_t count = net::wifi_scan_count();
+  for (size_t i = 0; i < count; ++i) {
+    net::WifiScanEntry info{};
+    if (!net::wifi_scan_entry(i, &info)) {
+      continue;
+    }
+    JsonObject entry = arr.createNestedObject();
+    entry["ssid"] = info.ssid;
+    entry["rssi_dbm"] = info.rssi_dbm;
+    entry["rssi_percent"] = info.rssi_percent;
+    entry["channel"] = info.channel;
+    entry["secure"] = info.secure;
+  }
+  send_json(doc);
+}
+
 void handle_can_stats() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -337,6 +426,7 @@ void handle_can_stats() {
 }
 
 void handle_storage_stats() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -351,6 +441,7 @@ void handle_storage_stats() {
 }
 
 void handle_buffers() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -369,6 +460,7 @@ void handle_buffers() {
 }
 
 void handle_files_list() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -423,6 +515,7 @@ bool parse_file_route(const String& uri, size_t* out_id, String* out_action) {
 }
 
 void handle_file_download(size_t id) {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -456,6 +549,7 @@ void handle_file_download(size_t id) {
 }
 
 void handle_file_mark_downloaded(size_t id) {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -469,7 +563,21 @@ void handle_file_mark_downloaded(size_t id) {
   s_server.send(200, "application/json", "{\"ok\":true}");
 }
 
+void handle_file_delete(size_t id) {
+  add_cors_headers();
+  if (!ensure_auth()) {
+    return;
+  }
+
+  if (!storage::delete_file(id)) {
+    s_server.send(400, "application/json", "{\"error\":\"delete_failed\"}");
+    return;
+  }
+  s_server.send(200, "application/json", "{\"ok\":true}");
+}
+
 void handle_control_start() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -478,6 +586,7 @@ void handle_control_start() {
 }
 
 void handle_control_stop() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -486,6 +595,7 @@ void handle_control_stop() {
 }
 
 void handle_control_close_file() {
+  add_cors_headers();
   if (!ensure_auth()) {
     return;
   }
@@ -494,7 +604,16 @@ void handle_control_close_file() {
 }
 
 void handle_not_found() {
+  add_cors_headers();
+  if (s_server.method() == HTTP_OPTIONS) {
+    s_server.send(204, "text/plain", "");
+    return;
+  }
   const String uri = s_server.uri();
+  if (!uri.startsWith("/api/")) {
+    handle_static();
+    return;
+  }
   size_t id = 0;
   String action;
   if (parse_file_route(uri, &id, &action)) {
@@ -506,6 +625,10 @@ void handle_not_found() {
       handle_file_mark_downloaded(id);
       return;
     }
+    if (action == "delete" && s_server.method() == HTTP_POST) {
+      handle_file_delete(id);
+      return;
+    }
   }
 
   s_server.send(404, "application/json", "{\"error\":\"not_found\"}");
@@ -514,21 +637,31 @@ void handle_not_found() {
 } // namespace
 
 void init() {
-  s_server.on("/", HTTP_GET, handle_index);
-  s_server.on("/style.css", HTTP_GET, handle_style);
-  s_server.on("/app.js", HTTP_GET, handle_app_js);
+  s_spiffs_ready = SPIFFS.begin(true);
   s_server.on("/api/status", HTTP_GET, handle_status);
+  s_server.on("/api/status", HTTP_OPTIONS, handle_options);
   s_server.on("/api/config", HTTP_GET, handle_config_get);
   s_server.on("/api/config", HTTP_PUT, handle_config_put);
   s_server.on("/api/config", HTTP_POST, handle_config_put);
+  s_server.on("/api/config", HTTP_OPTIONS, handle_options);
   s_server.on("/api/time", HTTP_POST, handle_time_set);
+  s_server.on("/api/time", HTTP_OPTIONS, handle_options);
+  s_server.on("/api/wifi/scan", HTTP_GET, handle_wifi_scan);
+  s_server.on("/api/wifi/scan", HTTP_OPTIONS, handle_options);
   s_server.on("/api/can/stats", HTTP_GET, handle_can_stats);
+  s_server.on("/api/can/stats", HTTP_OPTIONS, handle_options);
   s_server.on("/api/storage/stats", HTTP_GET, handle_storage_stats);
+  s_server.on("/api/storage/stats", HTTP_OPTIONS, handle_options);
   s_server.on("/api/buffers", HTTP_GET, handle_buffers);
+  s_server.on("/api/buffers", HTTP_OPTIONS, handle_options);
   s_server.on("/api/files", HTTP_GET, handle_files_list);
+  s_server.on("/api/files", HTTP_OPTIONS, handle_options);
   s_server.on("/api/control/start_logging", HTTP_POST, handle_control_start);
   s_server.on("/api/control/stop_logging", HTTP_POST, handle_control_stop);
   s_server.on("/api/control/close_active_file", HTTP_POST, handle_control_close_file);
+  s_server.on("/api/control/start_logging", HTTP_OPTIONS, handle_options);
+  s_server.on("/api/control/stop_logging", HTTP_OPTIONS, handle_options);
+  s_server.on("/api/control/close_active_file", HTTP_OPTIONS, handle_options);
   s_server.onNotFound(handle_not_found);
 }
 

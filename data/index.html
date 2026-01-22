@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CAN-Grabber</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="content">
+    <aside id="navbar" class="navbar">
+      <div id="logo">
+        <img src="logo.png" alt="OpenInverter" />
+      </div>
+      <div>
+        <a class="tablink" data-view="status" href="#status">
+          <p class="navbar-text">STATUS</p>
+        </a>
+        <a class="tablink" data-view="can" href="#can">
+          <p class="navbar-text">CAN CONFIG</p>
+        </a>
+        <a class="tablink" data-view="config" href="#config">
+          <p class="navbar-text">CONFIG</p>
+        </a>
+        <a class="tablink" data-view="files" href="#files">
+          <p class="navbar-text">FILES</p>
+        </a>
+      </div>
+    </aside>
+
+    <div id="content-wrapper">
+      <div id="content-wrapper-inner">
+        <div id="status" class="tabdiv main-content" data-display="flex" style="display:flex;">
+          <div class="main-right">
+            <h3 class="underline">Actions</h3>
+            <button id="refresh-status">Refresh</button>
+          </div>
+          <div class="main-left">
+            <h2>Status</h2>
+            <div class="dash-row">
+              <div class="dash-box">
+                <h3>System</h3>
+                <p>Uptime: <strong id="uptime">-</strong></p>
+                <p>Time: <strong id="time-now">-</strong></p>
+                <p>Logging: <strong id="logging-state">-</strong></p>
+              </div>
+              <div class="dash-box">
+                <h3>Network</h3>
+                <p>SSID: <strong id="wifi-ssid">-</strong></p>
+                <p>IP: <strong id="wifi-ip">-</strong></p>
+                <p>RSSI: <strong id="wifi-rssi">-</strong></p>
+                <p>STA mode: <strong id="wifi-sta-mode">-</strong></p>
+              </div>
+            </div>
+            <div class="dash-row">
+              <div class="dash-box">
+                <h3>Storage</h3>
+                <p>Ready: <strong id="sd-ready">-</strong></p>
+                <p>Total: <strong id="sd-total">-</strong></p>
+                <p>Free: <strong id="sd-free">-</strong></p>
+              </div>
+              <div class="dash-box">
+                <h3>Buffers</h3>
+                <p>Bytes/s: <strong id="log-rate">-</strong></p>
+                <p>Total: <strong id="log-total">-</strong></p>
+                <p>Active buses: <strong id="log-buses">-</strong></p>
+              </div>
+            </div>
+
+            <h3 class="underline">CAN Stats</h3>
+            <table>
+              <thead>
+                <tr><th>Bus</th><th>Drops</th><th>High Water (bytes)</th></tr>
+              </thead>
+              <tbody id="can-stats-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="config" class="tabdiv main-content" data-display="flex" style="display:none;">
+          <div class="main-right">
+            <h3 class="underline">Actions</h3>
+            <button id="refresh-config">Reload</button>
+            <button id="save-config">Save</button>
+
+            <h3 class="underline">Logging</h3>
+            <button id="start-logging">Start logging</button>
+            <button id="stop-logging">Stop logging</button>
+            <button id="close-file">Close active file</button>
+          </div>
+          <div class="main-left">
+            <h2>Configuration</h2>
+            <div class="form-grid">
+              <label>API Token</label>
+              <input id="api-token" type="password" placeholder="optional">
+            </div>
+
+            <h3 class="underline">Logging</h3>
+            <div class="form-grid">
+              <label>Max file size (MB)</label>
+              <input id="log-max-size" type="number" min="1">
+              <label>Low space threshold (MB)</label>
+              <input id="log-low-space" type="number" min="0">
+            </div>
+
+            <h3 class="underline">Time</h3>
+            <div class="form-grid">
+              <label>CAN time sync</label>
+              <div class="switch">
+                <input id="can-time-sync" type="checkbox">
+                <span class="slider round"></span>
+              </div>
+              <label>Set time</label>
+              <div class="time-row">
+                <input id="time-set" type="datetime-local">
+                <button id="set-time">Set</button>
+              </div>
+            </div>
+
+            <h3 class="underline">WiFi</h3>
+            <div class="form-grid">
+              <label>Station mode</label>
+              <div class="switch">
+                <input id="wifi-sta-enabled" type="checkbox">
+                <span class="slider round"></span>
+              </div>
+            </div>
+            <div id="wifi-configs" class="stack"></div>
+
+            <h3 class="underline">Upload</h3>
+            <div class="form-grid">
+              <label>Upload URL</label>
+              <input id="upload-url" type="text" placeholder="http://...">
+            </div>
+          </div>
+        </div>
+
+        <div id="can" class="tabdiv main-content" data-display="flex" style="display:none;">
+          <div class="main-right">
+            <h3 class="underline">Actions</h3>
+            <button id="refresh-can">Reload</button>
+            <button id="save-can">Save</button>
+          </div>
+          <div class="main-left">
+            <h2>CAN Configuration</h2>
+            <h3 class="underline">CAN Buses</h3>
+            <div id="bus-configs" class="stack"></div>
+          </div>
+        </div>
+
+        <div id="files" class="tabdiv main-content" data-display="flex" style="display:none;">
+          <div class="main-right">
+            <h3 class="underline">Actions</h3>
+            <button id="refresh-files">Refresh</button>
+            <button id="download-selected">Download selected</button>
+            <button id="delete-selected">Delete selected</button>
+          </div>
+          <div class="main-left">
+            <h2>Files</h2>
+            <div class="filters">
+              <label for="file-filter">Bus</label>
+              <select id="file-filter"></select>
+            </div>
+            <div class="file-actions">
+              <label class="checkbox">
+                <input type="checkbox" id="select-all-files">
+                Select all
+              </label>
+            </div>
+            <table>
+              <thead>
+                <tr><th></th><th>ID</th><th>Bus</th><th>Name</th><th>Size</th><th>Start</th><th>End</th><th>Flags</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="files-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

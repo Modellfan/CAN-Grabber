@@ -838,6 +838,7 @@ Das Web-Interface muss folgende Informationen anzeigen:
 
 ### 12.5 Dateiverwaltung
 
+
 Log-Dateien müssen:
 - Über das Web-Interface herunterladbar sein
 
@@ -846,6 +847,12 @@ Download einer Datei:
 
 Aktive Log-Dateien:
 - Dürfen nicht gelöscht werden
+
+
+### 12.6 Ports
+
+UI-Server: Port 81 (statische Web-UI)
+REST-API: Port 80 (JSON API, CORS aktiv)
 
 ## 13. REST-Schnittstelle
 

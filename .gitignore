@@ -3,3 +3,4 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+include/dev/sd_http_download_secrets.h

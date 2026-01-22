@@ -6,6 +6,7 @@ namespace web {
 void init();
 void start();
 void stop();
+void loop();
 
 } // namespace web
 

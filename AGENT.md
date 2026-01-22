@@ -78,6 +78,7 @@
 - [ ] Done wenn: Gerät verbindet sich robust und ist per `.local` erreichbar.
 
 ## Phase 5 �?" Web-Interface (UI) zuerst read-only, dann write
+- [x] Webserver separat (UI auf Port 81, REST auf Port 80)
 - [x] Webserver Grundgeruest
 - [x] Statische Assets (OpenInverter-like) aus Flash
 - [x] Statusseite (read-only): SD, RSSI, Uhrzeit, counts, buffer stats
@@ -162,13 +163,15 @@
 ## Debugging notes
 - Use the full PlatformIO path with quotes in PowerShell: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" ...`
 - COM9 was missing; serial monitor should use COM10 at 115200.
-
+- Firmware upload: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" run --target upload --environment esp32s3_release --upload-port COM10`
+- SPIFFS upload: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" run -t uploadfs -e esp32s3_release`
 ## Querschnitt: Definition of Done (für jedes Issue)
 - [ ] Kompiliert in PlatformIO (debug+release)
 - [ ] Keine Blockierung des CAN-Loggings
 - [ ] Web/REST zeigt Status korrekt
 - [ ] Fehlerzustände werden sichtbar gemacht
 - [ ] Minimaler Test: simulierte Last / künstliche Frames / SD voll / WLAN weg
+
 
 
 

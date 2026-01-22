@@ -1,4 +1,4 @@
-#if !defined(SD_SPEED_TEST) && !defined(RX_LOAD_TEST)
+#if !defined(SD_SPEED_TEST) && !defined(RX_LOAD_TEST) && !defined(SD_HTTP_DOWNLOAD_TEST)
 
 #include <Arduino.h>
 
@@ -9,6 +9,7 @@
 #include "net/net_manager.h"
 #include "rest/rest_api.h"
 #include "storage/storage_manager.h"
+#include "web/web_server.h"
 
 #ifndef APP_NAME
 #define APP_NAME "CAN-Grabber"
@@ -52,12 +53,15 @@ void setup() {
   net::connect();
   rest::init();
   rest::start();
+  web::init();
+  web::start();
 }
 
 void loop() {
   net::loop();
   rest::loop();
-  delay(1000);
+  web::loop();
+  delay(10);
 }
 
-#endif // !SD_SPEED_TEST && !RX_LOAD_TEST
+#endif // !SD_SPEED_TEST && !RX_LOAD_TEST && !SD_HTTP_DOWNLOAD_TEST
