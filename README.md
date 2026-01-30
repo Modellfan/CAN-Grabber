@@ -130,6 +130,7 @@ Funktionale Beschreibung und Anforderungen.
     - [18.5.6 Testkriterien](#1856-testkriterien)
     - [18.5.7 SD Speed Test (Development)](#1857-sd-speed-test-development)
     - [18.5.8 RX Load Test (Development)](#1858-rx-load-test-development)
+    - [18.5.9 WiFi Speed Tests (Development)](#1859-wifi-speed-tests-development)
 - [19. Sicherheit](#19-sicherheit)
   - [19.1 Zugriffsschutz](#191-zugriffsschutz)
   - [19.2 Netzwerk-Sicherheit](#192-netzwerk-sicherheit)
@@ -1349,7 +1350,7 @@ Metrics (serial output):
 - Produced/s, Consumed/s
 - Drops (block overflow count)
 - High-water (max pending bytes)
-## 19. Sicherheit
+#### 18.5.9 WiFi Speed Tests (Development)\r\n\r\nZiel:\r\n- Vergleich verschiedener HTTP/TCP-Download-Implementierungen (SD-Streaming vs. RAM-Streaming).\r\n- Identifikation der hoechsten Throughput-Variante fuer SD-Downloads.\r\n\r\nGemeinsame Voraussetzungen:\r\n- PlatformIO env entsprechend auswaehlen.\r\n- SD-Karte korrekt initialisiert (siehe hardware/hardware_config.h Pins).\r\n- WLAN-Zugangsdaten setzen (siehe include/dev/sd_http_download_secrets.h bzw. Code).\r\n\r\nTests (4 Varianten):\r\n\r\n1) WebServer streamFile (SD, synchron)\r\n- Source: src/dev/webserver_streamfile_test.cpp\r\n- Env: webserver_streamfile_test\r\n- Port/URL: http://<ip>/ (Root) oder direkte Datei-URLs\r\n- Testdatei: /test_500kb.bin (500 KB), erstellt falls fehlend\r\n- Methode: WebServer::streamFile() direkt von SD\r\n- Speed-Note (Kommentar im Source): nicht notiert\r\n\r\n2) SD HTTP Download Test (AsyncWebServer, SD, 3 Tasks)\r\n- Source: src/dev/sd_http_download_test.cpp\r\n- Env: sd_http_download_test\r\n- URL: http://<ip>/download\r\n- Testdatei: /sd_http_test.bin (10 MB), erstellt falls fehlend\r\n- Methode: ESPAsyncWebServer + sd_reader_task (SD lesen) + web_task (Server) + wifi_task (Reconnect)\r\n- Speed-Note (Kommentar im Source): ~440 kb/s\r\n- Status: favorisiert (Async-Variante macht aktuell am meisten Sinn)\r\n- Offene Frage: pruefen, ob die Aufteilung in 3 Tasks wirklich notwendig ist\r\n\r\n3) SD HTTP Download Test 2 (WebServer, SD, manuelles Streaming)\r\n- Source: src/dev/sd_http_download_test2.cpp\r\n- Env: sd_http_download_test2\r\n- URL: http://<ip>/download\r\n- Testdatei: /sd_http_test.bin (10 MB), erstellt falls fehlend\r\n- Methode: WebServer + separater SD-Reader Task + manuelles client.write() in 1460-Byte-Chunks\r\n- Speed-Note (Kommentar im Source): ~230 kb/s\r\n\r\n4) WiFi Speed Test (Raw TCP, RAM-Streaming)\r\n- Source: src/dev/wifi_speed_test.cpp\r\n- Env: wifi_speed_test\r\n- URL: http://<ip>/speed?mb=10 (default 10 MB, cap 200 MB)\r\n- Methode: WiFiServer (raw TCP), generiert Payload aus statischem RAM-Puffer\r\n- Settings: WiFi.setSleep(false), WiFi.useStaticBuffers(true) (hoeherer Durchsatz)\r\n- Speed-Notes (Kommentare im Source): Download bis ~10000 kb/s, Upload ~100 kb/s (alte Notiz); "Same speed of 300-400 kb/s as above"\r\n\r\nBeobachtungen (bisher):\r\n- Groesster Sprung durch Wechsel auf ESP32 mit externer Antenne.\r\n- Async-Download (sd_http_download_test) wirkt am sinnvollsten, muss aber noch validiert werden.\r\n## 19. Sicherheit
 
 ### 19.1 Zugriffsschutz
 

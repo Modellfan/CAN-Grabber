@@ -1,3 +1,4 @@
+//440kb/s
 #if defined(SD_HTTP_DOWNLOAD_TEST)
 
 // SPDX-License-Identifier: LGPL-3.0-or-later
@@ -78,6 +79,8 @@ namespace
       Serial.print("WiFi connect to ");
       Serial.println(SD_HTTP_TEST_SSID);
 
+      WiFi.setSleep(false);
+      WiFi.useStaticBuffers(true);
       WiFi.begin(SD_HTTP_TEST_SSID, SD_HTTP_TEST_PASSWORD);
 
       const uint32_t start = millis();
