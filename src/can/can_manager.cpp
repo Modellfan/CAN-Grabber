@@ -40,6 +40,11 @@ struct BusState {
   uint8_t write_index = 0;
   uint32_t drops = 0;
   uint32_t high_water = 0; // bytes pending
+  uint64_t total_received = 0;
+  uint64_t total_sent = 0;
+  uint32_t rx_window_bytes = 0;
+  uint64_t rx_window_start_us = 0;
+  uint64_t last_rx_us = 0;
 };
 
 BusState s_buses[config::kMaxBuses];
@@ -112,6 +117,11 @@ void init_bus_state() {
     s_buses[i].write_index = 0;
     s_buses[i].drops = 0;
     s_buses[i].high_water = 0;
+    s_buses[i].total_received = 0;
+    s_buses[i].total_sent = 0;
+    s_buses[i].rx_window_bytes = 0;
+    s_buses[i].rx_window_start_us = 0;
+    s_buses[i].last_rx_us = 0;
     for (uint8_t b = 0; b < kBlockCount; ++b) {
       s_buses[i].blocks[b].len = 0;
       s_buses[i].blocks[b].frames = 0;
@@ -163,6 +173,13 @@ void rx_task(void* param) {
       }
 
       portENTER_CRITICAL(&s_ring_mux[bus_id]);
+      bus.total_received++;
+      bus.last_rx_us = now;
+      if (bus.rx_window_start_us == 0 || (now - bus.rx_window_start_us) >= 1000000ULL) {
+        bus.rx_window_start_us = now;
+        bus.rx_window_bytes = 0;
+      }
+      bus.rx_window_bytes += static_cast<uint32_t>(msg.len);
       LogBlockState* block = &bus.blocks[bus.write_index];
       if (block->state != 3) {
         bool found = false;
@@ -357,6 +374,129 @@ uint32_t high_water(uint8_t bus_id) {
   value = s_buses[bus_id].high_water;
   portEXIT_CRITICAL(&s_ring_mux[bus_id]);
   return value;
+}
+
+// Return the currently queued bytes for a bus.
+uint32_t queue_depth(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+
+  uint32_t depth = 0;
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  for (uint8_t i = 0; i < kBlockCount; ++i) {
+    depth += static_cast<uint32_t>(s_buses[bus_id].blocks[i].len);
+  }
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+  return depth;
+}
+
+// Return queue capacity in bytes for one bus.
+uint32_t queue_capacity() {
+  return static_cast<uint32_t>(kBlockSize * kBlockCount);
+}
+
+// Return traffic load in percent for the bus over the last second.
+uint32_t bus_load_pct(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+
+  uint64_t now_us = static_cast<uint64_t>(esp_timer_get_time());
+  uint64_t last_rx_us = 0;
+  uint64_t window_start_us = 0;
+  uint32_t window_bytes = 0;
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  last_rx_us = s_buses[bus_id].last_rx_us;
+  window_start_us = s_buses[bus_id].rx_window_start_us;
+  window_bytes = s_buses[bus_id].rx_window_bytes;
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+
+  if (last_rx_us == 0 || (now_us - last_rx_us) >= 1000000ULL || window_start_us == 0) {
+    return 0;
+  }
+
+  const uint64_t elapsed_us = (now_us > window_start_us) ? (now_us - window_start_us) : 1ULL;
+  const uint64_t bits_per_sec = (static_cast<uint64_t>(window_bytes) * 8ULL * 1000000ULL) / elapsed_us;
+  const uint32_t bitrate = config::get().buses[bus_id].bitrate;
+  if (bitrate == 0) {
+    return 0;
+  }
+  uint32_t pct = static_cast<uint32_t>((bits_per_sec * 100ULL) / bitrate);
+  if (pct > 100) {
+    pct = 100;
+  }
+  return pct;
+}
+
+// Return the number of received frames for a bus.
+uint64_t total_received(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+
+  uint64_t value = 0;
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  value = s_buses[bus_id].total_received;
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+  return value;
+}
+
+// Return the number of transmitted frames for a bus.
+uint64_t total_sent(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+
+  uint64_t value = 0;
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  value = s_buses[bus_id].total_sent;
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+  return value;
+}
+
+// Report whether the RX task exists for a bus.
+bool rx_task_running(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return false;
+  }
+  return s_rx_tasks[bus_id] != nullptr;
+}
+
+// Return MCP2515 receive error counter for a bus.
+uint8_t receive_error_counter(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+  ACAN2515* driver = s_buses[bus_id].driver;
+  if (driver == nullptr) {
+    return 0;
+  }
+  return driver->receiveErrorCounter();
+}
+
+// Return MCP2515 transmit error counter for a bus.
+uint8_t transmit_error_counter(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+  ACAN2515* driver = s_buses[bus_id].driver;
+  if (driver == nullptr) {
+    return 0;
+  }
+  return driver->transmitErrorCounter();
+}
+
+// Return MCP2515 error flag register value for a bus.
+uint8_t error_flag_register(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+  ACAN2515* driver = s_buses[bus_id].driver;
+  if (driver == nullptr) {
+    return 0;
+  }
+  return driver->errorFlagRegister();
 }
 
 } // namespace can

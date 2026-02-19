@@ -301,10 +301,10 @@ void init() {
       Serial.println(static_cast<int>(event));
       if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
         Serial.println("[net] STA connected");
-        start_mdns();
+        s_connecting = false;
+        s_attempt_start_ms = 0;
       } else if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {
         Serial.println("[net] STA disconnected");
-        stop_mdns();
         handle_sta_failure("disconnected");
       } else if (event == ARDUINO_EVENT_WIFI_STA_START) {
         Serial.println("[net] STA start");
@@ -427,6 +427,9 @@ void loop() {
       start_mdns();
     }
     return;
+  }
+  if (s_mdns_started) {
+    stop_mdns();
   }
 
   if (!sta_enabled) {

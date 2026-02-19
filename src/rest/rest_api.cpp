@@ -29,6 +29,39 @@ bool token_configured() {
   return config::get().global.api_token[0] != '\0';
 }
 
+const char* http_method_name(HTTPMethod method) {
+  switch (method) {
+    case HTTP_GET:
+      return "GET";
+    case HTTP_POST:
+      return "POST";
+    case HTTP_PUT:
+      return "PUT";
+    case HTTP_PATCH:
+      return "PATCH";
+    case HTTP_DELETE:
+      return "DELETE";
+    case HTTP_OPTIONS:
+      return "OPTIONS";
+    case HTTP_HEAD:
+      return "HEAD";
+    default:
+      return "UNKNOWN";
+  }
+}
+
+void log_not_found_request() {
+  const IPAddress remote = s_server.client().remoteIP();
+  Serial.printf(
+      "[REST] NOT_FOUND method=%s uri=%s remote=%u.%u.%u.%u args=%d\n",
+      http_method_name(s_server.method()), s_server.uri().c_str(), remote[0],
+      remote[1], remote[2], remote[3], s_server.args());
+  for (int i = 0; i < s_server.args(); ++i) {
+    Serial.printf("[REST]   arg[%d] %s=%s\n", i, s_server.argName(i).c_str(),
+                  s_server.arg(i).c_str());
+  }
+}
+
 void add_cors_headers() {
   s_server.sendHeader("Access-Control-Allow-Origin", "*");
   s_server.sendHeader("Access-Control-Allow-Methods", "GET,POST,PUT,OPTIONS");
@@ -293,13 +326,38 @@ void handle_status() {
   storage_obj["ready"] = storage::is_ready();
   storage_obj["total_bytes"] = st.total_bytes;
   storage_obj["free_bytes"] = st.free_bytes;
+  storage_obj["log_files"] = storage::file_count();
 
   JsonArray can_stats = root.createNestedArray("can");
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
+    const config::BusConfig& bus_cfg = config::get().buses[i];
+    const uint32_t depth = can::queue_depth(i);
+    const uint32_t capacity = can::queue_capacity();
+    const uint32_t load_pct = can::bus_load_pct(i);
+    const uint32_t high = can::high_water(i);
+    const uint32_t high_pct = (capacity > 0) ? static_cast<uint32_t>((high * 100ULL) / capacity) : 0;
+    const uint8_t eflg = can::error_flag_register(i);
     JsonObject entry = can_stats.createNestedObject();
     entry["bus"] = i;
+    entry["id"] = i;
+    entry["name"] = bus_cfg.name;
+    entry["enabled"] = bus_cfg.enabled;
+    entry["logging"] = bus_cfg.logging;
+    entry["read_only"] = bus_cfg.read_only;
+    entry["bitrate"] = bus_cfg.bitrate;
     entry["drops"] = can::drop_count(i);
-    entry["high_water"] = can::high_water(i);
+    entry["high_water"] = high;
+    entry["high_water_pct"] = high_pct;
+    entry["queue_depth"] = depth;
+    entry["queue_capacity"] = capacity;
+    entry["queue_load_pct"] = load_pct;
+    entry["total_received"] = can::total_received(i);
+    entry["total_sent"] = can::total_sent(i);
+    entry["rx_task_running"] = can::rx_task_running(i);
+    entry["rec"] = can::receive_error_counter(i);
+    entry["tec"] = can::transmit_error_counter(i);
+    entry["eflg"] = eflg;
+    entry["bus_off"] = (eflg & 0x20u) != 0;
   }
 
   send_json(doc);
@@ -390,7 +448,7 @@ void handle_wifi_scan() {
     return;
   }
 
-  DynamicJsonDocument doc(2048);
+  DynamicJsonDocument doc(4096);
   JsonArray arr = doc.to<JsonArray>();
   const size_t count = net::wifi_scan_count();
   for (size_t i = 0; i < count; ++i) {
@@ -417,10 +475,34 @@ void handle_can_stats() {
   DynamicJsonDocument doc(2048);
   JsonArray arr = doc.to<JsonArray>();
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
+    const config::BusConfig& bus_cfg = config::get().buses[i];
+    const uint32_t depth = can::queue_depth(i);
+    const uint32_t capacity = can::queue_capacity();
+    const uint32_t load_pct = can::bus_load_pct(i);
+    const uint32_t high = can::high_water(i);
+    const uint32_t high_pct = (capacity > 0) ? static_cast<uint32_t>((high * 100ULL) / capacity) : 0;
+    const uint8_t eflg = can::error_flag_register(i);
     JsonObject entry = arr.createNestedObject();
     entry["bus"] = i;
+    entry["id"] = i;
+    entry["name"] = bus_cfg.name;
+    entry["enabled"] = bus_cfg.enabled;
+    entry["logging"] = bus_cfg.logging;
+    entry["read_only"] = bus_cfg.read_only;
+    entry["bitrate"] = bus_cfg.bitrate;
     entry["drops"] = can::drop_count(i);
-    entry["high_water"] = can::high_water(i);
+    entry["high_water"] = high;
+    entry["high_water_pct"] = high_pct;
+    entry["queue_depth"] = depth;
+    entry["queue_capacity"] = capacity;
+    entry["queue_load_pct"] = load_pct;
+    entry["total_received"] = can::total_received(i);
+    entry["total_sent"] = can::total_sent(i);
+    entry["rx_task_running"] = can::rx_task_running(i);
+    entry["rec"] = can::receive_error_counter(i);
+    entry["tec"] = can::transmit_error_counter(i);
+    entry["eflg"] = eflg;
+    entry["bus_off"] = (eflg & 0x20u) != 0;
   }
   send_json(doc);
 }
@@ -525,6 +607,10 @@ void handle_file_download(size_t id) {
     s_server.send(404, "application/json", "{\"error\":\"not_found\"}");
     return;
   }
+  if (info.flags & 0x04u) {
+    s_server.send(409, "application/json", "{\"error\":\"active_file\"}");
+    return;
+  }
 
   if (!SD.exists(info.path)) {
     s_server.send(404, "application/json", "{\"error\":\"missing\"}");
@@ -599,11 +685,23 @@ void handle_control_close_file() {
   if (!ensure_auth()) {
     return;
   }
+  const String body = s_server.arg("plain");
+  if (body.length() > 0) {
+    DynamicJsonDocument doc(256);
+    DeserializationError err = deserializeJson(doc, body);
+    if (!err && doc.containsKey("bus_id")) {
+      const uint8_t bus_id = doc["bus_id"].as<uint8_t>();
+      logging::rotate_file(bus_id);
+      s_server.send(200, "application/json", "{\"ok\":true}");
+      return;
+    }
+  }
   logging::rotate_files();
   s_server.send(200, "application/json", "{\"ok\":true}");
 }
 
 void handle_not_found() {
+  log_not_found_request();
   add_cors_headers();
   if (s_server.method() == HTTP_OPTIONS) {
     s_server.send(204, "text/plain", "");
@@ -638,6 +736,12 @@ void handle_not_found() {
 
 void init() {
   s_spiffs_ready = SPIFFS.begin(true);
+  if (!s_spiffs_ready) {
+    Serial.println("[REST] SPIFFS mount failed - static web UI unavailable");
+  }
+
+  s_server.on("/", HTTP_GET, handle_static);
+
   s_server.on("/api/status", HTTP_GET, handle_status);
   s_server.on("/api/status", HTTP_OPTIONS, handle_options);
   s_server.on("/api/config", HTTP_GET, handle_config_get);

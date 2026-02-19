@@ -36,6 +36,46 @@ struct FileStatusEntry {
 FileStatusEntry s_entries[kMaxEntries];
 size_t s_entry_count = 0;
 
+bool parse_bus_id_from_log_path(const char* path, uint8_t* bus_id) {
+  if (path == nullptr || bus_id == nullptr) {
+    return false;
+  }
+  const char* bus = strstr(path, "_bus");
+  if (bus == nullptr) {
+    return false;
+  }
+  bus += 4;
+  if (*bus < '0' || *bus > '9') {
+    return false;
+  }
+  char* endptr = nullptr;
+  const unsigned long parsed = strtoul(bus, &endptr, 10);
+  if (endptr == bus || parsed > 255) {
+    return false;
+  }
+  if (*endptr != '_' && *endptr != '.') {
+    return false;
+  }
+  *bus_id = static_cast<uint8_t>(parsed);
+  return true;
+}
+
+// Clear stale "active" flags after reboot and stamp a closed time if missing.
+bool clear_active_flags_on_boot() {
+  bool changed = false;
+  for (size_t i = 0; i < s_entry_count; ++i) {
+    FileStatusEntry& entry = s_entries[i];
+    if (entry.flags & kFlagActive) {
+      entry.flags &= static_cast<uint8_t>(~kFlagActive);
+      if (entry.end_ms == 0) {
+        entry.end_ms = entry.start_ms;
+      }
+      changed = true;
+    }
+  }
+  return changed;
+}
+
 // Create a directory if it does not already exist.
 void ensure_dir(const char* path) {
   if (!SD.exists(path)) {
@@ -98,6 +138,11 @@ bool load_status() {
     strncpy(entry.path, path, sizeof(entry.path));
     entry.path[sizeof(entry.path) - 1] = '\0';
     entry.bus_id = static_cast<uint8_t>(obj["bus"] | 0);
+    uint8_t bus_from_name = 0;
+    if (parse_bus_id_from_log_path(entry.path, &bus_from_name)) {
+      // Normalize legacy metadata that stored bus as 1-based while filenames are bus0..bus5.
+      entry.bus_id = bus_from_name;
+    }
     entry.start_ms = static_cast<uint32_t>(obj["start_ms"] | 0);
     entry.end_ms = static_cast<uint32_t>(obj["end_ms"] | 0);
     entry.size_bytes = static_cast<uint32_t>(obj["size"] | 0);
@@ -252,6 +297,101 @@ bool find_oldest_log_file(char* out, size_t out_len) {
   return found;
 }
 
+bool is_log_file_path(const char* path) {
+  if (path == nullptr) {
+    return false;
+  }
+  const char* base = strrchr(path, '/');
+  base = base ? base + 1 : path;
+  if (strncmp(base, "log_", 4) != 0) {
+    return false;
+  }
+  const size_t len = strlen(base);
+  return (len >= 4) && (strcmp(base + (len - 4), ".sav") == 0);
+}
+
+// Remove stale placeholder logs left behind by unclean shutdown:
+// metadata says zero payload and no proper end timestamp.
+bool remove_stale_placeholder_logs_on_boot() {
+  bool changed = false;
+  for (size_t i = 0; i < s_entry_count;) {
+    const FileStatusEntry& entry = s_entries[i];
+    if (entry.size_bytes != 0 || entry.end_ms != entry.start_ms) {
+      ++i;
+      continue;
+    }
+    if (!is_log_file_path(entry.path)) {
+      ++i;
+      continue;
+    }
+
+    if (SD.exists(entry.path)) {
+      SD.remove(entry.path);
+    }
+    remove_entry(i);
+    changed = true;
+  }
+  return changed;
+}
+
+bool remove_empty_logs_on_boot() {
+  bool changed = false;
+
+  for (size_t i = 0; i < s_entry_count;) {
+    const FileStatusEntry entry = s_entries[i];
+    if (!is_log_file_path(entry.path) || !SD.exists(entry.path)) {
+      ++i;
+      continue;
+    }
+
+    File file = SD.open(entry.path, FILE_READ);
+    if (!file) {
+      ++i;
+      continue;
+    }
+
+    const size_t size = file.size();
+    file.close();
+    if (size != 0) {
+      ++i;
+      continue;
+    }
+
+    SD.remove(entry.path);
+    remove_entry(i);
+    changed = true;
+  }
+
+  File root = SD.open("/");
+  if (!root) {
+    return changed;
+  }
+
+  for (File file = root.openNextFile(); file; file = root.openNextFile()) {
+    if (file.isDirectory()) {
+      file.close();
+      continue;
+    }
+
+    const String name = file.name();
+    const bool empty_log = is_log_file_path(name.c_str()) && (file.size() == 0);
+    file.close();
+    if (!empty_log) {
+      continue;
+    }
+
+    SD.remove(name.c_str());
+    const int index = find_entry(name.c_str());
+    if (index >= 0) {
+      remove_entry(static_cast<size_t>(index));
+    }
+    changed = true;
+  }
+
+  root.close();
+  return changed;
+}
+
 } // namespace
 
 // Initialize the SD card, folders, and file status database.
@@ -272,9 +412,23 @@ void init() {
   }
   ensure_dir(kMetaDir);
 
+  bool metadata_changed = false;
   if (!load_status()) {
     save_status();
   } else if (!SD.exists(kStatusPath)) {
+    save_status();
+  } else if (clear_active_flags_on_boot()) {
+    metadata_changed = true;
+  }
+
+  if (remove_empty_logs_on_boot()) {
+    metadata_changed = true;
+  }
+  if (remove_stale_placeholder_logs_on_boot()) {
+    metadata_changed = true;
+  }
+
+  if (metadata_changed) {
     save_status();
   }
 }

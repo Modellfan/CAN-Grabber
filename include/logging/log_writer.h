@@ -40,6 +40,7 @@ void start();
 void stop();
 void close_file(uint8_t bus_id);
 void rotate_files();
+void rotate_file(uint8_t bus_id);
 bool enqueue(const Frame& frame);
 Stats get_stats();
 

@@ -25,6 +25,15 @@ void deinit();
 bool pop_rx_frame(uint8_t bus_id, Frame& frame);
 uint32_t drop_count(uint8_t bus_id);
 uint32_t high_water(uint8_t bus_id);
+uint32_t queue_depth(uint8_t bus_id);
+uint32_t queue_capacity();
+uint32_t bus_load_pct(uint8_t bus_id);
+uint64_t total_received(uint8_t bus_id);
+uint64_t total_sent(uint8_t bus_id);
+bool rx_task_running(uint8_t bus_id);
+uint8_t receive_error_counter(uint8_t bus_id);
+uint8_t transmit_error_counter(uint8_t bus_id);
+uint8_t error_flag_register(uint8_t bus_id);
 
 #ifndef RX_LOAD_TEST
 struct LogBlock {

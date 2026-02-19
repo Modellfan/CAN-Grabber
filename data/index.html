@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CAN-Grabber</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=20260219a">
 </head>
 <body>
   <div id="content">
@@ -14,15 +14,19 @@
       </div>
       <div>
         <a class="tablink" data-view="status" href="#status">
+          <img class="navimg" src="news.svg" alt="">
           <p class="navbar-text">STATUS</p>
         </a>
         <a class="tablink" data-view="can" href="#can">
+          <img class="navimg" src="radar.svg" alt="">
           <p class="navbar-text">CAN CONFIG</p>
         </a>
         <a class="tablink" data-view="config" href="#config">
+          <img class="navimg" src="configurate.svg" alt="">
           <p class="navbar-text">CONFIG</p>
         </a>
         <a class="tablink" data-view="files" href="#files">
+          <img class="navimg" src="stack.svg" alt="">
           <p class="navbar-text">FILES</p>
         </a>
       </div>
@@ -31,12 +35,9 @@
     <div id="content-wrapper">
       <div id="content-wrapper-inner">
         <div id="status" class="tabdiv main-content" data-display="flex" style="display:flex;">
-          <div class="main-right">
-            <h3 class="underline">Actions</h3>
-            <button id="refresh-status">Refresh</button>
-          </div>
           <div class="main-left">
             <h2>Status</h2>
+            <div id="can-stats-cards" class="dash-row can-stats-grid"></div>
             <div class="dash-row">
               <div class="dash-box">
                 <h3>System</h3>
@@ -51,13 +52,12 @@
                 <p>RSSI: <strong id="wifi-rssi">-</strong></p>
                 <p>STA mode: <strong id="wifi-sta-mode">-</strong></p>
               </div>
-            </div>
-            <div class="dash-row">
               <div class="dash-box">
                 <h3>Storage</h3>
                 <p>Ready: <strong id="sd-ready">-</strong></p>
                 <p>Total: <strong id="sd-total">-</strong></p>
                 <p>Free: <strong id="sd-free">-</strong></p>
+                <p>Log files: <strong id="sd-log-files">-</strong></p>
               </div>
               <div class="dash-box">
                 <h3>Buffers</h3>
@@ -66,27 +66,13 @@
                 <p>Active buses: <strong id="log-buses">-</strong></p>
               </div>
             </div>
-
-            <h3 class="underline">CAN Stats</h3>
-            <table>
-              <thead>
-                <tr><th>Bus</th><th>Drops</th><th>High Water (bytes)</th></tr>
-              </thead>
-              <tbody id="can-stats-body"></tbody>
-            </table>
           </div>
         </div>
 
         <div id="config" class="tabdiv main-content" data-display="flex" style="display:none;">
           <div class="main-right">
             <h3 class="underline">Actions</h3>
-            <button id="refresh-config">Reload</button>
-            <button id="save-config">Save</button>
-
-            <h3 class="underline">Logging</h3>
-            <button id="start-logging">Start logging</button>
-            <button id="stop-logging">Stop logging</button>
-            <button id="close-file">Close active file</button>
+            <button id="save-config" class="files-bulk-action">Save</button>
           </div>
           <div class="main-left">
             <h2>Configuration</h2>
@@ -106,10 +92,7 @@
             <h3 class="underline">Time</h3>
             <div class="form-grid">
               <label>CAN time sync</label>
-              <div class="switch">
-                <input id="can-time-sync" type="checkbox">
-                <span class="slider round"></span>
-              </div>
+              <input id="can-time-sync" type="checkbox" class="cfg-checkbox">
               <label>Set time</label>
               <div class="time-row">
                 <input id="time-set" type="datetime-local">
@@ -120,10 +103,7 @@
             <h3 class="underline">WiFi</h3>
             <div class="form-grid">
               <label>Station mode</label>
-              <div class="switch">
-                <input id="wifi-sta-enabled" type="checkbox">
-                <span class="slider round"></span>
-              </div>
+              <input id="wifi-sta-enabled" type="checkbox" class="cfg-checkbox">
             </div>
             <div id="wifi-configs" class="stack"></div>
 
@@ -151,9 +131,9 @@
         <div id="files" class="tabdiv main-content" data-display="flex" style="display:none;">
           <div class="main-right">
             <h3 class="underline">Actions</h3>
-            <button id="refresh-files">Refresh</button>
-            <button id="download-selected">Download selected</button>
-            <button id="delete-selected">Delete selected</button>
+            <button id="refresh-files" class="files-bulk-action">Refresh</button>
+            <button id="download-selected" class="files-bulk-action">Download selected</button>
+            <button id="delete-selected" class="files-bulk-action">Delete selected</button>
           </div>
           <div class="main-left">
             <h2>Files</h2>
@@ -180,6 +160,6 @@
   </div>
 
   <div id="toast" class="toast"></div>
-  <script src="/app.js"></script>
+  <script src="/app.js?v=20260219a"></script>
 </body>
 </html>

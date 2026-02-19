@@ -154,6 +154,8 @@ void apply_defaults(Config& cfg) {
   cfg.global.low_space_threshold_bytes = 32UL * 1024UL * 1024UL;
   cfg.global.wifi_count = 0;
   cfg.global.wifi_sta_enabled = false;
+  strncpy(cfg.global.upload_url, "http://can-upload.local:8000/edit", sizeof(cfg.global.upload_url));
+  cfg.global.upload_url[sizeof(cfg.global.upload_url) - 1] = '\0';
   cfg.global.api_token[0] = '\0';
 
   for (uint8_t i = 0; i < kMaxBuses; ++i) {

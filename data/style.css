@@ -126,13 +126,11 @@ html, body {
     display: block;
     margin:0;
     color: black;
-    float: left;
+    float: none;
 }
 
 #navbar img {
     display: block;
-    float: left;
-    padding: 5px 10px 5px 10px;
 }
 
 #navbar p {
@@ -321,12 +319,46 @@ tr:hover {
 }
 
 .tablink {
-    width: 200px;
+    width: 180px;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
-    line-height: 30px;
-    padding: 0px;
+    line-height: 1.2;
+    gap: 10px;
+    padding: 0 0 0 10px;
+    white-space: nowrap;
+    min-height: 44px;
+}
+
+.navimg {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    max-width: 24px;
+    max-height: 24px;
+    object-fit: contain;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    margin: 0;
+    float: none !important;
+    flex: 0 0 24px;
+}
+
+.navbar-text {
+    display: inline-block;
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.tablink.active {
+    background-color: transparent;
+}
+
+.tablink.active .navbar-text {
+    font-weight: 700;
 }
 
 .fullheight {
@@ -391,6 +423,34 @@ tr:hover {
 
 .dash-box h3 {
     padding: 5px 0px 10px 0px;
+}
+
+.can-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 8px 0 20px 0;
+    width: calc(100% - 10px);
+}
+
+.can-stat-card {
+    height: 360px;
+    background: #ffffff;
+    overflow: auto;
+}
+
+.can-stat-card p {
+    margin: 0 0 4px 0;
+}
+
+.can-stat-card.disabled {
+    border-color: #b6b6b6;
+    background: #f3f3f3;
+    color: #8a8a8a;
+}
+
+.can-stat-card.disabled strong {
+    color: #7a7a7a;
 }
 
 /* CAN Mapping */
@@ -519,6 +579,25 @@ tr:hover {
   flex-wrap: wrap;
   gap: 10px;
   margin: 10px 0;
+}
+
+.file-action-btn {
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+#files .main-right .files-bulk-action,
+#config .main-right .files-bulk-action {
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+#files .main-right,
+#config .main-right {
+  padding-right: 16px;
+  box-sizing: border-box;
 }
 
 .checkbox {
@@ -727,4 +806,34 @@ input:checked + .slider:before {
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+}
+
+.cfg-checkbox {
+    width: 16px;
+    height: 16px;
+    margin: 5px;
+}
+
+#status .dash-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+#status .dash-box {
+    height: 360px;
+}
+
+@media only screen and (max-width: 1400px) {
+    #status .dash-row,
+    .can-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    #status .dash-row,
+    .can-stats-grid {
+        grid-template-columns: 1fr;
+    }
 }

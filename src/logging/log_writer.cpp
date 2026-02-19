@@ -127,7 +127,7 @@ void build_log_path(uint8_t bus_id,
            out_len,
            "/log_%lu_bus%u_%s.sav",
            static_cast<unsigned long>(start_ms),
-           static_cast<unsigned>(bus_id + 1),
+           static_cast<unsigned>(bus_id),
            name);
   out[out_len - 1] = '\0';
 }
@@ -138,7 +138,7 @@ size_t write_header(File& file, uint8_t bus_id, uint32_t* checksum) {
   const int len = snprintf(header,
                            sizeof(header),
                            "# SavvyCAN ASCII log - bus %u\n",
-                           static_cast<unsigned>(bus_id + 1));
+                           static_cast<unsigned>(bus_id));
   if (len <= 0) {
     return 0;
   }
@@ -225,7 +225,7 @@ void flush_buffer(BusLogState& state) {
   state.buffered_len = 0;
 }
 
-// Open a new log file for the given bus, preallocating if configured.
+// Open a new log file for the given bus.
 bool open_log_file(uint8_t bus_id) {
   const config::Config& cfg = config::get();
   const uint32_t max_size = cfg.global.max_file_size_bytes;
@@ -237,9 +237,15 @@ bool open_log_file(uint8_t bus_id) {
   }
 
   const uint32_t start_ms = millis();
+  uint32_t unique_start_ms = start_ms;
   char path[64];
   const char* bus_name = cfg.buses[bus_id].name;
-  build_log_path(bus_id, bus_name, start_ms, path, sizeof(path));
+  build_log_path(bus_id, bus_name, unique_start_ms, path, sizeof(path));
+  // Avoid clobbering an existing file when timestamp fallback repeats across boots.
+  for (uint32_t guard = 0; guard < 1000 && SD.exists(path); ++guard) {
+    unique_start_ms++;
+    build_log_path(bus_id, bus_name, unique_start_ms, path, sizeof(path));
+  }
 
   File file = SD.open(path, FILE_WRITE);
   if (!file) {
@@ -247,24 +253,11 @@ bool open_log_file(uint8_t bus_id) {
     return false;
   }
 
-  if (max_size > 0) {
-    portENTER_CRITICAL(&s_stats_mux);
-    s_prealloc_attempts++;
-    portEXIT_CRITICAL(&s_stats_mux);
-    if (!file.seek(max_size - 1) || file.write(static_cast<uint8_t>(0)) != 1) {
-      portENTER_CRITICAL(&s_stats_mux);
-      s_prealloc_failures++;
-      portEXIT_CRITICAL(&s_stats_mux);
-    }
-    file.flush();
-    file.seek(0);
-  }
-
   state.file = file;
   state.active = true;
   state.state = BusLogState::LogState::kActive;
   state.bytes_written = 0;
-  state.start_ms = start_ms;
+  state.start_ms = unique_start_ms;
   state.checksum = 0xFFFFFFFFu;
   state.buffered_len = 0;
   strncpy(state.path, path, sizeof(state.path));
@@ -273,7 +266,7 @@ bool open_log_file(uint8_t bus_id) {
   const size_t header_bytes = write_header(state.file, bus_id, &state.checksum);
   state.bytes_written += header_bytes;
   note_bytes_written(header_bytes);
-  storage::register_log_file(state.path, static_cast<uint8_t>(bus_id + 1), start_ms);
+  storage::register_log_file(state.path, bus_id, unique_start_ms);
   return true;
 }
 
@@ -529,6 +522,20 @@ void rotate_files() {
     }
     open_log_file(i);
   }
+}
+
+// Close and reopen the active file for one bus.
+void rotate_file(uint8_t bus_id) {
+  if (!s_started || bus_id >= config::kMaxBuses) {
+    return;
+  }
+
+  const config::Config& cfg = config::get();
+  close_log_file(bus_id);
+  if (!cfg.buses[bus_id].enabled || !cfg.buses[bus_id].logging) {
+    return;
+  }
+  open_log_file(bus_id);
 }
 
 // Placeholder for per-frame enqueue; logging is block-based now.

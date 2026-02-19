@@ -315,6 +315,78 @@ uint32_t high_water(uint8_t bus_id) {
   return value;
 }
 
+// Return the currently queued bytes for a bus.
+uint32_t queue_depth(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+  uint32_t depth = 0;
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  for (uint8_t i = 0; i < kBlockCount; ++i) {
+    depth += static_cast<uint32_t>(s_buses[bus_id].blocks[i].len);
+  }
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+  return depth;
+}
+
+// Return queue capacity in bytes for one bus.
+uint32_t queue_capacity() {
+  return static_cast<uint32_t>(kBlockSize * kBlockCount);
+}
+
+// Return traffic load in percent for the bus in load-test mode.
+uint32_t bus_load_pct(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+  return 0;
+}
+
+// Return the number of synthetic received frames for a bus.
+uint64_t total_received(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+
+  uint64_t value = 0;
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  value = s_produced[bus_id];
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+  return value;
+}
+
+// Return the number of transmitted frames for a bus.
+uint64_t total_sent(uint8_t bus_id) {
+  (void)bus_id;
+  return 0;
+}
+
+// Report whether the synthetic RX task exists for a bus.
+bool rx_task_running(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return false;
+  }
+  return s_rx_tasks[bus_id] != nullptr;
+}
+
+// Return MCP2515 receive error counter for a bus.
+uint8_t receive_error_counter(uint8_t bus_id) {
+  (void)bus_id;
+  return 0;
+}
+
+// Return MCP2515 transmit error counter for a bus.
+uint8_t transmit_error_counter(uint8_t bus_id) {
+  (void)bus_id;
+  return 0;
+}
+
+// Return MCP2515 error flag register value for a bus.
+uint8_t error_flag_register(uint8_t bus_id) {
+  (void)bus_id;
+  return 0;
+}
+
 } // namespace can
 
 namespace load_test {
