@@ -9,6 +9,7 @@
 #include "can/can_manager.h"
 #include "config/app_config.h"
 #include "storage/storage_manager.h"
+#include "upload/upload_manager.h"
 #ifdef RX_LOAD_TEST
 #include "dev/load_test_control.h"
 #endif
@@ -288,6 +289,7 @@ void close_log_file(uint8_t bus_id) {
   const uint32_t end_ms = millis();
   const uint32_t checksum = state.checksum ^ 0xFFFFFFFFu;
   storage::finalize_log_file(state.path, state.bytes_written, end_ms, checksum);
+  upload::request_upload_auto(state.path);
   state.active = false;
   state.state = BusLogState::LogState::kIdle;
   state.path[0] = '\0';

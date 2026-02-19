@@ -9,6 +9,7 @@
 #include "net/net_manager.h"
 #include "rest/rest_api.h"
 #include "storage/storage_manager.h"
+#include "upload/upload_manager.h"
 #include "web/web_server.h"
 
 #ifndef APP_NAME
@@ -19,6 +20,13 @@
 #endif
 #ifndef PIO_ENV_NAME
 #define PIO_ENV_NAME "unknown"
+#endif
+#ifndef ENABLE_COMPRESSOR
+#define ENABLE_COMPRESSOR 0
+#endif
+
+#if ENABLE_COMPRESSOR
+#include "compress/compressor.h"
 #endif
 
 static void printBuildInfo() {
@@ -49,6 +57,11 @@ void setup() {
   can::init();
   logging::init();
   logging::start();
+  upload::init();
+  upload::queue_pending();
+#if ENABLE_COMPRESSOR
+  compressor::init();
+#endif
   net::init();
   net::connect();
   rest::init();

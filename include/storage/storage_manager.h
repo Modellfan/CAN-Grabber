@@ -6,6 +6,10 @@
 
 namespace storage {
 
+constexpr uint8_t kFlagDownloaded = 1u << 0;
+constexpr uint8_t kFlagUploaded = 1u << 1;
+constexpr uint8_t kFlagActive = 1u << 2;
+
 struct Stats {
   uint64_t total_bytes;
   uint64_t free_bytes;
@@ -26,6 +30,7 @@ bool is_ready();
 Stats get_stats();
 size_t file_count();
 bool get_file_info(size_t index, FileInfo* out);
+bool find_file_info(const char* path, FileInfo* out, size_t* out_index);
 bool delete_file(size_t index);
 
 bool ensure_space(uint64_t min_free_bytes);

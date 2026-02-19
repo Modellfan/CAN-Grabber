@@ -34,6 +34,7 @@ struct GlobalConfig {
   uint8_t wifi_count;
   WifiConfig wifi[3];
   bool wifi_sta_enabled;
+  bool auto_upload_enabled;
   char upload_url[kUrlMaxLen];
   char influx_url[kUrlMaxLen];
   char influx_token[kTokenMaxLen];

@@ -12,10 +12,12 @@
 #include <stdlib.h>
 
 #include "can/can_manager.h"
+#include "compress/compressor.h"
 #include "config/app_config.h"
 #include "logging/log_writer.h"
 #include "net/net_manager.h"
 #include "storage/storage_manager.h"
+#include "upload/upload_manager.h"
 
 namespace rest {
 
@@ -101,8 +103,21 @@ void handle_static() {
   }
 
   String path = s_server.uri();
+  const int query = path.indexOf('?');
+  if (query >= 0) {
+    path = path.substring(0, query);
+  }
+  if (!path.startsWith("/")) {
+    path = "/" + path;
+  }
+  while (path.indexOf("//") >= 0) {
+    path.replace("//", "/");
+  }
   if (path.endsWith("/")) {
     path += "index.html";
+  }
+  if (path == "/index") {
+    path = "/index.html";
   }
 
   if (!SPIFFS.exists(path)) {
@@ -162,11 +177,12 @@ void send_json(const JsonDocument& doc, int code = 200) {
 }
 
 void add_config_json(JsonObject root, const config::Config& cfg) {
-  JsonObject global = root.createNestedObject("global");
+  JsonObject global = root["global"].to<JsonObject>();
   global["max_file_size_bytes"] = cfg.global.max_file_size_bytes;
   global["low_space_threshold_bytes"] = cfg.global.low_space_threshold_bytes;
   global["wifi_count"] = cfg.global.wifi_count;
   global["wifi_sta_enabled"] = cfg.global.wifi_sta_enabled;
+  global["auto_upload_enabled"] = cfg.global.auto_upload_enabled;
   global["upload_url"] = cfg.global.upload_url;
   global["influx_url"] = cfg.global.influx_url;
   global["influx_token"] = cfg.global.influx_token;
@@ -174,17 +190,17 @@ void add_config_json(JsonObject root, const config::Config& cfg) {
   global["can_time_sync"] = cfg.global.can_time_sync;
   global["manual_time_epoch"] = cfg.global.manual_time_epoch;
   global["dbc_name"] = cfg.global.dbc_name;
-  JsonArray wifi = global.createNestedArray("wifi");
+  JsonArray wifi = global["wifi"].to<JsonArray>();
   for (uint8_t i = 0; i < 3; ++i) {
-    JsonObject entry = wifi.createNestedObject();
+    JsonObject entry = wifi.add<JsonObject>();
     entry["ssid"] = cfg.global.wifi[i].ssid;
     entry["password"] = cfg.global.wifi[i].password;
   }
 
-  JsonArray buses = root.createNestedArray("buses");
+  JsonArray buses = root["buses"].to<JsonArray>();
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
     const config::BusConfig& bus = cfg.buses[i];
-    JsonObject obj = buses.createNestedObject();
+    JsonObject obj = buses.add<JsonObject>();
     obj["id"] = i;
     obj["enabled"] = bus.enabled;
     obj["bitrate"] = bus.bitrate;
@@ -197,53 +213,56 @@ void add_config_json(JsonObject root, const config::Config& cfg) {
 void apply_config_from_json(const JsonObject& root) {
   config::Config& cfg = config::get_mutable();
 
-  if (root.containsKey("global")) {
+  if (!root["global"].isNull()) {
     JsonObject global = root["global"].as<JsonObject>();
-    if (global.containsKey("max_file_size_bytes")) {
+    if (!global["max_file_size_bytes"].isNull()) {
       cfg.global.max_file_size_bytes = global["max_file_size_bytes"].as<uint32_t>();
     }
-    if (global.containsKey("low_space_threshold_bytes")) {
+    if (!global["low_space_threshold_bytes"].isNull()) {
       cfg.global.low_space_threshold_bytes =
           global["low_space_threshold_bytes"].as<uint32_t>();
     }
-    if (global.containsKey("wifi_count")) {
+    if (!global["wifi_count"].isNull()) {
       config::set_wifi_count(global["wifi_count"].as<uint8_t>());
     }
-    if (global.containsKey("wifi_sta_enabled")) {
+    if (!global["wifi_sta_enabled"].isNull()) {
       cfg.global.wifi_sta_enabled = global["wifi_sta_enabled"].as<bool>();
     }
-    if (global.containsKey("upload_url")) {
+    if (!global["auto_upload_enabled"].isNull()) {
+      cfg.global.auto_upload_enabled = global["auto_upload_enabled"].as<bool>();
+    }
+    if (!global["upload_url"].isNull()) {
       const char* value = global["upload_url"] | "";
       strncpy(cfg.global.upload_url, value, sizeof(cfg.global.upload_url));
       cfg.global.upload_url[sizeof(cfg.global.upload_url) - 1] = '\0';
     }
-    if (global.containsKey("influx_url")) {
+    if (!global["influx_url"].isNull()) {
       const char* value = global["influx_url"] | "";
       strncpy(cfg.global.influx_url, value, sizeof(cfg.global.influx_url));
       cfg.global.influx_url[sizeof(cfg.global.influx_url) - 1] = '\0';
     }
-    if (global.containsKey("influx_token")) {
+    if (!global["influx_token"].isNull()) {
       const char* value = global["influx_token"] | "";
       strncpy(cfg.global.influx_token, value, sizeof(cfg.global.influx_token));
       cfg.global.influx_token[sizeof(cfg.global.influx_token) - 1] = '\0';
     }
-    if (global.containsKey("api_token")) {
+    if (!global["api_token"].isNull()) {
       const char* value = global["api_token"] | "";
       strncpy(cfg.global.api_token, value, sizeof(cfg.global.api_token));
       cfg.global.api_token[sizeof(cfg.global.api_token) - 1] = '\0';
     }
-    if (global.containsKey("can_time_sync")) {
+    if (!global["can_time_sync"].isNull()) {
       cfg.global.can_time_sync = global["can_time_sync"].as<bool>();
     }
-    if (global.containsKey("manual_time_epoch")) {
+    if (!global["manual_time_epoch"].isNull()) {
       cfg.global.manual_time_epoch = global["manual_time_epoch"].as<int64_t>();
     }
-    if (global.containsKey("dbc_name")) {
+    if (!global["dbc_name"].isNull()) {
       const char* value = global["dbc_name"] | "";
       strncpy(cfg.global.dbc_name, value, sizeof(cfg.global.dbc_name));
       cfg.global.dbc_name[sizeof(cfg.global.dbc_name) - 1] = '\0';
     }
-    if (global.containsKey("wifi")) {
+    if (!global["wifi"].isNull()) {
       JsonArray wifi = global["wifi"].as<JsonArray>();
       uint8_t count = 0;
       for (JsonObject entry : wifi) {
@@ -259,29 +278,29 @@ void apply_config_from_json(const JsonObject& root) {
     }
   }
 
-  if (root.containsKey("buses")) {
+  if (!root["buses"].isNull()) {
     JsonArray buses = root["buses"].as<JsonArray>();
     for (JsonObject bus : buses) {
-      if (!bus.containsKey("id")) {
+      if (bus["id"].isNull()) {
         continue;
       }
       const uint8_t id = bus["id"].as<uint8_t>();
       if (id >= config::kMaxBuses) {
         continue;
       }
-      if (bus.containsKey("enabled")) {
+      if (!bus["enabled"].isNull()) {
         cfg.buses[id].enabled = bus["enabled"].as<bool>();
       }
-      if (bus.containsKey("bitrate")) {
+      if (!bus["bitrate"].isNull()) {
         cfg.buses[id].bitrate = bus["bitrate"].as<uint32_t>();
       }
-      if (bus.containsKey("read_only")) {
+      if (!bus["read_only"].isNull()) {
         cfg.buses[id].read_only = bus["read_only"].as<bool>();
       }
-      if (bus.containsKey("logging")) {
+      if (!bus["logging"].isNull()) {
         cfg.buses[id].logging = bus["logging"].as<bool>();
       }
-      if (bus.containsKey("name")) {
+      if (!bus["name"].isNull()) {
         const char* name = bus["name"] | "";
         config::set_bus_name(id, name);
       }
@@ -297,7 +316,7 @@ void handle_status() {
     return;
   }
 
-  DynamicJsonDocument doc(4096);
+  JsonDocument doc;
   JsonObject root = doc.to<JsonObject>();
   root["uptime_sec"] = millis() / 1000;
   root["wifi_connected"] = net::is_connected();
@@ -312,7 +331,7 @@ void handle_status() {
   root["time_valid"] = now > 100000;
 
   logging::Stats log_stats = logging::get_stats();
-  JsonObject log = root.createNestedObject("logging");
+  JsonObject log = root["logging"].to<JsonObject>();
   log["total_bytes"] = log_stats.total_bytes;
   log["bytes_per_sec"] = log_stats.bytes_per_sec;
   log["active_buses"] = log_stats.active_buses;
@@ -322,13 +341,44 @@ void handle_status() {
   log["last_write_ms"] = log_stats.last_write_ms;
 
   storage::Stats st = storage::get_stats();
-  JsonObject storage_obj = root.createNestedObject("storage");
+  JsonObject storage_obj = root["storage"].to<JsonObject>();
   storage_obj["ready"] = storage::is_ready();
   storage_obj["total_bytes"] = st.total_bytes;
   storage_obj["free_bytes"] = st.free_bytes;
   storage_obj["log_files"] = storage::file_count();
 
-  JsonArray can_stats = root.createNestedArray("can");
+  upload::Stats up = upload::get_stats();
+  JsonObject uploader = root["uploader"].to<JsonObject>();
+  uploader["initialized"] = up.initialized;
+  uploader["uploading"] = up.uploading;
+  uploader["upload_speed_bps"] = up.upload_speed_bytes_per_sec;
+  uploader["current_file_size_bytes"] = up.current_file_size_bytes;
+  uploader["current_file_sent_bytes"] = up.current_file_sent_bytes;
+  uploader["total_uploaded_files"] = up.total_uploaded_files;
+  uploader["total_uploaded_bytes"] = up.total_uploaded_bytes;
+  uploader["uploaded_files"] = up.uploaded_files;
+  uploader["outstanding_files"] = up.outstanding_files;
+  uploader["outstanding_bytes"] = up.outstanding_bytes;
+  uploader["last_error"] = up.last_error;
+  uploader["last_error_interrupted"] = up.last_error_interrupted;
+  uploader["last_error_connect"] = up.last_error_connect;
+  uploader["last_error_message"] = up.last_error_message;
+  uploader["server_reachable_known"] = up.server_reachable_known;
+  uploader["server_reachable"] = up.server_reachable;
+  uploader["server_rtt_ms"] = up.server_rtt_ms;
+  uploader["server_reach_message"] = up.server_reach_message;
+
+  compressor::Stats cmp = compressor::get_stats();
+  JsonObject compressor_obj = root["compressor"].to<JsonObject>();
+  compressor_obj["active"] = cmp.active;
+  compressor_obj["current_input_done_bytes"] = cmp.current_input_done_bytes;
+  compressor_obj["current_input_total_bytes"] = cmp.current_input_total_bytes;
+  compressor_obj["outstanding_files"] = cmp.outstanding_files;
+  compressor_obj["outstanding_bytes"] = cmp.outstanding_bytes;
+  compressor_obj["compressed_files_total"] = cmp.compressed_files_total;
+  compressor_obj["compressed_input_bytes_total"] = cmp.compressed_input_bytes_total;
+
+  JsonArray can_stats = root["can"].to<JsonArray>();
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
     const config::BusConfig& bus_cfg = config::get().buses[i];
     const uint32_t depth = can::queue_depth(i);
@@ -337,7 +387,7 @@ void handle_status() {
     const uint32_t high = can::high_water(i);
     const uint32_t high_pct = (capacity > 0) ? static_cast<uint32_t>((high * 100ULL) / capacity) : 0;
     const uint8_t eflg = can::error_flag_register(i);
-    JsonObject entry = can_stats.createNestedObject();
+    JsonObject entry = can_stats.add<JsonObject>();
     entry["bus"] = i;
     entry["id"] = i;
     entry["name"] = bus_cfg.name;
@@ -369,7 +419,7 @@ void handle_config_get() {
     return;
   }
 
-  DynamicJsonDocument doc(8192);
+  JsonDocument doc;
   JsonObject root = doc.to<JsonObject>();
   add_config_json(root, config::get());
   send_json(doc);
@@ -387,7 +437,7 @@ void handle_config_put() {
     return;
   }
 
-  DynamicJsonDocument doc(8192);
+  JsonDocument doc;
   DeserializationError err = deserializeJson(doc, body);
   if (err) {
     s_server.send(400, "application/json", "{\"error\":\"bad_json\"}");
@@ -412,14 +462,14 @@ void handle_time_set() {
     return;
   }
 
-  DynamicJsonDocument doc(512);
+  JsonDocument doc;
   DeserializationError err = deserializeJson(doc, body);
   if (err) {
     s_server.send(400, "application/json", "{\"error\":\"bad_json\"}");
     return;
   }
 
-  if (!doc.containsKey("epoch")) {
+  if (doc["epoch"].isNull()) {
     s_server.send(400, "application/json", "{\"error\":\"missing_epoch\"}");
     return;
   }
@@ -448,7 +498,7 @@ void handle_wifi_scan() {
     return;
   }
 
-  DynamicJsonDocument doc(4096);
+  JsonDocument doc;
   JsonArray arr = doc.to<JsonArray>();
   const size_t count = net::wifi_scan_count();
   for (size_t i = 0; i < count; ++i) {
@@ -456,7 +506,7 @@ void handle_wifi_scan() {
     if (!net::wifi_scan_entry(i, &info)) {
       continue;
     }
-    JsonObject entry = arr.createNestedObject();
+    JsonObject entry = arr.add<JsonObject>();
     entry["ssid"] = info.ssid;
     entry["rssi_dbm"] = info.rssi_dbm;
     entry["rssi_percent"] = info.rssi_percent;
@@ -472,7 +522,7 @@ void handle_can_stats() {
     return;
   }
 
-  DynamicJsonDocument doc(2048);
+  JsonDocument doc;
   JsonArray arr = doc.to<JsonArray>();
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
     const config::BusConfig& bus_cfg = config::get().buses[i];
@@ -482,7 +532,7 @@ void handle_can_stats() {
     const uint32_t high = can::high_water(i);
     const uint32_t high_pct = (capacity > 0) ? static_cast<uint32_t>((high * 100ULL) / capacity) : 0;
     const uint8_t eflg = can::error_flag_register(i);
-    JsonObject entry = arr.createNestedObject();
+    JsonObject entry = arr.add<JsonObject>();
     entry["bus"] = i;
     entry["id"] = i;
     entry["name"] = bus_cfg.name;
@@ -513,7 +563,7 @@ void handle_storage_stats() {
     return;
   }
 
-  DynamicJsonDocument doc(1024);
+  JsonDocument doc;
   JsonObject obj = doc.to<JsonObject>();
   storage::Stats st = storage::get_stats();
   obj["ready"] = storage::is_ready();
@@ -528,7 +578,7 @@ void handle_buffers() {
     return;
   }
 
-  DynamicJsonDocument doc(2048);
+  JsonDocument doc;
   JsonObject root = doc.to<JsonObject>();
   logging::Stats stats = logging::get_stats();
   root["started"] = stats.started;
@@ -547,7 +597,7 @@ void handle_files_list() {
     return;
   }
 
-  DynamicJsonDocument doc(8192);
+  JsonDocument doc;
   JsonArray arr = doc.to<JsonArray>();
   const size_t count = storage::file_count();
   for (size_t i = 0; i < count; ++i) {
@@ -555,7 +605,7 @@ void handle_files_list() {
     if (!storage::get_file_info(i, &info)) {
       continue;
     }
-    JsonObject entry = arr.createNestedObject();
+    JsonObject entry = arr.add<JsonObject>();
     entry["id"] = i;
     entry["path"] = info.path;
     entry["start_ms"] = info.start_ms;
@@ -662,6 +712,25 @@ void handle_file_delete(size_t id) {
   s_server.send(200, "application/json", "{\"ok\":true}");
 }
 
+void handle_file_upload(size_t id) {
+  add_cors_headers();
+  if (!ensure_auth()) {
+    return;
+  }
+
+  storage::FileInfo info{};
+  if (!storage::get_file_info(id, &info)) {
+    s_server.send(404, "application/json", "{\"error\":\"not_found\"}");
+    return;
+  }
+  if (info.flags & storage::kFlagActive) {
+    s_server.send(409, "application/json", "{\"error\":\"active_file\"}");
+    return;
+  }
+  upload::request_upload(info.path);
+  s_server.send(202, "application/json", "{\"ok\":true,\"queued\":true}");
+}
+
 void handle_control_start() {
   add_cors_headers();
   if (!ensure_auth()) {
@@ -687,9 +756,9 @@ void handle_control_close_file() {
   }
   const String body = s_server.arg("plain");
   if (body.length() > 0) {
-    DynamicJsonDocument doc(256);
+    JsonDocument doc;
     DeserializationError err = deserializeJson(doc, body);
-    if (!err && doc.containsKey("bus_id")) {
+    if (!err && !doc["bus_id"].isNull()) {
       const uint8_t bus_id = doc["bus_id"].as<uint8_t>();
       logging::rotate_file(bus_id);
       s_server.send(200, "application/json", "{\"ok\":true}");
@@ -701,13 +770,15 @@ void handle_control_close_file() {
 }
 
 void handle_not_found() {
-  log_not_found_request();
+  const String uri = s_server.uri();
+  if (uri.startsWith("/api/")) {
+    log_not_found_request();
+  }
   add_cors_headers();
   if (s_server.method() == HTTP_OPTIONS) {
     s_server.send(204, "text/plain", "");
     return;
   }
-  const String uri = s_server.uri();
   if (!uri.startsWith("/api/")) {
     handle_static();
     return;
@@ -727,6 +798,10 @@ void handle_not_found() {
       handle_file_delete(id);
       return;
     }
+    if (action == "upload" && s_server.method() == HTTP_POST) {
+      handle_file_upload(id);
+      return;
+    }
   }
 
   s_server.send(404, "application/json", "{\"error\":\"not_found\"}");
@@ -741,6 +816,21 @@ void init() {
   }
 
   s_server.on("/", HTTP_GET, handle_static);
+  s_server.on("/index.html", HTTP_GET, handle_static);
+  s_server.on("/style.css", HTTP_GET, handle_static);
+  s_server.on("/app.js", HTTP_GET, handle_static);
+  s_server.on("/logo.png", HTTP_GET, handle_static);
+  s_server.on("/ajax-loader.gif", HTTP_GET, handle_static);
+  s_server.on("/configurate.svg", HTTP_GET, handle_static);
+  s_server.on("/globe.svg", HTTP_GET, handle_static);
+  s_server.on("/news.svg", HTTP_GET, handle_static);
+  s_server.on("/radar.svg", HTTP_GET, handle_static);
+  s_server.on("/save.svg", HTTP_GET, handle_static);
+  s_server.on("/stack.svg", HTTP_GET, handle_static);
+  s_server.on("/refresh.png", HTTP_GET, handle_static);
+  s_server.on("/icon-check-circle.png", HTTP_GET, handle_static);
+  s_server.on("/icon-trash.png", HTTP_GET, handle_static);
+  s_server.on("/icon-x-square.png", HTTP_GET, handle_static);
 
   s_server.on("/api/status", HTTP_GET, handle_status);
   s_server.on("/api/status", HTTP_OPTIONS, handle_options);

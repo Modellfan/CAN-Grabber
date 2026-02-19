@@ -65,6 +65,21 @@
                 <p>Total: <strong id="log-total">-</strong></p>
                 <p>Active buses: <strong id="log-buses">-</strong></p>
               </div>
+              <div class="dash-box">
+                <h3>Uploader</h3>
+                <p>Uploaded: <strong id="upload-done-files">-</strong></p>
+                <p>Outstanding: <strong id="upload-open-files">-</strong></p>
+                <p>Server: <strong id="upload-server-reach">-</strong></p>
+                <p>Speed: <strong id="upload-speed">-</strong></p>
+                <p>Remaining: <strong id="upload-remaining-mb">-</strong></p>
+                <p>ETA: <strong id="upload-eta">-</strong></p>
+                <p>Status: <strong id="upload-status">-</strong></p>
+              </div>
+              <div class="dash-box">
+                <h3>Compressor</h3>
+                <p>Current: <strong id="compress-current">-</strong></p>
+                <p>Outstanding: <strong id="compress-outstanding">-</strong></p>
+              </div>
             </div>
           </div>
         </div>
@@ -109,6 +124,8 @@
 
             <h3 class="underline">Upload</h3>
             <div class="form-grid">
+              <label>Auto upload</label>
+              <input id="auto-upload-enabled" type="checkbox" class="cfg-checkbox">
               <label>Upload URL</label>
               <input id="upload-url" type="text" placeholder="http://...">
             </div>
@@ -132,6 +149,7 @@
           <div class="main-right">
             <h3 class="underline">Actions</h3>
             <button id="refresh-files" class="files-bulk-action">Refresh</button>
+            <button id="upload-selected" class="files-bulk-action">Upload selected</button>
             <button id="download-selected" class="files-bulk-action">Download selected</button>
             <button id="delete-selected" class="files-bulk-action">Delete selected</button>
           </div>
@@ -160,6 +178,6 @@
   </div>
 
   <div id="toast" class="toast"></div>
-  <script src="/app.js?v=20260219a"></script>
+  <script src="/app.js?v=20260219c"></script>
 </body>
 </html>

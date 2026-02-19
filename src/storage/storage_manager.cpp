@@ -1,5 +1,6 @@
 #include "storage/storage_manager.h"
 
+#include <Arduino.h>
 #include <ArduinoJson.h>
 #include <SD.h>
 #include <SPI.h>
@@ -17,10 +18,8 @@ bool s_ready = false;
 
 constexpr char kMetaDir[] = "/meta";
 constexpr char kStatusPath[] = "/meta/file_status.json";
+constexpr char kCompressedDir[] = "/cmp";
 constexpr uint8_t kSdMaxFiles = 12;
-constexpr uint8_t kFlagDownloaded = 1u << 0;
-constexpr uint8_t kFlagUploaded = 1u << 1;
-constexpr uint8_t kFlagActive = 1u << 2;
 constexpr size_t kMaxEntries = 128;
 
 struct FileStatusEntry {
@@ -58,6 +57,47 @@ bool parse_bus_id_from_log_path(const char* path, uint8_t* bus_id) {
   }
   *bus_id = static_cast<uint8_t>(parsed);
   return true;
+}
+
+bool build_compressed_sidecar_path(const char* src, char* out, size_t out_len) {
+  if (src == nullptr || out == nullptr || out_len == 0) {
+    return false;
+  }
+  const char* base = strrchr(src, '/');
+  base = base ? (base + 1) : src;
+  const int n = snprintf(out, out_len, "%s/%s.mz", kCompressedDir, base);
+  if (n <= 0 || static_cast<size_t>(n) >= out_len) {
+    out[0] = '\0';
+    return false;
+  }
+  return true;
+}
+
+bool normalize_abs_path(const char* in, char* out, size_t out_len) {
+  if (in == nullptr || out == nullptr || out_len == 0) {
+    return false;
+  }
+  if (in[0] == '/') {
+    strncpy(out, in, out_len);
+    out[out_len - 1] = '\0';
+    return true;
+  }
+  const int n = snprintf(out, out_len, "/%s", in);
+  if (n <= 0 || static_cast<size_t>(n) >= out_len) {
+    out[0] = '\0';
+    return false;
+  }
+  return true;
+}
+
+void remove_compressed_sidecar(const char* src_path) {
+  char cmp[96];
+  if (!build_compressed_sidecar_path(src_path, cmp, sizeof(cmp))) {
+    return;
+  }
+  if (SD.exists(cmp)) {
+    SD.remove(cmp);
+  }
 }
 
 // Clear stale "active" flags after reboot and stamp a closed time if missing.
@@ -118,7 +158,7 @@ bool load_status() {
     return false;
   }
 
-  DynamicJsonDocument doc(16384);
+  JsonDocument doc;
   DeserializationError err = deserializeJson(doc, file);
   file.close();
   if (err) {
@@ -164,11 +204,11 @@ bool save_status() {
     return false;
   }
 
-  DynamicJsonDocument doc(16384);
+  JsonDocument doc;
   doc["version"] = 1;
-  JsonArray files = doc.createNestedArray("files");
+  JsonArray files = doc["files"].to<JsonArray>();
   for (size_t i = 0; i < s_entry_count; ++i) {
-    JsonObject obj = files.createNestedObject();
+    JsonObject obj = files.add<JsonObject>();
     obj["path"] = s_entries[i].path;
     obj["bus"] = s_entries[i].bus_id;
     obj["start_ms"] = s_entries[i].start_ms;
@@ -328,6 +368,7 @@ bool remove_stale_placeholder_logs_on_boot() {
     if (SD.exists(entry.path)) {
       SD.remove(entry.path);
     }
+    remove_compressed_sidecar(entry.path);
     remove_entry(i);
     changed = true;
   }
@@ -358,6 +399,7 @@ bool remove_empty_logs_on_boot() {
     }
 
     SD.remove(entry.path);
+    remove_compressed_sidecar(entry.path);
     remove_entry(i);
     changed = true;
   }
@@ -374,14 +416,20 @@ bool remove_empty_logs_on_boot() {
     }
 
     const String name = file.name();
-    const bool empty_log = is_log_file_path(name.c_str()) && (file.size() == 0);
+    char abs_path[96];
+    if (!normalize_abs_path(name.c_str(), abs_path, sizeof(abs_path))) {
+      file.close();
+      continue;
+    }
+    const bool empty_log = is_log_file_path(abs_path) && (file.size() == 0);
     file.close();
     if (!empty_log) {
       continue;
     }
 
-    SD.remove(name.c_str());
-    const int index = find_entry(name.c_str());
+    SD.remove(abs_path);
+    remove_compressed_sidecar(abs_path);
+    const int index = find_entry(abs_path);
     if (index >= 0) {
       remove_entry(static_cast<size_t>(index));
     }
@@ -399,7 +447,22 @@ void init() {
   s_ready = false;
 
   s_sd_spi.begin(SD_SCK_PIN, SD_MISO_PIN, SD_MOSI_PIN, SD_CS_PIN);
-  if (!SD.begin(SD_CS_PIN, s_sd_spi, SD_SPI_CLOCK_HZ, "/sd", kSdMaxFiles)) {
+  const uint32_t clocks[] = {SD_SPI_CLOCK_HZ, 10000000UL, 4000000UL};
+  bool mounted = false;
+  for (size_t i = 0; i < (sizeof(clocks) / sizeof(clocks[0])); ++i) {
+    if (i > 0) {
+      SD.end();
+      delay(50);
+    }
+    if (SD.begin(SD_CS_PIN, s_sd_spi, clocks[i], "/sd", kSdMaxFiles)) {
+      mounted = true;
+      Serial.printf("[storage] SD mounted at %lu Hz\n",
+                    static_cast<unsigned long>(clocks[i]));
+      break;
+    }
+  }
+  if (!mounted) {
+    Serial.println("[storage] SD mount failed on all clock fallbacks");
     return;
   }
 
@@ -471,6 +534,22 @@ bool get_file_info(size_t index, FileInfo* out) {
   return true;
 }
 
+bool find_file_info(const char* path, FileInfo* out, size_t* out_index) {
+  if (path == nullptr || out == nullptr) {
+    return false;
+  }
+  for (size_t i = 0; i < s_entry_count; ++i) {
+    if (strcmp(s_entries[i].path, path) != 0) {
+      continue;
+    }
+    if (out_index != nullptr) {
+      *out_index = i;
+    }
+    return get_file_info(i, out);
+  }
+  return false;
+}
+
 // Ensure at least min_free_bytes are free, deleting old files if needed.
 bool ensure_space(uint64_t min_free_bytes) {
   if (!s_ready) {
@@ -497,6 +576,7 @@ bool ensure_space(uint64_t min_free_bytes) {
       if (SD.exists(path)) {
         SD.remove(path);
       }
+      remove_compressed_sidecar(path);
       remove_entry(static_cast<size_t>(index));
       save_status();
       stats = get_stats();
@@ -506,6 +586,7 @@ bool ensure_space(uint64_t min_free_bytes) {
     char fallback[64];
     if (find_oldest_log_file(fallback, sizeof(fallback))) {
       SD.remove(fallback);
+      remove_compressed_sidecar(fallback);
       stats = get_stats();
       continue;
     }
@@ -598,6 +679,7 @@ bool delete_file(size_t index) {
   if (SD.exists(entry.path) && !SD.remove(entry.path)) {
     return false;
   }
+  remove_compressed_sidecar(entry.path);
 
   remove_entry(index);
   save_status();

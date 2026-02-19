@@ -63,6 +63,23 @@ function formatUptime(seconds) {
   return `${days}d ${hours}h ${mins}m`;
 }
 
+function formatEta(seconds) {
+  if (!seconds || !Number.isFinite(seconds) || seconds <= 0) {
+    return "-";
+  }
+  const total = Math.round(seconds);
+  const hours = Math.floor(total / 3600);
+  const mins = Math.floor((total % 3600) / 60);
+  const secs = total % 60;
+  if (hours > 0) {
+    return `${hours}h ${mins}m`;
+  }
+  if (mins > 0) {
+    return `${mins}m ${secs}s`;
+  }
+  return `${secs}s`;
+}
+
 function formatFlags(flags) {
   const entries = [];
   if (flags & 1) entries.push("downloaded");
@@ -354,6 +371,7 @@ function collectConfig() {
       low_space_threshold_bytes: Math.max(0, lowSpaceMb) * 1024 * 1024,
       wifi_count: wifiCount,
       wifi_sta_enabled: document.getElementById("wifi-sta-enabled").checked,
+      auto_upload_enabled: document.getElementById("auto-upload-enabled").checked,
       wifi,
       upload_url: document.getElementById("upload-url").value.trim(),
       influx_url: cfg.global.influx_url,
@@ -389,6 +407,47 @@ async function loadStatus() {
     document.getElementById("log-total").textContent = formatBytes(data.logging.total_bytes);
     document.getElementById("log-buses").textContent = data.logging.active_buses;
     document.getElementById("logging-state").textContent = data.logging.started ? "running" : "stopped";
+    const up = data.uploader || {};
+    document.getElementById("upload-done-files").textContent = formatCount(up.uploaded_files ?? 0);
+    document.getElementById("upload-open-files").textContent = formatCount(up.outstanding_files ?? 0);
+    let reach = "-";
+    if (up.server_reachable_known) {
+      if (up.server_reachable) {
+        const rtt = Number(up.server_rtt_ms || -1);
+        reach = rtt >= 0 ? `reachable (${rtt} ms)` : "reachable";
+      } else {
+        reach = `unreachable: ${up.server_reach_message || "probe failed"}`;
+      }
+    }
+    document.getElementById("upload-server-reach").textContent = reach;
+    const upBps = Number(up.upload_speed_bps || 0);
+    document.getElementById("upload-speed").textContent = upBps > 0 ? `${formatBytes(upBps)}/s` : "-";
+    const remainingBytes = Number(up.outstanding_bytes || 0);
+    document.getElementById("upload-remaining-mb").textContent = formatBytes(remainingBytes);
+    const etaSec = upBps > 0 ? (remainingBytes / upBps) : 0;
+    document.getElementById("upload-eta").textContent = formatEta(etaSec);
+    let uploadStatus = up.uploading ? "uploading" : "idle";
+    if (up.last_error) {
+      if (up.last_error_connect) {
+        uploadStatus = `connect problem: ${up.last_error_message || "server unreachable"}`;
+      } else if (up.last_error_interrupted) {
+        uploadStatus = `interrupted: ${up.last_error_message || "transfer failed"}`;
+      } else {
+        uploadStatus = `error: ${up.last_error_message || "upload failed"}`;
+      }
+    }
+    document.getElementById("upload-status").textContent = uploadStatus;
+
+    const cmp = data.compressor || {};
+    const cmpDone = Number(cmp.current_input_done_bytes || 0);
+    const cmpTotal = Number(cmp.current_input_total_bytes || 0);
+    const cmpCurrent = cmp.active ? `${formatBytes(cmpDone)} / ${formatBytes(cmpTotal)}` : "-";
+    document.getElementById("compress-current").textContent = cmpCurrent;
+    const cmpOutstandingFiles = Number(cmp.outstanding_files || 0);
+    const cmpOutstandingBytes = Number(cmp.outstanding_bytes || 0);
+    document.getElementById("compress-outstanding").textContent =
+      `${formatBytes(cmpOutstandingBytes)} (${formatCount(cmpOutstandingFiles)} files)`;
+
     if (data.time_epoch) {
       const dt = new Date(data.time_epoch * 1000);
       document.getElementById("time-now").textContent = dt.toISOString().replace("T", " ").slice(0, 19);
@@ -417,6 +476,7 @@ async function loadConfig() {
     document.getElementById("log-max-size").value = Math.round(data.global.max_file_size_bytes / (1024 * 1024));
     document.getElementById("log-low-space").value = Math.round(data.global.low_space_threshold_bytes / (1024 * 1024));
     document.getElementById("upload-url").value = data.global.upload_url || "";
+    document.getElementById("auto-upload-enabled").checked = !!data.global.auto_upload_enabled;
     document.getElementById("can-time-sync").checked = !!data.global.can_time_sync;
     document.getElementById("wifi-sta-enabled").checked = !!data.global.wifi_sta_enabled;
   } catch (err) {
@@ -502,6 +562,7 @@ async function loadFiles() {
         }
       });
     });
+
   } catch (err) {
     showToast(err.message, true);
   }
@@ -678,6 +739,34 @@ function wireEvents() {
     setTimeout(() => {
       state.downloadInProgress = false;
     }, (ids.length * 800) + 3000);
+  });
+
+  document.getElementById("upload-selected").addEventListener("click", async () => {
+    const ids = selectedFileIds();
+    if (!ids.length) {
+      showToast("Select files first", true);
+      return;
+    }
+
+    let queued = 0;
+    const failed = [];
+    for (const id of ids) {
+      try {
+        await apiPost(`/api/files/${id}/upload`, {});
+        queued += 1;
+      } catch (err) {
+        failed.push(id);
+      }
+    }
+
+    if (queued > 0) {
+      showToast(`Queued ${queued} upload(s)`);
+    }
+    if (failed.length > 0) {
+      showToast(`Upload failed for ${failed.length} file(s)`, true);
+    }
+    loadFiles();
+    loadStatus();
   });
 
   document.getElementById("delete-selected").addEventListener("click", async () => {
