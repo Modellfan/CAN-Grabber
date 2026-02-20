@@ -1,4 +1,5 @@
 import asyncio
+import base64
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
@@ -15,6 +16,10 @@ import threading
 import time
 from typing import Any, Deque, Dict, List, Tuple
 from urllib.parse import quote_plus
+from urllib.parse import urlencode
+from urllib.request import Request as UrlRequest
+from urllib.request import urlopen
+from urllib.error import HTTPError, URLError
 
 try:
     import httpx
@@ -22,6 +27,7 @@ except ModuleNotFoundError:
     httpx = None
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from starlette.requests import ClientDisconnect
 from starlette.datastructures import UploadFile as StarletteUploadFile
 from zeroconf import IPVersion, ServiceInfo
 from zeroconf.asyncio import AsyncZeroconf
@@ -47,6 +53,15 @@ FAIL_RETRY_AFTER_SEC = max(1, int(os.getenv("CAN_UPLOAD_FAIL_RETRY_AFTER_SEC", "
 IDEMPOTENCY_TTL_SEC = max(60, int(os.getenv("CAN_UPLOAD_IDEMPOTENCY_TTL_SEC", "86400")))
 ONEDRIVE_CONFIG_FILE = os.getenv("CAN_UPLOAD_ONEDRIVE_CONFIG_FILE", "onedrive_config.json")
 ONEDRIVE_SCOPE = os.getenv("CAN_UPLOAD_ONEDRIVE_SCOPE", "offline_access Files.ReadWrite")
+DDNS_ENABLED = os.getenv("CAN_UPLOAD_DDNS_ENABLE", "0").strip().lower() in {"1", "true", "yes", "on"}
+DDNS_PROVIDER = os.getenv("CAN_UPLOAD_DDNS_PROVIDER", "noip").strip().lower()
+DDNS_HOSTNAME = os.getenv("CAN_UPLOAD_DDNS_HOSTNAME", "").strip()
+DDNS_USERNAME = os.getenv("CAN_UPLOAD_DDNS_USERNAME", "").strip()
+DDNS_PASSWORD = os.getenv("CAN_UPLOAD_DDNS_PASSWORD", "").strip()
+DDNS_UPDATE_URL = os.getenv("CAN_UPLOAD_DDNS_UPDATE_URL", "https://dynupdate.no-ip.com/nic/update").strip()
+DDNS_INTERVAL_SEC = max(0, int(os.getenv("CAN_UPLOAD_DDNS_INTERVAL_SEC", "600")))
+DDNS_USER_AGENT = os.getenv("CAN_UPLOAD_DDNS_USER_AGENT", "can-upload-mock/1.0").strip() or "can-upload-mock/1.0"
+DDNS_MYIP = os.getenv("CAN_UPLOAD_DDNS_MYIP", "").strip()
 
 logger = logging.getLogger("can_upload_mock")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s - %(message)s")
@@ -92,6 +107,16 @@ onedrive_config: Dict[str, Any] = {
     "scope": ONEDRIVE_SCOPE,
 }
 onedrive_sync_status: Dict[str, Dict[str, Any]] = {}
+ddns_task: asyncio.Task | None = None
+ddns_status: Dict[str, Any] = {
+    "enabled": DDNS_ENABLED,
+    "provider": DDNS_PROVIDER,
+    "hostname": DDNS_HOSTNAME,
+    "last_run": "",
+    "last_ok": False,
+    "last_message": "not started",
+    "last_response": "",
+}
 
 
 class BonjourAdvertiser:
@@ -484,6 +509,96 @@ async def auto_sync_file_to_onedrive(local_path: Path) -> None:
         append_audit({"outcome": "onedrive_sync_error", "filename": filename, "error": str(exc)})
 
 
+async def build_final_upload_response(
+    *,
+    client_ip: str,
+    metadata: Dict[str, Any],
+    saved_files: List[Dict[str, Any]],
+    idempotency_key: str,
+) -> JSONResponse:
+    if not saved_files:
+        append_audit({"client_ip": client_ip, "outcome": "no_files"})
+        return response_error(code="NO_FILES", message="no files were provided", status_code=400)
+
+    for file_result in saved_files:
+        filename = str(file_result.get("saved_as", "upload.bin"))
+        dedupe_key = build_duplicate_key(filename, metadata, str(file_result.get("sha256", "")))
+        existing_duplicate = content_fingerprint_store.get(dedupe_key)
+        if existing_duplicate:
+            duplicate_path = Path(str(file_result["path"]))
+            duplicate_path.unlink(missing_ok=True)
+            duplicate_data = {
+                "filename": filename,
+                "existing": existing_duplicate,
+                "metadata": metadata,
+            }
+            append_audit(
+                {
+                    "client_ip": client_ip,
+                    "outcome": "duplicate_content",
+                    "filename": filename,
+                    "sha256": file_result.get("sha256", ""),
+                    "metadata": metadata,
+                }
+            )
+            return response_ok(
+                code="DUPLICATE_CONTENT",
+                message="duplicate content detected; not stored again",
+                data=duplicate_data,
+                status_code=200,
+            )
+        content_fingerprint_store[dedupe_key] = file_result
+
+    response_data = {
+        "count": len(saved_files),
+        "files": saved_files,
+        "metadata": metadata,
+        "idempotency_key": idempotency_key or None,
+    }
+    onedrive_results: List[Dict[str, Any]] = []
+    for file_info in saved_files:
+        try:
+            local_path = Path(str(file_info["path"]))
+            await auto_sync_file_to_onedrive(local_path)
+            sync = onedrive_sync_status.get(local_path.name, {})
+            onedrive_results.append(
+                {
+                    "filename": local_path.name,
+                    "state": sync.get("state", "unknown"),
+                    "message": sync.get("message", ""),
+                    "web_url": sync.get("web_url", ""),
+                }
+            )
+        except Exception as exc:
+            onedrive_results.append(
+                {
+                    "filename": str(file_info.get("saved_as", "")),
+                    "state": "error",
+                    "message": str(exc),
+                    "web_url": "",
+                }
+            )
+    response_data["onedrive"] = onedrive_results
+    if idempotency_key:
+        with idempotency_lock:
+            idempotency_store[idempotency_key] = (time.time(), response_data)
+    append_audit(
+        {
+            "client_ip": client_ip,
+            "outcome": "accepted",
+            "metadata": metadata,
+            "idempotency_key": idempotency_key or None,
+            "files": saved_files,
+        }
+    )
+    return response_ok(
+        code="UPLOAD_ACCEPTED",
+        message="upload stored successfully",
+        data=response_data,
+        status_code=201,
+    )
+
+
 def _cleanup_old_idempotency_entries(now: float) -> None:
     expired_keys = [key for key, (ts, _) in idempotency_store.items() if now - ts > IDEMPOTENCY_TTL_SEC]
     for key in expired_keys:
@@ -572,6 +687,38 @@ def parse_metadata(form_items: List[Tuple[str, Any]]) -> Tuple[Dict[str, Any], L
     return metadata, errors
 
 
+def parse_metadata_from_headers(request: Request) -> Tuple[Dict[str, Any], List[str]]:
+    metadata: Dict[str, Any] = {}
+    errors: List[str] = []
+    header_map = {
+        "bus_id": "x-bus-id",
+        "start_ms": "x-start-ms",
+        "end_ms": "x-end-ms",
+        "flags": "x-flags",
+        "source": "x-source",
+        "device_id": "x-device-id",
+    }
+    for key, header_name in header_map.items():
+        value = request.headers.get(header_name, "").strip()
+        if value:
+            metadata[key] = value
+    missing = [field for field in REQUIRED_METADATA_FIELDS if not metadata.get(field)]
+    if missing:
+        errors.append(f"Missing required metadata headers: {', '.join(sorted(missing))}")
+    for field in REQUIRED_NUMERIC_FIELDS:
+        if field in metadata and metadata.get(field):
+            try:
+                metadata[field] = int(metadata[field])
+            except ValueError:
+                errors.append(f"Metadata header '{field}' must be an integer")
+    if "flags" in metadata:
+        try:
+            metadata["flags"] = int(metadata["flags"])
+        except ValueError:
+            errors.append("Metadata header 'flags' must be an integer")
+    return metadata, errors
+
+
 def build_duplicate_key(filename: str, metadata: Dict[str, Any], sha256_hex: str) -> str:
     bus_id = metadata.get("bus_id", "")
     start_ms = metadata.get("start_ms", "")
@@ -615,15 +762,127 @@ async def save_upload_atomic(upload: StarletteUploadFile, filename: str) -> Dict
     }
 
 
+async def save_stream_atomic(request: Request, filename: str) -> Dict[str, Any]:
+    destination = UPLOAD_DIR / filename
+    sha = hashlib.sha256()
+    total = 0
+    fd, temp_path_str = tempfile.mkstemp(prefix=f".{filename}.", suffix=".part", dir=str(UPLOAD_DIR))
+    temp_path = Path(temp_path_str)
+    try:
+        with os.fdopen(fd, "wb") as out:
+            async for chunk in request.stream():
+                if not chunk:
+                    continue
+                total += len(chunk)
+                if total > MAX_UPLOAD_BYTES:
+                    raise ValueError(f"Upload exceeds max size of {MAX_UPLOAD_BYTES} bytes")
+                sha.update(chunk)
+                out.write(chunk)
+            out.flush()
+            os.fsync(out.fileno())
+        os.replace(temp_path, destination)
+    except Exception:
+        if temp_path.exists():
+            temp_path.unlink(missing_ok=True)
+        raise
+    return {
+        "path": str(destination),
+        "saved_as": destination.name,
+        "bytes": total,
+        "sha256": sha.hexdigest(),
+    }
+
+
 def get_lan_upload_url() -> str:
     return f"http://{advertiser.local_ip}:{advertiser.port}/edit"
 
 
+def _ddns_set_status(ok: bool, message: str, response: str = "") -> None:
+    ddns_status["last_run"] = utc_now_iso()
+    ddns_status["last_ok"] = ok
+    ddns_status["last_message"] = message
+    ddns_status["last_response"] = response
+
+
+def _ddns_is_configured() -> tuple[bool, str]:
+    if not DDNS_ENABLED:
+        return False, "disabled"
+    if DDNS_PROVIDER != "noip":
+        return False, f"unsupported provider '{DDNS_PROVIDER}' (only 'noip' is supported)"
+    if not DDNS_HOSTNAME:
+        return False, "missing CAN_UPLOAD_DDNS_HOSTNAME"
+    if not DDNS_USERNAME:
+        return False, "missing CAN_UPLOAD_DDNS_USERNAME"
+    if not DDNS_PASSWORD:
+        return False, "missing CAN_UPLOAD_DDNS_PASSWORD"
+    if not DDNS_UPDATE_URL:
+        return False, "missing CAN_UPLOAD_DDNS_UPDATE_URL"
+    return True, "ok"
+
+
+def _noip_update_once_sync() -> tuple[bool, str, str]:
+    params = {"hostname": DDNS_HOSTNAME}
+    if DDNS_MYIP:
+        params["myip"] = DDNS_MYIP
+    url = f"{DDNS_UPDATE_URL}?{urlencode(params)}"
+    auth = base64.b64encode(f"{DDNS_USERNAME}:{DDNS_PASSWORD}".encode("utf-8")).decode("ascii")
+    req = UrlRequest(url, method="GET")
+    req.add_header("Authorization", f"Basic {auth}")
+    req.add_header("User-Agent", DDNS_USER_AGENT)
+    try:
+        with urlopen(req, timeout=10) as resp:
+            body = resp.read().decode("utf-8", errors="replace").strip()
+        token = body.split()[0].lower() if body else ""
+        if token in {"good", "nochg"}:
+            return True, f"no-ip update ok ({token})", body
+        return False, f"no-ip update failed ({token or 'empty response'})", body
+    except HTTPError as exc:
+        return False, f"HTTP error {exc.code}", ""
+    except URLError as exc:
+        return False, f"network error: {exc.reason}", ""
+    except Exception as exc:
+        return False, f"unexpected error: {exc}", ""
+
+
+async def ddns_update_once() -> None:
+    ok, message, response = await asyncio.to_thread(_noip_update_once_sync)
+    _ddns_set_status(ok, message, response)
+    if ok:
+        logger.info("DynDNS update succeeded: %s", message)
+    else:
+        logger.warning("DynDNS update failed: %s; response='%s'", message, response)
+
+
+async def ddns_update_loop() -> None:
+    while True:
+        await asyncio.sleep(max(1, DDNS_INTERVAL_SEC))
+        await ddns_update_once()
+
+
 async def startup() -> None:
+    global ddns_task
     ensure_upload_dir()
     load_onedrive_config()
     logger.info("Upload directory: %s", UPLOAD_DIR)
     logger.info("LAN upload URL: %s", get_lan_upload_url())
+    if FAIL_WITH_503:
+        logger.warning(
+            "Forced 503 mode is enabled (CAN_UPLOAD_FORCE_503=1). All /edit uploads will return 503 with Retry-After=%ss.",
+            FAIL_RETRY_AFTER_SEC,
+        )
+    ddns_ok, ddns_message = _ddns_is_configured()
+    if DDNS_ENABLED:
+        if ddns_ok:
+            logger.info("DynDNS enabled (%s): hostname=%s", DDNS_PROVIDER, DDNS_HOSTNAME)
+            await ddns_update_once()
+            if DDNS_INTERVAL_SEC > 0:
+                ddns_task = asyncio.create_task(ddns_update_loop(), name="ddns-update-loop")
+                logger.info("DynDNS periodic refresh enabled: every %ss", DDNS_INTERVAL_SEC)
+            else:
+                logger.info("DynDNS periodic refresh disabled (CAN_UPLOAD_DDNS_INTERVAL_SEC=0)")
+        else:
+            _ddns_set_status(False, ddns_message)
+            logger.warning("DynDNS enabled but not configured: %s", ddns_message)
     if not BONJOUR_ENABLED:
         logger.info("Bonjour registration disabled by CAN_UPLOAD_ENABLE_BONJOUR")
         return
@@ -639,14 +898,30 @@ async def startup() -> None:
 
 
 async def shutdown() -> None:
+    global ddns_task
+    if ddns_task:
+        ddns_task.cancel()
+        try:
+            await ddns_task
+        except asyncio.CancelledError:
+            pass
+        ddns_task = None
     await advertiser.unregister()
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     await startup()
-    yield
-    await shutdown()
+    try:
+        yield
+    except asyncio.CancelledError:
+        # Uvicorn may cancel lifespan tasks during Ctrl+C shutdown on Windows.
+        pass
+    finally:
+        try:
+            await shutdown()
+        except asyncio.CancelledError:
+            pass
 
 
 app = FastAPI(title="CAN Upload Mock Server", lifespan=lifespan)
@@ -656,7 +931,7 @@ app = FastAPI(title="CAN Upload Mock Server", lifespan=lifespan)
 def root() -> Dict[str, Any]:
     return {
         "service": "can-upload-mock",
-        "post_endpoints": ["/edit", "/upload"],
+        "post_endpoints": ["/edit", "/upload", "/edit-chunked", "/upload-chunked"],
         "bonjour_url": f"http://{advertiser.service_name}.local:{advertiser.port}/",
         "lan_upload_url": get_lan_upload_url(),
         "bonjour_enabled": BONJOUR_ENABLED,
@@ -666,6 +941,16 @@ def root() -> Dict[str, Any]:
         "upload_directory": str(UPLOAD_DIR),
         "requires_auth_token": bool(API_TOKEN),
         "onedrive_httpx_available": httpx is not None,
+        "ddns": {
+            "enabled": DDNS_ENABLED,
+            "provider": DDNS_PROVIDER,
+            "hostname": DDNS_HOSTNAME,
+            "interval_sec": DDNS_INTERVAL_SEC,
+            "last_run": ddns_status.get("last_run", ""),
+            "last_ok": ddns_status.get("last_ok", False),
+            "last_message": ddns_status.get("last_message", ""),
+            "last_response": ddns_status.get("last_response", ""),
+        },
         "max_upload_bytes": MAX_UPLOAD_BYTES,
         "allowed_extensions": sorted(ALLOWED_EXTENSIONS),
         "allowed_mime_types": sorted(ALLOWED_MIME_TYPES),
@@ -902,6 +1187,100 @@ def readyz() -> JSONResponse:
     )
 
 
+async def upload_chunked_core(request: Request, client_ip: str) -> JSONResponse:
+    metadata, metadata_errors = parse_metadata_from_headers(request)
+    if metadata_errors:
+        append_audit({"client_ip": client_ip, "outcome": "invalid_metadata_headers", "errors": metadata_errors})
+        return response_error(
+            code="INVALID_METADATA",
+            message="; ".join(metadata_errors),
+            status_code=400,
+            data={"required_headers": ["x-bus-id", "x-start-ms", "x-end-ms"]},
+        )
+
+    idempotency_key = request.headers.get("X-Idempotency-Key", "").strip()
+    now = time.time()
+    if idempotency_key:
+        with idempotency_lock:
+            _cleanup_old_idempotency_entries(now)
+            existing = idempotency_store.get(idempotency_key)
+            if existing:
+                _, existing_response = existing
+                append_audit(
+                    {
+                        "client_ip": client_ip,
+                        "outcome": "idempotency_replay",
+                        "idempotency_key": idempotency_key,
+                    }
+                )
+                return response_ok(
+                    code="DUPLICATE_IDEMPOTENCY_KEY",
+                    message="request already processed for idempotency key",
+                    data=existing_response,
+                    status_code=200,
+                )
+
+    filename = safe_filename(request.headers.get("x-filename", "chunked-upload.bin"))
+    content_type = request.headers.get("content-type", "application/octet-stream")
+    if not is_extension_allowed(filename):
+        append_audit({"client_ip": client_ip, "outcome": "blocked_extension", "filename": filename})
+        return response_error(
+            code="UNSUPPORTED_FILE_EXTENSION",
+            message=f"extension not allowed for file '{filename}'",
+            status_code=415,
+        )
+    if not is_mime_allowed(content_type):
+        append_audit({"client_ip": client_ip, "outcome": "blocked_mime", "filename": filename})
+        return response_error(
+            code="UNSUPPORTED_MEDIA_TYPE",
+            message=f"MIME type not allowed for file '{filename}'",
+            status_code=415,
+        )
+    try:
+        saved = await save_stream_atomic(request, filename)
+    except ClientDisconnect:
+        append_audit({"client_ip": client_ip, "outcome": "client_disconnect_during_stream_write", "filename": filename})
+        return response_error(
+            code="CLIENT_DISCONNECT",
+            message="client disconnected during chunked upload stream",
+            status_code=499,
+        )
+    except asyncio.CancelledError:
+        return response_error(
+            code="REQUEST_CANCELLED",
+            message="request cancelled during chunked upload stream",
+            status_code=499,
+        )
+    except ValueError as exc:
+        append_audit({"client_ip": client_ip, "outcome": "too_large", "filename": filename})
+        return response_error(code="PAYLOAD_TOO_LARGE", message=str(exc), status_code=413)
+    except Exception as exc:
+        append_audit({"client_ip": client_ip, "outcome": "write_error", "filename": filename, "error": str(exc)})
+        return response_error(
+            code="UPLOAD_WRITE_FAILED",
+            message=f"failed to save '{filename}': {exc}",
+            status_code=500,
+        )
+
+    saved_files = [
+        {
+            "field": "stream",
+            "filename": filename,
+            "content_type": content_type,
+            "saved_as": saved["saved_as"],
+            "bytes": saved["bytes"],
+            "sha256": saved["sha256"],
+            "path": saved["path"],
+        }
+    ]
+    return await build_final_upload_response(
+        client_ip=client_ip,
+        metadata=metadata,
+        saved_files=saved_files,
+        idempotency_key=idempotency_key,
+    )
+
+
 @app.post("/edit")
 async def upload_like_esp(request: Request) -> JSONResponse:
     client_ip = request_client_ip(request)
@@ -928,14 +1307,25 @@ async def upload_like_esp(request: Request) -> JSONResponse:
             retry_after=retry_after,
         )
 
+    upload_mode = request.headers.get("x-upload-mode", "").strip().lower()
+    content_type = request.headers.get("content-type", "").strip().lower()
+    if upload_mode in {"chunked", "raw"} or content_type.startswith("application/octet-stream"):
+        return await upload_chunked_core(request, client_ip)
+
     try:
         form = await request.form()
+    except ClientDisconnect:
+        append_audit({"client_ip": client_ip, "outcome": "client_disconnect_during_form_parse"})
+        return response_error(
+            code="CLIENT_DISCONNECT",
+            message="client disconnected while streaming multipart body",
+            status_code=499,
+        )
     except asyncio.CancelledError:
         return response_error(
             code="REQUEST_CANCELLED",
             message="request cancelled while reading multipart body",
-            status_code=503,
-            retry_after=1,
+            status_code=499,
         )
     items = list(form.multi_items())
     metadata, metadata_errors = parse_metadata(items)
@@ -1011,12 +1401,24 @@ async def upload_like_esp(request: Request) -> JSONResponse:
             )
         try:
             saved = await save_upload_atomic(value, filename)
+        except ClientDisconnect:
+            append_audit(
+                {
+                    "client_ip": client_ip,
+                    "outcome": "client_disconnect_during_file_write",
+                    "filename": filename,
+                }
+            )
+            return response_error(
+                code="CLIENT_DISCONNECT",
+                message="client disconnected during file upload",
+                status_code=499,
+            )
         except asyncio.CancelledError:
             return response_error(
                 code="REQUEST_CANCELLED",
                 message="request cancelled during file write",
-                status_code=503,
-                retry_after=1,
+                status_code=499,
             )
         except ValueError as exc:
             append_audit({"client_ip": client_ip, "outcome": "too_large", "filename": filename})
@@ -1036,32 +1438,6 @@ async def upload_like_esp(request: Request) -> JSONResponse:
                 status_code=500,
             )
 
-        dedupe_key = build_duplicate_key(filename, metadata, saved["sha256"])
-        existing_duplicate = content_fingerprint_store.get(dedupe_key)
-        if existing_duplicate:
-            duplicate_path = Path(saved["path"])
-            duplicate_path.unlink(missing_ok=True)
-            duplicate_data = {
-                "filename": filename,
-                "existing": existing_duplicate,
-                "metadata": metadata,
-            }
-            append_audit(
-                {
-                    "client_ip": client_ip,
-                    "outcome": "duplicate_content",
-                    "filename": filename,
-                    "sha256": saved["sha256"],
-                    "metadata": metadata,
-                }
-            )
-            return response_ok(
-                code="DUPLICATE_CONTENT",
-                message="duplicate content detected; not stored again",
-                data=duplicate_data,
-                status_code=200,
-            )
-
         file_result = {
             "field": key,
             "filename": value.filename,
@@ -1072,65 +1448,49 @@ async def upload_like_esp(request: Request) -> JSONResponse:
             "path": saved["path"],
         }
         saved_files.append(file_result)
-        content_fingerprint_store[dedupe_key] = file_result
 
-    if not saved_files:
-        append_audit({"client_ip": client_ip, "outcome": "no_files"})
-        return response_error(code="NO_FILES", message="no multipart file fields were provided", status_code=400)
-
-    response_data = {
-        "count": len(saved_files),
-        "files": saved_files,
-        "metadata": metadata,
-        "idempotency_key": idempotency_key or None,
-    }
-    onedrive_results: List[Dict[str, Any]] = []
-    for file_info in saved_files:
-        try:
-            local_path = Path(str(file_info["path"]))
-            await auto_sync_file_to_onedrive(local_path)
-            sync = onedrive_sync_status.get(local_path.name, {})
-            onedrive_results.append(
-                {
-                    "filename": local_path.name,
-                    "state": sync.get("state", "unknown"),
-                    "message": sync.get("message", ""),
-                    "web_url": sync.get("web_url", ""),
-                }
-            )
-        except Exception as exc:
-            onedrive_results.append(
-                {
-                    "filename": str(file_info.get("saved_as", "")),
-                    "state": "error",
-                    "message": str(exc),
-                    "web_url": "",
-                }
-            )
-    response_data["onedrive"] = onedrive_results
-    if idempotency_key:
-        with idempotency_lock:
-            idempotency_store[idempotency_key] = (time.time(), response_data)
-    append_audit(
-        {
-            "client_ip": client_ip,
-            "outcome": "accepted",
-            "metadata": metadata,
-            "idempotency_key": idempotency_key or None,
-            "files": saved_files,
-        }
-    )
-    return response_ok(
-        code="UPLOAD_ACCEPTED",
-        message="upload stored successfully",
-        data=response_data,
-        status_code=201,
+    return await build_final_upload_response(
+        client_ip=client_ip,
+        metadata=metadata,
+        saved_files=saved_files,
+        idempotency_key=idempotency_key,
     )
 
 
 @app.post("/upload")
 async def upload_generic(request: Request) -> JSONResponse:
     return await upload_like_esp(request)
+
+
+@app.post("/edit-chunked")
+async def upload_chunked_endpoint(request: Request) -> JSONResponse:
+    client_ip = request_client_ip(request)
+    if FAIL_WITH_503:
+        append_audit({"client_ip": client_ip, "outcome": "forced_503"})
+        return response_error(
+            code="TEMPORARY_UNAVAILABLE",
+            message="mock temporary outage",
+            status_code=503,
+            retry_after=FAIL_RETRY_AFTER_SEC,
+        )
+    if auth_failed(request):
+        append_audit({"client_ip": client_ip, "outcome": "auth_failed"})
+        return response_error(code="AUTH_FAILED", message="invalid or missing API token", status_code=401)
+    limited, retry_after = is_rate_limited(client_ip)
+    if limited:
+        append_audit({"client_ip": client_ip, "outcome": "rate_limited", "retry_after": retry_after})
+        return response_error(
+            code="RATE_LIMITED",
+            message="too many requests from client",
+            status_code=429,
+            retry_after=retry_after,
+        )
+    return await upload_chunked_core(request, client_ip)
+
+
+@app.post("/upload-chunked")
+async def upload_chunked_alias(request: Request) -> JSONResponse:
+    return await upload_chunked_endpoint(request)
 
 
 if __name__ == "__main__":
@@ -1142,6 +1502,14 @@ if __name__ == "__main__":
     print(f"Bonjour URL: http://{advertiser.service_name}.local:{DEFAULT_PORT}/")
     print(f"LAN upload URL: http://{lan_ip}:{DEFAULT_PORT}/edit")
     print(f"Web UI: http://{lan_ip}:{DEFAULT_PORT}/ui")
+    if DDNS_ENABLED:
+        print(f"DynDNS: enabled ({DDNS_PROVIDER}) for hostname '{DDNS_HOSTNAME}'")
+    else:
+        print("DynDNS: disabled")
+    if FAIL_WITH_503:
+        print(
+            f"WARNING: Forced 503 mode is enabled (CAN_UPLOAD_FORCE_503=1, Retry-After={FAIL_RETRY_AFTER_SEC}s)"
+        )
     if httpx is None:
         print("OneDrive note: httpx not installed, OneDrive features disabled until you install requirements.")
     print(f"Saved files directory: {UPLOAD_DIR}")

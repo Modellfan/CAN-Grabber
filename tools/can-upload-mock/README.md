@@ -5,6 +5,12 @@ This folder contains a FastAPI upload backend used to develop and test ESP32 aut
 ## Features implemented
 
 - `POST /edit` and `POST /upload` multipart endpoints
+- chunked stream endpoints:
+  - `POST /edit-chunked`
+  - `POST /upload-chunked`
+  - `POST /edit` also auto-detects raw chunked mode when:
+    - `X-Upload-Mode: chunked` or `raw`, or
+    - `Content-Type: application/octet-stream`
 - Web UI at `GET /ui`:
   - shows all local uploaded files
   - OneDrive setup menu
@@ -151,6 +157,18 @@ curl -X POST http://127.0.0.1:8000/edit `
   -H "X-Idempotency-Key: demo-1"
 ```
 
+Chunked/raw stream test (no multipart parser path):
+
+```powershell
+curl -X POST http://127.0.0.1:8000/edit-chunked `
+  -H "Content-Type: application/octet-stream" `
+  -H "X-Filename: test.bin" `
+  -H "X-Bus-Id: 0" `
+  -H "X-Start-Ms: 1000" `
+  -H "X-End-Ms: 2000" `
+  --data-binary "@README.md"
+```
+
 ## Config (environment variables)
 
 - `CAN_UPLOAD_PORT` default `8000`
@@ -170,6 +188,15 @@ curl -X POST http://127.0.0.1:8000/edit `
 - `CAN_UPLOAD_AUDIT_LOG_FILE` default `upload_audit.jsonl`
 - `CAN_UPLOAD_ONEDRIVE_CONFIG_FILE` default `onedrive_config.json`
 - `CAN_UPLOAD_ONEDRIVE_SCOPE` default `offline_access Files.ReadWrite`
+- `CAN_UPLOAD_DDNS_ENABLE` default `0` (set `1` to enable DynDNS updates on server start)
+- `CAN_UPLOAD_DDNS_PROVIDER` default `noip` (currently only `noip` supported)
+- `CAN_UPLOAD_DDNS_HOSTNAME` No-IP hostname to update (e.g. `nobbyfix.ddns.net`)
+- `CAN_UPLOAD_DDNS_USERNAME` No-IP account username
+- `CAN_UPLOAD_DDNS_PASSWORD` No-IP account password
+- `CAN_UPLOAD_DDNS_UPDATE_URL` default `https://dynupdate.no-ip.com/nic/update`
+- `CAN_UPLOAD_DDNS_INTERVAL_SEC` default `600` (periodic refresh; set `0` for one-shot update at startup only)
+- `CAN_UPLOAD_DDNS_USER_AGENT` default `can-upload-mock/1.0`
+- `CAN_UPLOAD_DDNS_MYIP` optional explicit public IP (normally leave empty)
 
 ## Example runtime configs
 
@@ -186,5 +213,17 @@ Enable auth + strict allowlist:
 $env:CAN_UPLOAD_API_TOKEN="my-secret-token"
 $env:CAN_UPLOAD_ALLOWED_EXTENSIONS=".log,.csv,.bin"
 $env:CAN_UPLOAD_ALLOWED_MIME_TYPES="text/plain,application/octet-stream,text/csv"
+python server.py
+```
+
+Enable No-IP DynDNS auto update (startup + periodic refresh):
+
+```powershell
+$env:CAN_UPLOAD_DDNS_ENABLE="1"
+$env:CAN_UPLOAD_DDNS_PROVIDER="noip"
+$env:CAN_UPLOAD_DDNS_HOSTNAME="nobbyfix.ddns.net"
+$env:CAN_UPLOAD_DDNS_USERNAME="<your-noip-username>"
+$env:CAN_UPLOAD_DDNS_PASSWORD="<your-noip-password>"
+$env:CAN_UPLOAD_DDNS_INTERVAL_SEC="600"
 python server.py
 ```

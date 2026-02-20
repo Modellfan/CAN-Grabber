@@ -1,0 +1,183 @@
+﻿
+run                           result http_status elapsed_ms upload_mb_s max_blocking_us_between_yields
+---                           ------ ----------- ---------- ----------- ------------------------------
+speed-close-len-16k           OK     201         49908      0.16        18199                         
+speed-close-len-8k            OK     201         18192      0.44        12579                         
+speed-budget-close-len-8k-4ms OK     201         18018      0.44        14026                         
+resp-close-len-8k-2ms         OK     201         18223      0.44        13047                         
+resp-close-len-4k-1ms         OK     201         17855      0.45        18875                         
+resp-close-len-2k-0.5ms       OK     201         17570      0.46        12033                         
+
+
+
+Detailed per-run stats
+----------------------
+Run: speed-close-len-16k
+  algo: greedy
+  transfer: content-length
+  keep_alive: off
+  read_write_chunk: 16384 / 16384
+  result: OK
+  http_status: 201
+  fail_reason_phase: 0 / 0
+  sent_bytes: 8389908
+  elapsed_ms: 49908
+  upload_mb_s: 0.16
+  sd_read_ms_total: 6442
+  max_blocking_us_between_yields: 18199
+  write_calls_zero_writes: 3045 / 3298
+  tcp_no_space_events_max_streak: 3298 / 23
+  tcp_disconnect_error_events: 1 / 0
+  callbacks_c_a_p_d_e_x: 1/3212/100/2/0/1
+  callback_core_switches_last_core: 0 / 1
+  sd_read_calls_us_avg_p95_p99_max: 512 / 12612 / 13817 / 14050 / 14282
+  cpu_avg_core0_core1_busy: 0.0 / 0.0
+  cpu_avg_loop_async_task: 0.0 / 0.0
+  task_states_run_ready_blocked_susp_deleted: 2/1/1/0/0
+  runtime_delta_total: 0
+  heap_min_free_largest_block_bytes: 181664 / 167924
+  psram_min_free_bytes: 0
+  wifi_min_rssi_disconnect_events: -64 / 0
+  stack_hw_min_loop_async_idle0_idle1_words: 5168 / 14508 / 224 / 328
+
+Run: speed-close-len-8k
+  algo: greedy
+  transfer: content-length
+  keep_alive: off
+  read_write_chunk: 8192 / 8192
+  result: OK
+  http_status: 201
+  fail_reason_phase: 0 / 0
+  sent_bytes: 8389934
+  elapsed_ms: 18192
+  upload_mb_s: 0.44
+  sd_read_ms_total: 6490
+  max_blocking_us_between_yields: 12579
+  write_calls_zero_writes: 3044 / 3185
+  tcp_no_space_events_max_streak: 3185 / 4
+  tcp_disconnect_error_events: 1 / 0
+  callbacks_c_a_p_d_e_x: 1/3152/36/2/0/1
+  callback_core_switches_last_core: 0 / 1
+  sd_read_calls_us_avg_p95_p99_max: 1024 / 6344 / 7315 / 7452 / 7684
+  cpu_avg_core0_core1_busy: 0.0 / 0.0
+  cpu_avg_loop_async_task: 0.0 / 0.0
+  task_states_run_ready_blocked_susp_deleted: 2/1/1/0/0
+  runtime_delta_total: 0
+  heap_min_free_largest_block_bytes: 179164 / 167924
+  psram_min_free_bytes: 0
+  wifi_min_rssi_disconnect_events: -63 / 0
+  stack_hw_min_loop_async_idle0_idle1_words: 5168 / 14508 / 224 / 328
+
+Run: speed-budget-close-len-8k-4ms
+  algo: budgeted
+  transfer: content-length
+  keep_alive: off
+  read_write_chunk: 8192 / 4096
+  result: OK
+  http_status: 201
+  fail_reason_phase: 0 / 0
+  sent_bytes: 8389945
+  elapsed_ms: 18018
+  upload_mb_s: 0.44
+  sd_read_ms_total: 6506
+  max_blocking_us_between_yields: 14026
+  write_calls_zero_writes: 3648 / 3208
+  tcp_no_space_events_max_streak: 3208 / 5
+  tcp_disconnect_error_events: 1 / 0
+  callbacks_c_a_p_d_e_x: 1/3176/36/2/0/1
+  callback_core_switches_last_core: 0 / 1
+  sd_read_calls_us_avg_p95_p99_max: 1024 / 6336 / 7304 / 7485 / 7648
+  cpu_avg_core0_core1_busy: 0.0 / 0.0
+  cpu_avg_loop_async_task: 0.0 / 0.0
+  task_states_run_ready_blocked_susp_deleted: 2/1/1/0/0
+  runtime_delta_total: 0
+  heap_min_free_largest_block_bytes: 179164 / 167924
+  psram_min_free_bytes: 0
+  wifi_min_rssi_disconnect_events: -62 / 0
+  stack_hw_min_loop_async_idle0_idle1_words: 5168 / 14232 / 208 / 328
+
+Run: resp-close-len-8k-2ms
+  algo: budgeted
+  transfer: content-length
+  keep_alive: off
+  read_write_chunk: 8192 / 4096
+  result: OK
+  http_status: 201
+  fail_reason_phase: 0 / 0
+  sent_bytes: 8389937
+  elapsed_ms: 18223
+  upload_mb_s: 0.44
+  sd_read_ms_total: 6478
+  max_blocking_us_between_yields: 13047
+  write_calls_zero_writes: 3616 / 3179
+  tcp_no_space_events_max_streak: 3179 / 5
+  tcp_disconnect_error_events: 1 / 0
+  callbacks_c_a_p_d_e_x: 1/3148/36/2/0/1
+  callback_core_switches_last_core: 0 / 1
+  sd_read_calls_us_avg_p95_p99_max: 1024 / 6344 / 7346 / 7468 / 7672
+  cpu_avg_core0_core1_busy: 0.0 / 0.0
+  cpu_avg_loop_async_task: 0.0 / 0.0
+  task_states_run_ready_blocked_susp_deleted: 2/1/1/0/0
+  runtime_delta_total: 0
+  heap_min_free_largest_block_bytes: 179156 / 167924
+  psram_min_free_bytes: 0
+  wifi_min_rssi_disconnect_events: -61 / 0
+  stack_hw_min_loop_async_idle0_idle1_words: 5152 / 14232 / 208 / 328
+
+Run: resp-close-len-4k-1ms
+  algo: budgeted
+  transfer: content-length
+  keep_alive: off
+  read_write_chunk: 4096 / 2048
+  result: OK
+  http_status: 201
+  fail_reason_phase: 0 / 0
+  sent_bytes: 8389951
+  elapsed_ms: 17855
+  upload_mb_s: 0.45
+  sd_read_ms_total: 6050
+  max_blocking_us_between_yields: 18875
+  write_calls_zero_writes: 5781 / 3262
+  tcp_no_space_events_max_streak: 3262 / 6
+  tcp_disconnect_error_events: 1 / 0
+  callbacks_c_a_p_d_e_x: 1/3256/35/2/0/1
+  callback_core_switches_last_core: 0 / 1
+  sd_read_calls_us_avg_p95_p99_max: 2048 / 2950 / 3158 / 3241 / 3533
+  cpu_avg_core0_core1_busy: 0.0 / 0.0
+  cpu_avg_loop_async_task: 0.0 / 0.0
+  task_states_run_ready_blocked_susp_deleted: 2/1/1/0/0
+  runtime_delta_total: 0
+  heap_min_free_largest_block_bytes: 175816 / 163828
+  psram_min_free_bytes: 0
+  wifi_min_rssi_disconnect_events: -61 / 0
+  stack_hw_min_loop_async_idle0_idle1_words: 5152 / 14232 / 208 / 328
+
+Run: resp-close-len-2k-0.5ms
+  algo: budgeted
+  transfer: content-length
+  keep_alive: off
+  read_write_chunk: 2048 / 1024
+  result: OK
+  http_status: 201
+  fail_reason_phase: 0 / 0
+  sent_bytes: 8389953
+  elapsed_ms: 17570
+  upload_mb_s: 0.46
+  sd_read_ms_total: 6135
+  max_blocking_us_between_yields: 12033
+  write_calls_zero_writes: 9796 / 2829
+  tcp_no_space_events_max_streak: 2829 / 5
+  tcp_disconnect_error_events: 1 / 0
+  callbacks_c_a_p_d_e_x: 1/3309/35/2/0/1
+  callback_core_switches_last_core: 0 / 1
+  sd_read_calls_us_avg_p95_p99_max: 4096 / 1497 / 3102 / 3216 / 3517
+  cpu_avg_core0_core1_busy: 0.0 / 0.0
+  cpu_avg_loop_async_task: 0.0 / 0.0
+  task_states_run_ready_blocked_susp_deleted: 2/1/1/0/0
+  runtime_delta_total: 0
+  heap_min_free_largest_block_bytes: 169220 / 155636
+  psram_min_free_bytes: 0
+  wifi_min_rssi_disconnect_events: -62 / 0
+  stack_hw_min_loop_async_idle0_idle1_words: 5152 / 14232 / 208 / 328
+
+

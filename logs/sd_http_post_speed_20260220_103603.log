@@ -1,0 +1,142 @@
+﻿Rebooting MCU...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4208d22a
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP POST speed test
+Target URL: http://192.168.3.2:8000/edit
+.
+WiFi connected: 192.168.3.45
+8MB test file exists
+
+Commands:
+  speed       -> run maximize-throughput target
+  responsive  -> run low-blocking target
+  both        -> run both targets
+  reset       -> reboot MCU (fresh run from boot)
+  help        -> print commands
+
+===== START SUITE: maximize-upload-speed =====
+----------------------------------------
+Run: speed-keepalive-len-16k
+Algo: greedy
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 16384 / 16384
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 12001
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+----------------------------------------
+Run: speed-keepalive-chunked-16k
+Algo: greedy
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 16384 / 16384
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 5033
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+----------------------------------------
+Run: speed-keepalive-len-8k
+Algo: greedy
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 8192 / 8192
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 11778
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+----------------------------------------
+Run: speed-budget-len-16k-4ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 16384 / 8192
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 5278
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+===== END SUITE: maximize-upload-speed =====
+
+===== START SUITE: minimize-blocking =====
+----------------------------------------
+Run: resp-keepalive-chunked-8k-2ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 8192 / 4096
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 11779
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+----------------------------------------
+Run: resp-keepalive-chunked-4k-1ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 4096 / 2048
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 5281
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+----------------------------------------
+Run: resp-keepalive-len-4k-1ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 4096 / 2048
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 11778
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+----------------------------------------
+Run: resp-keepalive-chunked-2k-0.5ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 2048 / 1024
+Result: FAILED
+HTTP status: 0
+Sent bytes: 0
+Elapsed ms: 5280
+Upload MB/s: 0.00
+SD read ms total: 0
+Max blocking us (between yields): 0
+write calls / zero writes: 0 / 0
+===== END SUITE: minimize-blocking =====

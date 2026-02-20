@@ -1,0 +1,116 @@
+﻿----------------------------------------
+Run: speed-keepalive-len-16k
+Algo: greedy
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 16384 / 16384
+Result: OK
+HTTP status: 201
+Sent bytes: 8389417
+Elapsed ms: 17262
+Upload MB/s: 0.46
+SD read ms total: 6464
+Max blocking us (between yields): 18569
+write calls / zero writes: 3009 / 3216
+----------------------------------------
+Run: speed-keepalive-chunked-16k
+Algo: greedy
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 16384 / 16384
+Result: FAILED
+HTTP status: 0
+Sent bytes: 4541386
+Elapsed ms: 9029
+Upload MB/s: 0.48
+SD read ms total: 3510
+Max blocking us (between yields): 18706
+write calls / zero writes: 2166 / 1761
+----------------------------------------
+Run: speed-keepalive-len-8k
+Algo: greedy
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 8192 / 8192
+Result: OK
+HTTP status: 201
+Sent bytes: 8389433
+Elapsed ms: 16045
+Upload MB/s: 0.50
+SD read ms total: 6482
+Max blocking us (between yields): 12138
+write calls / zero writes: 2864 / 3074
+----------------------------------------
+Run: speed-budget-len-16k-4ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 16384 / 8192
+Result: OK
+HTTP status: 201
+Sent bytes: 8389435
+Elapsed ms: 18773
+Upload MB/s: 0.43
+SD read ms total: 6450
+Max blocking us (between yields): 18618
+write calls / zero writes: 2986 / 3205
+===== END SUITE: maximize-upload-speed =====
+
+===== START SUITE: minimize-blocking =====
+----------------------------------------
+Run: resp-keepalive-chunked-8k-2ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 8192 / 4096
+Result: FAILED
+HTTP status: 0
+Sent bytes: 4292600
+Elapsed ms: 8314
+Upload MB/s: 0.49
+SD read ms total: 3342
+Max blocking us (between yields): 12779
+write calls / zero writes: 2840 / 1599
+----------------------------------------
+Run: resp-keepalive-chunked-4k-1ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 4096 / 2048
+Result: FAILED
+HTTP status: 0
+Sent bytes: 6045996
+Elapsed ms: 11791
+Upload MB/s: 0.49
+SD read ms total: 4361
+Max blocking us (between yields): 12130
+write calls / zero writes: 6833 / 1751
+----------------------------------------
+Run: resp-keepalive-len-4k-1ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: on
+Read/write chunk: 4096 / 2048
+Result: OK
+HTTP status: 201
+Sent bytes: 8389436
+Elapsed ms: 15483
+Upload MB/s: 0.52
+SD read ms total: 6049
+Max blocking us (between yields): 19096
+write calls / zero writes: 5532 / 3103
+----------------------------------------
+Run: resp-keepalive-chunked-2k-0.5ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 2048 / 1024
+Result: FAILED
+HTTP status: 0
+Sent bytes: 1287243
+Elapsed ms: 2713
+Upload MB/s: 0.45
+SD read ms total: 958
+Max blocking us (between yields): 8044
+write calls / zero writes: 2687 / 233
+===== END SUITE: minimize-blocking =====

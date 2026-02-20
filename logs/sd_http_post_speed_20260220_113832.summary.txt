@@ -1,0 +1,12 @@
+﻿
+run                           result http_status elapsed_ms upload_mb_s max_block_us
+---                           ------ ----------- ---------- ----------- ------------
+speed-close-len-16k           FAILED 0           7018       0.41        18209       
+speed-close-len-8k            FAILED 0           12024      0.44        12310       
+speed-budget-close-len-8k-4ms FAILED 0           3012       0.43        11955       
+resp-close-len-8k-2ms         FAILED 0           10020      0.41        13374       
+resp-close-len-4k-1ms         FAILED 0           1006       0.46        15516       
+resp-close-len-2k-0.5ms       FAILED 0           2005       0.43        11781       
+
+
+

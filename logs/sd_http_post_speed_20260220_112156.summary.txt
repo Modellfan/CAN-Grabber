@@ -1,0 +1,14 @@
+﻿
+run                             result http_status elapsed_ms upload_mb_s max_block_us
+---                             ------ ----------- ---------- ----------- ------------
+speed-keepalive-len-16k         FAILED 0           2004       0.37        18584       
+speed-keepalive-chunked-16k     FAILED 0           2008       0.40        18426       
+speed-keepalive-len-8k          FAILED 0           12030      0.41        11578       
+speed-budget-len-16k-4ms        FAILED 0           9041       0.41        18542       
+resp-keepalive-chunked-8k-2ms   FAILED 0           2011       0.40        12247       
+resp-keepalive-chunked-4k-1ms   FAILED 0           1004       0.36        11210       
+resp-keepalive-len-4k-1ms       FAILED 0           3007       0.41        17063       
+resp-keepalive-chunked-2k-0.5ms FAILED 0           1158       0.37        7864        
+
+
+

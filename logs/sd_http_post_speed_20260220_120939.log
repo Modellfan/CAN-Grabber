@@ -1,0 +1,259 @@
+﻿----------------------------------------
+Run: speed-close-len-16k
+Algo: greedy
+Transfer: content-length
+Keep-Alive: off
+Read/write chunk: 16384 / 16384
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8389908
+Elapsed ms: 20040
+Upload MB/s: 0.40
+SD read ms total: 6470
+Max blocking us (between yields): 18153
+write calls / zero writes: 3029 / 3230
+TCP no-space events/max streak: 3230 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3194/40/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 512 / 12601 / 13794 / 13976 / 14290
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 181248 / 167924
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -64 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5152 / 14508 / 208 / 328
+----------------------------------------
+Run: speed-close-len-8k
+Algo: greedy
+Transfer: content-length
+Keep-Alive: off
+Read/write chunk: 8192 / 8192
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8389934
+Elapsed ms: 18631
+Upload MB/s: 0.43
+SD read ms total: 6455
+Max blocking us (between yields): 12909
+write calls / zero writes: 3047 / 3158
+TCP no-space events/max streak: 3158 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3125/37/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 1024 / 6325 / 7299 / 7440 / 7602
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 179180 / 167924
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -65 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5152 / 14508 / 208 / 328
+----------------------------------------
+Run: speed-budget-close-len-8k-4ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: off
+Read/write chunk: 8192 / 4096
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8389945
+Elapsed ms: 18378
+Upload MB/s: 0.44
+SD read ms total: 6467
+Max blocking us (between yields): 13063
+write calls / zero writes: 3652 / 3186
+TCP no-space events/max streak: 3186 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3153/37/2/0/1
+Callback core switches / last core: 2 / 1
+SD read calls/us avg/p95/p99/max: 1024 / 6317 / 7297 / 7464 / 7667
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 180652 / 167924
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -66 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14508 / 208 / 328
+===== END SUITE: maximize-upload-speed =====
+
+===== START SUITE: chunked-compatibility =====
+----------------------------------------
+Run: chunked-close-8k
+Algo: greedy
+Transfer: chunked
+Keep-Alive: off
+Read/write chunk: 8192 / 8192
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8398145
+Elapsed ms: 18715
+Upload MB/s: 0.43
+SD read ms total: 6476
+Max blocking us (between yields): 12617
+write calls / zero writes: 5051 / 3169
+TCP no-space events/max streak: 3169 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3136/37/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 1024 / 6327 / 7297 / 7459 / 7650
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 179632 / 167924
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -66 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14504 / 208 / 328
+----------------------------------------
+Run: chunked-budget-close-4k-1ms
+Algo: budgeted
+Transfer: chunked
+Keep-Alive: off
+Read/write chunk: 4096 / 2048
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8406348
+Elapsed ms: 18859
+Upload MB/s: 0.43
+SD read ms total: 6038
+Max blocking us (between yields): 12401
+write calls / zero writes: 9654 / 2647
+TCP no-space events/max streak: 2647 / 6
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3296/37/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 2048 / 2959 / 3179 / 3276 / 3680
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 175080 / 159732
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -70 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14504 / 208 / 328
+----------------------------------------
+Run: chunked-keepalive-8k
+Algo: greedy
+Transfer: chunked
+Keep-Alive: on
+Read/write chunk: 8192 / 8192
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8398168
+Elapsed ms: 19283
+Upload MB/s: 0.42
+SD read ms total: 6479
+Max blocking us (between yields): 13173
+write calls / zero writes: 5092 / 3190
+TCP no-space events/max streak: 3190 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3154/38/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 1024 / 6323 / 7290 / 7437 / 7648
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 179732 / 167924
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -67 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14312 / 208 / 328
+===== END SUITE: chunked-compatibility =====
+
+===== START SUITE: minimize-blocking =====
+----------------------------------------
+Run: resp-close-len-8k-2ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: off
+Read/write chunk: 8192 / 4096
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8389951
+Elapsed ms: 18037
+Upload MB/s: 0.44
+SD read ms total: 6472
+Max blocking us (between yields): 13070
+write calls / zero writes: 3634 / 3167
+TCP no-space events/max streak: 3167 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3136/36/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 1024 / 6331 / 7303 / 7427 / 7555
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 178940 / 167924
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -68 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14312 / 208 / 328
+----------------------------------------
+Run: resp-close-len-4k-1ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: off
+Read/write chunk: 4096 / 2048
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8389951
+Elapsed ms: 21236
+Upload MB/s: 0.38
+SD read ms total: 6016
+Max blocking us (between yields): 17330
+write calls / zero writes: 5730 / 3261
+TCP no-space events/max streak: 3261 / 5
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3255/43/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 2048 / 2945 / 3144 / 3236 / 3820
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 175080 / 159732
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -69 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14312 / 208 / 328
+----------------------------------------
+Run: resp-close-len-2k-0.5ms
+Algo: budgeted
+Transfer: content-length
+Keep-Alive: off
+Read/write chunk: 2048 / 1024
+Result: OK
+HTTP status: 201
+Fail reason / phase: 0 / 0
+Sent bytes: 8389953
+Elapsed ms: 18634
+Upload MB/s: 0.43
+SD read ms total: 6128
+Max blocking us (between yields): 12948
+write calls / zero writes: 9690 / 2730
+TCP no-space events/max streak: 2730 / 6
+TCP disconnect/error events: 1 / 0
+Callbacks C/A/P/D/E/X: 1/3243/37/2/0/1
+Callback core switches / last core: 0 / 1
+SD read calls/us avg/p95/p99/max: 4096 / 1497 / 3095 / 3196 / 3668
+CPU avg core0/core1 busy %: 0.0 / 0.0
+CPU avg loop/async task %: 0.0 / 0.0
+Task states run/ready/blocked/susp/deleted: 2/1/1/0/0
+Runtime delta total: 0
+Heap min free/largest block (bytes): 166876 / 155636
+PSRAM min free (bytes): 0
+WiFi min RSSI / disconnect events: -60 / 0
+Stack HW min loop/async/idle0/idle1 (words): 5120 / 14312 / 208 / 328
+===== END SUITE: minimize-blocking =====
