@@ -71,6 +71,9 @@ constexpr uint32_t kPostConnectProblemSleepMs = 2000;
 constexpr uint32_t kConnectTimeoutMs = 8000;
 constexpr uint32_t kResponseTimeoutMs = 10000;
 constexpr uint32_t kWriteTimeoutMs = 8000;
+constexpr size_t kUploadFileReadChunkBytes = 2048;
+constexpr size_t kUploadWriteChunkBytes = 512;
+constexpr uint32_t kUploadWriteBusyBudgetUs = 350;
 #ifndef UPLOAD_DEBUG_WRITE
 #define UPLOAD_DEBUG_WRITE 1
 #endif
@@ -373,6 +376,7 @@ bool write_all_with_timeout(WiFiClient& client,
   size_t offset = 0;
   uint32_t last_progress = millis();
   uint32_t last_debug_log = 0;
+  uint32_t busy_window_start_us = micros();
   while (offset < len) {
     if (!client.connected()) {
 #if UPLOAD_DEBUG_WRITE
@@ -419,8 +423,8 @@ bool write_all_with_timeout(WiFiClient& client,
     }
     const size_t remaining = static_cast<size_t>(len - offset);
     const size_t chunk = (writable > 0)
-                             ? min(static_cast<size_t>(writable), remaining)
-                             : min(static_cast<size_t>(256), remaining);
+                             ? min(min(static_cast<size_t>(writable), remaining), kUploadWriteChunkBytes)
+                             : min(kUploadWriteChunkBytes, remaining);
     const size_t written = client.write(data + offset, chunk);
     if (written == 0) {
 #if UPLOAD_DEBUG_WRITE
@@ -438,6 +442,7 @@ bool write_all_with_timeout(WiFiClient& client,
       }
 #endif
       vTaskDelay(pdMS_TO_TICKS(2));
+      busy_window_start_us = micros();
       continue;
     }
     offset += written;
@@ -452,7 +457,10 @@ bool write_all_with_timeout(WiFiClient& client,
         client.availableForWrite(),
         client.connected() ? 1 : 0);
 #endif
-    vTaskDelay(pdMS_TO_TICKS(1));
+    if ((micros() - busy_window_start_us) >= kUploadWriteBusyBudgetUs) {
+      vTaskDelay(pdMS_TO_TICKS(1));
+      busy_window_start_us = micros();
+    }
   }
   return true;
 }
@@ -469,6 +477,7 @@ bool write_file_chunk_with_timeout(WiFiClient& client,
   size_t offset = 0;
   uint32_t last_progress = millis();
   uint32_t last_debug_log = 0;
+  uint32_t busy_window_start_us = micros();
   while (offset < len) {
     if (!client.connected()) {
 #if UPLOAD_DEBUG_WRITE
@@ -515,8 +524,8 @@ bool write_file_chunk_with_timeout(WiFiClient& client,
     }
     const size_t remaining = static_cast<size_t>(len - offset);
     const size_t chunk = (writable > 0)
-                             ? min(static_cast<size_t>(writable), remaining)
-                             : min(static_cast<size_t>(256), remaining);
+                             ? min(min(static_cast<size_t>(writable), remaining), kUploadWriteChunkBytes)
+                             : min(kUploadWriteChunkBytes, remaining);
     const size_t written = client.write(data + offset, chunk);
     if (written == 0) {
 #if UPLOAD_DEBUG_WRITE
@@ -534,6 +543,7 @@ bool write_file_chunk_with_timeout(WiFiClient& client,
       }
 #endif
       vTaskDelay(pdMS_TO_TICKS(2));
+      busy_window_start_us = micros();
       continue;
     }
     offset += written;
@@ -555,7 +565,10 @@ bool write_file_chunk_with_timeout(WiFiClient& client,
       last_debug_log = millis();
     }
 #endif
-    vTaskDelay(pdMS_TO_TICKS(1));
+    if ((micros() - busy_window_start_us) >= kUploadWriteBusyBudgetUs) {
+      vTaskDelay(pdMS_TO_TICKS(1));
+      busy_window_start_us = micros();
+    }
   }
   return true;
 }
@@ -1074,7 +1087,7 @@ UploadResult send_file_multipart(const storage::FileInfo& info) {
                 static_cast<unsigned long>(prefix.length()),
                 static_cast<unsigned long>(millis() - debug_start_ms));
 #endif
-  uint8_t buffer[1024];
+  uint8_t buffer[kUploadFileReadChunkBytes];
   uint32_t file_chunks = 0;
   while (file.available()) {
     const size_t n = file.read(buffer, sizeof(buffer));

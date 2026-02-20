@@ -1444,3 +1444,144 @@ Der Fokus liegt auf:
 - OpenInverter Web-Interface
 - ESP32 Arduino Framework
 - PlatformIO
+## 23. Development Benchmarks Addendum
+
+### 23.1 SD HTTP POST Upload Test (Development)
+
+Goal:
+- Compare 8 MB SD -> HTTP POST multipart upload profiles for two targets:
+- maximize upload throughput
+- minimize blocking for other tasks sharing WiFi/SD resources
+
+Setup:
+- Environment: `sd_http_post_speed_test`
+- Source: `src/dev/sd_http_post_speed_test.cpp`
+- Target endpoint: `http://192.168.3.2:8000/edit` (`can-upload-mock`)
+- ESP WiFi IP during run: `192.168.3.45`
+- SD test file: `8 MB` (`/sd_http_post_8mb.bin`)
+
+Measured results:
+
+| Run | Result | HTTP | Elapsed | Upload MB/s | SD read ms | Max blocking us |
+| --- | --- | --- | --- | --- | --- | --- |
+| speed-greedy-16k | OK | 201 | 65.033 s | 0.12 | 6349 | 77280 |
+| speed-greedy-8k | OK | 201 | 67.286 s | 0.12 | 6377 | 137882 |
+| speed-budget-16k-4ms | OK | 201 | 82.789 s | 0.10 | 6368 | 55228 |
+| resp-budget-8k-2ms | OK | 201 | 82.610 s | 0.10 | 6342 | 56573 |
+| resp-budget-4k-1ms | OK | 201 | 82.524 s | 0.10 | 6148 | 72509 |
+
+Analysis:
+- All tested profiles were functionally stable (HTTP 201 for all runs).
+- Highest throughput in this run: `speed-greedy-16k` (~0.12 MB/s).
+- Lowest observed peak blocking: `speed-budget-16k-4ms` (~55 ms), with lower throughput (~0.10 MB/s).
+- `speed-greedy-8k` did not improve throughput vs `speed-greedy-16k`, and had worse peak blocking.
+- SD read time is similar across profiles; most delta comes from network write/scheduling behavior.
+
+Current recommendation:
+- Throughput priority: `speed-greedy-16k`
+- Responsiveness priority: `resp-budget-8k-2ms` (or `speed-budget-16k-4ms`)
+
+Follow-up:
+- Re-run with keep-alive and chunked transfer profiles and compare against this baseline in the same network conditions.
+
+### 23.2 SD HTTP POST Async State Machine Retest (fresh reset via serial)
+
+Serial control update:
+- Dev command `reset` added in `sd_http_post_speed_test` to reboot MCU from serial console and force a clean rerun.
+
+Method:
+- Flash latest firmware.
+- Open COM15 and send `reset`.
+- Capture full suite output from boot.
+
+Latest measured results (async callback-driven client):
+
+| Run | Result | HTTP | Elapsed | Upload MB/s | Max blocking us |
+| --- | --- | --- | --- | --- | --- |
+| speed-keepalive-len-16k | OK | 201 | 17.262 s | 0.46 | 18569 |
+| speed-keepalive-chunked-16k | FAILED | 0 | 9.029 s | 0.48 | 18706 |
+| speed-keepalive-len-8k | OK | 201 | 16.045 s | 0.50 | 12138 |
+| speed-budget-len-16k-4ms | OK | 201 | 18.773 s | 0.43 | 18618 |
+| resp-keepalive-chunked-8k-2ms | FAILED | 0 | 8.314 s | 0.49 | 12779 |
+| resp-keepalive-chunked-4k-1ms | FAILED | 0 | 11.791 s | 0.49 | 12130 |
+| resp-keepalive-len-4k-1ms | OK | 201 | 15.483 s | 0.52 | 19096 |
+| resp-keepalive-chunked-2k-0.5ms | FAILED | 0 | 2.713 s | 0.45 | 8044 |
+
+Analysis:
+- Async callback state machine significantly improved throughput versus previous sync runs.
+- Best stable profile in this setup: `resp-keepalive-len-4k-1ms` at ~0.52 MB/s.
+- Content-length multipart uploads are stable (HTTP 201) across tested non-chunked profiles.
+- Chunked multipart uploads are currently not accepted reliably by the current target stack (`HTTP 0`/disconnect), despite valid transfer mechanics in client.
+
+Current recommendation:
+- Use content-length profiles for production-like testing against current `can-upload-mock` endpoint.
+- Keep chunked profiles as compatibility probes only unless server parsing path is adjusted to fully support chunked multipart upload streams.
+
+### 23.3 Automated Serial Benchmark Script
+
+Helper script:
+- `tools/serial-run.ps1`
+
+Purpose:
+- Automates one benchmark cycle: `flash -> serial reset -> log capture -> parsed summary table`.
+
+Examples:
+- Full cycle (includes flash):
+  - `powershell -ExecutionPolicy Bypass -File tools\\serial-run.ps1`
+- Capture only (skip flash):
+  - `powershell -ExecutionPolicy Bypass -File tools\\serial-run.ps1 -NoFlash`
+- Custom port/env:
+  - `powershell -ExecutionPolicy Bypass -File tools\\serial-run.ps1 -Port COM15 -EnvName sd_http_post_speed_test`
+
+Outputs:
+- Raw log: `logs/sd_http_post_speed_<timestamp>.log`
+- Parsed summary: `logs/sd_http_post_speed_<timestamp>.summary.txt`
+
+### 23.4 Async Regression Analysis and Fix (2026-02-20)
+
+Observed regression:
+- Earlier runs had partial success, later runs dropped to mostly/all `HTTP 0`.
+- Server audit log (`Desktop/CAN Upload/upload_audit.jsonl`) showed repeated:
+  - `client_disconnect_during_form_parse`
+
+What changed:
+- The async client used activity/phase timeout checks from loop context while upload state was being advanced in AsyncTCP callbacks.
+- This created false `write-timeout` aborts during body send (diagnostic `Fail reason / phase: 4 / 1`), so the ESP closed mid-multipart and the server reported client disconnect.
+
+Fix applied:
+- Removed race-prone per-activity timeout abort logic.
+- Replaced with one hard run timeout guard (`kHardRunTimeoutMs`) only.
+- Kept async callback state machine upload path.
+- Kept default suites on content-length multipart (`Connection: close`) for stable baseline.
+
+Re-run (automated via `tools/serial-run.ps1`) after fix:
+
+| Run | Result | HTTP | Elapsed | Upload MB/s | Max blocking us |
+| --- | --- | --- | --- | --- | --- |
+| speed-close-len-16k | OK | 201 | 49.908 s | 0.16 | 18199 |
+| speed-close-len-8k | OK | 201 | 18.192 s | 0.44 | 12579 |
+| speed-budget-close-len-8k-4ms | OK | 201 | 18.018 s | 0.44 | 14026 |
+| resp-close-len-8k-2ms | OK | 201 | 18.223 s | 0.44 | 13047 |
+| resp-close-len-4k-1ms | OK | 201 | 17.855 s | 0.45 | 18875 |
+| resp-close-len-2k-0.5ms | OK | 201 | 17.570 s | 0.46 | 12033 |
+
+Current stable recommendation:
+- Best throughput in this run: `resp-close-len-2k-0.5ms` (~0.46 MB/s).
+- Balanced low peak-blocking profile: `speed-close-len-8k` / `resp-close-len-8k-2ms`.
+
+### 23.5 Preferred Upload Profile (Main Uploader)
+
+Preferred profile (latest sweep):
+- `tune-len-2k-512w-0.35ms`
+
+Meaning:
+- SD read chunk: `2048` bytes
+- TCP write chunk: `512` bytes
+- Cooperative busy budget: `0.35 ms` (`350 us`) before yielding
+
+Applied to main uploader task implementation:
+- `src/upload/upload_manager.cpp`
+- constants set to:
+  - `kUploadFileReadChunkBytes = 2048`
+  - `kUploadWriteChunkBytes = 512`
+  - `kUploadWriteBusyBudgetUs = 350`
