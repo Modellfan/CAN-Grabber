@@ -185,7 +185,6 @@ function renderCanStatusCards(canEntries) {
       <p>Total sent: <strong>${formatCount(entry.total_sent)} msg</strong></p>
       <p>High Water: <strong>${formatCount(entry.high_water)} / ${formatCount(entry.queue_capacity)} bytes (${formatPercent(entry.high_water_pct)})</strong></p>
       <p>Bus load: <strong>${formatPercent(entry.queue_load_pct)}</strong></p>
-      <p>Enabled: <strong>${toYesNo(entry.enabled)}</strong></p>
       <p>Logging: <strong>${toYesNo(entry.logging)}</strong></p>
       <p>Read only: <strong>${toYesNo(entry.read_only)}</strong></p>
       <p>Bitrate: <strong>${formatBitrate(entry.bitrate)}</strong></p>
@@ -372,6 +371,7 @@ function collectConfig() {
       wifi_count: wifiCount,
       wifi_sta_enabled: document.getElementById("wifi-sta-enabled").checked,
       auto_upload_enabled: document.getElementById("auto-upload-enabled").checked,
+      compressor_enabled: document.getElementById("compressor-enabled").checked,
       wifi,
       upload_url: document.getElementById("upload-url").value.trim(),
       influx_url: cfg.global.influx_url,
@@ -408,6 +408,11 @@ async function loadStatus() {
     document.getElementById("log-buses").textContent = data.logging.active_buses;
     document.getElementById("logging-state").textContent = data.logging.started ? "running" : "stopped";
     const up = data.uploader || {};
+    const uploaderEnabled = !!up.enabled;
+    const uploaderBox = document.getElementById("uploader-box");
+    if (uploaderBox) {
+      uploaderBox.classList.toggle("disabled", !uploaderEnabled);
+    }
     document.getElementById("upload-done-files").textContent = formatCount(up.uploaded_files ?? 0);
     document.getElementById("upload-open-files").textContent = formatCount(up.outstanding_files ?? 0);
     let reach = "-";
@@ -426,27 +431,45 @@ async function loadStatus() {
     document.getElementById("upload-remaining-mb").textContent = formatBytes(remainingBytes);
     const etaSec = upBps > 0 ? (remainingBytes / upBps) : 0;
     document.getElementById("upload-eta").textContent = formatEta(etaSec);
-    let uploadStatus = up.uploading ? "uploading" : "idle";
-    if (up.last_error) {
-      if (up.last_error_connect) {
-        uploadStatus = `connect problem: ${up.last_error_message || "server unreachable"}`;
-      } else if (up.last_error_interrupted) {
-        uploadStatus = `interrupted: ${up.last_error_message || "transfer failed"}`;
-      } else {
-        uploadStatus = `error: ${up.last_error_message || "upload failed"}`;
+    let uploadStatus = "disabled";
+    if (uploaderEnabled) {
+      uploadStatus = up.uploading ? "uploading" : "idle";
+      if (up.last_error) {
+        if (up.last_error_connect) {
+          uploadStatus = `connect problem: ${up.last_error_message || "server unreachable"}`;
+        } else if (up.last_error_interrupted) {
+          uploadStatus = `interrupted: ${up.last_error_message || "transfer failed"}`;
+        } else {
+          uploadStatus = `error: ${up.last_error_message || "upload failed"}`;
+        }
       }
+    } else {
+      reach = "disabled";
+      document.getElementById("upload-speed").textContent = "-";
+      document.getElementById("upload-eta").textContent = "-";
+      document.getElementById("upload-remaining-mb").textContent = formatBytes(remainingBytes);
     }
     document.getElementById("upload-status").textContent = uploadStatus;
 
     const cmp = data.compressor || {};
-    const cmpDone = Number(cmp.current_input_done_bytes || 0);
-    const cmpTotal = Number(cmp.current_input_total_bytes || 0);
-    const cmpCurrent = cmp.active ? `${formatBytes(cmpDone)} / ${formatBytes(cmpTotal)}` : "-";
-    document.getElementById("compress-current").textContent = cmpCurrent;
-    const cmpOutstandingFiles = Number(cmp.outstanding_files || 0);
-    const cmpOutstandingBytes = Number(cmp.outstanding_bytes || 0);
-    document.getElementById("compress-outstanding").textContent =
-      `${formatBytes(cmpOutstandingBytes)} (${formatCount(cmpOutstandingFiles)} files)`;
+    const compressorEnabled = !!cmp.enabled;
+    const compressorBox = document.getElementById("compressor-box");
+    if (compressorBox) {
+      compressorBox.classList.toggle("disabled", !compressorEnabled);
+    }
+    if (!compressorEnabled) {
+      document.getElementById("compress-current").textContent = "-";
+      document.getElementById("compress-outstanding").textContent = "-";
+    } else {
+      const cmpDone = Number(cmp.current_input_done_bytes || 0);
+      const cmpTotal = Number(cmp.current_input_total_bytes || 0);
+      const cmpCurrent = cmp.active ? `${formatBytes(cmpDone)} / ${formatBytes(cmpTotal)}` : "-";
+      document.getElementById("compress-current").textContent = cmpCurrent;
+      const cmpOutstandingFiles = Number(cmp.outstanding_files || 0);
+      const cmpOutstandingBytes = Number(cmp.outstanding_bytes || 0);
+      document.getElementById("compress-outstanding").textContent =
+        `${formatBytes(cmpOutstandingBytes)} (${formatCount(cmpOutstandingFiles)} files)`;
+    }
 
     if (data.time_epoch) {
       const dt = new Date(data.time_epoch * 1000);
@@ -477,6 +500,7 @@ async function loadConfig() {
     document.getElementById("log-low-space").value = Math.round(data.global.low_space_threshold_bytes / (1024 * 1024));
     document.getElementById("upload-url").value = data.global.upload_url || "";
     document.getElementById("auto-upload-enabled").checked = !!data.global.auto_upload_enabled;
+    document.getElementById("compressor-enabled").checked = !!data.global.compressor_enabled;
     document.getElementById("can-time-sync").checked = !!data.global.can_time_sync;
     document.getElementById("wifi-sta-enabled").checked = !!data.global.wifi_sta_enabled;
   } catch (err) {

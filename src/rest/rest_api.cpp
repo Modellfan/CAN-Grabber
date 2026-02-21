@@ -26,6 +26,27 @@ namespace {
 WebServer s_server(80);
 bool s_started = false;
 bool s_spiffs_ready = false;
+volatile uint32_t s_last_activity_ms = 0;
+constexpr uint32_t kSlowRequestThresholdMs = 120;
+constexpr uint32_t kSlowHandleClientThresholdMs = 40;
+const char* http_method_name(HTTPMethod method);
+
+void mark_activity() {
+  s_last_activity_ms = millis();
+}
+
+void log_slow_request_if_needed(const char* tag, uint32_t start_ms) {
+  const uint32_t elapsed = millis() - start_ms;
+  if (elapsed < kSlowRequestThresholdMs) {
+    return;
+  }
+  Serial.printf("[REST][SLOW] %s took %lums method=%s uri=%s freeHeap=%lu\n",
+                tag != nullptr ? tag : "handler",
+                static_cast<unsigned long>(elapsed),
+                http_method_name(s_server.method()),
+                s_server.uri().c_str(),
+                static_cast<unsigned long>(ESP.getFreeHeap()));
+}
 
 bool token_configured() {
   return config::get().global.api_token[0] != '\0';
@@ -96,9 +117,17 @@ const char* content_type_for_path(const String& path) {
   return "text/plain";
 }
 
+bool is_cacheable_static_asset(const String& path) {
+  return path.endsWith(".css") || path.endsWith(".js") || path.endsWith(".png") ||
+         path.endsWith(".gif") || path.endsWith(".svg") || path.endsWith(".ico");
+}
+
 void handle_static() {
+  mark_activity();
+  const uint32_t handler_start = millis();
   if (!s_spiffs_ready) {
     s_server.send(500, "text/plain", "SPIFFS mount failed");
+    log_slow_request_if_needed("static", handler_start);
     return;
   }
 
@@ -120,22 +149,57 @@ void handle_static() {
     path = "/index.html";
   }
 
-  if (!SPIFFS.exists(path)) {
+  bool use_gzip = false;
+  String file_path = path;
+  String gzip_path = path + ".gz";
+  if (SPIFFS.exists(gzip_path)) {
+    use_gzip = true;
+    file_path = gzip_path;
+  }
+
+  if (!SPIFFS.exists(file_path)) {
     s_server.send(404, "text/plain", "Not found");
+    log_slow_request_if_needed("static", handler_start);
     return;
   }
 
-  File file = SPIFFS.open(path, "r");
+  const uint32_t open_start = millis();
+  File file = SPIFFS.open(file_path, "r");
   if (!file) {
     s_server.send(500, "text/plain", "Failed to open file");
+    log_slow_request_if_needed("static", handler_start);
     return;
   }
+  const uint32_t open_elapsed = millis() - open_start;
+  if (open_elapsed >= kSlowRequestThresholdMs) {
+    Serial.printf("[REST][SLOW] static open took %lums path=%s\n",
+                  static_cast<unsigned long>(open_elapsed), file_path.c_str());
+  }
 
+  WiFiClient client = s_server.client();
+  client.setNoDelay(true);
+  if (is_cacheable_static_asset(path)) {
+    s_server.sendHeader("Cache-Control", "public, max-age=86400, immutable");
+  } else {
+    s_server.sendHeader("Cache-Control", "no-cache");
+  }
+  if (use_gzip) {
+    s_server.sendHeader("Content-Encoding", "gzip");
+  }
+
+  const uint32_t stream_start = millis();
   s_server.streamFile(file, content_type_for_path(path));
+  const uint32_t stream_elapsed = millis() - stream_start;
+  if (stream_elapsed >= kSlowRequestThresholdMs) {
+    Serial.printf("[REST][SLOW] static stream took %lums path=%s\n",
+                  static_cast<unsigned long>(stream_elapsed), path.c_str());
+  }
   file.close();
+  log_slow_request_if_needed("static", handler_start);
 }
 
 void handle_options() {
+  mark_activity();
   add_cors_headers();
   s_server.send(204, "text/plain", "");
 }
@@ -183,6 +247,7 @@ void add_config_json(JsonObject root, const config::Config& cfg) {
   global["wifi_count"] = cfg.global.wifi_count;
   global["wifi_sta_enabled"] = cfg.global.wifi_sta_enabled;
   global["auto_upload_enabled"] = cfg.global.auto_upload_enabled;
+  global["compressor_enabled"] = cfg.global.compressor_enabled;
   global["upload_url"] = cfg.global.upload_url;
   global["influx_url"] = cfg.global.influx_url;
   global["influx_token"] = cfg.global.influx_token;
@@ -230,6 +295,9 @@ void apply_config_from_json(const JsonObject& root) {
     }
     if (!global["auto_upload_enabled"].isNull()) {
       cfg.global.auto_upload_enabled = global["auto_upload_enabled"].as<bool>();
+    }
+    if (!global["compressor_enabled"].isNull()) {
+      cfg.global.compressor_enabled = global["compressor_enabled"].as<bool>();
     }
     if (!global["upload_url"].isNull()) {
       const char* value = global["upload_url"] | "";
@@ -311,8 +379,11 @@ void apply_config_from_json(const JsonObject& root) {
 }
 
 void handle_status() {
+  mark_activity();
+  const uint32_t handler_start = millis();
   add_cors_headers();
   if (!ensure_auth()) {
+    log_slow_request_if_needed("status", handler_start);
     return;
   }
 
@@ -347,8 +418,15 @@ void handle_status() {
   storage_obj["free_bytes"] = st.free_bytes;
   storage_obj["log_files"] = storage::file_count();
 
+  const uint32_t uploader_stats_start = millis();
   upload::Stats up = upload::get_stats();
+  const uint32_t uploader_stats_elapsed = millis() - uploader_stats_start;
+  if (uploader_stats_elapsed >= kSlowRequestThresholdMs) {
+    Serial.printf("[REST][SLOW] status upload::get_stats took %lums\n",
+                  static_cast<unsigned long>(uploader_stats_elapsed));
+  }
   JsonObject uploader = root["uploader"].to<JsonObject>();
+  uploader["enabled"] = config::get().global.auto_upload_enabled;
   uploader["initialized"] = up.initialized;
   uploader["uploading"] = up.uploading;
   uploader["upload_speed_bps"] = up.upload_speed_bytes_per_sec;
@@ -370,6 +448,7 @@ void handle_status() {
 
   compressor::Stats cmp = compressor::get_stats();
   JsonObject compressor_obj = root["compressor"].to<JsonObject>();
+  compressor_obj["enabled"] = config::get().global.compressor_enabled;
   compressor_obj["active"] = cmp.active;
   compressor_obj["current_input_done_bytes"] = cmp.current_input_done_bytes;
   compressor_obj["current_input_total_bytes"] = cmp.current_input_total_bytes;
@@ -411,11 +490,15 @@ void handle_status() {
   }
 
   send_json(doc);
+  log_slow_request_if_needed("status", handler_start);
 }
 
 void handle_config_get() {
+  mark_activity();
+  const uint32_t handler_start = millis();
   add_cors_headers();
   if (!ensure_auth()) {
+    log_slow_request_if_needed("config_get", handler_start);
     return;
   }
 
@@ -423,17 +506,22 @@ void handle_config_get() {
   JsonObject root = doc.to<JsonObject>();
   add_config_json(root, config::get());
   send_json(doc);
+  log_slow_request_if_needed("config_get", handler_start);
 }
 
 void handle_config_put() {
+  mark_activity();
+  const uint32_t handler_start = millis();
   add_cors_headers();
   if (!ensure_auth()) {
+    log_slow_request_if_needed("config_put", handler_start);
     return;
   }
 
   const String body = s_server.arg("plain");
   if (body.length() == 0) {
     s_server.send(400, "application/json", "{\"error\":\"empty_body\"}");
+    log_slow_request_if_needed("config_put", handler_start);
     return;
   }
 
@@ -441,6 +529,7 @@ void handle_config_put() {
   DeserializationError err = deserializeJson(doc, body);
   if (err) {
     s_server.send(400, "application/json", "{\"error\":\"bad_json\"}");
+    log_slow_request_if_needed("config_put", handler_start);
     return;
   }
 
@@ -448,9 +537,11 @@ void handle_config_put() {
   apply_config_from_json(root);
   net::connect();
   s_server.send(200, "application/json", "{\"ok\":true}");
+  log_slow_request_if_needed("config_put", handler_start);
 }
 
 void handle_time_set() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -493,6 +584,7 @@ void handle_time_set() {
 }
 
 void handle_wifi_scan() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -517,6 +609,7 @@ void handle_wifi_scan() {
 }
 
 void handle_can_stats() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -558,6 +651,7 @@ void handle_can_stats() {
 }
 
 void handle_storage_stats() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -573,6 +667,7 @@ void handle_storage_stats() {
 }
 
 void handle_buffers() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -592,8 +687,11 @@ void handle_buffers() {
 }
 
 void handle_files_list() {
+  mark_activity();
+  const uint32_t handler_start = millis();
   add_cors_headers();
   if (!ensure_auth()) {
+    log_slow_request_if_needed("files_list", handler_start);
     return;
   }
 
@@ -616,6 +714,7 @@ void handle_files_list() {
     entry["flags"] = info.flags;
   }
   send_json(doc);
+  log_slow_request_if_needed("files_list", handler_start);
 }
 
 bool parse_file_route(const String& uri, size_t* out_id, String* out_action) {
@@ -647,29 +746,36 @@ bool parse_file_route(const String& uri, size_t* out_id, String* out_action) {
 }
 
 void handle_file_download(size_t id) {
+  mark_activity();
+  const uint32_t handler_start = millis();
   add_cors_headers();
   if (!ensure_auth()) {
+    log_slow_request_if_needed("file_download", handler_start);
     return;
   }
 
   storage::FileInfo info{};
   if (!storage::get_file_info(id, &info)) {
     s_server.send(404, "application/json", "{\"error\":\"not_found\"}");
+    log_slow_request_if_needed("file_download", handler_start);
     return;
   }
   if (info.flags & 0x04u) {
     s_server.send(409, "application/json", "{\"error\":\"active_file\"}");
+    log_slow_request_if_needed("file_download", handler_start);
     return;
   }
 
   if (!SD.exists(info.path)) {
     s_server.send(404, "application/json", "{\"error\":\"missing\"}");
+    log_slow_request_if_needed("file_download", handler_start);
     return;
   }
 
   File file = SD.open(info.path, FILE_READ);
   if (!file) {
     s_server.send(500, "application/json", "{\"error\":\"open_failed\"}");
+    log_slow_request_if_needed("file_download", handler_start);
     return;
   }
 
@@ -677,14 +783,24 @@ void handle_file_download(size_t id) {
   const char* name = base ? base + 1 : info.path;
   String disposition = String("attachment; filename=\"") + name + "\"";
   s_server.sendHeader("Content-Disposition", disposition);
+  const uint32_t stream_start = millis();
   const size_t sent = s_server.streamFile(file, "application/octet-stream");
+  const uint32_t stream_elapsed = millis() - stream_start;
+  if (stream_elapsed >= kSlowRequestThresholdMs) {
+    Serial.printf("[REST][SLOW] file_download stream took %lums path=%s bytes=%lu\n",
+                  static_cast<unsigned long>(stream_elapsed),
+                  info.path,
+                  static_cast<unsigned long>(sent));
+  }
   file.close();
   if (sent > 0) {
     storage::mark_downloaded(info.path);
   }
+  log_slow_request_if_needed("file_download", handler_start);
 }
 
 void handle_file_mark_downloaded(size_t id) {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -700,6 +816,7 @@ void handle_file_mark_downloaded(size_t id) {
 }
 
 void handle_file_delete(size_t id) {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -713,6 +830,7 @@ void handle_file_delete(size_t id) {
 }
 
 void handle_file_upload(size_t id) {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -732,6 +850,7 @@ void handle_file_upload(size_t id) {
 }
 
 void handle_control_start() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -741,6 +860,7 @@ void handle_control_start() {
 }
 
 void handle_control_stop() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -750,6 +870,7 @@ void handle_control_stop() {
 }
 
 void handle_control_close_file() {
+  mark_activity();
   add_cors_headers();
   if (!ensure_auth()) {
     return;
@@ -770,6 +891,8 @@ void handle_control_close_file() {
 }
 
 void handle_not_found() {
+  mark_activity();
+  const uint32_t handler_start = millis();
   const String uri = s_server.uri();
   if (uri.startsWith("/api/")) {
     log_not_found_request();
@@ -805,6 +928,7 @@ void handle_not_found() {
   }
 
   s_server.send(404, "application/json", "{\"error\":\"not_found\"}");
+  log_slow_request_if_needed("not_found", handler_start);
 }
 
 } // namespace
@@ -879,7 +1003,27 @@ void loop() {
   if (!s_started) {
     return;
   }
+  const uint32_t start_us = micros();
   s_server.handleClient();
+  const uint32_t elapsed_us = micros() - start_us;
+  if (elapsed_us >= (kSlowHandleClientThresholdMs * 1000UL)) {
+    Serial.printf("[REST][SLOW] handleClient took %luus method=%s uri=%s\n",
+                  static_cast<unsigned long>(elapsed_us),
+                  http_method_name(s_server.method()),
+                  s_server.uri().c_str());
+  }
+}
+
+uint32_t last_activity_ms() {
+  return s_last_activity_ms;
+}
+
+bool recently_active(uint32_t window_ms) {
+  const uint32_t last = s_last_activity_ms;
+  if (last == 0) {
+    return false;
+  }
+  return (millis() - last) <= window_ms;
 }
 
 } // namespace rest

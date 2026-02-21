@@ -1,6 +1,7 @@
 #if !defined(SD_SPEED_TEST) && !defined(RX_LOAD_TEST) && !defined(SD_HTTP_DOWNLOAD_TEST)
 
 #include <Arduino.h>
+#include <esp_heap_caps.h>
 
 #include "can/can_manager.h"
 #include "config/app_config.h"
@@ -41,6 +42,16 @@ static void printBuildInfo() {
   Serial.println(__TIME__);
   Serial.print("PIO Env: ");
   Serial.println(PIO_ENV_NAME);
+  Serial.print("Heap free/internal/largest: ");
+  Serial.print(ESP.getFreeHeap());
+  Serial.print(" / ");
+  Serial.print(heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+  Serial.print(" / ");
+  Serial.println(heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+  Serial.print("PSRAM size/free: ");
+  Serial.print(ESP.getPsramSize());
+  Serial.print(" / ");
+  Serial.println(ESP.getFreePsram());
 }
 
 void setup() {

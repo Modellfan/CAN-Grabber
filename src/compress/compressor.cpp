@@ -238,6 +238,15 @@ void task_entry(void*) {
       vTaskDelay(pdMS_TO_TICKS(1000));
       continue;
     }
+    if (!config::get().global.compressor_enabled) {
+      portENTER_CRITICAL(&s_mux);
+      s_active = false;
+      s_current_done = 0;
+      s_current_total = 0;
+      portEXIT_CRITICAL(&s_mux);
+      vTaskDelay(pdMS_TO_TICKS(kTaskSleepMs));
+      continue;
+    }
     if (logger_or_can_busy() || low_space_for_compression()) {
       vTaskDelay(pdMS_TO_TICKS(kBusyPauseMs));
       continue;
@@ -286,6 +295,9 @@ void init() {
 
 Stats get_stats() {
   Stats stats{};
+  if (!config::get().global.compressor_enabled) {
+    return stats;
+  }
   portENTER_CRITICAL(&s_mux);
   stats.active = s_active;
   stats.current_input_done_bytes = s_current_done;

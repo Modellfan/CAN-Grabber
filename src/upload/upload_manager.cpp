@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#include <AsyncTCP.h>
 #include <ESPmDNS.h>
 #include <SD.h>
 #include <WiFi.h>
@@ -12,8 +13,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <esp_heap_caps.h>
 
 #include "config/app_config.h"
+#include "rest/rest_api.h"
 #include "storage/storage_manager.h"
 
 namespace upload {
@@ -65,6 +68,7 @@ struct UploadResult {
 constexpr size_t kQueueLen = 32;
 constexpr uint32_t kBaseBackoffMs = 5000;
 constexpr uint32_t kMaxBackoffMs = 5UL * 60UL * 1000UL;
+constexpr uint32_t kStartupUploadDelayMs = 30000;
 constexpr uint32_t kTaskSleepMs = 500;
 constexpr uint32_t kPostAttemptSleepMs = 300;
 constexpr uint32_t kPostConnectProblemSleepMs = 2000;
@@ -74,24 +78,37 @@ constexpr uint32_t kWriteTimeoutMs = 8000;
 constexpr size_t kUploadFileReadChunkBytes = 2048;
 constexpr size_t kUploadWriteChunkBytes = 512;
 constexpr uint32_t kUploadWriteBusyBudgetUs = 350;
+constexpr uint32_t kAsyncHardTimeoutMs = 180000;
+constexpr uint32_t kAsyncResponseTimeoutMs = 15000;
 #ifndef UPLOAD_DEBUG_WRITE
-#define UPLOAD_DEBUG_WRITE 1
+#define UPLOAD_DEBUG_WRITE 0
 #endif
 #ifndef UPLOAD_DEBUG_FLOW
-#define UPLOAD_DEBUG_FLOW 1
+#define UPLOAD_DEBUG_FLOW 0
 #endif
 constexpr size_t kMaxResponseBodyBytes = 2048;
 constexpr uint32_t kPendingScanIntervalMs = 30000;
 constexpr uint32_t kReachabilityProbeIntervalMs = 5UL * 60UL * 1000UL;
 constexpr uint32_t kReachabilityProbeFailBackoffMs = 10UL * 60UL * 1000UL;
 constexpr uint32_t kResolvedIpTtlMs = 10UL * 60UL * 1000UL;
-constexpr UBaseType_t kUploadTaskPriority = tskIDLE_PRIORITY + 1;
-constexpr BaseType_t kUploadTaskCore = 1;
+constexpr uint32_t kWebBusyWindowMs = 1500;
+constexpr uint32_t kWebBusyPauseMs = 1000;
+constexpr uint32_t kLowHeapThresholdBytes = 36UL * 1024UL;
+constexpr uint32_t kVeryLowHeapThresholdBytes = 20UL * 1024UL;
+constexpr uint32_t kVeryLowInternalHeapThresholdBytes = 14UL * 1024UL;
+constexpr uint32_t kSmallLargestInternalBlockBytes = 8UL * 1024UL;
+constexpr uint32_t kPressureLogIntervalMs = 5000;
+constexpr uint32_t kPressureCooldownMinMs = 15000;
+constexpr uint32_t kPressureCooldownMaxMs = 120000;
+constexpr UBaseType_t kUploadTaskPriority = tskIDLE_PRIORITY;
+constexpr BaseType_t kUploadTaskCore = 0;
 
 QueueItem s_queue[kQueueLen];
 TaskHandle_t s_task = nullptr;
 portMUX_TYPE s_queue_mux = portMUX_INITIALIZER_UNLOCKED;
 bool s_initialized = false;
+bool s_task_started = false;
+bool s_startup_delay_logged = false;
 uint32_t s_last_pending_scan_ms = 0;
 portMUX_TYPE s_stats_mux = portMUX_INITIALIZER_UNLOCKED;
 uint32_t s_uploaded_files_total = 0;
@@ -120,6 +137,24 @@ IPAddress s_last_probe_ip;
 bool s_last_probe_ip_valid = false;
 uint32_t s_last_probe_ip_ms = 0;
 char s_last_probe_host[64] = "";
+uint32_t s_pressure_cooldown_until_ms = 0;
+uint32_t s_last_pressure_log_ms = 0;
+uint8_t s_pressure_fail_streak = 0;
+
+struct HeapDiag {
+  uint32_t free_all;
+  uint32_t free_internal;
+  uint32_t largest_internal;
+};
+
+HeapDiag capture_heap_diag() {
+  HeapDiag d{};
+  d.free_all = ESP.getFreeHeap();
+  d.free_internal = static_cast<uint32_t>(heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+  d.largest_internal = static_cast<uint32_t>(
+      heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+  return d;
+}
 
 void note_sent_bytes(uint32_t bytes);
 
@@ -418,8 +453,8 @@ bool write_all_with_timeout(WiFiClient& client,
         last_debug_log = millis();
       }
 #endif
-      // Some ESP32 core / socket states may report availableForWrite()==0 even
-      // though a small write can still make progress. Fall through and try.
+      vTaskDelay(pdMS_TO_TICKS(2));
+      continue;
     }
     const size_t remaining = static_cast<size_t>(len - offset);
     const size_t chunk = (writable > 0)
@@ -427,6 +462,9 @@ bool write_all_with_timeout(WiFiClient& client,
                              : min(kUploadWriteChunkBytes, remaining);
     const size_t written = client.write(data + offset, chunk);
     if (written == 0) {
+      if (client.getWriteError() != 0) {
+        return false;
+      }
 #if UPLOAD_DEBUG_WRITE
       if (last_debug_log == 0 || (millis() - last_debug_log) >= 250) {
         Serial.printf(
@@ -519,8 +557,8 @@ bool write_file_chunk_with_timeout(WiFiClient& client,
         last_debug_log = millis();
       }
 #endif
-      // Some ESP32 core / socket states may report availableForWrite()==0 even
-      // though a small write can still make progress. Fall through and try.
+      vTaskDelay(pdMS_TO_TICKS(2));
+      continue;
     }
     const size_t remaining = static_cast<size_t>(len - offset);
     const size_t chunk = (writable > 0)
@@ -528,6 +566,9 @@ bool write_file_chunk_with_timeout(WiFiClient& client,
                              : min(kUploadWriteChunkBytes, remaining);
     const size_t written = client.write(data + offset, chunk);
     if (written == 0) {
+      if (client.getWriteError() != 0) {
+        return false;
+      }
 #if UPLOAD_DEBUG_WRITE
       if (last_debug_log == 0 || (millis() - last_debug_log) >= 250) {
         Serial.printf(
@@ -621,6 +662,42 @@ bool should_probe_reachability() {
     return true;
   }
   return false;
+}
+
+bool should_defer_upload_work(const char** out_reason) {
+  const uint32_t now = millis();
+  if (s_pressure_cooldown_until_ms != 0 && now < s_pressure_cooldown_until_ms) {
+    if (out_reason != nullptr) {
+      *out_reason = "pressure cooldown";
+    }
+    return true;
+  }
+
+  const HeapDiag heap = capture_heap_diag();
+  if (heap.free_all <= kVeryLowHeapThresholdBytes ||
+      heap.free_internal <= kVeryLowInternalHeapThresholdBytes ||
+      heap.largest_internal <= kSmallLargestInternalBlockBytes) {
+    if (out_reason != nullptr) {
+      *out_reason = "heap critical";
+    }
+    return true;
+  }
+  if (rest::recently_active(kWebBusyWindowMs) &&
+      (heap.free_all <= kLowHeapThresholdBytes ||
+       heap.free_internal <= (kVeryLowInternalHeapThresholdBytes + 6UL * 1024UL))) {
+    if (out_reason != nullptr) {
+      *out_reason = "web active + low heap";
+    }
+    return true;
+  }
+  return false;
+}
+
+bool heap_under_pressure_now() {
+  const HeapDiag heap = capture_heap_diag();
+  return (heap.free_all <= kLowHeapThresholdBytes) ||
+         (heap.free_internal <= (kVeryLowInternalHeapThresholdBytes + 6UL * 1024UL)) ||
+         (heap.largest_internal <= (kSmallLargestInternalBlockBytes + 2UL * 1024UL));
 }
 
 void probe_upload_server_reachability() {
@@ -819,7 +896,10 @@ void note_sent_bytes(uint32_t bytes) {
   portEXIT_CRITICAL(&s_stats_mux);
 }
 
-void set_last_error(const UploadResult& result) {
+void build_last_error_message(const UploadResult& result, char* out, size_t out_len) {
+  if (out == nullptr || out_len == 0) {
+    return;
+  }
   const UploadError error = result.error;
   const int http_status = result.http_status;
   const char* msg = "unknown";
@@ -859,43 +939,560 @@ void set_last_error(const UploadResult& result) {
       break;
   }
   if (error == UploadError::kHttpStatusFailed) {
-    snprintf(s_last_error_message, sizeof(s_last_error_message), "%s (%d)", msg, http_status);
+    snprintf(out, out_len, "%s (%d)", msg, http_status);
   } else if (error == UploadError::kWriteFailed) {
-    snprintf(s_last_error_message,
-             sizeof(s_last_error_message),
+    snprintf(out,
+             out_len,
              "%s (wifi=%d connected=%d sent=%lu)",
              msg,
              static_cast<int>(WiFi.status()),
              result.connect_problem ? 0 : 1,
              static_cast<unsigned long>(result.sent_bytes));
   } else {
-    strncpy(s_last_error_message, msg, sizeof(s_last_error_message));
-    s_last_error_message[sizeof(s_last_error_message) - 1] = '\0';
+    strncpy(out, msg, out_len);
+    out[out_len - 1] = '\0';
   }
 }
+
+class AsyncMultipartUploadSession {
+public:
+  AsyncMultipartUploadSession(const storage::FileInfo& info,
+                              const ParsedUrl& parsed,
+                              const IPAddress& ip,
+                              const char* filename,
+                              const char* idempotency_key,
+                              const char* api_token)
+      : info_(info), parsed_(parsed), ip_(ip) {
+    if (filename != nullptr) {
+      strncpy(filename_, filename, sizeof(filename_));
+      filename_[sizeof(filename_) - 1] = '\0';
+    } else {
+      filename_[0] = '\0';
+    }
+    if (idempotency_key != nullptr) {
+      strncpy(idempotency_key_, idempotency_key, sizeof(idempotency_key_));
+      idempotency_key_[sizeof(idempotency_key_) - 1] = '\0';
+    } else {
+      idempotency_key_[0] = '\0';
+    }
+    if (api_token != nullptr) {
+      strncpy(api_token_, api_token, sizeof(api_token_));
+      api_token_[sizeof(api_token_) - 1] = '\0';
+    } else {
+      api_token_[0] = '\0';
+    }
+  }
+
+  UploadResult run() {
+    UploadResult result{};
+    result.ok = false;
+    result.error = UploadError::kNone;
+    result.http_status = 0;
+    result.retryable = false;
+    result.retry_after_ms = 0;
+    result.server_code[0] = '\0';
+    result.server_message[0] = '\0';
+
+    file_ = SD.open(info_.path, FILE_READ);
+    if (!file_) {
+      result.error = UploadError::kOpenFailed;
+      return result;
+    }
+
+    build_request();
+    bind_callbacks();
+    client_.setNoDelay(true);
+    client_.setAckTimeout(kWriteTimeoutMs + 8000);
+    client_.setRxTimeout(0);
+
+    start_ms_ = millis();
+    last_activity_ms_ = start_ms_;
+    if (!client_.connect(ip_, parsed_.port)) {
+      file_.close();
+      result.error = UploadError::kConnectFailed;
+      result.connect_problem = true;
+      return result;
+    }
+
+    while (!done_) {
+      const uint32_t now = millis();
+      if ((now - start_ms_) > kAsyncHardTimeoutMs) {
+        fail(FailReason::kWriteTimeout);
+        break;
+      }
+      if (phase_ == Phase::kWaitResponse &&
+          (now - last_activity_ms_) > kAsyncResponseTimeoutMs) {
+        fail(FailReason::kResponseTimeout);
+        break;
+      }
+      vTaskDelay(pdMS_TO_TICKS(2));
+    }
+
+    if (file_) {
+      file_.close();
+    }
+    client_.close();
+
+    result.sent_bytes = sent_bytes_;
+    result.http_status = http_status_;
+    result.retry_after_ms = retry_after_ms_;
+    strncpy(result.server_code, server_code_, sizeof(result.server_code));
+    result.server_code[sizeof(result.server_code) - 1] = '\0';
+    strncpy(result.server_message, server_message_, sizeof(result.server_message));
+    result.server_message[sizeof(result.server_message) - 1] = '\0';
+
+    if (ok_) {
+      result.ok = true;
+      return result;
+    }
+
+    result.interrupted = true;
+    result.connect_problem =
+        (WiFi.status() != WL_CONNECTED) || !client_was_connected_;
+    switch (fail_reason_) {
+      case FailReason::kConnect:
+        result.error = UploadError::kConnectFailed;
+        result.connect_problem = true;
+        break;
+      case FailReason::kResponseTimeout:
+        result.error = UploadError::kResponseTimeout;
+        break;
+      case FailReason::kBadStatus:
+        result.error = UploadError::kBadStatusLine;
+        break;
+      case FailReason::kWriteTimeout:
+      case FailReason::kDisconnected:
+      case FailReason::kError:
+      default:
+        result.error = UploadError::kWriteFailed;
+        break;
+    }
+    return result;
+  }
+
+private:
+  enum class BodySource : uint8_t { kPrefix = 0, kFile = 1, kSuffix = 2, kDone = 3 };
+  enum class Phase : uint8_t {
+    kSendHeaders = 0,
+    kSendBody = 1,
+    kWaitResponse = 2,
+    kComplete = 3,
+    kFailed = 4,
+  };
+  enum class FailReason : uint8_t {
+    kNone = 0,
+    kConnect,
+    kWriteTimeout,
+    kResponseTimeout,
+    kBadStatus,
+    kDisconnected,
+    kError,
+  };
+
+  static void on_connect(void* arg, AsyncClient* client) {
+    static_cast<AsyncMultipartUploadSession*>(arg)->handle_connect(client);
+  }
+  static void on_disconnect(void* arg, AsyncClient* client) {
+    static_cast<AsyncMultipartUploadSession*>(arg)->handle_disconnect(client);
+  }
+  static void on_ack(void* arg, AsyncClient* client, size_t len, uint32_t time) {
+    (void)len;
+    (void)time;
+    static_cast<AsyncMultipartUploadSession*>(arg)->handle_ack(client);
+  }
+  static void on_poll(void* arg, AsyncClient* client) {
+    static_cast<AsyncMultipartUploadSession*>(arg)->handle_poll(client);
+  }
+  static void on_error(void* arg, AsyncClient* client, int8_t error) {
+    (void)error;
+    static_cast<AsyncMultipartUploadSession*>(arg)->handle_error(client);
+  }
+  static void on_data(void* arg, AsyncClient* client, void* data, size_t len) {
+    static_cast<AsyncMultipartUploadSession*>(arg)->handle_data(client, data, len);
+  }
+
+  void bind_callbacks() {
+    client_.onConnect(on_connect, this);
+    client_.onDisconnect(on_disconnect, this);
+    client_.onAck(on_ack, this);
+    client_.onPoll(on_poll, this);
+    client_.onError(on_error, this);
+    client_.onData(on_data, this);
+  }
+
+  void build_request() {
+    const String device_id = WiFi.macAddress();
+    boundary_ = String("----CANGrabberBoundary") + String(millis());
+
+    prefix_.reserve(640);
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"bus_id\"\r\n\r\n";
+    prefix_ += String(info_.bus_id) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"start_ms\"\r\n\r\n";
+    prefix_ += String(info_.start_ms) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"end_ms\"\r\n\r\n";
+    prefix_ += String(info_.end_ms) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"size_bytes\"\r\n\r\n";
+    prefix_ += String(info_.size_bytes) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"checksum\"\r\n\r\n";
+    prefix_ += String(info_.checksum) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"path\"\r\n\r\n";
+    prefix_ += String(info_.path) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"flags\"\r\n\r\n";
+    prefix_ += String(info_.flags) + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"source\"\r\n\r\nesp32-can-grabber\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"device_id\"\r\n\r\n";
+    prefix_ += device_id + "\r\n";
+    prefix_ += "--" + boundary_ + "\r\n";
+    prefix_ += "Content-Disposition: form-data; name=\"updatefile\"; filename=\"";
+    prefix_ += String(filename_);
+    prefix_ += "\"\r\n";
+    prefix_ += "Content-Type: application/octet-stream\r\n\r\n";
+    suffix_ = "\r\n--" + boundary_ + "--\r\n";
+
+    const uint32_t content_length =
+        static_cast<uint32_t>(prefix_.length() + file_.size() + suffix_.length());
+
+    headers_.reserve(512);
+    headers_ += "POST ";
+    headers_ += parsed_.path;
+    headers_ += " HTTP/1.1\r\n";
+    headers_ += "Host: ";
+    headers_ += parsed_.host;
+    headers_ += "\r\n";
+    headers_ += "Connection: close\r\n";
+    headers_ += "Content-Type: multipart/form-data; boundary=";
+    headers_ += boundary_;
+    headers_ += "\r\n";
+    headers_ += "X-Idempotency-Key: ";
+    headers_ += idempotency_key_;
+    headers_ += "\r\n";
+    if (api_token_[0] != '\0') {
+      headers_ += "X-Api-Token: ";
+      headers_ += api_token_;
+      headers_ += "\r\n";
+    }
+    headers_ += "Content-Length: ";
+    headers_ += String(static_cast<unsigned long>(content_length));
+    headers_ += "\r\n\r\n";
+
+    seg_ptr_ = reinterpret_cast<const uint8_t*>(headers_.c_str());
+    seg_len_ = headers_.length();
+    seg_off_ = 0;
+    src_ = BodySource::kPrefix;
+    phase_ = Phase::kSendHeaders;
+  }
+
+  void handle_connect(AsyncClient* client) {
+    (void)client;
+    client_was_connected_ = true;
+    last_activity_ms_ = millis();
+    pump_send();
+  }
+
+  void handle_ack(AsyncClient* client) {
+    (void)client;
+    pump_send();
+  }
+
+  void handle_poll(AsyncClient* client) {
+    (void)client;
+    pump_send();
+  }
+
+  void handle_disconnect(AsyncClient* client) {
+    (void)client;
+    if (done_) {
+      return;
+    }
+    if (phase_ == Phase::kWaitResponse && header_parsed_ && response_body_ready()) {
+      finish();
+      return;
+    }
+    fail(FailReason::kDisconnected);
+  }
+
+  void handle_error(AsyncClient* client) {
+    (void)client;
+    fail(FailReason::kError);
+  }
+
+  void handle_data(AsyncClient* client, void* data, size_t len) {
+    (void)client;
+    if (done_ || data == nullptr || len == 0) {
+      return;
+    }
+    last_activity_ms_ = millis();
+    const char* p = static_cast<const char*>(data);
+    for (size_t i = 0; i < len; ++i) {
+      rx_buf_ += p[i];
+    }
+    parse_response();
+  }
+
+  bool prepare_next_data_segment() {
+    while (true) {
+      if (src_ == BodySource::kPrefix) {
+        const size_t rem = prefix_.length() - prefix_off_;
+        if (rem > 0) {
+          seg_ptr_ = reinterpret_cast<const uint8_t*>(prefix_.c_str() + prefix_off_);
+          seg_len_ = rem;
+          seg_off_ = 0;
+          prefix_off_ += rem;
+          return true;
+        }
+        src_ = BodySource::kFile;
+      } else if (src_ == BodySource::kFile) {
+        const size_t n = file_.read(file_buf_, kUploadFileReadChunkBytes);
+        if (n > 0) {
+          seg_ptr_ = file_buf_;
+          seg_len_ = n;
+          seg_off_ = 0;
+          return true;
+        }
+        src_ = BodySource::kSuffix;
+      } else if (src_ == BodySource::kSuffix) {
+        const size_t rem = suffix_.length() - suffix_off_;
+        if (rem > 0) {
+          seg_ptr_ = reinterpret_cast<const uint8_t*>(suffix_.c_str() + suffix_off_);
+          seg_len_ = rem;
+          seg_off_ = 0;
+          suffix_off_ += rem;
+          return true;
+        }
+        src_ = BodySource::kDone;
+        return false;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  void pump_send() {
+    if (done_ || !client_.connected()) {
+      return;
+    }
+    uint8_t loops = 0;
+    while (loops < 8 && !done_) {
+      loops++;
+      if (phase_ == Phase::kWaitResponse) {
+        break;
+      }
+      if (seg_off_ >= seg_len_) {
+        if (phase_ == Phase::kSendHeaders) {
+          phase_ = Phase::kSendBody;
+        }
+        if (phase_ == Phase::kSendBody) {
+          if (!prepare_next_data_segment()) {
+            phase_ = Phase::kWaitResponse;
+            break;
+          }
+        }
+      }
+      if (!client_.canSend() || client_.space() == 0) {
+        break;
+      }
+      const size_t remaining = seg_len_ - seg_off_;
+      size_t chunk = min(remaining, kUploadWriteChunkBytes);
+      chunk = min(chunk, client_.space());
+      if (chunk == 0) {
+        break;
+      }
+      const size_t wrote = client_.write(
+          reinterpret_cast<const char*>(seg_ptr_ + seg_off_), chunk);
+      if (wrote == 0) {
+        break;
+      }
+      seg_off_ += wrote;
+      sent_bytes_ += static_cast<uint32_t>(wrote);
+      note_sent_bytes(static_cast<uint32_t>(wrote));
+      last_activity_ms_ = millis();
+      if ((micros() - busy_window_start_us_) >= kUploadWriteBusyBudgetUs) {
+        break;
+      }
+    }
+    if ((micros() - busy_window_start_us_) >= kUploadWriteBusyBudgetUs) {
+      busy_window_start_us_ = micros();
+    }
+  }
+
+  void parse_response() {
+    if (!header_parsed_) {
+      const int split = rx_buf_.indexOf("\r\n\r\n");
+      if (split < 0) {
+        return;
+      }
+      const String head = rx_buf_.substring(0, split);
+      parse_headers(head);
+      rx_buf_.remove(0, split + 4);
+      header_parsed_ = true;
+      if (http_status_ <= 0) {
+        fail(FailReason::kBadStatus);
+        return;
+      }
+    }
+    if (!header_parsed_) {
+      return;
+    }
+    if (!rx_buf_.isEmpty()) {
+      const size_t remaining_room =
+          (kMaxResponseBodyBytes > response_body_.length())
+              ? (kMaxResponseBodyBytes - response_body_.length())
+              : 0;
+      if (remaining_room > 0) {
+        response_body_ += rx_buf_.substring(0, min(remaining_room, rx_buf_.length()));
+      }
+      response_body_bytes_ += rx_buf_.length();
+      rx_buf_.remove(0);
+    }
+    if (response_body_ready()) {
+      finish();
+    }
+  }
+
+  void parse_headers(const String& head) {
+    int line_start = 0;
+    bool first = true;
+    while (line_start >= 0 && line_start < static_cast<int>(head.length())) {
+      const int line_end = head.indexOf("\r\n", line_start);
+      String line;
+      if (line_end < 0) {
+        line = head.substring(line_start);
+        line_start = -1;
+      } else {
+        line = head.substring(line_start, line_end);
+        line_start = line_end + 2;
+      }
+      if (first) {
+        first = false;
+        int status = 0;
+        if (sscanf(line.c_str(), "HTTP/%*d.%*d %d", &status) == 1) {
+          http_status_ = status;
+        }
+        continue;
+      }
+      const uint32_t retry_after = parse_retry_after_ms(line);
+      if (retry_after > 0) {
+        retry_after_ms_ = retry_after;
+      }
+      String lower = line;
+      lower.toLowerCase();
+      if (lower.startsWith("content-length:")) {
+        response_content_length_ = lower.substring(15).toInt();
+      } else if (lower.startsWith("transfer-encoding:")) {
+        if (lower.indexOf("chunked") >= 0) {
+          response_chunked_ = true;
+        }
+      } else if (lower.startsWith("connection:")) {
+        if (lower.indexOf("close") >= 0) {
+          response_close_ = true;
+        }
+      }
+    }
+  }
+
+  bool response_body_ready() const {
+    if (response_content_length_ >= 0) {
+      return response_body_bytes_ >= static_cast<size_t>(response_content_length_);
+    }
+    if (response_chunked_) {
+      return false;
+    }
+    return response_close_;
+  }
+
+  void finish() {
+    parse_server_json(response_body_, &parsed_result_);
+    strncpy(server_code_, parsed_result_.server_code, sizeof(server_code_));
+    server_code_[sizeof(server_code_) - 1] = '\0';
+    strncpy(server_message_, parsed_result_.server_message, sizeof(server_message_));
+    server_message_[sizeof(server_message_) - 1] = '\0';
+    const bool status_ok = (http_status_ >= 200 && http_status_ < 300);
+    ok_ = status_ok &&
+          ((http_status_ == 201 && strcmp(server_code_, "UPLOAD_ACCEPTED") == 0) ||
+           (http_status_ == 200 &&
+            (strcmp(server_code_, "DUPLICATE_CONTENT") == 0 ||
+             strcmp(server_code_, "DUPLICATE_IDEMPOTENCY_KEY") == 0)));
+    phase_ = Phase::kComplete;
+    done_ = true;
+  }
+
+  void fail(FailReason reason) {
+    if (done_) {
+      return;
+    }
+    fail_reason_ = reason;
+    phase_ = Phase::kFailed;
+    done_ = true;
+  }
+
+  const storage::FileInfo info_;
+  const ParsedUrl parsed_;
+  const IPAddress ip_;
+  char filename_[64] = {0};
+  char idempotency_key_[128] = {0};
+  char api_token_[128] = {0};
+  char server_code_[48] = {0};
+  char server_message_[96] = {0};
+  UploadResult parsed_result_{};
+
+  AsyncClient client_;
+  File file_;
+  String boundary_;
+  String headers_;
+  String prefix_;
+  String suffix_;
+  String rx_buf_;
+  String response_body_;
+  uint8_t file_buf_[kUploadFileReadChunkBytes] = {0};
+  const uint8_t* seg_ptr_ = nullptr;
+  size_t seg_len_ = 0;
+  size_t seg_off_ = 0;
+  size_t prefix_off_ = 0;
+  size_t suffix_off_ = 0;
+  BodySource src_ = BodySource::kPrefix;
+  Phase phase_ = Phase::kSendHeaders;
+  FailReason fail_reason_ = FailReason::kNone;
+  bool done_ = false;
+  bool ok_ = false;
+  bool client_was_connected_ = false;
+  bool header_parsed_ = false;
+  bool response_chunked_ = false;
+  bool response_close_ = false;
+  int http_status_ = 0;
+  int32_t response_content_length_ = -1;
+  size_t response_body_bytes_ = 0;
+  uint32_t sent_bytes_ = 0;
+  uint32_t retry_after_ms_ = 0;
+  uint32_t start_ms_ = 0;
+  uint32_t last_activity_ms_ = 0;
+  uint32_t busy_window_start_us_ = 0;
+};
 
 UploadResult send_file_multipart(const storage::FileInfo& info) {
 #if UPLOAD_DEBUG_FLOW
   const uint32_t debug_start_ms = millis();
 #endif
-  UploadResult result{};
-  result.ok = false;
-  result.error = UploadError::kNone;
-  result.http_status = 0;
-  result.retryable = false;
-  result.retry_after_ms = 0;
-  result.server_code[0] = '\0';
-  result.server_message[0] = '\0';
   const config::Config& cfg = config::get();
   ParsedUrl parsed{};
   if (!parse_http_url(cfg.global.upload_url, &parsed) || !parsed.valid) {
+    UploadResult invalid{};
+    invalid.ok = false;
+    invalid.error = UploadError::kInvalidUrl;
+    invalid.connect_problem = true;
     Serial.println("[UPLOAD] Invalid upload_url (only http:// supported)");
-    result.error = UploadError::kInvalidUrl;
-    result.connect_problem = true;
-    return result;
+    return invalid;
   }
 #if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=start path=%s size=%lu host=%s port=%u pathUrl=%s wifi=%d heap=%lu\n",
+  Serial.printf("[UPLOAD][#debug] flow=start(async) path=%s size=%lu host=%s port=%u pathUrl=%s wifi=%d heap=%lu\n",
                 info.path,
                 static_cast<unsigned long>(info.size_bytes),
                 parsed.host,
@@ -906,69 +1503,16 @@ UploadResult send_file_multipart(const storage::FileInfo& info) {
 #endif
 
   if (!SD.exists(info.path)) {
-    result.error = UploadError::kMissingFile;
-    return result;
-  }
-
-  File file = SD.open(info.path, FILE_READ);
-  if (!file) {
-    result.error = UploadError::kOpenFailed;
-    return result;
+    UploadResult missing{};
+    missing.ok = false;
+    missing.error = UploadError::kMissingFile;
+    return missing;
   }
 
   const char* slash = strrchr(info.path, '/');
   const char* filename = slash ? (slash + 1) : info.path;
   char idempotency_key[128];
   build_idempotency_key(info, filename, idempotency_key, sizeof(idempotency_key));
-  const String device_id = WiFi.macAddress();
-
-  const String boundary = String("----CANGrabberBoundary") + String(millis());
-  String prefix;
-  prefix.reserve(512);
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"bus_id\"\r\n\r\n";
-  prefix += String(info.bus_id) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"start_ms\"\r\n\r\n";
-  prefix += String(info.start_ms) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"end_ms\"\r\n\r\n";
-  prefix += String(info.end_ms) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"size_bytes\"\r\n\r\n";
-  prefix += String(info.size_bytes) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"checksum\"\r\n\r\n";
-  prefix += String(info.checksum) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"path\"\r\n\r\n";
-  prefix += String(info.path) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"flags\"\r\n\r\n";
-  prefix += String(info.flags) + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"source\"\r\n\r\n";
-  prefix += "esp32-can-grabber\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"device_id\"\r\n\r\n";
-  prefix += device_id + "\r\n";
-  prefix += "--" + boundary + "\r\n";
-  prefix += "Content-Disposition: form-data; name=\"updatefile\"; filename=\"";
-  prefix += String(filename);
-  prefix += "\"\r\n";
-  prefix += "Content-Type: application/octet-stream\r\n\r\n";
-
-  const String suffix = "\r\n--" + boundary + "--\r\n";
-  const uint32_t content_length =
-      static_cast<uint32_t>(prefix.length() + file.size() + suffix.length());
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf(
-      "[UPLOAD][#debug] flow=payload prefix=%lu file=%lu suffix=%lu contentLength=%lu\n",
-      static_cast<unsigned long>(prefix.length()),
-      static_cast<unsigned long>(file.size()),
-      static_cast<unsigned long>(suffix.length()),
-      static_cast<unsigned long>(content_length));
-#endif
 
   IPAddress resolved_ip;
   char resolve_method[16];
@@ -976,15 +1520,16 @@ UploadResult send_file_multipart(const storage::FileInfo& info) {
     strncpy(resolve_method, "probe-ip", sizeof(resolve_method));
     resolve_method[sizeof(resolve_method) - 1] = '\0';
   } else if (!resolve_upload_host(parsed.host, &resolved_ip, resolve_method, sizeof(resolve_method))) {
-    file.close();
-    result.error = UploadError::kConnectFailed;
-    result.connect_problem = true;
-    snprintf(result.server_message,
-             sizeof(result.server_message),
+    UploadResult unresolved{};
+    unresolved.ok = false;
+    unresolved.error = UploadError::kConnectFailed;
+    unresolved.connect_problem = true;
+    snprintf(unresolved.server_message,
+             sizeof(unresolved.server_message),
              "resolve %s failed",
              parsed.host);
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
+    unresolved.server_message[sizeof(unresolved.server_message) - 1] = '\0';
+    return unresolved;
   }
 #if UPLOAD_DEBUG_FLOW
   Serial.printf("[UPLOAD][#debug] flow=resolved host=%s ip=%s method=%s\n",
@@ -992,218 +1537,15 @@ UploadResult send_file_multipart(const storage::FileInfo& info) {
                 resolved_ip.toString().c_str(),
                 resolve_method);
 #endif
-
-  WiFiClient client;
-  client.setTimeout(kResponseTimeoutMs / 1000);
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=connect begin ip=%s port=%u timeoutMs=%lu\n",
-                resolved_ip.toString().c_str(),
-                static_cast<unsigned>(parsed.port),
-                static_cast<unsigned long>(kConnectTimeoutMs));
-#endif
-  if (!client.connect(resolved_ip, parsed.port, kConnectTimeoutMs)) {
-    file.close();
-    result.error = UploadError::kConnectFailed;
-    result.connect_problem = true;
-    snprintf(result.server_message,
-             sizeof(result.server_message),
-             "connect %s(%s):%u failed",
-             parsed.host,
-             resolve_method,
-             static_cast<unsigned>(parsed.port));
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
-  }
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=connect ok connected=%d localPort=%u\n",
-                client.connected() ? 1 : 0,
-                static_cast<unsigned>(client.localPort()));
-#endif
-
-  String headers;
-  headers.reserve(512);
-  headers += "POST ";
-  headers += parsed.path;
-  headers += " HTTP/1.1\r\n";
-  headers += "Host: ";
-  headers += parsed.host;
-  headers += "\r\n";
-  headers += "Connection: close\r\n";
-  headers += "Content-Type: multipart/form-data; boundary=";
-  headers += boundary;
-  headers += "\r\n";
-  headers += "X-Idempotency-Key: ";
-  headers += idempotency_key;
-  headers += "\r\n";
-  if (cfg.global.api_token[0] != '\0') {
-    headers += "X-Api-Token: ";
-    headers += cfg.global.api_token;
-    headers += "\r\n";
-  }
-  headers += "Content-Length: ";
-  headers += String(static_cast<unsigned long>(content_length));
-  headers += "\r\n\r\n";
-
-  if (!write_all_with_timeout(client,
-                              reinterpret_cast<const uint8_t*>(headers.c_str()),
-                              headers.length(),
-                              kWriteTimeoutMs,
-                              "headers")) {
-    file.close();
-    const bool had_connect_problem =
-        (WiFi.status() != WL_CONNECTED) || !client.connected();
-    client.stop();
-    result.error = UploadError::kWriteFailed;
-    result.interrupted = true;
-    result.connect_problem = had_connect_problem;
-    strncpy(result.server_message, "write failed at headers", sizeof(result.server_message));
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
-  }
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=headers ok len=%lu elapsedMs=%lu\n",
-                static_cast<unsigned long>(headers.length()),
-                static_cast<unsigned long>(millis() - debug_start_ms));
-#endif
-
-  if (!write_all_with_timeout(client,
-                              reinterpret_cast<const uint8_t*>(prefix.c_str()),
-                              prefix.length(),
-                              kWriteTimeoutMs,
-                              "multipart-prefix")) {
-    file.close();
-    const bool had_connect_problem =
-        (WiFi.status() != WL_CONNECTED) || !client.connected();
-    client.stop();
-    result.error = UploadError::kWriteFailed;
-    result.interrupted = true;
-    result.connect_problem = had_connect_problem;
-    strncpy(result.server_message, "write failed at multipart-prefix", sizeof(result.server_message));
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
-  }
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=prefix ok len=%lu elapsedMs=%lu\n",
-                static_cast<unsigned long>(prefix.length()),
-                static_cast<unsigned long>(millis() - debug_start_ms));
-#endif
-  uint8_t buffer[kUploadFileReadChunkBytes];
-  uint32_t file_chunks = 0;
-  while (file.available()) {
-    const size_t n = file.read(buffer, sizeof(buffer));
-    if (n == 0) {
-      file.close();
-      client.stop();
-      result.error = UploadError::kReadFailed;
-      result.interrupted = true;
-      strncpy(result.server_message, "read failed from SD", sizeof(result.server_message));
-      result.server_message[sizeof(result.server_message) - 1] = '\0';
-      return result;
-    }
-    if (!write_file_chunk_with_timeout(client,
-                                       buffer,
-                                       n,
-                                       kWriteTimeoutMs,
-                                       &result.sent_bytes,
-                                       "file-chunk")) {
-      file.close();
-      const bool had_connect_problem =
-          (WiFi.status() != WL_CONNECTED) || !client.connected();
-      client.stop();
-      result.error = UploadError::kWriteFailed;
-      result.interrupted = true;
-      result.connect_problem = had_connect_problem;
-      strncpy(result.server_message, "write failed at file-chunk", sizeof(result.server_message));
-      result.server_message[sizeof(result.server_message) - 1] = '\0';
-      return result;
-    }
-    file_chunks++;
-  }
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=file ok chunks=%lu sent=%lu elapsedMs=%lu\n",
-                static_cast<unsigned long>(file_chunks),
-                static_cast<unsigned long>(result.sent_bytes),
-                static_cast<unsigned long>(millis() - debug_start_ms));
-#endif
-  file.close();
-  if (!write_all_with_timeout(client,
-                              reinterpret_cast<const uint8_t*>(suffix.c_str()),
-                              suffix.length(),
-                              kWriteTimeoutMs,
-                              "multipart-suffix")) {
-    const bool had_connect_problem =
-        (WiFi.status() != WL_CONNECTED) || !client.connected();
-    client.stop();
-    result.error = UploadError::kWriteFailed;
-    result.interrupted = true;
-    result.connect_problem = had_connect_problem;
-    strncpy(result.server_message, "write failed at multipart-suffix", sizeof(result.server_message));
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
-  }
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=suffix ok len=%lu elapsedMs=%lu\n",
-                static_cast<unsigned long>(suffix.length()),
-                static_cast<unsigned long>(millis() - debug_start_ms));
-#endif
-
-  String status_line;
-  if (!read_line_with_timeout(client, &status_line, kResponseTimeoutMs)) {
-    client.stop();
-    result.error = UploadError::kResponseTimeout;
-    result.interrupted = true;
-    strncpy(result.server_message, "timeout waiting status-line", sizeof(result.server_message));
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
-  }
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=status-line '%s'\n", status_line.c_str());
-#endif
-
-  int status_code = 0;
-  if (sscanf(status_line.c_str(), "HTTP/%*d.%*d %d", &status_code) != 1) {
-    client.stop();
-    result.error = UploadError::kBadStatusLine;
-    result.interrupted = true;
-    strncpy(result.server_message, "bad HTTP status-line", sizeof(result.server_message));
-    result.server_message[sizeof(result.server_message) - 1] = '\0';
-    return result;
-  }
-  result.http_status = status_code;
-
-  String header_line;
-  for (;;) {
-    if (!read_line_with_timeout(client, &header_line, kResponseTimeoutMs)) {
-      break;
-    }
-    if (header_line.length() == 0) {
-      break;
-    }
-    const uint32_t retry_after = parse_retry_after_ms(header_line);
-    if (retry_after > 0) {
-      result.retry_after_ms = retry_after;
-    }
-  }
-
-  String response_body;
-  (void)read_body_with_timeout(client,
-                               &response_body,
-                               kResponseTimeoutMs,
-                               kMaxResponseBodyBytes);
-#if UPLOAD_DEBUG_FLOW
-  Serial.printf("[UPLOAD][#debug] flow=response status=%d bodyLen=%lu elapsedMs=%lu\n",
-                status_code,
-                static_cast<unsigned long>(response_body.length()),
-                static_cast<unsigned long>(millis() - debug_start_ms));
-#endif
-  parse_server_json(response_body, &result);
-
-  client.stop();
-  result.ok = is_success_contract(result);
+  AsyncMultipartUploadSession session(
+      info, parsed, resolved_ip, filename, idempotency_key, cfg.global.api_token);
+  UploadResult result = session.run();
   result.retryable = is_http_retryable(result);
   if (!result.ok) {
-    if (status_code >= 200 && status_code < 300) {
-      result.error = UploadError::kRejectedResponse;
+    if (result.http_status >= 200 && result.http_status < 300) {
+      if (result.error == UploadError::kNone) {
+        result.error = UploadError::kRejectedResponse;
+      }
     } else {
       result.error = UploadError::kHttpStatusFailed;
     }
@@ -1217,15 +1559,19 @@ UploadResult send_file_multipart(const storage::FileInfo& info) {
     result.retryable = true;
   }
   if (!result.ok && !result.retryable &&
-      (status_code == 400 || status_code == 401 || status_code == 413 ||
-       status_code == 415)) {
-    // Permanent client-side rejection: keep as non-retryable.
-  } else if (!result.ok && !result.retryable && status_code >= 500) {
+      result.http_status >= 500) {
     result.retryable = true;
   }
   if (!result.ok && result.error == UploadError::kNone) {
     result.error = UploadError::kHttpStatusFailed;
   }
+#if UPLOAD_DEBUG_FLOW
+  Serial.printf("[UPLOAD][#debug] flow=async done status=%d sent=%lu elapsedMs=%lu ok=%d\n",
+                result.http_status,
+                static_cast<unsigned long>(result.sent_bytes),
+                static_cast<unsigned long>(millis() - debug_start_ms),
+                result.ok ? 1 : 0);
+#endif
   return result;
 }
 
@@ -1309,6 +1655,17 @@ void task_entry(void*) {
       continue;
     }
 
+    const uint32_t now_boot = millis();
+    if (now_boot < kStartupUploadDelayMs) {
+      if (!s_startup_delay_logged) {
+        Serial.printf("[UPLOAD] Startup delay active (%lums)\n",
+                      static_cast<unsigned long>(kStartupUploadDelayMs));
+        s_startup_delay_logged = true;
+      }
+      vTaskDelay(pdMS_TO_TICKS(1000));
+      continue;
+    }
+
     probe_upload_server_reachability();
 
     if (WiFi.status() != WL_CONNECTED) {
@@ -1337,6 +1694,33 @@ void task_entry(void*) {
 
     if (!has_item) {
       vTaskDelay(pdMS_TO_TICKS(kTaskSleepMs));
+      continue;
+    }
+
+    const char* defer_reason = nullptr;
+    if (should_defer_upload_work(&defer_reason)) {
+      portENTER_CRITICAL(&s_queue_mux);
+      if (index < kQueueLen && s_queue[index].used) {
+        s_queue[index].next_attempt_ms = millis() + kWebBusyPauseMs;
+      }
+      portEXIT_CRITICAL(&s_queue_mux);
+      const uint32_t now_defer = millis();
+      if (s_last_pressure_log_ms == 0 ||
+          (now_defer - s_last_pressure_log_ms) >= kPressureLogIntervalMs) {
+        const HeapDiag heap = capture_heap_diag();
+        Serial.printf(
+            "[UPLOAD] Deferred attempt (%s), heap=%lu internal=%lu largestInternal=%lu cooldownLeftMs=%lu\n",
+            defer_reason != nullptr ? defer_reason : "system pressure",
+            static_cast<unsigned long>(heap.free_all),
+            static_cast<unsigned long>(heap.free_internal),
+            static_cast<unsigned long>(heap.largest_internal),
+            static_cast<unsigned long>(
+                (s_pressure_cooldown_until_ms > now_defer)
+                    ? (s_pressure_cooldown_until_ms - now_defer)
+                    : 0));
+        s_last_pressure_log_ms = now_defer;
+      }
+      vTaskDelay(pdMS_TO_TICKS(kWebBusyPauseMs));
       continue;
     }
 
@@ -1373,6 +1757,21 @@ void task_entry(void*) {
                   static_cast<unsigned>(item.retries + 1));
     const UploadResult result = send_file_multipart(info);
 
+    char error_message[sizeof(s_last_error_message)];
+    error_message[0] = '\0';
+    if (!result.ok) {
+      build_last_error_message(result, error_message, sizeof(error_message));
+      if (result.server_code[0] != '\0') {
+        const size_t n = strlen(error_message);
+        if (n + 4 < sizeof(error_message)) {
+          snprintf(error_message + n,
+                   sizeof(error_message) - n,
+                   " [%s]",
+                   result.server_code);
+        }
+      }
+    }
+
     portENTER_CRITICAL(&s_stats_mux);
     s_uploading = false;
     s_current_file_size = 0;
@@ -1388,16 +1787,8 @@ void task_entry(void*) {
       s_last_error = true;
       s_last_error_interrupted = result.interrupted;
       s_last_error_connect = result.connect_problem;
-      set_last_error(result);
-      if (result.server_code[0] != '\0') {
-        const size_t n = strlen(s_last_error_message);
-        if (n + 4 < sizeof(s_last_error_message)) {
-          snprintf(s_last_error_message + n,
-                   sizeof(s_last_error_message) - n,
-                   " [%s]",
-                   result.server_code);
-        }
-      }
+      strncpy(s_last_error_message, error_message, sizeof(s_last_error_message));
+      s_last_error_message[sizeof(s_last_error_message) - 1] = '\0';
     }
     portEXIT_CRITICAL(&s_stats_mux);
 
@@ -1405,13 +1796,41 @@ void task_entry(void*) {
     bool log_retry = false;
     bool log_permanent = false;
     uint32_t scheduled_delay_ms = 0;
+    uint32_t requested_retry_after_ms = result.retry_after_ms;
+    if (!ok && result.connect_problem) {
+      const HeapDiag heap = capture_heap_diag();
+      const bool pressure = (heap.free_all <= kLowHeapThresholdBytes) ||
+                            (heap.free_internal <= (kVeryLowInternalHeapThresholdBytes + 6UL * 1024UL)) ||
+                            (heap.largest_internal <= (kSmallLargestInternalBlockBytes + 2UL * 1024UL));
+      if (pressure) {
+        s_pressure_fail_streak = static_cast<uint8_t>(min<uint16_t>(s_pressure_fail_streak + 1, 8));
+        uint32_t cooldown = kPressureCooldownMinMs;
+        for (uint8_t i = 1; i < s_pressure_fail_streak; ++i) {
+          if (cooldown >= (kPressureCooldownMaxMs / 2)) {
+            cooldown = kPressureCooldownMaxMs;
+            break;
+          }
+          cooldown *= 2;
+        }
+        if (cooldown > kPressureCooldownMaxMs) {
+          cooldown = kPressureCooldownMaxMs;
+        }
+        requested_retry_after_ms = max(requested_retry_after_ms, cooldown);
+        s_pressure_cooldown_until_ms = millis() + requested_retry_after_ms;
+      } else if (s_pressure_fail_streak > 0) {
+        s_pressure_fail_streak--;
+      }
+    } else if (ok) {
+      s_pressure_fail_streak = 0;
+      s_pressure_cooldown_until_ms = 0;
+    }
     portENTER_CRITICAL(&s_queue_mux);
     if (ok) {
       queue_remove(index);
     } else if (result.retryable || result.connect_problem || result.interrupted) {
       scheduled_delay_ms = queue_schedule_retry(index,
                                                 static_cast<uint8_t>(item.retries + 1),
-                                                result.retry_after_ms,
+                                                requested_retry_after_ms,
                                                 true);
       log_retry = true;
     } else {
@@ -1421,8 +1840,9 @@ void task_entry(void*) {
     portEXIT_CRITICAL(&s_queue_mux);
 
     if (log_retry) {
+      const HeapDiag heap = capture_heap_diag();
       Serial.printf(
-          "[UPLOAD] Retry scheduled path=%s in=%lums err=%u status=%d code=%s msg=%s interrupted=%d connect=%d wifi=%d freeHeap=%lu\n",
+          "[UPLOAD] Retry scheduled path=%s in=%lums err=%u status=%d code=%s msg=%s interrupted=%d connect=%d wifi=%d heap=%lu internal=%lu largestInternal=%lu\n",
           info.path,
           static_cast<unsigned long>(scheduled_delay_ms),
           static_cast<unsigned>(result.error),
@@ -1432,7 +1852,9 @@ void task_entry(void*) {
           result.interrupted ? 1 : 0,
           result.connect_problem ? 1 : 0,
           static_cast<int>(WiFi.status()),
-          static_cast<unsigned long>(ESP.getFreeHeap()));
+          static_cast<unsigned long>(heap.free_all),
+          static_cast<unsigned long>(heap.free_internal),
+          static_cast<unsigned long>(heap.largest_internal));
     } else if (log_permanent) {
       Serial.printf(
           "[UPLOAD] Permanent failure path=%s err=%u status=%d code=%s msg=%s\n",
@@ -1458,12 +1880,16 @@ void task_entry(void*) {
 
 } // namespace
 
-void init() {
-  if (s_initialized) {
+void ensure_task_started_if_enabled() {
+  if (!s_initialized) {
     return;
   }
-  memset(s_queue, 0, sizeof(s_queue));
-  s_initialized = true;
+  if (!config::get().global.auto_upload_enabled) {
+    return;
+  }
+  if (s_task_started) {
+    return;
+  }
   xTaskCreatePinnedToCore(task_entry,
                           "upload_task",
                           8192,
@@ -1471,10 +1897,28 @@ void init() {
                           kUploadTaskPriority,
                           &s_task,
                           kUploadTaskCore);
+  s_task_started = (s_task != nullptr);
+}
+
+void init() {
+  if (s_initialized) {
+    ensure_task_started_if_enabled();
+    return;
+  }
+  memset(s_queue, 0, sizeof(s_queue));
+  s_initialized = true;
+  ensure_task_started_if_enabled();
 }
 
 void request_upload(const char* path) {
   if (!s_initialized || path == nullptr) {
+    return;
+  }
+  if (!config::get().global.auto_upload_enabled) {
+    return;
+  }
+  ensure_task_started_if_enabled();
+  if (!s_task_started) {
     return;
   }
   portENTER_CRITICAL(&s_queue_mux);
@@ -1492,6 +1936,10 @@ void request_upload_auto(const char* path) {
   if (!config::get().global.auto_upload_enabled) {
     return;
   }
+  ensure_task_started_if_enabled();
+  if (!s_task_started) {
+    return;
+  }
   portENTER_CRITICAL(&s_queue_mux);
   const bool queued = queue_add_or_bump(path, false);
   portEXIT_CRITICAL(&s_queue_mux);
@@ -1505,6 +1953,10 @@ void queue_pending() {
     return;
   }
   if (!config::get().global.auto_upload_enabled) {
+    return;
+  }
+  ensure_task_started_if_enabled();
+  if (!s_task_started) {
     return;
   }
   const size_t count = storage::file_count();
@@ -1524,8 +1976,9 @@ void queue_pending() {
 }
 
 Stats get_stats() {
+  ensure_task_started_if_enabled();
   Stats stats{};
-  stats.initialized = s_initialized;
+  stats.initialized = s_task_started;
 
   portENTER_CRITICAL(&s_stats_mux);
   const uint32_t now = millis();
@@ -1552,6 +2005,13 @@ Stats get_stats() {
           sizeof(stats.server_reach_message));
   stats.server_reach_message[sizeof(stats.server_reach_message) - 1] = '\0';
   portEXIT_CRITICAL(&s_stats_mux);
+
+  if (!config::get().global.auto_upload_enabled) {
+    stats.uploaded_files = 0;
+    stats.outstanding_files = 0;
+    stats.outstanding_bytes = 0;
+    return stats;
+  }
 
   const size_t count = storage::file_count();
   uint32_t uploaded_files = 0;

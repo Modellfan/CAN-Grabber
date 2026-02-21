@@ -1,0 +1,11 @@
+result_state: ERROR
+error_code: -1000
+sent_bytes: 0
+total_bytes: 8389714
+last_rate_bps: 0
+elapsed_s: 180.251
+samples: 649
+sent_mb: 0.000
+total_mb: 8.001
+avg_upload_mb_s: 0.000
+log_path: logs\upload_ui_multipart_retry_20260222_003346.jsonl

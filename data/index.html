@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CAN-Grabber</title>
-  <link rel="stylesheet" href="/style.css?v=20260219a">
+  <link rel="stylesheet" href="/style.css?v=20260220a">
 </head>
 <body>
   <div id="content">
@@ -65,7 +65,7 @@
                 <p>Total: <strong id="log-total">-</strong></p>
                 <p>Active buses: <strong id="log-buses">-</strong></p>
               </div>
-              <div class="dash-box">
+              <div class="dash-box" id="uploader-box">
                 <h3>Uploader</h3>
                 <p>Uploaded: <strong id="upload-done-files">-</strong></p>
                 <p>Outstanding: <strong id="upload-open-files">-</strong></p>
@@ -75,7 +75,7 @@
                 <p>ETA: <strong id="upload-eta">-</strong></p>
                 <p>Status: <strong id="upload-status">-</strong></p>
               </div>
-              <div class="dash-box">
+              <div class="dash-box" id="compressor-box">
                 <h3>Compressor</h3>
                 <p>Current: <strong id="compress-current">-</strong></p>
                 <p>Outstanding: <strong id="compress-outstanding">-</strong></p>
@@ -129,6 +129,12 @@
               <label>Upload URL</label>
               <input id="upload-url" type="text" placeholder="http://...">
             </div>
+
+            <h3 class="underline">Compression</h3>
+            <div class="form-grid">
+              <label>Enable compressor</label>
+              <input id="compressor-enabled" type="checkbox" class="cfg-checkbox">
+            </div>
           </div>
         </div>
 
@@ -178,6 +184,6 @@
   </div>
 
   <div id="toast" class="toast"></div>
-  <script src="/app.js?v=20260219c"></script>
+  <script src="/app.js?v=20260220a"></script>
 </body>
 </html>
