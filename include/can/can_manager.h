@@ -47,7 +47,7 @@ bool acquire_log_block(uint8_t bus_id, LogBlock* out);
 void release_log_block(uint8_t bus_id, uint8_t index, uint32_t flushed_frames);
 #endif
 
-#ifdef RX_LOAD_TEST
+#if defined(RX_LOAD_TEST) || defined(CAN_SIMULATED_LOAD)
 void set_load_test_fps(uint32_t fps);
 uint32_t load_test_fps();
 uint32_t load_test_produced(uint8_t bus_id);

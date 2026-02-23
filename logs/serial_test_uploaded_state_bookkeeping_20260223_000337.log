@@ -1,0 +1,5 @@
+[  1103][E][vfs_api.cpp:301] VFSFileImpl(): fopen(/sd/upload_state_v5.txt) failed
+UPLOAD_LOG tag=progress run=1 ms=0 state=SENDING sent=9250 total=8389708 rate_bps=27861 error=0 http=0 rssi=-60 heap=197152
+UPLOAD_LOG tag=progress run=1 ms=0 state=SENDING sent=189474 total=8389708 rate_bps=54613 error=0 http=0 rssi=-60 heap=201304
+UPLOAD_LOG tag=progress run=1 ms=0 state=SENDING sent=287778 total=8389708 rate_bps=83167 error=0 http=0 rssi=-60 heap=199384
+test_uploaded_state_bookkeeping PASS

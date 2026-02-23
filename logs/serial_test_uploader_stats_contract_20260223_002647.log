@@ -1,0 +1,11 @@
+[ 39625][E][vfs_api.cpp:105] open(): /sd/upload_state_v5.txt does not exist, no permits for creation
+SD_RECOVER start reason=uploaded_state_contains/open attempts=3
+[ 39637][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 39648][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 39654][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 39660][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 39666][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 39672][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 39678][E][vfs_api.cpp:113] exists(): File system is not mounted
+test_uploader_stats_contract PASS
+state=FINALIZING sent=91237 total=8389733 rate_bps=54795 error=0

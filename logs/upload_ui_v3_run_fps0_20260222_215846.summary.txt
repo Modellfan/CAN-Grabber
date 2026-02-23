@@ -1,0 +1,11 @@
+result_state: ERROR
+error_code: -1000
+sent_bytes: 0
+total_bytes: 8389391
+last_rate_bps: 0
+elapsed_s: 249.391
+samples: 6
+sent_mb: 0.000
+total_mb: 8.001
+avg_upload_mb_s: 0.000
+log_path: logs\upload_ui_v3_run_fps0_20260222_215846.jsonl

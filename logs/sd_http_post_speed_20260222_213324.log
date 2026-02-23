@@ -1,0 +1,32 @@
+﻿Rebooting MCU...
+???ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x400570f0
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + CAN/logger integration UI test v3
+.
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+Prepared SD test files: 8
+Architecture (v3):
+ A) CAN RX tasks: core 0, prio MAX-2 (from can_manager).
+ B) Storage IO arbiter: core 1, prio MAX-4. ONLY task using SD/File.
+ C) Upload network sender: core 1, prio MAX-5. WiFiClient only.
+ D) HTTP server task: core 1, prio 4.
+ E) Monitor task: core 1, prio 2.
+Arbitration: GREEN/YELLOW/RED by max CAN queue_depth backlog with hysteresis.
+
+Serial commands:
+  help     -> print commands
+  start    -> start uploads
+  abort    -> abort upload stream
+  status   -> print current stats
+  fps <n>  -> set simulated CAN fps
+  reset    -> reboot MCU

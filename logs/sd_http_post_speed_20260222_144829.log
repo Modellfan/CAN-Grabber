@@ -1,0 +1,104 @@
+﻿Rebooting MCU...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40377959
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + local reactive UI test
+.
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+[   734][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[   948][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1158][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1368][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+Prepared SD test files: 8
+Guru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1). 
+
+Core  1 register dump:
+PC      : 0x42016f0a  PS      : 0x00060f34  A0      : 0x8200b298  A1      : 0x3fceb860  
+A2      : 0x3fc941d8  A3      : 0x000000ff  A4      : 0x00000000  A5      : 0x00000000  
+A6      : 0x01000000  A7      : 0x00000001  A8      : 0x000008e2  A9      : 0x00000000  
+A10     : 0xfa000000  A11     : 0x000008e2  A12     : 0xc2800000  A13     : 0x08ad0000  
+A14     : 0x00000040  A15     : 0x00000010  SAR     : 0x0000000a  EXCCAUSE: 0x00000006  
+EXCVADDR: 0x00000000  LBEG    : 0x42043384  LEND    : 0x42043394  LCOUNT  : 0x0000000f  
+
+
+Backtrace: 0x42016f07:0x3fceb860 0x4200b295:0x3fceb880 0x4200bb82:0x3fceb8a0 0x4200bd27:0x3fceb8c0 0x4200be75:0x3fceb8e0 0x42041d69:0x3fceb910 0x42041f40:0x3fceb930 0x42042b02:0x3fceb950 0x420431e2:0x3fceb990 0x42043d64:0x3fceb9d0 0x420454af:0x3fcebc40 0x420237d1:0x3fcebdb0 0x4208a835:0x3fcebdd0 0x42080b30:0x3fcebdf0 0x42080cfb:0x3fcebe20 0x42097a81:0x3fcebea0 0x4200486e:0x3fcebec0 0x42004a2c:0x3fcebf10 0x4200adff:0x3fcebf30 0x42018662:0x3fcebf70
+
+
+Core  0 register dump:
+PC      : 0x42099122  PS      : 0x00060034  A0      : 0x82021bb4  A1      : 0x3fcf4830  
+A2      : 0x00000000  A3      : 0x42081d1c  A4      : 0x00060120  A5      : 0x80000000  
+A6      : 0x02c95c00  A7      : 0x00ffffff  A8      : 0x820216ee  A9      : 0x3fcf4800  
+A10     : 0x00000000  A11     : 0x80000001  A12     : 0x8037fa31  A13     : 0x3fced410  
+A14     : 0x00060023  A15     : 0x00000003  SAR     : 0x0000001d  EXCCAUSE: 0x00000006  
+EXCVADDR: 0x00000000  LBEG    : 0x00000000  LEND    : 0x00000000  LCOUNT  : 0x00000000  
+
+
+Backtrace: 0x4209911f:0x3fcf4830 0x42021bb1:0x3fcf4850 0x4037dbd8:0x3fcf4870
+
+
+
+
+ELF file SHA256: bd0f58c7d675538c
+
+Guru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1). 
+
+Core  1 register dump:
+PC      : 0x40383ecf  PS      : 0x00020234  A0      : 0x82047ace  A1      : 0x3fceb670  
+A2      : 0x00020223  A3      : 0xa5a5a5a5  A4      : 0x82047ace  A5      : 0x00060225  
+A6      : 0xfffbfff0  A7      : 0x00000046  A8      : 0x3fc97218  A9      : 0x00000001  
+A10     : 0x60000000  A11     : 0x00000001  A12     : 0x0000000a  A13     : 0x3fceb65c  
+A14     : 0x00000001  A15     : 0x3fcf4870  SAR     : 0x0000000a  EXCCAUSE: 0x00000006  
+EXCVADDR: 0x00000000  LBEG    : 0x400570e8  LEND    : 0x400570f3  LCOUNT  : 0x00000000  
+
+
+Backtrace: 0x40383ecc:0x3fceb670 0x42047acb:0x3fceb680 0x420480cd:0x3fceb6a0 0x4202208e:0x3fceb6c0 0x4202237a:0x3fceb730 0x40377959:0x3fceb780 0x403772e8:0x3fceb7a0 0x00040022:0x3fceb860 |<-CORRUPTED
+
+
+Core  0 register dump:
+PC      : 0x42099122  PS      : 0x00060034  A0      : 0x82021bb4  A1      : 0x3fcf4830  
+A2      : 0x00000000  A3      : 0x42081d1c  A4      : 0x00060120  A5      : 0x80000000  
+A6      : 0x02c95c00  A7      : 0x00ffffff  A8      : 0x820216ee  A9      : 0x3fcf4800  
+A10     : 0x00000000  A11     : 0x80000001  A12     : 0x8037fa31  A13     : 0x3fced410  
+A14     : 0x00060023  A15     : 0x00000003  SAR     : 0x0000001d  EXCCAUSE: 0x00000006  
+EXCVADDR: 0x00000000  LBEG    : 0x00000000  LEND    : 0x00000000  LCOUNT  : 0x00000000  
+
+
+Backtrace: 0x4209911f:0x3fcf4830 0x42021bb1:0x3fcf4850 0x4037dbd8:0x3fcf4870
+
+
+
+
+ELF file SHA256: bd0f58c7d675538c
+
+Re-entered core dump! Exception happened during core dump!
+Rebooting...
+???ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x42022286
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + local reactive UI test
+..
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+[   936][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1350][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1560][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1770][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1981][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+SD init failed

@@ -1,0 +1,30 @@
+﻿Rebooting MCU...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4201c1b4
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + local reactive UI test
+.
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+Architecture:
+ A) Upload Manager Task: prio 5, core 1. Raw HTTP write loop + fairness.
+ B) HTTP Server Task: prio 3, core 0. Handles /, /status, /start, /abort.
+ C) Prefetch Task (optional): prio 2, core 1. Fills fixed ring buffer.
+ D) Monitor Task: prio 1, core 0. Wi-Fi reconnect/watchdog.
+Data flow: SD file -> optional ring -> upload loop -> remote server.
+Fairness: chunked writes, zero-write delay, taskYIELD, 2ms timeslice delay.
+
+Serial commands:
+  help   -> print commands
+  start  -> start upload
+  abort  -> abort upload
+  status -> print current upload stats
+  reset  -> reboot MCU

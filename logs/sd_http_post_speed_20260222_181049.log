@@ -1,0 +1,216 @@
+﻿Architecture:
+ A) Upload Manager Task: prio 5, core 1. Raw HTTP write loop + fairness.
+ B) HTTP Server Task: prio 3, core 0. Handles /, /status, /start, /abort.
+ C) Prefetch Task (optional): prio 2, core 1. Fills fixed ring buffer.
+ D) Monitor Task: prio 1, core 0. Wi-Fi reconnect/watchdog.
+Data flow: SD file -> optional ring -> upload loop -> remote server.
+Fairness: chunked writes, zero-write delay, taskYIELD, 2ms timeslice delay.
+
+Serial commands:
+  help   -> print commands
+  start  -> start upload
+  abort  -> abort upload
+  clearstate -> clear /upload_state_v2.txt and requeue files
+  status -> print current upload stats
+  reset  -> reboot MCU
+UPLOAD_LOG tag=start run=1 ms=5 state=CONNECTING sent=0 total=8389720 rate_bps=0 error=0 http=0 rssi=-60 heap=206288
+upload start requested
+Guru Meditation Error: Core  0 panic'ed (Unhandled debug exception). 
+Debug exception reason: Stack canary watchpoint triggered (net_monitor) 
+Core  0 register dump:
+PC      : 0x4037f8a7  PS      : 0x00060036  A0      : 0x8037e1dc  A1      : 0x3fcb9150  
+A2      : 0x3fc95c10  A3      : 0xb33fffff  A4      : 0x0000abab  A5      : 0x00060023  
+A6      : 0x00060023  A7      : 0x0000cdcd  A8      : 0xb33fffff  A9      : 0xffffffff  
+A10     : 0x00000000  A11     : 0x3fc95320  A12     : 0x00000000  A13     : 0x3fc9ee14  
+A14     : 0x02c95c10  A15     : 0x00ffffff  SAR     : 0x0000000e  EXCCAUSE: 0x00000001  
+EXCVADDR: 0x00000000  LBEG    : 0x420440b0  LEND    : 0x420440c0  LCOUNT  : 0x0000000f  
+
+
+Backtrace: 0x4037f8a4:0x3fcb9150 0x4037e1d9:0x3fcb9190 0x4037c82c:0x3fcb91c0 0x4037c822:0xa5a5a5a5 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 19403a8be1c293e9
+
+Guru Meditation Error: Core  0 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  0 register dump:
+PC      : 0x4037f5ad  PS      : 0x00060034  A0      : 0x820488bc  A1      : 0x3fc9f610  
+A2      : 0x3fc9ef04  A3      : 0x00000001  A4      : 0x3fcb8ec0  A5      : 0x0000024c  
+A6      : 0x00000008  A7      : 0x3fc9f7ec  A8      : 0x8037f60d  A9      : 0x3fc9f5f0  
+A10     : 0x3fcb8ec8  A11     : 0x3c0b6ba6  A12     : 0x000000ff  A13     : 0x0000ff00  
+A14     : 0x00ff0000  A15     : 0xff000000  SAR     : 0x0000001e  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x0000000d  LBEG    : 0x400556d5  LEND    : 0x400556e5  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x4037f5aa:0x3fc9f610 0x420488b9:0x3fc9f650 0x420493bf:0x3fc9f670 0x420497d4:0x3fc9f700 0x4204885d:0x3fc9f730
+
+
+
+
+ELF file SHA256: 19403a8be1c293e9
+
+Re-entered core dump! Exception happened during core dump!
+Rebooting...
+???ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x403774d0
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + local reactive UI test
+.
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+[   811][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1021][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1331][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1541][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1751][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+SD recover: init_sd
+[  2163][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2325][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2588][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2849][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  3011][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+SD recover ok on attempt 6
+Prepared SD test files: 8
+Architecture:
+ A) Upload Manager Task: prio 5, core 1. Raw HTTP write loop + fairness.
+ B) HTTP Server Task: prio 3, core 0. Handles /, /status, /start, /abort.
+ C) Prefetch Task (optional): prio 2, core 1. Fills fixed ring buffer.
+ D) Monitor Task: prio 1, core 0. Wi-Fi reconnect/watchdog.
+Data flow: SD file -> optional ring -> upload loop -> remote server.
+Fairness: chunked writes, zero-write delay, taskYIELD, 2ms timeslice delay.
+
+Serial commands:
+  help   -> print commands
+  start  -> start upload
+  abort  -> abort upload
+  clearstate -> clear /upload_state_v2.txt and requeue files
+  status -> print current upload stats
+  reset  -> reboot MCU
+UPLOAD_LOG tag=start run=1 ms=6 state=CONNECTING sent=0 total=8389720 rate_bps=0 error=0 http=0 rssi=-61 heap=203452
+Guru Meditation Error: Core  0 panic'ed (Unhandled debug exception). 
+Debug exception reason: Stack canary watchpoint triggered (net_monitor) 
+Core  0 register dump:
+PC      : 0x4037f8a7  PS      : 0x00060136  A0      : 0x8037e1dc  A1      : 0x3fcb9c60  
+A2      : 0x3fc95c10  A3      : 0xb33fffff  A4      : 0x0000abab  A5      : 0x00060123  
+A6      : 0x00060123  A7      : 0x0000cdcd  A8      : 0xb33fffff  A9      : 0xffffffff  
+A10     : 0x00000000  A11     : 0x00000001  A12     : 0x00000001  A13     : 0x3fcef920  
+A14     : 0x02c95c10  A15     : 0x00ffffff  SAR     : 0x00000019  EXCCAUSE: 0x00000001  
+EXCVADDR: 0x00000000  LBEG    : 0x40056f5c  LEND    : 0x40056f72  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x4037f8a4:0x3fcb9c60 0x4037e1d9:0x3fcb9ca0 0x4037c82c:0x3fcb9cd0 0x4037c822:0xa5a5a5a5 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 19403a8be1c293e9
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x403774d0
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + local reactive UI test
+.
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+Prepared SD test files: 8
+Architecture:
+ A) Upload Manager Task: prio 5, core 1. Raw HTTP write loop + fairness.
+ B) HTTP Server Task: prio 3, core 0. Handles /, /status, /start, /abort.
+ C) Prefetch Task (optional): prio 2, core 1. Fills fixed ring buffer.
+ D) Monitor Task: prio 1, core 0. Wi-Fi reconnect/watchdog.
+Data flow: SD file -> optional ring -> upload loop -> remote server.
+Fairness: chunked writes, zero-write delay, taskYIELD, 2ms timeslice delay.
+
+Serial commands:
+  help   -> print commands
+  start  -> start upload
+  abort  -> abort upload
+  clearstate -> clear /upload_state_v2.txt and requeue files
+  status -> print current upload stats
+  reset  -> reboot MCU
+UPLOAD_LOG tag=start run=1 ms=6 state=CONNECTING sent=0 total=8389720 rate_bps=0 error=0 http=0 rssi=-59 heap=206280
+Guru Meditation Error: Core  0 panic'ed (Unhandled debug exception). 
+Debug exception reason: Stack canary watchpoint triggered (net_monitor) 
+Core  0 register dump:
+PC      : 0x4037f8a7  PS      : 0x00060036  A0      : 0x8037e1dc  A1      : 0x3fcb9150  
+A2      : 0x3fc95c10  A3      : 0xb33fffff  A4      : 0x0000abab  A5      : 0x00060023  
+A6      : 0x00060023  A7      : 0x0000cdcd  A8      : 0xb33fffff  A9      : 0xffffffff  
+A10     : 0x00000000  A11     : 0x3fc95320  A12     : 0x00000000  A13     : 0x3fc9ee14  
+A14     : 0x02c95c10  A15     : 0x00ffffff  SAR     : 0x0000000e  EXCCAUSE: 0x00000001  
+EXCVADDR: 0x00000000  LBEG    : 0x420440b0  LEND    : 0x420440c0  LCOUNT  : 0x0000000f  
+
+
+Backtrace: 0x4037f8a4:0x3fcb9150 0x4037e1d9:0x3fcb9190 0x4037c82c:0x3fcb91c0 0x4037c822:0xa5a5a5a5 |<-CORRUPTED
+
+
+
+
+ELF file SHA256: 19403a8be1c293e9
+
+Guru Meditation Error: Core  0 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  0 register dump:
+PC      : 0x4037f5ad  PS      : 0x00060034  A0      : 0x820488bc  A1      : 0x3fc9f610  
+A2      : 0x3fc9ef04  A3      : 0x00000001  A4      : 0x3fcb8ec0  A5      : 0x0000024c  
+A6      : 0x00000008  A7      : 0x3fc9f7ec  A8      : 0x8037f60d  A9      : 0x3fc9f5f0  
+A10     : 0x3fcb8ec8  A11     : 0x3c0b6ba6  A12     : 0x000000ff  A13     : 0x0000ff00  
+A14     : 0x00ff0000  A15     : 0xff000000  SAR     : 0x00000012  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x0000000d  LBEG    : 0x400556d5  LEND    : 0x400556e5  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x4037f5aa:0x3fc9f610 0x420488b9:0x3fc9f650 0x420493bf:0x3fc9f670 0x420497d4:0x3fc9f700 0x4204885d:0x3fc9f730
+
+
+
+
+ELF file SHA256: 19403a8be1c293e9
+
+Re-entered core dump! Exception happened during core dump!
+Rebooting...
+???ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x403774d0
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce3808,len:0x4bc
+load:0x403c9700,len:0xbd8
+load:0x403cc700,len:0x2a0c
+entry 0x403c98d0
+
+SD HTTP upload + local reactive UI test
+.
+Wi-Fi IP: 192.168.3.45
+Upload target: http://192.168.3.2:8000/edit
+[   770][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[   980][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1290][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1500][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  1710][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+SD recover: init_sd
+[  2122][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2285][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2547][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2809][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+[  2971][E][sd_diskio.cpp:806] sdcard_mount(): f_mount failed: (3) The physical drive cannot work
+SD recover ok on attempt 6
+Prepared SD test files: 8

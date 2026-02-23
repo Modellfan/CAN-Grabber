@@ -1,0 +1,24 @@
+Architecture:
+ A) Upload Manager Task: prio 5, core 1. Raw HTTP write loop + fairness.
+ B) HTTP Server Task: prio 3, core 0. Handles /, /status, /start, /abort.
+ C) Prefetch Task (optional): prio 2, core 1. Fills fixed ring buffer.
+ D) Monitor Task: prio 1, core 0. Wi-Fi reconnect/watchdog.
+Data flow: SD file -> optional ring -> upload loop -> remote server.
+Fairness: chunked writes, zero-write delay, taskYIELD, 2ms timeslice delay.
+
+Serial commands:
+  help   -> print commands
+  start  -> start upload
+  abort  -> abort upload
+  reset_upload_state -> clear persisted uploaded state and re-queue test files
+  recover_sd -> force SD recover routine
+  bookkeeping -> print uploaded/outstanding/queue counters
+  test_reachability_probe -> run reachability probe self test
+  test_retry_policy -> run retry-policy self test
+  test_server_contract -> run server-contract self test
+  test_uploaded_state_bookkeeping -> run uploaded-state bookkeeping self test
+  test_recover_sd -> run SD recover self test
+  test_reset_upload_state -> run reset-upload-state self test
+  status -> print current upload stats
+  reset  -> reboot MCU
+test_reachability_probe PASS

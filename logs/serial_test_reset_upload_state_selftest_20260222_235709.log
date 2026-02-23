@@ -1,0 +1,6 @@
+upload abort requested
+UPLOAD_LOG tag=end run=2 ms=15480 state=ERROR sent=3384365 total=8389720 rate_bps=502191 error=-13 http=0 rssi=-57 heap=202188
+UPLOAD_LOG tag=start run=3 ms=4 state=CONNECTING sent=0 total=8389733 rate_bps=0 error=0 http=0 rssi=-57 heap=201824
+UPLOAD_LOG tag=progress run=3 ms=0 state=SENDING sent=271417 total=8389733 rate_bps=56496 error=0 http=0 rssi=-58 heap=201164
+UPLOAD_LOG tag=progress run=3 ms=0 state=SENDING sent=377913 total=8389733 rate_bps=98304 error=0 http=0 rssi=-58 heap=199572
+UPLOAD_LOG tag=progress run=3 ms=0 state=SENDING sent=484409 total=8389733 rate_bps=105363 error=0 http=0 rssi=-57 heap=198968

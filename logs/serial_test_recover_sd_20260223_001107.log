@@ -1,0 +1,20 @@
+UPLOAD_LOG tag=end run=1 ms=92 state=ERROR sent=0 total=8389708 rate_bps=0 error=-12 http=0 rssi=-59 heap=205372
+UPLOAD_LOG tag=start run=2 ms=13 state=CONNECTING sent=0 total=8389720 rate_bps=0 error=0 http=0 rssi=-59 heap=201532
+UPLOAD_LOG tag=end run=2 ms=331 state=ERROR sent=1069 total=8389720 rate_bps=0 error=-13 http=0 rssi=-59 heap=198676
+UPLOAD_LOG tag=start run=3 ms=9 state=CONNECTING sent=0 total=8389720 rate_bps=0 error=0 http=0 rssi=-59 heap=195580
+UPLOAD_LOG tag=progress run=3 ms=0 state=SENDING sent=148525 total=8389720 rate_bps=54795 error=0 http=0 rssi=-60 heap=199960
+UPLOAD_LOG tag=progress run=3 ms=0 state=SENDING sent=623661 total=8389720 rate_bps=481882 error=0 http=0 rssi=-59 heap=196772
+UPLOAD_LOG tag=progress run=3 ms=0 state=SENDING sent=1098797 total=8389720 rate_bps=524288 error=0 http=0 rssi=-60 heap=198364
+SD_RECOVER start reason=selftest attempts=3
+SD_RECOVER success attempt=1
+test_recover_sd PASS
+UPLOAD_LOG tag=progress run=3 ms=0 state=FINALIZING sent=1172568 total=8389720 rate_bps=441107 error=0 http=0 rssi=-59 heap=204328
+SD_RECOVER start reason=serial/recover_sd attempts=3
+[ 11158][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 11168][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 11174][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 11180][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 11186][E][vfs_api.cpp:113] exists(): File system is not mounted
+[ 11191][E][vfs_api.cpp:113] exists(): File system is not mounted
+SD_RECOVER success attempt=1
+recover_sd PASS

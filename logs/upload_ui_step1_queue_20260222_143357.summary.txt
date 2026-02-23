@@ -1,0 +1,11 @@
+result_state: DONE
+error_code: 0
+sent_bytes: 8389746
+total_bytes: 8389746
+last_rate_bps: 470804
+elapsed_s: 148.746
+samples: 541
+sent_mb: 8.001
+total_mb: 8.001
+avg_upload_mb_s: 0.054
+log_path: logs\upload_ui_step1_queue_20260222_143357.jsonl

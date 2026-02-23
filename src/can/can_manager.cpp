@@ -19,6 +19,10 @@ constexpr size_t kBlockSize = 8192;
 constexpr uint8_t kBlockCount = 2;
 constexpr UBaseType_t kRxTaskPriority = configMAX_PRIORITIES - 2;
 constexpr BaseType_t kRxTaskCore = 0;
+#if defined(CAN_SIMULATED_LOAD)
+constexpr uint32_t kSimDefaultFps = 2500;
+constexpr uint32_t kSimYieldEvery = 500;
+#endif
 
 ACAN2515 s_can0(CAN1_CS_PIN, SPI, CAN1_INT_PIN);
 ACAN2515 s_can1(CAN2_CS_PIN, SPI, CAN2_INT_PIN);
@@ -49,6 +53,10 @@ struct BusState {
 
 BusState s_buses[config::kMaxBuses];
 portMUX_TYPE s_ring_mux[config::kMaxBuses];
+#if defined(CAN_SIMULATED_LOAD)
+volatile uint32_t s_sim_target_fps = kSimDefaultFps;
+uint32_t s_sim_produced[config::kMaxBuses] = {};
+#endif
 
 // ISR trampoline for CAN0 controller.
 void can0_isr() {
@@ -139,6 +147,102 @@ void init_bus_state() {
 }
 
 // One RX task per bus; pinned to core 0 at highest priority.
+bool append_line_to_block(uint8_t bus_id, const char* line, size_t len, uint64_t now_us, uint8_t frame_len) {
+  if (bus_id >= config::kMaxBuses || line == nullptr || len == 0 || len > kBlockSize) {
+    return false;
+  }
+
+  BusState& bus = s_buses[bus_id];
+  uint8_t block_index = 0xFF;
+  size_t write_off = 0;
+
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  bus.total_received++;
+  bus.last_rx_us = now_us;
+  if (bus.rx_window_start_us == 0 || (now_us - bus.rx_window_start_us) >= 1000000ULL) {
+    bus.rx_window_start_us = now_us;
+    bus.rx_window_bytes = 0;
+  }
+  bus.rx_window_bytes += frame_len;
+
+  LogBlockState* block = &bus.blocks[bus.write_index];
+  if (block->state != 3) {
+    bool found = false;
+    for (uint8_t i = 0; i < kBlockCount; ++i) {
+      const uint8_t candidate = (bus.write_index + i) % kBlockCount;
+      if (bus.blocks[candidate].state == 0) {
+        bus.write_index = candidate;
+        block = &bus.blocks[candidate];
+        block->len = 0;
+        block->frames = 0;
+        block->state = 3;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      block = nullptr;
+    }
+  }
+
+  if (block != nullptr && block->len + len > kBlockSize) {
+    if (block->len > 0) {
+      block->state = 1;
+    }
+    bool found = false;
+    for (uint8_t i = 0; i < kBlockCount; ++i) {
+      const uint8_t candidate = (bus.write_index + 1 + i) % kBlockCount;
+      if (bus.blocks[candidate].state == 0) {
+        bus.write_index = candidate;
+        block = &bus.blocks[candidate];
+        block->len = 0;
+        block->frames = 0;
+        block->state = 3;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      block = nullptr;
+    }
+  }
+
+  if (block == nullptr) {
+    bus.drops++;
+    portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+    return false;
+  }
+
+  block_index = bus.write_index;
+  write_off = block->len;
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+
+  // Copy payload outside critical section to minimize interrupt latency.
+  memcpy(s_buses[bus_id].blocks[block_index].data + write_off, line, len);
+
+  portENTER_CRITICAL(&s_ring_mux[bus_id]);
+  LogBlockState& dst = s_buses[bus_id].blocks[block_index];
+  if (dst.state != 3) {
+    s_buses[bus_id].drops++;
+    portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+    return false;
+  }
+  dst.len += len;
+  dst.frames++;
+  if (dst.len >= kBlockSize) {
+    dst.state = 1;
+  }
+  size_t pending = 0;
+  for (uint8_t i = 0; i < kBlockCount; ++i) {
+    pending += s_buses[bus_id].blocks[i].len;
+  }
+  if (pending > s_buses[bus_id].high_water) {
+    s_buses[bus_id].high_water = static_cast<uint32_t>(pending);
+  }
+  portEXIT_CRITICAL(&s_ring_mux[bus_id]);
+  return true;
+}
+
 // Per-bus RX task that drains MCP2515 and fills log blocks.
 void rx_task(void* param) {
   const uint8_t bus_id = static_cast<uint8_t>(
@@ -157,100 +261,82 @@ void rx_task(void* param) {
     }
 
     BusState& bus = s_buses[bus_id];
-    if (!bus.enabled || bus.driver == nullptr) {
+    if (!bus.enabled) {
       vTaskDelay(pdMS_TO_TICKS(10));
       continue;
     }
+#if !defined(CAN_SIMULATED_LOAD)
+    if (bus.driver == nullptr) {
+      vTaskDelay(pdMS_TO_TICKS(10));
+      continue;
+    }
+#endif
 
+#if defined(CAN_SIMULATED_LOAD)
+    static uint32_t local_seq[config::kMaxBuses] = {};
+    static uint32_t local_yield[config::kMaxBuses] = {};
+    uint32_t fps = s_sim_target_fps;
+    if (fps == 0) {
+      vTaskDelay(pdMS_TO_TICKS(1));
+      continue;
+    }
+    const uint32_t interval_us = 1000000UL / fps;
+    static uint64_t next_tick_us[config::kMaxBuses] = {};
+    const uint64_t now_us = static_cast<uint64_t>(esp_timer_get_time());
+    if (next_tick_us[bus_id] == 0) {
+      next_tick_us[bus_id] = now_us;
+    }
+    if (now_us < next_tick_us[bus_id]) {
+      const uint64_t wait_us = next_tick_us[bus_id] - now_us;
+      if (wait_us >= 1000ULL) {
+        vTaskDelay(pdMS_TO_TICKS(1));
+      } else {
+        taskYIELD();
+      }
+      continue;
+    }
+    msg.ext = false;
+    msg.rtr = false;
+    msg.len = 8;
+    msg.id = 0x500u + bus_id;
+    const uint32_t seq = local_seq[bus_id]++;
+    msg.data[0] = static_cast<uint8_t>(seq);
+    msg.data[1] = static_cast<uint8_t>(seq >> 8);
+    msg.data[2] = static_cast<uint8_t>(seq >> 16);
+    msg.data[3] = static_cast<uint8_t>(seq >> 24);
+    msg.data[4] = static_cast<uint8_t>(bus_id);
+    msg.data[5] = 0xA5;
+    msg.data[6] = 0x5A;
+    msg.data[7] = 0x01;
+    char line[96];
+    const size_t len = format_savvy_line(bus_id, now_us, msg, line, sizeof(line));
+    if (append_line_to_block(bus_id, line, len, now_us, msg.len)) {
+      s_sim_produced[bus_id]++;
+    }
+    next_tick_us[bus_id] += interval_us;
+    if (interval_us >= 1000UL) {
+      vTaskDelay(pdMS_TO_TICKS(1));
+    } else if (++local_yield[bus_id] >= kSimYieldEvery) {
+      local_yield[bus_id] = 0;
+      vTaskDelay(pdMS_TO_TICKS(1));
+    } else {
+      taskYIELD();
+    }
+#else
     bool any = false;
     while (bus.driver->available()) {
       bus.driver->receive(msg);
-      const uint64_t now = static_cast<uint64_t>(esp_timer_get_time());
+      const uint64_t now_us = static_cast<uint64_t>(esp_timer_get_time());
       char line[96];
-      const size_t len = format_savvy_line(bus_id, now, msg, line, sizeof(line));
-      if (len == 0 || len > kBlockSize) {
-        continue;
+      const size_t len = format_savvy_line(bus_id, now_us, msg, line, sizeof(line));
+      if (append_line_to_block(bus_id, line, len, now_us, msg.len)) {
+        any = true;
       }
-
-      portENTER_CRITICAL(&s_ring_mux[bus_id]);
-      bus.total_received++;
-      bus.last_rx_us = now;
-      if (bus.rx_window_start_us == 0 || (now - bus.rx_window_start_us) >= 1000000ULL) {
-        bus.rx_window_start_us = now;
-        bus.rx_window_bytes = 0;
-      }
-      bus.rx_window_bytes += static_cast<uint32_t>(msg.len);
-      LogBlockState* block = &bus.blocks[bus.write_index];
-      if (block->state != 3) {
-        bool found = false;
-        for (uint8_t i = 0; i < kBlockCount; ++i) {
-          const uint8_t candidate = (bus.write_index + i) % kBlockCount;
-          if (bus.blocks[candidate].state == 0) {
-            bus.write_index = candidate;
-            block = &bus.blocks[candidate];
-            block->len = 0;
-            block->frames = 0;
-            block->state = 3;
-            found = true;
-            break;
-          }
-        }
-        if (!found) {
-          block = nullptr;
-        }
-      }
-
-      if (block != nullptr && block->len + len > kBlockSize) {
-        if (block->len > 0) {
-          block->state = 1;
-        }
-        bool found = false;
-        for (uint8_t i = 0; i < kBlockCount; ++i) {
-          const uint8_t candidate = (bus.write_index + 1 + i) % kBlockCount;
-          if (bus.blocks[candidate].state == 0) {
-            bus.write_index = candidate;
-            block = &bus.blocks[candidate];
-            block->len = 0;
-            block->frames = 0;
-            block->state = 3;
-            found = true;
-            break;
-          }
-        }
-        if (!found) {
-          block = nullptr;
-        }
-      }
-
-      if (block == nullptr) {
-        bus.drops++;
-        portEXIT_CRITICAL(&s_ring_mux[bus_id]);
-        continue;
-      }
-
-      memcpy(block->data + block->len, line, len);
-      block->len += len;
-      block->frames++;
-
-      if (block->len >= kBlockSize) {
-        block->state = 1;
-      }
-
-      size_t pending = 0;
-      for (uint8_t i = 0; i < kBlockCount; ++i) {
-        pending += bus.blocks[i].len;
-      }
-      if (pending > bus.high_water) {
-        bus.high_water = static_cast<uint32_t>(pending);
-      }
-      portEXIT_CRITICAL(&s_ring_mux[bus_id]);
-
-      any = true;
     }
-
     if (!any) {
       vTaskDelay(pdMS_TO_TICKS(1));
     }
+#endif
   }
 }
 
@@ -258,18 +344,24 @@ void rx_task(void* param) {
 
 // Initialize CAN buses and start RX tasks for enabled channels.
 void init() {
+#if !defined(CAN_SIMULATED_LOAD)
   SPI.setFrequency(CAN_SPI_CLOCK_HZ);
   SPI.begin(CAN_SPI_SCK_PIN, CAN_SPI_MISO_PIN, CAN_SPI_MOSI_PIN);
+#endif
 
   const config::Config& cfg = config::get();
   init_bus_state();
 
   if (cfg.buses[0].enabled) {
+#if !defined(CAN_SIMULATED_LOAD)
     configure_can_bus(s_can0, cfg.buses[0].bitrate, can0_isr);
+#endif
     s_buses[0].enabled = true;
   }
   if (cfg.buses[1].enabled) {
+#if !defined(CAN_SIMULATED_LOAD)
     configure_can_bus(s_can1, cfg.buses[1].bitrate, can1_isr);
+#endif
     s_buses[1].enabled = true;
   }
 
@@ -498,5 +590,22 @@ uint8_t error_flag_register(uint8_t bus_id) {
   }
   return driver->errorFlagRegister();
 }
+
+#if defined(CAN_SIMULATED_LOAD)
+void set_load_test_fps(uint32_t fps) {
+  s_sim_target_fps = fps;
+}
+
+uint32_t load_test_fps() {
+  return s_sim_target_fps;
+}
+
+uint32_t load_test_produced(uint8_t bus_id) {
+  if (bus_id >= config::kMaxBuses) {
+    return 0;
+  }
+  return s_sim_produced[bus_id];
+}
+#endif
 
 } // namespace can

@@ -1,0 +1,11 @@
+result_state: DONE
+error_code: 0
+sent_bytes: 8389733
+total_bytes: 8389733
+last_rate_bps: 489074
+elapsed_s: 97.762
+samples: 346
+sent_mb: 8.001
+total_mb: 8.001
+avg_upload_mb_s: 0.082
+log_path: logs\upload_ui_step3_contract_20260222_144010.jsonl

@@ -1,0 +1,14049 @@
+# Upload UI Test Results
+
+## Historical Runs (2026-02-22)
+- Context: Feature-by-feature bring-up of `sd_http_upload_ui_test_v2`.
+
+| Step | Change | Time (Local) | Result | Avg MB/s | Summary |
+| --- | --- | --- | --- | ---: | --- |
+| 1 | Queue + auto-scan + dedupe/bump | 2026-02-22 14:33:57 | DONE / error=0 | 0.054 | `logs/upload_ui_step1_queue_20260222_143357.summary.txt` |
+| 2 | Retry/backoff/jitter/retry-after | 2026-02-22 14:38:39 | DONE / error=0 | 0.642 | `logs/upload_ui_step2_retry_20260222_143839.summary.txt` |
+| 3 | JSON contract validation | 2026-02-22 14:40:10 | DONE / error=0 | 0.082 | `logs/upload_ui_step3_contract_20260222_144010.summary.txt` |
+| 4 | Idempotency + auth headers | 2026-02-22 14:42:45 | DONE / error=0 | 0.171 | `logs/upload_ui_step4_headers_20260222_144245.summary.txt` |
+| 5 | Uploaded-state bookkeeping (final fixed run) | 2026-02-22 14:50:54 | DONE / error=0 | 0.405 | `logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt` |
+
+## Ongoing Policy
+- Every future `tools/upload_ui_tester_v2.py` run/check appends a timestamped markdown entry here.
+- Entries include:
+  - local + UTC time
+  - git short hash
+  - current working tree changes
+  - test/check result metrics
+
+## Check
+- Local Time: `2026-02-22 14:53:28`
+- UTC Time: `2026-02-22 13:53:28Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1212`
+## Check
+- Local Time: `2026-02-22 17:38:57`
+- UTC Time: `2026-02-22 16:38:57Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1490`
+## Run
+- Local Time: `2026-02-22 17:49:04`
+- UTC Time: `2026-02-22 16:49:04Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Result: `state=ERROR` `error=-1000`
+- Throughput: `avg_upload_mb_s=0.000`
+- Bytes: `0/0`
+- Sample Count: `2109`
+- Log: `logs\upload_ui_probe_v2_20260222_173904.jsonl`
+- Summary: `logs\upload_ui_probe_v2_20260222_173904.summary.txt`
+## Check
+- Local Time: `2026-02-22 17:51:34`
+- UTC Time: `2026-02-22 16:51:34Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1490`
+## Check
+- Local Time: `2026-02-22 17:56:27`
+- UTC Time: `2026-02-22 16:56:27Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-22 17:59:32`
+- UTC Time: `2026-02-22 16:59:32Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-22 17:59:39`
+- UTC Time: `2026-02-22 16:59:39Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ m tools/esp32-arduino-lib-builder
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/upload_ui_test_v2/
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1490`
+## Check
+- Local Time: `2026-02-22 22:33:22`
+- UTC Time: `2026-02-22 21:33:22Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? archives/
+?? docs/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_test_runbook_v2.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+```
+- Env: `sd_http_upload_ui_test_v2`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `start_failed: <urlopen error timed out>`
+
+## 2026-02-22 22:35:17 +01:00 - Restore and test v2 stage 20260222_180602_before_clear_upload_state_feature
+- Requested rollback stage restored via `tools/stage_archive.ps1`:
+  - `src/dev/sd_http_upload_ui_test_v2.cpp`
+  - `src/dev/upload_ui_test_v2/main.cpp`
+  - `src/dev/upload_ui_test_v2/storage.cpp`
+  - `src/dev/upload_ui_test_v2/uploader.cpp`
+  - `src/dev/upload_ui_test_v2/webserver.cpp`
+  - `tools/upload_ui_tester_v2.py`
+- Flashed firmware: `sd_http_upload_ui_test_v2` to `COM15` (success).
+- Serial runtime observations after flash:
+  - Repeated SD mount recovery attempts (`f_mount failed`) then `SD recover ok`.
+  - Repeated crash loop: `Guru Meditation Error ... Stack canary watchpoint triggered (net_monitor)`.
+- Automation/test execution:
+  - `python tools/upload_ui_tester_v2.py --base-url http://192.168.3.45 --start --timeout 180 ...`
+  - Result: `failed_to_start: <urlopen error timed out>`.
+- Webinterface responsiveness probe (30s, `/` + `/status`):
+  - `/`: `ok=3`, `err=10`, `avg_latency_ms=362.3`
+  - `/status`: `ok=5`, `err=8`, `avg_latency_ms=333.6`
+- Upload-speed probe:
+  - `/start` eventually accepted (`attempt 5`), but status stayed idle.
+  - `samples=6`, `state=IDLE->IDLE`, `bytes_sent=0->0`, `total=0`, `avg_bps=0.0`.
+- Result: FAIL (firmware unstable in this restored stage; web UI intermittently unreachable; upload did not run).
+## Check
+- Local Time: `2026-02-22 23:07:50`
+- UTC Time: `2026-02-22 22:07:50Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? archives/
+?? docs/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_test_runbook_v2.md
+?? tools/upload_ui_test_runbook_v5.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1212`
+## Run
+- Local Time: `2026-02-22 23:08:13`
+- UTC Time: `2026-02-22 22:08:13Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? archives/
+?? docs/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_test_runbook_v2.md
+?? tools/upload_ui_test_runbook_v5.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.433`
+- Responsiveness: `success=100.00%` `p95=35.40 ms` `max=49.84 ms`
+- Active Upload Responsiveness: `samples=67` `p95=35.40 ms` `max=49.84 ms`
+- Bytes: `8389740/8389740`
+- Sample Count: `68`
+- Log: `logs\upload_ui_v5_run_20260222_230755.jsonl`
+- Summary: `logs\upload_ui_v5_run_20260222_230755.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:29:35`
+- UTC Time: `2026-02-22 22:29:35Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? docs/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1212`
+## Run
+- Local Time: `2026-02-22 23:29:54`
+- UTC Time: `2026-02-22 22:29:54Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? docs/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.433`
+- Responsiveness: `success=100.00%` `p95=39.33 ms` `max=66.70 ms`
+- Active Upload Responsiveness: `samples=67` `p95=39.43 ms` `max=66.70 ms`
+- Bytes: `8389730/8389730`
+- Sample Count: `68`
+- Log: `logs\upload_ui_v5_poststep_20260222_232932.jsonl`
+- Summary: `logs\upload_ui_v5_poststep_20260222_232932.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:37:41`
+- UTC Time: `2026-02-22 22:37:41Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1212`
+## Run
+- Local Time: `2026-02-22 23:38:02`
+- UTC Time: `2026-02-22 22:38:02Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.399`
+- Responsiveness: `success=100.00%` `p95=76.16 ms` `max=109.16 ms`
+- Active Upload Responsiveness: `samples=70` `p95=76.51 ms` `max=109.16 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `71`
+- Log: `logs\upload_ui_v5_queue_pipeline_20260222_233741.jsonl`
+- Summary: `logs\upload_ui_v5_queue_pipeline_20260222_233741.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:44:06`
+- UTC Time: `2026-02-22 22:44:06Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `retry_policy_ok=True`
+## Run
+- Local Time: `2026-02-22 23:48:07`
+- UTC Time: `2026-02-22 22:48:07Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=ERROR` `error=-1000`
+- Throughput: `avg_upload_mb_s=0.000`
+- Responsiveness: `success=100.00%` `p95=33.68 ms` `max=82.47 ms`
+- Active Upload Responsiveness: `samples=0` `p95=0.00 ms` `max=0.00 ms`
+- Bytes: `0/0`
+- Sample Count: `883`
+- Log: `logs\upload_ui_v5_retry_policy_20260222_234406.jsonl`
+- Summary: `logs\upload_ui_v5_retry_policy_20260222_234406.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:51:47`
+- UTC Time: `2026-02-22 22:51:47Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `retry_policy_ok=True`
+## Check
+- Local Time: `2026-02-22 23:51:47`
+- UTC Time: `2026-02-22 22:51:47Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `server_contract_ok=True`
+## Check
+- Local Time: `2026-02-22 23:56:12`
+- UTC Time: `2026-02-22 22:56:12Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-22 23:56:12`
+- UTC Time: `2026-02-22 22:56:12Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1212`
+## Run
+- Local Time: `2026-02-22 23:56:39`
+- UTC Time: `2026-02-22 22:56:39Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.360`
+- Responsiveness: `success=100.00%` `p95=79.53 ms` `max=101.51 ms`
+- Active Upload Responsiveness: `samples=77` `p95=79.71 ms` `max=101.51 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `78`
+- Log: `logs\upload_ui_v5_reset_state_20260222_235615.jsonl`
+- Summary: `logs\upload_ui_v5_reset_state_20260222_235615.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:58:35`
+- UTC Time: `2026-02-22 22:58:35Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1212`
+## Check
+- Local Time: `2026-02-22 23:58:40`
+- UTC Time: `2026-02-22 22:58:40Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-22 23:59:06`
+- UTC Time: `2026-02-22 22:59:06Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.424`
+- Responsiveness: `success=100.00%` `p95=76.96 ms` `max=85.30 ms`
+- Active Upload Responsiveness: `samples=66` `p95=77.15 ms` `max=85.30 ms`
+- Bytes: `8389746/8389746`
+- Sample Count: `67`
+- Log: `logs\upload_ui_v5_speed_r1_20260222_235846.jsonl`
+- Summary: `logs\upload_ui_v5_speed_r1_20260222_235846.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:59:12`
+- UTC Time: `2026-02-22 22:59:12Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-22 23:59:38`
+- UTC Time: `2026-02-22 22:59:38Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.375`
+- Responsiveness: `success=100.00%` `p95=114.22 ms` `max=4830.88 ms`
+- Active Upload Responsiveness: `samples=50` `p95=116.41 ms` `max=4830.88 ms`
+- Bytes: `8389746/8389746`
+- Sample Count: `51`
+- Log: `logs\upload_ui_v5_speed_r2_20260222_235916.jsonl`
+- Summary: `logs\upload_ui_v5_speed_r2_20260222_235916.summary.txt`
+## Check
+- Local Time: `2026-02-22 23:59:43`
+- UTC Time: `2026-02-22 22:59:43Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:00:11`
+- UTC Time: `2026-02-22 23:00:11Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.351`
+- Responsiveness: `success=100.00%` `p95=114.52 ms` `max=152.50 ms`
+- Active Upload Responsiveness: `samples=77` `p95=115.79 ms` `max=152.50 ms`
+- Bytes: `8389746/8389746`
+- Sample Count: `78`
+- Log: `logs\upload_ui_v5_speed_r3_20260222_235947.jsonl`
+- Summary: `logs\upload_ui_v5_speed_r3_20260222_235947.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:03:15`
+- UTC Time: `2026-02-22 23:03:15Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1212`
+## Check
+- Local Time: `2026-02-23 00:03:16`
+- UTC Time: `2026-02-22 23:03:16Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `uploaded_state_ok=True uploaded=1 outstanding=7 queue_ready=8 queue_delayed=0`
+## Check
+- Local Time: `2026-02-23 00:03:43`
+- UTC Time: `2026-02-22 23:03:43Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:04:07`
+- UTC Time: `2026-02-22 23:04:07Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.414`
+- Responsiveness: `success=100.00%` `p95=65.99 ms` `max=78.19 ms`
+- Active Upload Responsiveness: `samples=68` `p95=66.02 ms` `max=78.19 ms`
+- Bytes: `8389721/8389721`
+- Sample Count: `69`
+- Log: `logs\upload_ui_v5_bookkeeping_20260223_000347.jsonl`
+- Summary: `logs\upload_ui_v5_bookkeeping_20260223_000347.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:06:51`
+- UTC Time: `2026-02-22 23:06:51Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1212`
+## Check
+- Local Time: `2026-02-23 00:07:47`
+- UTC Time: `2026-02-22 23:07:47Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 00:07:56`
+- UTC Time: `2026-02-22 23:07:56Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `recover_sd_check_failed: timed out`
+## Check
+- Local Time: `2026-02-23 00:08:12`
+- UTC Time: `2026-02-22 23:08:12Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1212`
+## Check
+- Local Time: `2026-02-23 00:09:08`
+- UTC Time: `2026-02-22 23:09:08Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 00:09:22`
+- UTC Time: `2026-02-22 23:09:22Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `recover_sd_check_failed: timed out`
+## Check
+- Local Time: `2026-02-23 00:10:46`
+- UTC Time: `2026-02-22 23:10:46Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `recover_sd_ok=True`
+## Check
+- Local Time: `2026-02-23 00:10:59`
+- UTC Time: `2026-02-22 23:10:59Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:11:40`
+- UTC Time: `2026-02-22 23:11:40Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.288`
+- Responsiveness: `success=100.00%` `p95=67.06 ms` `max=86.07 ms`
+- Active Upload Responsiveness: `samples=98` `p95=67.08 ms` `max=86.07 ms`
+- Bytes: `8389733/8389733`
+- Sample Count: `99`
+- Log: `logs\upload_ui_v5_recover_sd_20260223_001112.jsonl`
+- Summary: `logs\upload_ui_v5_recover_sd_20260223_001112.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:14:57`
+- UTC Time: `2026-02-22 23:14:57Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 00:14:57`
+- UTC Time: `2026-02-22 23:14:57Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reachability_probe_ok=True`
+r=0 root_len=1433`
+## Run
+- Local Time: `2026-02-23 00:15:32`
+- UTC Time: `2026-02-22 23:15:32Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.403`
+- Responsiveness: `success=100.00%` `p95=70.77 ms` `max=113.90 ms`
+- Active Upload Responsiveness: `samples=69` `p95=70.79 ms` `max=113.90 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `70`
+- Log: `logs\upload_ui_v5_probe_step1_20260223_001511.jsonl`
+- Summary: `logs\upload_ui_v5_probe_step1_20260223_001511.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:17:35`
+- UTC Time: `2026-02-22 23:17:35Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reachability_probe_ok=True`
+## Check
+- Local Time: `2026-02-23 00:17:35`
+- UTC Time: `2026-02-22 23:17:35Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1433`
+## Check
+- Local Time: `2026-02-23 00:17:53`
+- UTC Time: `2026-02-22 23:17:53Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:18:20`
+- UTC Time: `2026-02-22 23:18:20Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.310`
+- Responsiveness: `success=100.00%` `p95=81.50 ms` `max=108.54 ms`
+- Active Upload Responsiveness: `samples=90` `p95=81.67 ms` `max=108.54 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `91`
+- Log: `logs\upload_ui_v5_probe_step2_20260223_001752.jsonl`
+- Summary: `logs\upload_ui_v5_probe_step2_20260223_001752.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:22:03`
+- UTC Time: `2026-02-22 23:22:03Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1433`
+## Check
+- Local Time: `2026-02-23 00:22:59`
+- UTC Time: `2026-02-22 23:22:59Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `[WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 00:22:59`
+- UTC Time: `2026-02-22 23:22:59Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `uploader_stats_contract_check_failed: [WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 00:23:10`
+- UTC Time: `2026-02-22 23:23:10Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 00:23:14`
+- UTC Time: `2026-02-22 23:23:14Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `[WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 00:23:19`
+- UTC Time: `2026-02-22 23:23:19Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `uploader_stats_contract_check_failed: timed out`
+## Check
+- Local Time: `2026-02-23 00:23:50`
+- UTC Time: `2026-02-22 23:23:50Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `uploader_stats_contract_check_failed: [WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 00:23:50`
+- UTC Time: `2026-02-22 23:23:50Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `[WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 00:25:04`
+- UTC Time: `2026-02-22 23:25:04Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `[WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 00:25:56`
+- UTC Time: `2026-02-22 23:25:56Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:25:56`
+- UTC Time: `2026-02-22 23:25:56Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `uploader_stats_contract_check_failed: <urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:26:34`
+- UTC Time: `2026-02-22 23:26:34Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1433`
+## Check
+- Local Time: `2026-02-23 00:26:35`
+- UTC Time: `2026-02-22 23:26:35Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `uploader_contract_ok=True missing=none`
+## Check
+- Local Time: `2026-02-23 00:26:46`
+- UTC Time: `2026-02-22 23:26:46Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:30:58`
+- UTC Time: `2026-02-22 23:30:58Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=ERROR` `error=-1000`
+- Throughput: `avg_upload_mb_s=0.000`
+- Responsiveness: `success=1.94%` `p95=1176.26 ms` `max=1178.04 ms`
+- Active Upload Responsiveness: `samples=2` `p95=1176.26 ms` `max=1178.04 ms`
+- Bytes: `91237/8389733`
+- Sample Count: `2`
+- Log: `logs\upload_ui_v5_uploader_contract_20260223_002655.jsonl`
+- Summary: `logs\upload_ui_v5_uploader_contract_20260223_002655.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:31:09`
+- UTC Time: `2026-02-22 23:31:09Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `recover_sd_check_failed: <urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:31:09`
+- UTC Time: `2026-02-22 23:31:09Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `reset_upload_state_failed: <urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:31:09`
+- UTC Time: `2026-02-22 23:31:09Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:32:15`
+- UTC Time: `2026-02-22 23:32:15Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `uploader_stats_contract_check_failed: <urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:32:16`
+- UTC Time: `2026-02-22 23:32:16Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 00:32:46`
+- UTC Time: `2026-02-22 23:32:46Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1433`
+## Check
+- Local Time: `2026-02-23 00:32:47`
+- UTC Time: `2026-02-22 23:32:47Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `uploader_contract_ok=True missing=none`
+## Check
+- Local Time: `2026-02-23 00:32:55`
+- UTC Time: `2026-02-22 23:32:55Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:36:57`
+- UTC Time: `2026-02-22 23:36:57Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=ERROR` `error=-1000`
+- Throughput: `avg_upload_mb_s=0.016`
+- Responsiveness: `success=100.00%` `p95=1347.16 ms` `max=2487.08 ms`
+- Active Upload Responsiveness: `samples=286` `p95=1347.16 ms` `max=2487.08 ms`
+- Bytes: `4031557/8389746`
+- Sample Count: `286`
+- Log: `logs\upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl`
+- Summary: `logs\upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:46:02`
+- UTC Time: `2026-02-22 23:46:02Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 00:46:08`
+- UTC Time: `2026-02-22 23:46:08Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reachability_probe_ok=True`
+## Check
+- Local Time: `2026-02-23 00:46:08`
+- UTC Time: `2026-02-22 23:46:08Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reachability_cache_ok=True`
+## Run
+- Local Time: `2026-02-23 00:46:27`
+- UTC Time: `2026-02-22 23:46:27Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.777`
+- Responsiveness: `success=100.00%` `p95=68.48 ms` `max=80.33 ms`
+- Active Upload Responsiveness: `samples=36` `p95=68.93 ms` `max=80.33 ms`
+- Bytes: `8389733/8389733`
+- Sample Count: `37`
+- Log: `logs\upload_ui_v5_probe_step1_revert_20260223_004616.jsonl`
+- Summary: `logs\upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt`
+## Check
+- Local Time: `2026-02-23 00:46:33`
+- UTC Time: `2026-02-22 23:46:33Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 00:46:59`
+- UTC Time: `2026-02-22 23:46:59Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.404`
+- Responsiveness: `success=100.00%` `p95=67.73 ms` `max=78.71 ms`
+- Active Upload Responsiveness: `samples=69` `p95=67.78 ms` `max=78.71 ms`
+- Bytes: `8389733/8389733`
+- Sample Count: `70`
+- Log: `logs\upload_ui_v5_probe_step2_revert_20260223_004638.jsonl`
+- Summary: `logs\upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:03:01`
+- UTC Time: `2026-02-23 00:03:01Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1965`
+e`
+## Run
+- Local Time: `2026-02-23 01:08:08`
+- UTC Time: `2026-02-23 00:08:08Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=ERROR` `error=-1000`
+- Throughput: `avg_upload_mb_s=0.000`
+- Responsiveness: `success=0.00%` `p95=0.00 ms` `max=0.00 ms`
+- Active Upload Responsiveness: `samples=0` `p95=0.00 ms` `max=0.00 ms`
+- Bytes: `0/0`
+- Sample Count: `0`
+- Log: `logs\upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl`
+- Summary: `logs\upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:08:17`
+- UTC Time: `2026-02-23 00:08:17Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 01:08:39`
+- UTC Time: `2026-02-23 00:08:39Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `[WinError 10054] Eine vorhandene Verbindung wurde vom Remotehost geschlossen`
+## Check
+- Local Time: `2026-02-23 01:09:31`
+- UTC Time: `2026-02-23 00:09:31Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 01:11:10`
+- UTC Time: `2026-02-23 00:11:10Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `<urlopen error timed out>`
+## Check
+- Local Time: `2026-02-23 01:12:10`
+- UTC Time: `2026-02-23 00:12:10Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `FAIL`
+- Detail: `reset_upload_state_failed: <urlopen error [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte>`
+## Check
+- Local Time: `2026-02-23 01:13:42`
+- UTC Time: `2026-02-23 00:13:42Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 01:13:42`
+- UTC Time: `2026-02-23 00:13:42Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=1965`
+## Run
+- Local Time: `2026-02-23 01:14:03`
+- UTC Time: `2026-02-23 00:14:03Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.536`
+- Responsiveness: `success=100.00%` `p95=75.13 ms` `max=98.50 ms`
+- Active Upload Responsiveness: `samples=53` `p95=75.33 ms` `max=98.50 ms`
+- Bytes: `8389733/8389733`
+- Sample Count: `54`
+- Log: `logs\upload_ui_v5_4files_20260223_011348.jsonl`
+- Summary: `logs\upload_ui_v5_4files_20260223_011348.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:17:15`
+- UTC Time: `2026-02-23 00:17:15Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=1965`
+## Check
+- Local Time: `2026-02-23 01:17:42`
+- UTC Time: `2026-02-23 00:17:42Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 01:18:03`
+- UTC Time: `2026-02-23 00:18:03Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.492`
+- Responsiveness: `success=100.00%` `p95=76.62 ms` `max=3020.23 ms`
+- Active Upload Responsiveness: `samples=47` `p95=76.73 ms` `max=3020.23 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `48`
+- Log: `logs\upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl`
+- Summary: `logs\upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:20:00`
+- UTC Time: `2026-02-23 00:20:00Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:21:52`
+- UTC Time: `2026-02-23 00:21:52Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:22:19`
+- UTC Time: `2026-02-23 00:22:19Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Check
+- Local Time: `2026-02-23 01:22:27`
+- UTC Time: `2026-02-23 00:22:27Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=2029`
+## Run
+- Local Time: `2026-02-23 01:23:33`
+- UTC Time: `2026-02-23 00:23:33Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.132`
+- Responsiveness: `success=100.00%` `p95=39.03 ms` `max=1211.33 ms`
+- Active Upload Responsiveness: `samples=210` `p95=39.08 ms` `max=1211.33 ms`
+- Bytes: `8389733/8389733`
+- Sample Count: `211`
+- Log: `logs\upload_ui_v5_idle_probe_only_20260223_012232.jsonl`
+- Summary: `logs\upload_ui_v5_idle_probe_only_20260223_012232.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:24:05`
+- UTC Time: `2026-02-23 00:24:05Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:25:48`
+- UTC Time: `2026-02-23 00:25:48Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:27:53`
+- UTC Time: `2026-02-23 00:27:53Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 01:28:14`
+- UTC Time: `2026-02-23 00:28:14Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.557`
+- Responsiveness: `success=100.00%` `p95=89.89 ms` `max=176.98 ms`
+- Active Upload Responsiveness: `samples=50` `p95=89.89 ms` `max=176.98 ms`
+- Bytes: `8389746/8389746`
+- Sample Count: `51`
+- Log: `logs\upload_ui_v5_speed_rerun_20260223_012759.jsonl`
+- Summary: `logs\upload_ui_v5_speed_rerun_20260223_012759.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:34:54`
+- UTC Time: `2026-02-23 00:34:54Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:35:20`
+- UTC Time: `2026-02-23 00:35:20Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 01:35:40`
+- UTC Time: `2026-02-23 00:35:40Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.402`
+- Responsiveness: `success=100.00%` `p95=84.05 ms` `max=94.35 ms`
+- Active Upload Responsiveness: `samples=70` `p95=84.06 ms` `max=94.35 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `71`
+- Log: `logs\upload_ui_v5_serial_split_20260223_013519.jsonl`
+- Summary: `logs\upload_ui_v5_serial_split_20260223_013519.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:43:55`
+- UTC Time: `2026-02-23 00:43:55Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:44:21`
+- UTC Time: `2026-02-23 00:44:21Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `reset_upload_state_ok=True state_file_removed=True`
+## Run
+- Local Time: `2026-02-23 01:44:43`
+- UTC Time: `2026-02-23 00:44:43Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.jsonl
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Result: `state=DONE` `error=0`
+- Throughput: `avg_upload_mb_s=0.388`
+- Responsiveness: `success=100.00%` `p95=80.87 ms` `max=95.25 ms`
+- Active Upload Responsiveness: `samples=73` `p95=81.37 ms` `max=95.25 ms`
+- Bytes: `8389720/8389720`
+- Sample Count: `74`
+- Log: `logs\upload_ui_v5_comment_all_funcs_20260223_014421.jsonl`
+- Summary: `logs\upload_ui_v5_comment_all_funcs_20260223_014421.summary.txt`
+## Check
+- Local Time: `2026-02-23 01:44:53`
+- UTC Time: `2026-02-23 00:44:53Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.jsonl
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=SENDING status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:46:47`
+- UTC Time: `2026-02-23 00:46:47Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.jsonl
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:49:28`
+- UTC Time: `2026-02-23 00:49:28Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.jsonl
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`
+## Check
+- Local Time: `2026-02-23 01:54:27`
+- UTC Time: `2026-02-23 00:54:27Z`
+- Git Ref: `19bec8c`
+- Changes:
+```text
+M include/can/can_manager.h
+ M include/dev/sd_http_post_speed_secrets.h
+ M include/dev/sd_http_upload_ui_secrets.h
+ M platformio.ini
+ M src/can/can_manager.cpp
+ M src/logging/log_writer.cpp
+ m tools/esp32-arduino-lib-builder
+?? IMPLEMENTATION_LOG.md
+?? archives/
+?? docs/
+?? logs/sd_http_post_speed_20260222_134926.clean.log
+?? logs/sd_http_post_speed_20260222_134926.log
+?? logs/sd_http_post_speed_20260222_135755.clean.log
+?? logs/sd_http_post_speed_20260222_135755.log
+?? logs/sd_http_post_speed_20260222_135925.clean.log
+?? logs/sd_http_post_speed_20260222_135925.log
+?? logs/sd_http_post_speed_20260222_140031.clean.log
+?? logs/sd_http_post_speed_20260222_140031.log
+?? logs/sd_http_post_speed_20260222_140332.clean.log
+?? logs/sd_http_post_speed_20260222_140332.log
+?? logs/sd_http_post_speed_20260222_141124.clean.log
+?? logs/sd_http_post_speed_20260222_141124.log
+?? logs/sd_http_post_speed_20260222_142301.clean.log
+?? logs/sd_http_post_speed_20260222_142301.log
+?? logs/sd_http_post_speed_20260222_142942.clean.log
+?? logs/sd_http_post_speed_20260222_142942.log
+?? logs/sd_http_post_speed_20260222_144451.clean.log
+?? logs/sd_http_post_speed_20260222_144451.log
+?? logs/sd_http_post_speed_20260222_144626.clean.log
+?? logs/sd_http_post_speed_20260222_144626.log
+?? logs/sd_http_post_speed_20260222_144829.clean.log
+?? logs/sd_http_post_speed_20260222_144829.log
+?? logs/sd_http_post_speed_20260222_174924.log
+?? logs/sd_http_post_speed_20260222_175633.log
+?? logs/sd_http_post_speed_20260222_180747.log
+?? logs/sd_http_post_speed_20260222_181022.log
+?? logs/sd_http_post_speed_20260222_181049.log
+?? logs/sd_http_post_speed_20260222_213324.log
+?? logs/sd_http_post_speed_20260222_215358.log
+?? logs/sd_http_post_speed_20260222_215626.log
+?? logs/serial_test_contract_retry_20260222_235320.log
+?? logs/serial_test_reachability_probe_20260223_001506.log
+?? logs/serial_test_reachability_probe_cache_20260223_001747.log
+?? logs/serial_test_recover_sd_20260223_001107.log
+?? logs/serial_test_reset_upload_state_20260222_235654.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235709.log
+?? logs/serial_test_reset_upload_state_selftest_20260222_235737.log
+?? logs/serial_test_retry_policy_20260222_235045.log
+?? logs/serial_test_uploaded_state_bookkeeping_20260223_000337.log
+?? logs/serial_test_uploader_stats_contract_20260223_002353.log
+?? logs/serial_test_uploader_stats_contract_20260223_002647.log
+?? logs/upload_ui_after_clearstate_20260222_181257.jsonl
+?? logs/upload_ui_after_clearstate_20260222_181257.summary.txt
+?? logs/upload_ui_probe_v2_20260222_173904.jsonl
+?? logs/upload_ui_probe_v2_20260222_173904.summary.txt
+?? logs/upload_ui_run_20260222_135031.jsonl
+?? logs/upload_ui_run_20260222_135031.summary.txt
+?? logs/upload_ui_run_20260222_140448.jsonl
+?? logs/upload_ui_run_20260222_140448.summary.txt
+?? logs/upload_ui_run_v2_20260222_141236.jsonl
+?? logs/upload_ui_run_v2_20260222_141236.summary.txt
+?? logs/upload_ui_run_v2_retry1_20260222_141557.jsonl
+?? logs/upload_ui_run_v2_retry1_20260222_141557.summary.txt
+?? logs/upload_ui_run_v2_split_20260222_142357.jsonl
+?? logs/upload_ui_run_v2_split_20260222_142357.summary.txt
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.jsonl
+?? logs/upload_ui_run_v2_tasksplit_20260222_142712.summary.txt
+?? logs/upload_ui_step1_queue_20260222_143357.jsonl
+?? logs/upload_ui_step1_queue_20260222_143357.summary.txt
+?? logs/upload_ui_step2_retry_20260222_143839.jsonl
+?? logs/upload_ui_step2_retry_20260222_143839.summary.txt
+?? logs/upload_ui_step3_contract_20260222_144010.jsonl
+?? logs/upload_ui_step3_contract_20260222_144010.summary.txt
+?? logs/upload_ui_step4_headers_20260222_144245.jsonl
+?? logs/upload_ui_step4_headers_20260222_144245.summary.txt
+?? logs/upload_ui_step5_state_fixed_20260222_145054.jsonl
+?? logs/upload_ui_step5_state_fixed_20260222_145054.summary.txt
+?? logs/upload_ui_test_results.md
+?? logs/upload_ui_v3_run_20260222_213645.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.jsonl
+?? logs/upload_ui_v3_run_fps0_20260222_215846.summary.txt
+?? logs/upload_ui_v3_run_fps900_20260222_214519.jsonl
+?? logs/upload_ui_v3_run_fps900_20260222_214519.summary.txt
+?? logs/upload_ui_v3_run_retry_20260222_213754.jsonl
+?? logs/upload_ui_v3_run_retry_20260222_213754.summary.txt
+?? logs/upload_ui_v5_4files_20260223_011348.jsonl
+?? logs/upload_ui_v5_4files_20260223_011348.summary.txt
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.jsonl
+?? logs/upload_ui_v5_bookkeeping_20260223_000347.summary.txt
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.jsonl
+?? logs/upload_ui_v5_comment_all_funcs_20260223_014421.summary.txt
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.jsonl
+?? logs/upload_ui_v5_idle_probe_only_20260223_012232.summary.txt
+?? logs/upload_ui_v5_poststep_20260222_232932.jsonl
+?? logs/upload_ui_v5_poststep_20260222_232932.summary.txt
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.jsonl
+?? logs/upload_ui_v5_probe_age_queue_ui_20260223_010306.summary.txt
+?? logs/upload_ui_v5_probe_step1_20260223_001511.jsonl
+?? logs/upload_ui_v5_probe_step1_20260223_001511.summary.txt
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.jsonl
+?? logs/upload_ui_v5_probe_step1_revert_20260223_004616.summary.txt
+?? logs/upload_ui_v5_probe_step2_20260223_001752.jsonl
+?? logs/upload_ui_v5_probe_step2_20260223_001752.summary.txt
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.jsonl
+?? logs/upload_ui_v5_probe_step2_revert_20260223_004638.summary.txt
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.jsonl
+?? logs/upload_ui_v5_queue_pipeline_20260222_233741.summary.txt
+?? logs/upload_ui_v5_recover_sd_20260223_001112.jsonl
+?? logs/upload_ui_v5_recover_sd_20260223_001112.summary.txt
+?? logs/upload_ui_v5_reset_state_20260222_235615.jsonl
+?? logs/upload_ui_v5_reset_state_20260222_235615.summary.txt
+?? logs/upload_ui_v5_retry_policy_20260222_234406.jsonl
+?? logs/upload_ui_v5_retry_policy_20260222_234406.summary.txt
+?? logs/upload_ui_v5_run_20260222_230755.jsonl
+?? logs/upload_ui_v5_run_20260222_230755.summary.txt
+?? logs/upload_ui_v5_serial_split_20260223_013519.jsonl
+?? logs/upload_ui_v5_serial_split_20260223_013519.summary.txt
+?? logs/upload_ui_v5_speed_r1_20260222_235846.jsonl
+?? logs/upload_ui_v5_speed_r1_20260222_235846.summary.txt
+?? logs/upload_ui_v5_speed_r2_20260222_235916.jsonl
+?? logs/upload_ui_v5_speed_r2_20260222_235916.summary.txt
+?? logs/upload_ui_v5_speed_r3_20260222_235947.jsonl
+?? logs/upload_ui_v5_speed_r3_20260222_235947.summary.txt
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.jsonl
+?? logs/upload_ui_v5_speed_rerun_20260223_012759.summary.txt
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.jsonl
+?? logs/upload_ui_v5_startup_sd_only_recover_20260223_011746.summary.txt
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.jsonl
+?? logs/upload_ui_v5_uploader_contract_20260223_002655.summary.txt
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.jsonl
+?? logs/upload_ui_v5_uploader_contract_retry_20260223_003254.summary.txt
+?? src/dev/sd_http_upload_ui_test_v2.cpp
+?? src/dev/sd_http_upload_ui_test_v3.cpp
+?? src/dev/sd_http_upload_ui_test_v4.cpp
+?? src/dev/sd_http_upload_ui_test_v5.cpp
+?? src/dev/upload_ui_test_v2/
+?? src/dev/upload_ui_test_v3/
+?? src/dev/upload_ui_test_v4/
+?? src/dev/upload_ui_test_v5/
+?? tools/stage_archive.ps1
+?? tools/upload_ui_test_runbook.md
+?? tools/upload_ui_tester_v2.py
+?? tools/upload_ui_tester_v3.py
+?? tools/upload_ui_tester_v5.py
+```
+- Env: `sd_http_upload_ui_test_v5`
+- Base URL: `http://192.168.3.45`
+- Check Result: `OK`
+- Detail: `status_state=IDLE status_error=0 root_len=2029`

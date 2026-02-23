@@ -41,8 +41,8 @@ struct BusLogState {
 BusLogState s_bus_logs[config::kMaxBuses];
 bool s_started = false;
 TaskHandle_t s_log_task = nullptr;
-constexpr UBaseType_t kLogTaskPriority = configMAX_PRIORITIES - 1;
-constexpr BaseType_t kLogTaskCore = 0;
+constexpr UBaseType_t kLogTaskPriority = configMAX_PRIORITIES - 4;
+constexpr BaseType_t kLogTaskCore = 1;
 portMUX_TYPE s_stats_mux = portMUX_INITIALIZER_UNLOCKED;
 uint64_t s_total_bytes = 0;
 uint32_t s_bytes_per_sec = 0;

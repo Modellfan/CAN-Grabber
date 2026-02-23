@@ -1,0 +1,4 @@
+UPLOAD_LOG tag=progress run=4 ms=0 state=SENDING sent=820281 total=8389733 rate_bps=57690 error=0 http=0 rssi=-57 heap=200292
+UPLOAD_LOG tag=progress run=4 ms=0 state=SENDING sent=926777 total=8389733 rate_bps=97523 error=0 http=0 rssi=-58 heap=198096
+UPLOAD_LOG tag=progress run=4 ms=0 state=SENDING sent=1033273 total=8389733 rate_bps=103369 error=0 http=0 rssi=-58 heap=198708
+test_reset_upload_state PASS

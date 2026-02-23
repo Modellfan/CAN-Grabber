@@ -1,0 +1,11 @@
+result_state: DONE
+error_code: 0
+sent_bytes: 8389714
+total_bytes: 8389714
+last_rate_bps: 506414
+elapsed_s: 17.039
+samples: 63
+sent_mb: 8.001
+total_mb: 8.001
+avg_upload_mb_s: 0.470
+log_path: logs\upload_ui_run_v2_tasksplit_20260222_142712.jsonl

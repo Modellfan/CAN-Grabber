@@ -1,0 +1,11 @@
+result_state: DONE
+error_code: 0
+sent_bytes: 8389720
+total_bytes: 8389720
+last_rate_bps: 489561
+elapsed_s: 19.743
+samples: 70
+sent_mb: 8.001
+total_mb: 8.001
+avg_upload_mb_s: 0.405
+log_path: logs\upload_ui_step5_state_fixed_20260222_145054.jsonl
