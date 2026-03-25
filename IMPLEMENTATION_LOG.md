@@ -65,6 +65,9 @@ This file is the permanent record for development work in this project.
 | 2026-02-23 02:01:08 - Move Upload Trace Logging To Serial Tester | n/a | n/a | n/a | n/a | [entry](IMPLEMENTATION_LOG.md) |
 | 2026-02-23 02:03:02 - Move Upload Stats Types/State To Uploader | n/a | n/a | n/a | n/a | [entry](IMPLEMENTATION_LOG.md) |
 | 2026-02-23 02:04:19 - Move Prefetch Task Next To Other Task Implementations | n/a | n/a | n/a | n/a | [entry](IMPLEMENTATION_LOG.md) |
+| 2026-02-23 02:21:55 - Move Upload/Server Definitions From Storage To Uploader | n/a | n/a | n/a | n/a | [entry](IMPLEMENTATION_LOG.md) |
+| 2026-02-23 02:25:57 - Split Queue Logic Into Dedicated CPP | n/a | n/a | n/a | n/a | [entry](IMPLEMENTATION_LOG.md) |
+| 2026-02-25 20:44:54 - Add Standard Function Header Comment Format | n/a | n/a | n/a | n/a | [entry](IMPLEMENTATION_LOG.md) |
 
 ## 2026-02-22 23:10:01 +01:00 - Add Web UI Responsiveness Metrics To v5 Tester
 ### Planned Steps
@@ -1147,3 +1150,88 @@ This file is the permanent record for development work in this project.
 
 ### Notes
 - No runtime logic changed; function location only.
+
+## 2026-02-23 02:21:55 +01:00 - Move Upload/Server Definitions From Storage To Uploader
+### Planned Steps
+- Move upload-task/server-communication constants and type definitions from `storage.cpp` into `uploader.cpp`.
+- Move related queue/probe/url/multipart/uploaded-state functions to `uploader.cpp`.
+- Keep `storage.cpp` focused on shared platform/storage primitives and rebuild.
+
+### Changes Made
+- `src/dev/upload_ui_test_v5/uploader.cpp`: added `//## Constants` and `//## Type Definition` sections.
+- `src/dev/upload_ui_test_v5/uploader.cpp`: moved upload/server related definitions and logic:
+  - constants: queue/retry/probe/test-file/uploaded-state values
+  - types: `ParsedUrl`, `QueueItem`, `ProbeStats`
+  - globals: `s_target`, queue state, probe state, autoscan state
+  - functions: probe/url/resolve/multipart helpers, test-file preparation, uploaded-state bookkeeping, queue pipeline helpers, retryable classification
+  - self-tests moved from storage: reachability/cache/recover/bookkeeping/reset
+- `src/dev/upload_ui_test_v5/storage.cpp`: removed moved blocks so this file no longer owns upload/server pipeline definitions.
+
+### Automated Tests Run
+- `& "$env:USERPROFILE\.platformio\penv\Scripts\platformio.exe" run -e sd_http_upload_ui_test_v5`: FAIL (intermediate state during refactor)
+- `& "$env:USERPROFILE\.platformio\penv\Scripts\platformio.exe" run -e sd_http_upload_ui_test_v5`: PASS
+- `& "$env:USERPROFILE\.platformio\penv\Scripts\platformio.exe" run -e sd_http_upload_ui_test_v5`: PASS (after cleanup removal of temporary moved-block markers)
+
+### Result
+- `upload_server_constants_owner: uploader_cpp`
+- `upload_server_type_definitions_owner: uploader_cpp`
+- `storage_upload_server_blocks_removed: true`
+- `build_status_sd_http_upload_ui_test_v5: PASS`
+
+### Artifacts
+- [`src/dev/upload_ui_test_v5/uploader.cpp`](src/dev/upload_ui_test_v5/uploader.cpp)
+- [`src/dev/upload_ui_test_v5/storage.cpp`](src/dev/upload_ui_test_v5/storage.cpp)
+
+### Notes
+- Final state compiles cleanly; intermediate compile failure occurred only while moving dependent blocks in phases.
+
+## 2026-02-23 02:25:57 +01:00 - Split Queue Logic Into Dedicated CPP
+### Planned Steps
+- Create a dedicated queue module and move all upload-queue ownership into it.
+- Remove queue definitions from uploader module and update include order.
+- Build firmware to validate the refactor.
+
+### Changes Made
+- `src/dev/upload_ui_test_v5/upload_queue.cpp`: new module containing queue constants/types/globals and queue/bookkeeping functions.
+- `src/dev/upload_ui_test_v5/upload_queue.cpp`: added requested section headers `//## Constants` and `//## Type Definition`.
+- `src/dev/upload_ui_test_v5/uploader.cpp`: removed queue state ownership and queue function implementations; uploader now consumes queue APIs/state from the queue module.
+- `src/dev/sd_http_upload_ui_test_v5.cpp`: added include for `upload_queue.cpp` before `uploader.cpp`.
+
+### Automated Tests Run
+- `rg -n "void queue_state_summary|void queue_remove|uint32_t queue_schedule_retry|bool queue_add_or_bump|const QueueItem\\* queue_snapshot_ready|void queue_pending\\(|bool reset_upload_state_and_queue|void queue_pending_periodic|struct QueueItem|kQueueLen|kAutoScanIntervalMs" src/dev/upload_ui_test_v5/uploader.cpp src/dev/upload_ui_test_v5/upload_queue.cpp`: PASS
+- `& "$env:USERPROFILE\.platformio\penv\Scripts\platformio.exe" run -e sd_http_upload_ui_test_v5`: PASS
+
+### Result
+- `queue_module_split_done: true`
+- `queue_owner_file: src/dev/upload_ui_test_v5/upload_queue.cpp`
+- `build_status_sd_http_upload_ui_test_v5: PASS`
+
+### Artifacts
+- [`src/dev/upload_ui_test_v5/upload_queue.cpp`](src/dev/upload_ui_test_v5/upload_queue.cpp)
+- [`src/dev/upload_ui_test_v5/uploader.cpp`](src/dev/upload_ui_test_v5/uploader.cpp)
+- [`src/dev/sd_http_upload_ui_test_v5.cpp`](src/dev/sd_http_upload_ui_test_v5.cpp)
+
+### Notes
+- No runtime behavior change intended; this is a structural split to isolate queue concerns.
+
+## 2026-02-25 20:44:54 +01:00 - Add Standard Function Header Comment Format
+### Planned Steps
+- Add a runbook section defining the standard function header comment format.
+- Include the exact requested dashed-header example and a multi-line example.
+- Run a verification command to confirm the section is present.
+
+### Changes Made
+- `tools/upload_ui_test_runbook.md`: added `Function Header Comment Standard` section with required format and multi-line example.
+
+### Automated Tests Run
+- `rg -n "Function Header Comment Standard|Helper Function: Returns true if the given CAN ID is blacklisted|Multi-line description" tools/upload_ui_test_runbook.md`: PASS
+
+### Result
+- `function_header_comment_standard_documented: true`
+- `multiline_header_comment_allowed: true`
+
+### Artifacts
+- [`tools/upload_ui_test_runbook.md`](tools/upload_ui_test_runbook.md)
+
+### Notes
+- Documentation-only update; firmware build/flash not required.

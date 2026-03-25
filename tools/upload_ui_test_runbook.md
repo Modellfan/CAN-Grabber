@@ -41,6 +41,27 @@ Required format:
   - `// ====================================================================================================`
 - Place all `run_*selftest` implementations under that divider.
 
+## Function Header Comment Standard
+
+Use this as the standard header style above functions. Multi-line descriptions are allowed.
+
+Required format:
+
+```cpp
+//---------------------------------------------------------------------------
+// Helper Function: Returns true if the given CAN ID is blacklisted.
+//---------------------------------------------------------------------------
+```
+
+Multi-line description example:
+
+```cpp
+//---------------------------------------------------------------------------
+// Helper Function: Builds multipart headers for one upload.
+// Also appends idempotency/auth headers when configured.
+//---------------------------------------------------------------------------
+```
+
 ## Stage Archiving Workflow
 
 Use `tools/stage_archive.ps1` to keep restore points before code changes.
