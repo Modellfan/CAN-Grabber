@@ -10,6 +10,16 @@ constexpr uint8_t SD_SCK_PIN = 36;
 constexpr uint8_t SD_CS_PIN = 39;
 constexpr uint32_t SD_SPI_CLOCK_HZ = 20000000UL;
 
+// SD card SDIO pins (SD_MMC). Keep as -1 to use board defaults from Arduino core.
+// Set all six pins for custom SDIO wiring on ESP32-S3:
+// CLK, CMD, D0, D1, D2, D3
+constexpr int8_t SDIO_CLK_PIN = -1;
+constexpr int8_t SDIO_CMD_PIN = -1;
+constexpr int8_t SDIO_D0_PIN = -1;
+constexpr int8_t SDIO_D1_PIN = -1;
+constexpr int8_t SDIO_D2_PIN = -1;
+constexpr int8_t SDIO_D3_PIN = -1;
+
 // MCP2515 SPI pins (shared SPI bus for CAN controllers)
 constexpr uint8_t CAN_SPI_SCK_PIN = 12;
 constexpr uint8_t CAN_SPI_MOSI_PIN = 11;
