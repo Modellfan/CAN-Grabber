@@ -10,7 +10,7 @@
 
 #include "can/can_manager.h"
 #include "config/app_config.h"
-#include "esp32s3/rom/miniz.h"
+#include "miniz.h"
 #include "logging/log_writer.h"
 #include "storage/storage_manager.h"
 

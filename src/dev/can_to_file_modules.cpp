@@ -1,0 +1,87 @@
+#include <Arduino.h>
+#include <esp_heap_caps.h>
+
+#include "can/can_manager.h"
+#include "config/app_config.h"
+#include "hardware/hardware_config.h"
+#include "logging/log_writer.h"
+#include "net/net_manager.h"
+#include "rest/rest_api.h"
+#include "storage/storage_manager.h"
+#include "upload/upload_manager.h"
+#include "web/web_server.h"
+
+#ifndef APP_NAME
+#define APP_NAME "CAN-Grabber"
+#endif
+#ifndef APP_VERSION
+#define APP_VERSION "0.0.0"
+#endif
+#ifndef PIO_ENV_NAME
+#define PIO_ENV_NAME "unknown"
+#endif
+#ifndef ENABLE_COMPRESSOR
+#define ENABLE_COMPRESSOR 0
+#endif
+
+#if ENABLE_COMPRESSOR
+#include "compress/compressor.h"
+#endif
+
+static void printBuildInfo() {
+  Serial.println();
+  Serial.print("App: ");
+  Serial.println(APP_NAME);
+  Serial.print("Version: ");
+  Serial.println(APP_VERSION);
+  Serial.print("Build: ");
+  Serial.print(__DATE__);
+  Serial.print(" ");
+  Serial.println(__TIME__);
+  Serial.print("PIO Env: ");
+  Serial.println(PIO_ENV_NAME);
+  Serial.print("Heap free/internal/largest: ");
+  Serial.print(ESP.getFreeHeap());
+  Serial.print(" / ");
+  Serial.print(heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+  Serial.print(" / ");
+  Serial.println(heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+  Serial.print("PSRAM size/free: ");
+  Serial.print(ESP.getPsramSize());
+  Serial.print(" / ");
+  Serial.println(ESP.getFreePsram());
+}
+
+void setup() {
+  Serial.begin(115200);
+  delay(200);
+
+  pinMode(STATUS_LED_PIN, OUTPUT);
+  digitalWrite(STATUS_LED_PIN, LOW);
+
+  printBuildInfo();
+
+  config::init();
+  storage::init();
+  can::init();
+  logging::init();
+  logging::start();
+  upload::init();
+  upload::queue_pending();
+#if ENABLE_COMPRESSOR
+  compressor::init();
+#endif
+  net::init();
+  net::connect();
+  rest::init();
+  rest::start();
+  web::init();
+  web::start();
+}
+
+void loop() {
+  net::loop();
+  rest::loop();
+  web::loop();
+  delay(10);
+}

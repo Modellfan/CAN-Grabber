@@ -1444,3 +1444,41 @@ Der Fokus liegt auf:
 - OpenInverter Web-Interface
 - ESP32 Arduino Framework
 - PlatformIO
+
+### 23.6 SDIO Write Speed Test (4-bit, 40 MHz)
+
+Goal:
+- Measure raw SD_MMC write throughput on ESP32-S3 with the dedicated 4-bit SDIO wiring.
+- Compare block size and preallocation impact for the current `SDIO_CLOCK_KHZ = 40000` setup.
+
+Setup:
+- Environment: `sd_sdio_speed_test`
+- Source: `src/dev/sd_sdio_speed_test.cpp`
+- Bus mode: `4-bit SDIO`
+- SDIO clock: `40 MHz` (`SDIO_CLOCK_KHZ = 40000`)
+- Pin mapping: `CLK=9`, `CMD=14`, `D0=10`, `D1=11`, `D2=12`, `D3=13`
+- Test file size: `16 MB`
+
+Measured results:
+
+| Block size | Preallocate | Elapsed | Write MB/s |
+| --- | --- | --- | --- |
+| 4096 | yes | 15.83 s | 1.01 |
+| 8192 | yes | 5.99 s | 2.67 |
+| 16384 | yes | 3.64 s | 4.39 |
+| 32768 | yes | 2.22 s | 7.21 |
+| 65536 | yes | 2.25 s | 7.11 |
+| 4096 | no | 10.65 s | 1.50 |
+| 8192 | no | 6.05 s | 2.65 |
+| 16384 | no | 3.77 s | 4.25 |
+| 32768 | no | 2.28 s | 7.03 |
+| 65536 | no | 2.28 s | 7.02 |
+
+Analysis:
+- Best result in this sweep: `32 KB + preallocate` at `7.21 MB/s`.
+- `32 KB` and `64 KB` are effectively tied; `32 KB` is the cleaner default because it reaches the peak without a larger buffer.
+- Preallocation matters most for the smallest block size; from `16 KB` upward the gap is small.
+- This 4-bit SDIO path is materially faster than the earlier SPI-mode SD benchmark in the same project.
+
+Current recommendation:
+- Use `4-bit SDIO`, `40 MHz`, `32 KB` writes, and keep preallocation enabled when the test or logging path can afford it.

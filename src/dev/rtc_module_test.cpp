@@ -8,7 +8,7 @@
 
 namespace {
 
-RTC_DS3231 rtc;
+RTC_DS1307 rtc;
 String inputLine;
 bool rtcPresent = false;
 
@@ -57,8 +57,8 @@ void printHelp() {
   Serial.println("RTC command list:");
   Serial.println("  help");
   Serial.println("  read");
-  Serial.println("  lost");
-  Serial.println("  temp");
+  Serial.println("  running");
+  Serial.println("  temp  (not supported on DS1307)");
   Serial.println("  set YYYY-MM-DD HH:MM:SS");
   Serial.println("  setunix <unix_seconds>");
   Serial.println("  unix");
@@ -80,12 +80,12 @@ void handleCommand(const String &line) {
     return;
   }
 
-  if (line == "lost") {
+  if (line == "running" || line == "lost") {
     if (!rtcPresent) {
       Serial.println("ERR: RTC not available");
       return;
     }
-    Serial.printf("lostPower: %s\n", rtc.lostPower() ? "true" : "false");
+    Serial.printf("running: %s\n", rtc.isrunning() ? "true" : "false");
     return;
   }
 
@@ -94,7 +94,7 @@ void handleCommand(const String &line) {
       Serial.println("ERR: RTC not available");
       return;
     }
-    Serial.printf("temperature: %.2f C\n", rtc.getTemperature());
+    Serial.println("ERR: temperature not supported on DS1307");
     return;
   }
 
@@ -170,11 +170,11 @@ void setup() {
 
   rtcPresent = rtc.begin();
   if (rtcPresent) {
-    Serial.println("RTC_DS3231 detected.");
+    Serial.println("RTC_DS1307 detected.");
     printNow();
-    Serial.printf("lostPower: %s\n", rtc.lostPower() ? "true" : "false");
+    Serial.printf("running: %s\n", rtc.isrunning() ? "true" : "false");
   } else {
-    Serial.println("RTC_DS3231 not found on I2C. Connect module and reset.");
+    Serial.println("RTC_DS1307 not found on I2C. Connect module and reset.");
   }
 
   printHelp();

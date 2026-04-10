@@ -13,12 +13,19 @@ constexpr uint32_t SD_SPI_CLOCK_HZ = 20000000UL;
 // SD card SDIO pins (SD_MMC). Keep as -1 to use board defaults from Arduino core.
 // Set all six pins for custom SDIO wiring on ESP32-S3:
 // CLK, CMD, D0, D1, D2, D3
-constexpr int8_t SDIO_CLK_PIN = -1;
-constexpr int8_t SDIO_CMD_PIN = -1;
-constexpr int8_t SDIO_D0_PIN = -1;
-constexpr int8_t SDIO_D1_PIN = -1;
-constexpr int8_t SDIO_D2_PIN = -1;
-constexpr int8_t SDIO_D3_PIN = -1;
+// SDIO clock is expressed in kHz because SD_MMC.begin() expects kHz.
+// SDIO detect uses the socket's card-detect switch. Set pin to -1 to disable.
+// Common socket wiring pulls DET low when a card is inserted, so use pull-up and
+// keep SDIO_DET_ACTIVE_LOW = true unless your socket behaves the other way round.
+constexpr int8_t SDIO_CLK_PIN = 15;
+constexpr int8_t SDIO_CMD_PIN = 1;
+constexpr int8_t SDIO_D0_PIN = 16;
+constexpr int8_t SDIO_D1_PIN = 42;
+constexpr int8_t SDIO_D2_PIN = 41;
+constexpr int8_t SDIO_D3_PIN = 2;
+constexpr int8_t SDIO_DET_PIN = -1;
+constexpr bool SDIO_DET_ACTIVE_LOW = true;
+constexpr uint32_t SDIO_CLOCK_KHZ = 40000UL;
 
 // MCP2515 SPI pins (shared SPI bus for CAN controllers)
 constexpr uint8_t CAN_SPI_SCK_PIN = 12;
@@ -32,8 +39,8 @@ constexpr uint8_t CAN2_CS_PIN = 7;
 constexpr uint8_t CAN2_INT_PIN = 8;
 
 // I2C bus pins (RTC and other peripherals; -1 uses board defaults)
-constexpr int8_t I2C_SDA_PIN = -1;
-constexpr int8_t I2C_SCL_PIN = -1;
+constexpr int8_t I2C_SDA_PIN = 38;
+constexpr int8_t I2C_SCL_PIN = 40;
 
 // RTC pins (optional; -1 means not wired)
 constexpr int8_t RTC_INT_PIN = -1;

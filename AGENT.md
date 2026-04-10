@@ -162,6 +162,7 @@
 
 ## Debugging notes
 - Use the full PlatformIO path with quotes in PowerShell: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" ...`
+- On Windows, force UTF-8 in the parent PowerShell process before PlatformIO uploads to avoid the upload-console error `UnicodeEncodeError: 'charmap' codec can't encode characters...`: `$env:PYTHONUTF8='1'; `$env:PYTHONIOENCODING='utf-8'; [Console]::InputEncoding=[System.Text.UTF8Encoding]::new(); [Console]::OutputEncoding=[System.Text.UTF8Encoding]::new(); chcp.com 65001 | Out-Null; & "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" run -e <env> -t upload --upload-port <port>`
 - COM9 was missing; serial monitor should use COM10 at 115200.
 - Firmware upload: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" run --target upload --environment esp32s3_release --upload-port COM10`
 - SPIFFS upload: `& "C:\Users\Win11 Pro\.platformio\penv\Scripts\platformio.exe" run -t uploadfs -e esp32s3_release`

@@ -31,9 +31,38 @@ void print_result(uint32_t bytes, uint32_t elapsed_ms) {
   Serial.println(" MB/s)");
 }
 
+bool print_sd_detect_status() {
+  if (SDIO_DET_PIN < 0) {
+    Serial.println("SD detect: disabled.");
+    return true;
+  }
+
+  pinMode(SDIO_DET_PIN, SDIO_DET_ACTIVE_LOW ? INPUT_PULLUP : INPUT_PULLDOWN);
+  delay(1);
+
+  const int raw = digitalRead(SDIO_DET_PIN);
+  const bool inserted = SDIO_DET_ACTIVE_LOW ? (raw == LOW) : (raw == HIGH);
+
+  Serial.printf("SD detect GPIO=%d raw=%s => %s\n", SDIO_DET_PIN,
+                raw == LOW ? "LOW" : "HIGH",
+                inserted ? "card inserted" : "no card detected");
+
+  if (!inserted) {
+    Serial.println(
+        "If the card is inserted, invert SDIO_DET_ACTIVE_LOW in hardware_config.h.");
+  }
+
+  return inserted;
+}
+
 bool init_sd_mmc() {
   SD_MMC.end();
   delay(50);
+
+  if (!print_sd_detect_status()) {
+    Serial.println("Skipping SD_MMC.begin because no card is detected.");
+    return false;
+  }
 
   const bool customPinsConfigured =
       SDIO_CLK_PIN >= 0 && SDIO_CMD_PIN >= 0 && SDIO_D0_PIN >= 0 &&
@@ -52,7 +81,8 @@ bool init_sd_mmc() {
     Serial.println("SDIO pinout: board defaults (configure in hardware_config.h)");
   }
 
-  return SD_MMC.begin("/sdcard", kUseOneBitMode, kFormatIfMountFailed);
+  return SD_MMC.begin("/sdcard", kUseOneBitMode, kFormatIfMountFailed,
+                      SDIO_CLOCK_KHZ);
 }
 
 float run_write_test(size_t block_size, bool preallocate, uint32_t* out_bytes,
