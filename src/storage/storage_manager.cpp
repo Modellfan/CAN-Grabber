@@ -2,8 +2,7 @@
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#include <SD.h>
-#include <SPI.h>
+#include <SD_MMC.h>
 #include <string.h>
 
 #include "config/app_config.h"
@@ -11,9 +10,12 @@
 
 namespace storage {
 
+fs::FS& card() {
+  return SD_MMC;
+}
+
 namespace {
 
-SPIClass s_sd_spi(HSPI);
 bool s_ready = false;
 
 constexpr char kMetaDir[] = "/meta";
@@ -21,6 +23,8 @@ constexpr char kStatusPath[] = "/meta/file_status.json";
 constexpr char kCompressedDir[] = "/cmp";
 constexpr uint8_t kSdMaxFiles = 12;
 constexpr size_t kMaxEntries = 128;
+constexpr bool kUseOneBitMode = false;
+constexpr bool kFormatIfMountFailed = false;
 
 struct FileStatusEntry {
   char path[64];
@@ -95,9 +99,75 @@ void remove_compressed_sidecar(const char* src_path) {
   if (!build_compressed_sidecar_path(src_path, cmp, sizeof(cmp))) {
     return;
   }
-  if (SD.exists(cmp)) {
-    SD.remove(cmp);
+  if (card().exists(cmp)) {
+    card().remove(cmp);
   }
+}
+
+bool print_sd_detect_status() {
+  if (SDIO_DET_PIN < 0) {
+    return true;
+  }
+
+  pinMode(SDIO_DET_PIN, SDIO_DET_ACTIVE_LOW ? INPUT_PULLUP : INPUT_PULLDOWN);
+  delay(1);
+
+  const int raw = digitalRead(SDIO_DET_PIN);
+  const bool inserted = SDIO_DET_ACTIVE_LOW ? (raw == LOW) : (raw == HIGH);
+
+  Serial.printf("[storage] SD detect GPIO=%d raw=%s => %s\n",
+                SDIO_DET_PIN,
+                raw == LOW ? "LOW" : "HIGH",
+                inserted ? "card inserted" : "no card detected");
+
+  if (!inserted) {
+    Serial.println("[storage] If the card is inserted, invert SDIO_DET_ACTIVE_LOW");
+  }
+  return inserted;
+}
+
+bool init_sd_mmc() {
+  SD_MMC.end();
+  delay(50);
+
+  if (!print_sd_detect_status()) {
+    Serial.println("[storage] Skipping SD_MMC.begin because no card is detected");
+    return false;
+  }
+
+  const bool custom_pins_configured =
+      SDIO_CLK_PIN >= 0 && SDIO_CMD_PIN >= 0 && SDIO_D0_PIN >= 0 &&
+      SDIO_D1_PIN >= 0 && SDIO_D2_PIN >= 0 && SDIO_D3_PIN >= 0;
+
+  if (custom_pins_configured) {
+    if (!SD_MMC.setPins(SDIO_CLK_PIN, SDIO_CMD_PIN, SDIO_D0_PIN, SDIO_D1_PIN,
+                        SDIO_D2_PIN, SDIO_D3_PIN)) {
+      Serial.println("[storage] SD_MMC.setPins failed");
+      return false;
+    }
+    Serial.printf("[storage] SDIO pins CLK=%d CMD=%d D0=%d D1=%d D2=%d D3=%d\n",
+                  SDIO_CLK_PIN,
+                  SDIO_CMD_PIN,
+                  SDIO_D0_PIN,
+                  SDIO_D1_PIN,
+                  SDIO_D2_PIN,
+                  SDIO_D3_PIN);
+  } else {
+    Serial.println("[storage] SDIO pinout: board defaults");
+  }
+
+  if (!SD_MMC.begin("/sdcard",
+                    kUseOneBitMode,
+                    kFormatIfMountFailed,
+                    static_cast<int>(SDIO_CLOCK_KHZ),
+                    kSdMaxFiles)) {
+    return false;
+  }
+
+  Serial.printf("[storage] SD_MMC mounted at %lu kHz (%s)\n",
+                static_cast<unsigned long>(SDIO_CLOCK_KHZ),
+                kUseOneBitMode ? "1-bit" : "4-bit");
+  return true;
 }
 
 // Clear stale "active" flags after reboot and stamp a closed time if missing.
@@ -118,8 +188,8 @@ bool clear_active_flags_on_boot() {
 
 // Create a directory if it does not already exist.
 void ensure_dir(const char* path) {
-  if (!SD.exists(path)) {
-    SD.mkdir(path);
+  if (!card().exists(path)) {
+    card().mkdir(path);
   }
 }
 
@@ -149,11 +219,11 @@ void remove_entry(size_t index) {
 // Load file status metadata from disk into memory.
 bool load_status() {
   s_entry_count = 0;
-  if (!SD.exists(kStatusPath)) {
+  if (!card().exists(kStatusPath)) {
     return true;
   }
 
-  File file = SD.open(kStatusPath, FILE_READ);
+  File file = card().open(kStatusPath, FILE_READ);
   if (!file) {
     return false;
   }
@@ -196,10 +266,10 @@ bool load_status() {
 // Persist current file status metadata to disk.
 bool save_status() {
   ensure_dir(kMetaDir);
-  if (SD.exists(kStatusPath)) {
-    SD.remove(kStatusPath);
+  if (card().exists(kStatusPath)) {
+    card().remove(kStatusPath);
   }
-  File file = SD.open(kStatusPath, FILE_WRITE);
+  File file = card().open(kStatusPath, FILE_WRITE);
   if (!file) {
     return false;
   }
@@ -308,7 +378,7 @@ bool parse_log_filename(const char* name, uint32_t* start_ms) {
 
 // Scan the root directory for the oldest log filename.
 bool find_oldest_log_file(char* out, size_t out_len) {
-  File root = SD.open("/");
+  File root = card().open("/");
   if (!root) {
     return false;
   }
@@ -365,8 +435,8 @@ bool remove_stale_placeholder_logs_on_boot() {
       continue;
     }
 
-    if (SD.exists(entry.path)) {
-      SD.remove(entry.path);
+    if (card().exists(entry.path)) {
+      card().remove(entry.path);
     }
     remove_compressed_sidecar(entry.path);
     remove_entry(i);
@@ -380,12 +450,12 @@ bool remove_empty_logs_on_boot() {
 
   for (size_t i = 0; i < s_entry_count;) {
     const FileStatusEntry entry = s_entries[i];
-    if (!is_log_file_path(entry.path) || !SD.exists(entry.path)) {
+    if (!is_log_file_path(entry.path) || !card().exists(entry.path)) {
       ++i;
       continue;
     }
 
-    File file = SD.open(entry.path, FILE_READ);
+    File file = card().open(entry.path, FILE_READ);
     if (!file) {
       ++i;
       continue;
@@ -398,13 +468,13 @@ bool remove_empty_logs_on_boot() {
       continue;
     }
 
-    SD.remove(entry.path);
+    card().remove(entry.path);
     remove_compressed_sidecar(entry.path);
     remove_entry(i);
     changed = true;
   }
 
-  File root = SD.open("/");
+  File root = card().open("/");
   if (!root) {
     return changed;
   }
@@ -427,7 +497,7 @@ bool remove_empty_logs_on_boot() {
       continue;
     }
 
-    SD.remove(abs_path);
+    card().remove(abs_path);
     remove_compressed_sidecar(abs_path);
     const int index = find_entry(abs_path);
     if (index >= 0) {
@@ -446,23 +516,8 @@ bool remove_empty_logs_on_boot() {
 void init() {
   s_ready = false;
 
-  s_sd_spi.begin(SD_SCK_PIN, SD_MISO_PIN, SD_MOSI_PIN, SD_CS_PIN);
-  const uint32_t clocks[] = {SD_SPI_CLOCK_HZ, 10000000UL, 4000000UL};
-  bool mounted = false;
-  for (size_t i = 0; i < (sizeof(clocks) / sizeof(clocks[0])); ++i) {
-    if (i > 0) {
-      SD.end();
-      delay(50);
-    }
-    if (SD.begin(SD_CS_PIN, s_sd_spi, clocks[i], "/sd", kSdMaxFiles)) {
-      mounted = true;
-      Serial.printf("[storage] SD mounted at %lu Hz\n",
-                    static_cast<unsigned long>(clocks[i]));
-      break;
-    }
-  }
-  if (!mounted) {
-    Serial.println("[storage] SD mount failed on all clock fallbacks");
+  if (!init_sd_mmc()) {
+    Serial.println("[storage] SD_MMC.begin failed");
     return;
   }
 
@@ -478,7 +533,7 @@ void init() {
   bool metadata_changed = false;
   if (!load_status()) {
     save_status();
-  } else if (!SD.exists(kStatusPath)) {
+  } else if (!card().exists(kStatusPath)) {
     save_status();
   } else if (clear_active_flags_on_boot()) {
     metadata_changed = true;
@@ -508,8 +563,8 @@ Stats get_stats() {
     return stats;
   }
 
-  stats.total_bytes = SD.totalBytes();
-  const uint64_t used = SD.usedBytes();
+  stats.total_bytes = SD_MMC.totalBytes();
+  const uint64_t used = SD_MMC.usedBytes();
   stats.free_bytes = stats.total_bytes >= used ? (stats.total_bytes - used) : 0;
   return stats;
 }
@@ -573,8 +628,8 @@ bool ensure_space(uint64_t min_free_bytes) {
     int index = pick_deletion_candidate();
     if (index >= 0) {
       const char* path = s_entries[index].path;
-      if (SD.exists(path)) {
-        SD.remove(path);
+      if (card().exists(path)) {
+        card().remove(path);
       }
       remove_compressed_sidecar(path);
       remove_entry(static_cast<size_t>(index));
@@ -585,7 +640,7 @@ bool ensure_space(uint64_t min_free_bytes) {
 
     char fallback[64];
     if (find_oldest_log_file(fallback, sizeof(fallback))) {
-      SD.remove(fallback);
+      card().remove(fallback);
       remove_compressed_sidecar(fallback);
       stats = get_stats();
       continue;
@@ -676,7 +731,7 @@ bool delete_file(size_t index) {
     return false;
   }
 
-  if (SD.exists(entry.path) && !SD.remove(entry.path)) {
+  if (card().exists(entry.path) && !card().remove(entry.path)) {
     return false;
   }
   remove_compressed_sidecar(entry.path);

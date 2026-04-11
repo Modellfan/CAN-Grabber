@@ -1,0 +1,651 @@
+2026-04-11 12:32:48.910 | opening COM15 at 115200 baud, duration=20.0s
+2026-04-11 12:32:48.911 | serial connected
+2026-04-11 12:32:52.912 | sent command: wifi-debug
+2026-04-11 12:32:52.912 | ESP-ROM:esp32s3-20210327
+2026-04-11 12:32:52.913 | Build:Mar 27 2021
+2026-04-11 12:32:52.913 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:32:52.913 | SPIWP:0xee
+2026-04-11 12:32:52.914 | mode:DIO, clock div:1
+2026-04-11 12:32:52.914 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:32:52.914 | load:0x403c8700,len:0xc2c
+2026-04-11 12:32:52.915 | load:0x403cb700,len:0x30c0
+2026-04-11 12:32:52.916 | entry 0x403c88b8
+2026-04-11 12:32:52.916 | 
+2026-04-11 12:32:52.916 | App: CAN-Grabber
+2026-04-11 12:32:52.916 | Version: 0.0.1
+2026-04-11 12:32:52.917 | Build: Apr 11 2026 12:31:36
+2026-04-11 12:32:52.917 | PIO Env: esp32s3_debug
+2026-04-11 12:32:52.918 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:32:52.918 | PSRAM size/free: 0 / 0
+2026-04-11 12:32:52.918 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:32:52.919 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 12:32:52.920 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:32:52.920 | [rtc] RTC_DS1307 detected
+2026-04-11 12:32:52.921 | [rtc] Startup epoch from RTC: 1775910774
+2026-04-11 12:32:52.922 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:32:52.923 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:32:52.925 | [  1080][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:32:52.925 | [UPLOAD] Startup delay active (30000ms)
+2026-04-11 12:32:52.925 | [net] Init, mode: 0
+2026-04-11 12:32:52.926 | [net] Event: 101
+2026-04-11 12:32:52.926 | [net] AP start: canlogger-setup
+2026-04-11 12:32:52.926 | [net] Event: 110
+2026-04-11 12:32:52.927 | [net] STA start
+2026-04-11 12:32:52.927 | [net] Event: 130
+2026-04-11 12:32:52.927 | [net] AP start event
+2026-04-11 12:32:52.927 | [net] AP IP: 192.168.4.1
+2026-04-11 12:32:52.928 | [net] STA mode disabled; AP only[net] Event: 131
+2026-04-11 12:32:52.928 | [net] AP stop event
+2026-04-11 12:32:52.929 | [net] Event: 130
+2026-04-11 12:32:52.929 | [net] AP start event
+2026-04-11 12:32:52.929 | 
+2026-04-11 12:32:52.929 | [net] Started async scan
+2026-04-11 12:32:52.932 | [serial] Debug WiFi stored in slot 0: Überlingen@Wohnzimmer
+2026-04-11 12:32:52.937 | [serial] STA enabled, restarting to apply network config
+2026-04-11 12:32:52.991 | [net] Event: 102
+2026-04-11 12:32:52.992 | [net] Event: 111
+2026-04-11 12:32:53.003 | x��ESP-ROM:esp32s3-20210327
+2026-04-11 12:32:53.003 | Build:Mar 27 2021
+2026-04-11 12:32:53.009 | rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:32:53.010 | Saved PC:0x420bf408
+2026-04-11 12:32:53.014 | SPIWP:0xee
+2026-04-11 12:32:53.014 | mode:DIO, clock div:1
+2026-04-11 12:32:53.015 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:32:53.020 | load:0x403c8700,len:0xc2c
+2026-04-11 12:32:53.020 | load:0x403cb700,len:0x30c0
+2026-04-11 12:32:53.021 | entry 0x403c88b8
+2026-04-11 12:32:53.501 | 
+2026-04-11 12:32:53.502 | App: CAN-Grabber
+2026-04-11 12:32:53.502 | Version: 0.0.1
+2026-04-11 12:32:53.507 | Build: Apr 11 2026 12:31:36
+2026-04-11 12:32:53.508 | PIO Env: esp32s3_debug
+2026-04-11 12:32:53.513 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:32:53.513 | PSRAM size/free: 0 / 0
+2026-04-11 12:32:53.519 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:32:53.525 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 12:32:53.526 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:32:53.529 | [rtc] RTC_DS1307 detected
+2026-04-11 12:32:53.530 | [rtc] Startup epoch from RTC: 1775910778
+2026-04-11 12:32:53.577 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:32:53.636 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:32:54.349 | [  1084][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:32:54.351 | [UPLOAD] Startup delay active (30000ms)
+2026-04-11 12:32:54.352 | [net] Init, mode: 0
+2026-04-11 12:32:54.364 | [net] Event: 101
+2026-04-11 12:32:54.408 | [net] AP start: canlogger-setup
+2026-04-11 12:32:54.409 | [net] Event: 110
+2026-04-11 12:32:54.413 | [net] STA start
+2026-04-11 12:32:54.414 | [net] Event: 130
+2026-04-11 12:32:54.414 | [net] AP start event
+2026-04-11 12:32:54.419 | [net] AP IP: 192.168.4.1
+2026-04-11 12:32:54.419 | [net] STA candidate count: 1[net] Event: 131
+2026-04-11 12:32:54.424 | [net] AP stop event
+2026-04-11 12:32:54.425 | [net] Event: 130
+2026-04-11 12:32:54.425 | [net] AP start event
+2026-04-11 12:32:54.425 | 
+2026-04-11 12:32:54.429 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-11 12:32:54.430 | [net] STA index: 0
+2026-04-11 12:32:54.499 | E (2715) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.505 | E (2716) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.510 | E (2716) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.511 | E (2716) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.516 | E (2720) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.521 | E (2724) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.522 | E (2728) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.527 | E (2732) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.532 | E (2736) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.538 | E (2740) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.539 | E (2744) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.543 | E (2748) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.549 | E (2751) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.549 | E (2755) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.555 | E (2759) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.560 | E (2763) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.561 | E (2767) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.566 | E (2771) esp-aes: Failed to allocate memory
+2026-04-11 12:32:54.568 | E (2775) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.498 | E (4715) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.504 | E (4715) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.509 | E (4715) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.510 | E (4715) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.515 | E (4719) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.520 | E (4723) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.521 | E (4727) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.526 | E (4731) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.531 | E (4735) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.537 | E (4739) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.537 | E (4743) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.542 | E (4747) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.548 | E (4751) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.549 | E (4754) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.554 | E (4758) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.559 | E (4762) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.560 | E (4766) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.565 | E (4770) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.570 | E (4774) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.576 | E (4778) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.576 | E (4782) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.581 | E (4786) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.587 | E (4790) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.588 | E (4794) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.593 | E (4797) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.598 | E (4801) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.599 | E (4805) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.604 | E (4809) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.609 | E (4813) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.614 | E (4817) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.615 | E (4821) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.621 | E (4825) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.626 | E (4829) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.627 | E (4833) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.632 | E (4836) esp-aes: Failed to allocate memory
+2026-04-11 12:32:56.634 | E (4840) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.509 | E (6725) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.514 | E (6725) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.520 | E (6725) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.520 | E (6726) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.526 | E (6730) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.531 | E (6734) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.531 | E (6738) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.537 | E (6741) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.541 | E (6745) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.547 | E (6749) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.548 | E (6753) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.553 | E (6757) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.558 | E (6761) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.560 | E (6765) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.564 | E (6769) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.570 | E (6773) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.570 | E (6777) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.576 | E (6780) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.581 | E (6784) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.586 | E (6788) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.587 | E (6792) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.591 | E (6796) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.597 | E (6800) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.599 | E (6804) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.602 | E (6808) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.609 | E (6812) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.609 | E (6816) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.614 | E (6820) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.619 | E (6823) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.624 | E (6827) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.625 | E (6831) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.630 | E (6835) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.636 | E (6839) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.637 | E (6843) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.641 | E (6847) esp-aes: Failed to allocate memory
+2026-04-11 12:32:58.643 | E (6851) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.519 | E (8735) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.523 | E (8735) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.529 | E (8735) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.529 | E (8735) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.535 | E (8739) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.540 | E (8743) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.540 | E (8747) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.546 | E (8751) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.551 | E (8755) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.556 | E (8759) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.557 | E (8763) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.562 | E (8767) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.568 | E (8771) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.568 | E (8774) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.573 | E (8778) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.579 | E (8782) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.580 | E (8786) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.585 | E (8790) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.590 | E (8794) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.595 | E (8798) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.596 | E (8802) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.601 | E (8806) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.607 | E (8810) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.608 | E (8814) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.612 | E (8817) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.618 | E (8821) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.619 | E (8825) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.625 | E (8829) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.629 | E (8833) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.635 | E (8837) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.636 | E (8841) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.641 | E (8845) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.646 | E (8849) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.647 | E (8853) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.652 | E (8857) esp-aes: Failed to allocate memory
+2026-04-11 12:33:00.653 | E (8860) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.533 | E (10749) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.538 | E (10750) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.543 | E (10750) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.545 | E (10750) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.549 | E (10754) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.555 | E (10758) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.560 | E (10762) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.560 | E (10766) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.566 | E (10770) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.571 | E (10774) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.572 | E (10778) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.577 | E (10782) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.582 | E (10786) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.588 | E (10790) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.588 | E (10794) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.594 | E (10798) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.599 | E (10802) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.600 | E (10806) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.605 | E (10810) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.611 | E (10814) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.615 | E (10818) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.617 | E (10822) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.621 | E (10826) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.627 | E (10830) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.628 | E (10834) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.633 | E (10838) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.638 | E (10842) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.643 | E (10846) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.644 | E (10850) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.649 | E (10854) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.654 | E (10858) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.656 | E (10862) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.661 | E (10866) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.666 | E (10870) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.671 | E (10874) esp-aes: Failed to allocate memory
+2026-04-11 12:33:02.672 | E (10878) esp-aes: Failed to allocate memory
+2026-04-11 12:33:04.479 | [net] Event: 113
+2026-04-11 12:33:04.480 | [net] STA disconnected
+2026-04-11 12:33:04.482 | [net] STA failure (disconnected) idx=0 count=1
+2026-04-11 12:33:04.510 | [net] Event: 112
+2026-04-11 12:33:05.574 | [net] Event: 115
+2026-04-11 12:33:05.579 | [net] STA connected: ssid=Überlingen@Wohnzimmer rssi=-64
+2026-04-11 12:33:05.585 | [net] STA IP: 192.168.3.45 gateway=192.168.3.1 subnet=255.255.255.0
+2026-04-11 12:33:05.591 | E (13803) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.602 | E (13803) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.603 | [ 12334][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.607 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.626 | E (13837) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.632 | E (13837) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.638 | [ 12368][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.641 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.660 | E (13871) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.666 | E (13871) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.671 | [ 12402][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.675 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.694 | E (13905) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.700 | E (13905) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.705 | [ 12436][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.709 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.728 | E (13939) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.734 | E (13939) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.740 | [ 12470][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.743 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.763 | E (13973) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.768 | E (13973) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.773 | [ 12504][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.777 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.796 | E (14007) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.802 | E (14007) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.807 | [ 12538][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.811 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.830 | E (14041) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.836 | E (14041) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.842 | [ 12572][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.845 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.864 | E (14075) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.870 | E (14076) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.875 | [ 12606][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.879 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.898 | E (14109) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.904 | E (14109) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.909 | [ 12640][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.913 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.932 | E (14143) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.938 | E (14143) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.944 | [ 12674][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.947 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:05.966 | E (14177) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:05.972 | E (14178) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:05.977 | [ 12708][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:05.981 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.000 | E (14211) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.006 | E (14211) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.012 | [ 12742][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.015 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.034 | E (14245) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.040 | E (14245) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.045 | [ 12776][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.049 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.068 | E (14279) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.075 | E (14279) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.079 | [ 12810][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.083 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.102 | E (14313) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.108 | E (14313) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.113 | [ 12844][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.117 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.136 | E (14347) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.143 | E (14347) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.148 | [ 12878][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.151 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.171 | E (14381) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.176 | E (14381) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.181 | [ 12912][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.185 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.205 | E (14415) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.211 | E (14415) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.216 | [ 12946][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.219 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.238 | E (14449) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.244 | E (14449) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.250 | [ 12980][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.253 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.272 | E (14483) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.278 | E (14483) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.284 | [ 13014][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.287 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.306 | E (14517) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.313 | E (14517) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.317 | [ 13048][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.321 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.340 | E (14551) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.346 | E (14551) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.351 | [ 13082][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.355 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.374 | E (14585) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.381 | E (14585) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.386 | [ 13116][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.389 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.408 | E (14619) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.414 | E (14619) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.419 | [ 13150][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.423 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.442 | E (14653) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.448 | E (14653) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.453 | [ 13184][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.457 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.476 | E (14687) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.483 | E (14688) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.488 | [ 13218][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.491 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.512 | E (14722) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.517 | E (14722) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.522 | [ 13253][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.526 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.545 | E (14756) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.551 | E (14756) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.556 | [ 13287][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.560 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.579 | E (14790) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.585 | E (14790) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.590 | [ 13321][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.594 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.613 | E (14824) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.619 | E (14824) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.624 | [ 13355][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.628 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.647 | E (14858) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.653 | E (14858) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.658 | [ 13389][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.662 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.682 | E (14892) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.687 | E (14892) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.692 | [ 13423][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.696 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.715 | E (14926) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.721 | E (14926) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.726 | [ 13457][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.730 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.749 | E (14960) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.756 | E (14960) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.760 | [ 13491][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.764 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.783 | E (14994) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.789 | E (14994) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.795 | [ 13525][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.798 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.817 | E (15028) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.823 | E (15028) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.828 | [ 13559][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.832 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.851 | E (15062) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.857 | E (15062) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.862 | [ 13593][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.866 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.885 | E (15096) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.891 | E (15096) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.896 | [ 13627][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.900 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.919 | E (15130) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.925 | E (15130) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.930 | [ 13661][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.934 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.953 | E (15164) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.959 | E (15164) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.964 | [ 13695][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:06.968 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:06.987 | E (15198) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:06.993 | E (15198) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:06.998 | [ 13729][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.002 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.021 | E (15232) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.027 | E (15232) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.032 | [ 13763][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.036 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.055 | E (15266) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.061 | E (15266) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.066 | [ 13797][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.070 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.089 | E (15300) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.095 | E (15300) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.100 | [ 13831][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.104 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.123 | E (15334) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.130 | E (15334) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.134 | [ 13865][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.138 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.158 | E (15368) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.163 | E (15368) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.168 | [ 13899][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.172 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.191 | E (15402) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.197 | E (15402) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.202 | [ 13933][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.206 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.226 | E (15436) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.232 | E (15436) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.236 | [ 13967][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.240 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.260 | E (15470) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.265 | E (15470) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.270 | [ 14001][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.274 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.294 | E (15504) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.299 | E (15504) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.305 | [ 14035][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.308 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.327 | E (15538) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.333 | E (15538) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.338 | [ 14069][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.342 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.360 | E (15572) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.367 | E (15572) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.372 | [ 14103][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.375 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.396 | E (15606) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.401 | E (15606) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.406 | [ 14137][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.411 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.430 | E (15640) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.435 | E (15640) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.440 | [ 14171][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.443 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.463 | E (15674) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.469 | E (15674) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.475 | [ 14205][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.478 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.497 | E (15708) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.504 | E (15708) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.509 | [ 14239][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.512 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.532 | E (15742) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.537 | E (15742) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.542 | [ 14273][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.547 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.565 | E (15776) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.571 | E (15776) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.577 | [ 14307][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.580 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.600 | E (15810) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.606 | E (15810) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.611 | [ 14341][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.615 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.634 | E (15844) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.640 | E (15844) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.644 | [ 14375][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.648 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.667 | E (15878) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.674 | E (15878) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.679 | [ 14409][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.682 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.701 | E (15912) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.707 | E (15912) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.712 | [ 14443][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.716 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.735 | E (15946) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.741 | E (15946) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.746 | [ 14477][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.750 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.769 | E (15980) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.775 | E (15980) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.780 | [ 14511][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.784 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.803 | E (16014) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.809 | E (16014) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.814 | [ 14545][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.818 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.837 | E (16048) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.844 | E (16048) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.848 | [ 14579][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.852 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.871 | E (16082) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.877 | E (16082) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.882 | [ 14613][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.886 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.905 | E (16116) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.911 | E (16116) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.916 | [ 14647][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.920 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.939 | E (16150) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.945 | E (16150) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.951 | [ 14681][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.954 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:07.973 | E (16184) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:07.980 | E (16184) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:07.984 | [ 14715][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:07.988 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.008 | E (16218) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.013 | E (16218) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.018 | [ 14749][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.022 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.041 | E (16252) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.047 | E (16252) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.052 | [ 14783][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.056 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.075 | E (16286) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.081 | E (16286) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.086 | [ 14817][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.090 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.109 | E (16320) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.116 | E (16320) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.120 | [ 14851][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.124 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.143 | E (16354) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.149 | E (16354) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.154 | [ 14885][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.158 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.177 | E (16388) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.183 | E (16388) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.189 | [ 14919][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.192 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.211 | E (16422) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.217 | E (16422) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.222 | [ 14953][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.226 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.245 | E (16456) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.251 | E (16456) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.256 | [ 14987][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.260 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.279 | E (16490) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.285 | E (16490) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.290 | [ 15021][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.294 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.313 | E (16524) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.319 | E (16524) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.324 | [ 15055][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.328 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.347 | E (16558) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.353 | E (16558) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.358 | [ 15089][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.362 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.382 | E (16592) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.388 | E (16593) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.393 | [ 15123][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.396 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.416 | E (16627) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.422 | E (16627) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.427 | [ 15158][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.431 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.450 | E (16661) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.456 | E (16661) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.461 | [ 15192][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.465 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.484 | E (16695) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.490 | E (16695) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.495 | [ 15226][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.499 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.518 | E (16729) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.524 | E (16729) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.529 | [ 15260][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.533 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.553 | E (16763) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.559 | E (16763) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.564 | [ 15294][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.567 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.587 | E (16797) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.592 | E (16797) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.597 | [ 15328][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.601 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.620 | E (16831) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.626 | E (16831) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.631 | [ 15362][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.635 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.654 | E (16865) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.660 | E (16865) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.665 | [ 15396][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.669 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.688 | E (16899) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.695 | E (16899) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.700 | [ 15430][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.703 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.723 | E (16933) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.729 | E (16933) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.733 | [ 15464][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.737 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.756 | E (16967) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.763 | E (16967) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.768 | [ 15498][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.771 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.791 | E (17001) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.797 | E (17001) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.802 | [ 15532][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.806 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.825 | E (17035) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.831 | E (17035) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.836 | [ 15566][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.840 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.859 | E (17069) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.865 | E (17069) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.870 | [ 15600][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.873 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.893 | E (17103) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.899 | E (17103) mdns: _mdns_service_task_start(5510): Failed to start the mDNS service task
+2026-04-11 12:33:08.904 | [ 15634][E][ESPmDNS.cpp:85] begin(): Failed starting MDNS
+2026-04-11 12:33:08.907 | [net] mDNS start failed for canlogger.local
+2026-04-11 12:33:08.927 | E (17137) mdns: _mdns_task_create_with_caps(5480): failed to allocate memory for the mDNS task's stack
+2026-04-11 12:33:08.946 | log saved to logs\serial_boot_20260411_123248.log

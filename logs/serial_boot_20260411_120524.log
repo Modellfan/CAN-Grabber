@@ -1,0 +1,46 @@
+2026-04-11 12:05:24.021 | opening COM15 at 115200 baud, duration=50.0s
+2026-04-11 12:05:24.022 | serial connected
+2026-04-11 12:05:25.023 | sent command: reset
+2026-04-11 12:05:25.023 | ESP-ROM:esp32s3-20210327
+2026-04-11 12:05:25.024 | Build:Mar 27 2021
+2026-04-11 12:05:25.024 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:05:25.024 | SPIWP:0xee
+2026-04-11 12:05:25.025 | mode:DIO, clock div:1
+2026-04-11 12:05:25.025 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:05:25.026 | load:0x403c8700,len:0xc2c
+2026-04-11 12:05:25.026 | load:0x403cb700,len:0x30c0
+2026-04-11 12:05:25.026 | entry 0x403c88b8
+2026-04-11 12:05:25.026 | 
+2026-04-11 12:05:25.027 | App: CAN-Grabber
+2026-04-11 12:05:25.027 | Version: 0.0.1
+2026-04-11 12:05:25.027 | Build: Apr 11 2026 12:04:29
+2026-04-11 12:05:25.028 | PIO Env: esp32s3_debug
+2026-04-11 12:05:25.028 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:05:25.029 | PSRAM size/free: 0 / 0
+2026-04-11 12:05:25.030 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:05:25.031 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:05:25.031 | [rtc] RTC_DS1307 detected
+2026-04-11 12:05:25.032 | [rtc] Startup epoch from RTC: 1775909129
+2026-04-11 12:05:25.034 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:05:25.035 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:05:25.375 | [  1081][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:05:25.378 | [UPLOAD] Startup delay active (30000ms)
+2026-04-11 12:05:25.378 | [net] Init, mode: 0
+2026-04-11 12:05:25.390 | [net] Event: 101
+2026-04-11 12:05:25.432 | [net] AP start: canlogger-setup
+2026-04-11 12:05:25.432 | [net] Event: 110
+2026-04-11 12:05:25.437 | [net] STA start
+2026-04-11 12:05:25.437 | [net] Event: 130
+2026-04-11 12:05:25.437 | [net] AP start event
+2026-04-11 12:05:25.443 | [net] AP IP: 192.168.4.1
+2026-04-11 12:05:25.443 | [net] STA mode disabled; AP only[net] Event: 131
+2026-04-11 12:05:25.449 | [net] AP stop event
+2026-04-11 12:05:25.449 | [net] Event: 130
+2026-04-11 12:05:25.450 | [net] AP start event
+2026-04-11 12:05:25.450 | 
+2026-04-11 12:05:25.451 | [net] Started async scan
+2026-04-11 12:05:28.855 | [net] Event: 102
+2026-04-11 12:05:55.445 | [net] Started async scan
+2026-04-11 12:05:58.658 | [net] Event: 102
+2026-04-11 12:05:58.669 | [net] Scan done: 11
+2026-04-11 12:06:14.032 | log saved to logs\serial_boot_20260411_120524.log

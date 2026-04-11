@@ -4,6 +4,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
+namespace fs {
+class FS;
+}
+
 namespace storage {
 
 constexpr uint8_t kFlagDownloaded = 1u << 0;
@@ -27,6 +31,7 @@ struct FileInfo {
 
 void init();
 bool is_ready();
+fs::FS& card();
 Stats get_stats();
 size_t file_count();
 bool get_file_info(size_t index, FileInfo* out);

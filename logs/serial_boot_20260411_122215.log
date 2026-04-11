@@ -1,0 +1,44 @@
+2026-04-11 12:22:15.790 | opening COM15 at 115200 baud, duration=12.0s
+2026-04-11 12:22:15.791 | serial connected
+2026-04-11 12:22:16.791 | sent command: wifi-status
+2026-04-11 12:22:16.791 | ESP-ROM:esp32s3-20210327
+2026-04-11 12:22:16.792 | Build:Mar 27 2021
+2026-04-11 12:22:16.793 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:22:16.794 | SPIWP:0xee
+2026-04-11 12:22:16.794 | mode:DIO, clock div:1
+2026-04-11 12:22:16.795 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:22:16.796 | load:0x403c8700,len:0xc2c
+2026-04-11 12:22:16.797 | load:0x403cb700,len:0x30c0
+2026-04-11 12:22:16.839 | entry 0x403c88b8
+2026-04-11 12:22:16.839 | 
+2026-04-11 12:22:16.840 | App: CAN-Grabber
+2026-04-11 12:22:16.840 | Version: 0.0.1
+2026-04-11 12:22:16.840 | Build: Apr 11 2026 12:19:26
+2026-04-11 12:22:16.841 | PIO Env: esp32s3_debug
+2026-04-11 12:22:16.842 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:22:16.843 | PSRAM size/free: 0 / 0
+2026-04-11 12:22:16.843 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:22:16.845 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 12:22:16.846 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:22:16.846 | [rtc] RTC_DS1307 detected
+2026-04-11 12:22:16.847 | [rtc] Startup epoch from RTC: 1775910140
+2026-04-11 12:22:16.849 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:22:16.850 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:22:17.143 | [  1080][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:22:17.144 | [UPLOAD] Startup delay active (30000ms)
+2026-04-11 12:22:17.145 | [net] Init, mode: 0
+2026-04-11 12:22:17.158 | [net] Event: 101
+2026-04-11 12:22:17.199 | [net] AP start: canlogger-setup
+2026-04-11 12:22:17.200 | [net] Event: 110
+2026-04-11 12:22:17.204 | [net] STA start
+2026-04-11 12:22:17.204 | [net] Event: 130
+2026-04-11 12:22:17.205 | [net] AP start event
+2026-04-11 12:22:17.210 | [net] AP IP: 192.168.4.1
+2026-04-11 12:22:17.211 | [net] STA mode disabled; AP only[net] Event: 131
+2026-04-11 12:22:17.215 | [net] AP stop event
+2026-04-11 12:22:17.216 | [net] Event: 130
+2026-04-11 12:22:17.216 | [net] AP start event
+2026-04-11 12:22:17.217 | 
+2026-04-11 12:22:17.217 | [net] Started async scan
+2026-04-11 12:22:20.622 | [net] Event: 102
+2026-04-11 12:22:27.933 | log saved to logs\serial_boot_20260411_122215.log

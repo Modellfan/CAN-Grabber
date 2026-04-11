@@ -1,0 +1,121 @@
+2026-04-11 12:16:47.805 | opening COM15 at 115200 baud, duration=60.0s
+2026-04-11 12:16:47.806 | serial connected
+2026-04-11 12:16:51.807 | sent command: wifi-debug
+2026-04-11 12:16:51.808 | ESP-ROM:esp32s3-20210327
+2026-04-11 12:16:51.808 | Build:Mar 27 2021
+2026-04-11 12:16:51.809 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:16:51.809 | SPIWP:0xee
+2026-04-11 12:16:51.812 | mode:DIO, clock div:1
+2026-04-11 12:16:51.878 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:16:51.879 | load:0x403c8700,len:0xc2c
+2026-04-11 12:16:51.880 | load:0x403cb700,len:0x30c0
+2026-04-11 12:16:51.881 | entry 0x403c88b8
+2026-04-11 12:16:51.881 | 
+2026-04-11 12:16:51.882 | App: CAN-Grabber
+2026-04-11 12:16:51.882 | Version: 0.0.1
+2026-04-11 12:16:51.883 | Build: Apr 11 2026 12:15:18
+2026-04-11 12:16:51.883 | PIO Env: esp32s3_debug
+2026-04-11 12:16:51.885 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:16:51.886 | PSRAM size/free: 0 / 0
+2026-04-11 12:16:51.887 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:16:51.889 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 12:16:51.890 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:16:51.891 | [rtc] RTC_DS1307 detected
+2026-04-11 12:16:51.892 | [rtc] Startup epoch from RTC: 1775909812
+2026-04-11 12:16:51.893 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:16:51.895 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:16:51.896 | [  108[0UPLOAD] Sta]rtup delay [active (300E00ms)
+2026-04-11 12:16:51.899 | ][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:16:51.900 | [net] Init, mode: 0
+2026-04-11 12:16:51.903 | [net] Event: 101
+2026-04-11 12:16:51.904 | [net] AP start: canlogger-setup
+2026-04-11 12:16:51.905 | [net] Event: 110
+2026-04-11 12:16:51.905 | [net] STA start
+2026-04-11 12:16:51.906 | [net] Event: 130
+2026-04-11 12:16:51.906 | [net] AP start event
+2026-04-11 12:16:51.907 | [net] AP IP: 192.168.4.1
+2026-04-11 12:16:51.908 | [net] STA mode disabled; AP only[net] Event: 131
+2026-04-11 12:16:51.909 | [net] AP stop event
+2026-04-11 12:16:51.909 | [net] Event: 130
+2026-04-11 12:16:51.910 | [net] AP start event
+2026-04-11 12:16:51.910 | 
+2026-04-11 12:16:51.916 | [net] Started async scan
+2026-04-11 12:16:51.918 | [serial] Debug WiFi stored in slot 0: Überlingen@Blacknet
+2026-04-11 12:16:51.920 | [serial] STA enabled, reconnecting network
+2026-04-11 12:16:51.920 | [net] AP stop
+2026-04-11 12:16:51.921 | [net] Event: 131
+2026-04-11 12:16:51.921 | [net] AP stop event
+2026-04-11 12:16:51.938 | [net] Event: 130Guru Meditation Error: Core  0 panic'ed (LoadProhibited). Exception was unhandled.
+2026-04-11 12:16:51.938 | 
+2026-04-11 12:16:51.939 | Core  0 register dump:
+2026-04-11 12:16:51.949 | PC      : 0x420982b1  PS      : 0x00060530  A0      : 0x82098eb5  A1      : 0x3fce5720  
+2026-04-11 12:16:51.955 | A2      : 0x00000000  A3      : 0x3fcc01a0  A4      : 0x3fcc018c  A5      : 0x3fcf4b64  
+2026-04-11 12:16:51.961 | A6      : 0x3fcc052c  A7      : 0x00000001  A8      : 0x820982a4  A9      : 0x3fce56d0  
+2026-04-11 12:16:51.971 | A10     : 0x00000000  A11     : 0x3fce5720  A12     : 0x000000c0  A13     : 0x00000000  
+2026-04-11 12:16:51.978 | A14     : 0x00000000  A15     : 0x00000000  SAR     : 0x0000001b  EXCCAUSE: 0x0000001c  
+2026-04-11 12:16:51.988 | EXCVADDR: 0x0000002c  LBEG    : 0x40056f5c  LEND    : 0x40056f72  LCOUNT  : 0xffffffff  
+2026-04-11 12:16:51.988 | 
+2026-04-11 12:16:51.988 | 
+2026-04-11 12:16:52.000 | Backtrace: 0x420982ae:0x3fce5720 0x42098eb2:0x3fce5780 0x420a1c5d:0x3fce57c0 0x420a35fb:0x3fce57e0 0x420a1a66:0x3fce5810 0x420ddb59:0x3fce5830 0x4037e0dd:0x3fce5860
+2026-04-11 12:16:52.000 | 
+2026-04-11 12:16:52.000 | 
+2026-04-11 12:16:52.000 | 
+2026-04-11 12:16:52.001 | 
+2026-04-11 12:16:52.002 | ELF file SHA256: 8cd40a9e7
+2026-04-11 12:16:52.002 | 
+2026-04-11 12:16:52.431 | Rebooting...
+2026-04-11 12:16:52.443 | ���ESP-ROM:esp32s3-20210327
+2026-04-11 12:16:52.444 | Build:Mar 27 2021
+2026-04-11 12:16:52.449 | rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:16:52.449 | Saved PC:0x4037d3d5
+2026-04-11 12:16:52.454 | SPIWP:0xee
+2026-04-11 12:16:52.454 | mode:DIO, clock div:1
+2026-04-11 12:16:52.455 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:16:52.460 | load:0x403c8700,len:0xc2c
+2026-04-11 12:16:52.461 | load:0x403cb700,len:0x30c0
+2026-04-11 12:16:52.461 | entry 0x403c88b8
+2026-04-11 12:16:52.940 | 
+2026-04-11 12:16:52.941 | App: CAN-Grabber
+2026-04-11 12:16:52.942 | Version: 0.0.1
+2026-04-11 12:16:52.946 | Build: Apr 11 2026 12:15:18
+2026-04-11 12:16:52.946 | PIO Env: esp32s3_debug
+2026-04-11 12:16:52.952 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:16:52.953 | PSRAM size/free: 0 / 0
+2026-04-11 12:16:52.957 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:16:52.963 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 12:16:52.963 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:16:52.969 | [rtc] RTC_DS1307 detected
+2026-04-11 12:16:52.970 | [rtc] Startup epoch from RTC: 1775909817
+2026-04-11 12:16:53.016 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:16:53.075 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:16:53.787 | [  1082][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:16:53.788 | [UPLOAD] Startup delay active (30000ms)
+2026-04-11 12:16:53.789 | [net] Init, mode: 0
+2026-04-11 12:16:53.801 | [net] Event: 101
+2026-04-11 12:16:53.843 | [net] AP start: canlogger-setup
+2026-04-11 12:16:53.843 | [net] Event: 110
+2026-04-11 12:16:53.848 | [net] STA start
+2026-04-11 12:16:53.848 | [net] Event: 130
+2026-04-11 12:16:53.849 | [net] AP start event
+2026-04-11 12:16:53.853 | [net] AP IP: 192.168.4.1
+2026-04-11 12:16:53.855 | [net] STA candidate count: 1[net] Event: 131
+2026-04-11 12:16:53.859 | [net] AP stop event
+2026-04-11 12:16:53.859 | [net] Event: 130
+2026-04-11 12:16:53.860 | [net] AP start event
+2026-04-11 12:16:53.860 | 
+2026-04-11 12:16:53.864 | [net] STA connect: Überlingen@Blacknet
+2026-04-11 12:16:53.864 | [net] STA index: 0
+2026-04-11 12:16:56.703 | [net] Event: 113
+2026-04-11 12:16:56.704 | [net] STA disconnected
+2026-04-11 12:16:56.709 | [net] STA failure (disconnected) idx=0 count=1
+2026-04-11 12:16:56.709 | [net] Event: 113
+2026-04-11 12:16:56.714 | [net] STA disconnected
+2026-04-11 12:16:56.714 | [net] STA failure (disconnected) idx=0 count=2
+2026-04-11 12:16:56.720 | [net] STA mode disabled (exhausted)
+2026-04-11 12:16:56.720 | [net] STA mode changed: off
+2026-04-11 12:16:56.722 | [net] Event: 113
+2026-04-11 12:16:56.723 | [net] STA disconnected
+2026-04-11 12:17:22.702 | [net] Started async scan
+2026-04-11 12:17:25.917 | [net] Event: 102
+2026-04-11 12:17:25.917 | [net] Scan done: 11
+2026-04-11 12:17:47.819 | log saved to logs\serial_boot_20260411_121647.log

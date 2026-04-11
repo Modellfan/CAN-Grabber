@@ -170,9 +170,15 @@ void start_mdns() {
   if (MDNS.begin(kHostname)) {
     MDNS.addService("http", "tcp", 80);
     s_mdns_started = true;
+    const String ip = WiFi.localIP().toString();
+    Serial.printf("[net] mDNS ready: %s.local -> %s (service http/tcp 80)\n",
+                  kHostname,
+                  ip.c_str());
 #if defined(STA_AP_TEST)
     NET_TEST_LOG("[net][test] mDNS started");
 #endif
+  } else {
+    Serial.printf("[net] mDNS start failed for %s.local\n", kHostname);
   }
 }
 
@@ -300,7 +306,17 @@ void init() {
       Serial.print("[net] Event: ");
       Serial.println(static_cast<int>(event));
       if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
-        Serial.println("[net] STA connected");
+        const String ssid = WiFi.SSID();
+        const String ip = WiFi.localIP().toString();
+        const String gateway = WiFi.gatewayIP().toString();
+        const String subnet = WiFi.subnetMask().toString();
+        Serial.printf("[net] STA connected: ssid=%s rssi=%d\n",
+                      ssid.c_str(),
+                      WiFi.RSSI());
+        Serial.printf("[net] STA IP: %s gateway=%s subnet=%s\n",
+                      ip.c_str(),
+                      gateway.c_str(),
+                      subnet.c_str());
         s_connecting = false;
         s_attempt_start_ms = 0;
       } else if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {

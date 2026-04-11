@@ -1,7 +1,7 @@
 #include "logging/log_writer.h"
 
 #include <Arduino.h>
-#include <SD.h>
+#include <FS.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <string.h>
@@ -198,7 +198,7 @@ bool reopen_log_file(BusLogState& state) {
     state.file.close();
   }
 
-  File file = SD.open(state.path, FILE_WRITE);
+  File file = storage::card().open(state.path, FILE_WRITE);
   if (!file) {
     portENTER_CRITICAL(&s_stats_mux);
     s_reopen_failures++;
@@ -243,12 +243,12 @@ bool open_log_file(uint8_t bus_id) {
   const char* bus_name = cfg.buses[bus_id].name;
   build_log_path(bus_id, bus_name, unique_start_ms, path, sizeof(path));
   // Avoid clobbering an existing file when timestamp fallback repeats across boots.
-  for (uint32_t guard = 0; guard < 1000 && SD.exists(path); ++guard) {
+  for (uint32_t guard = 0; guard < 1000 && storage::card().exists(path); ++guard) {
     unique_start_ms++;
     build_log_path(bus_id, bus_name, unique_start_ms, path, sizeof(path));
   }
 
-  File file = SD.open(path, FILE_WRITE);
+  File file = storage::card().open(path, FILE_WRITE);
   if (!file) {
     state.state = BusLogState::LogState::kError;
     return false;

@@ -1,7 +1,7 @@
 #include "compress/compressor.h"
 
 #include <Arduino.h>
-#include <SD.h>
+#include <FS.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <stdlib.h>
@@ -113,11 +113,11 @@ bool compress_file(const storage::FileInfo& info) {
   if (!build_compressed_path(info.path, out_path, sizeof(out_path))) {
     return false;
   }
-  if (SD.exists(out_path)) {
+  if (storage::card().exists(out_path)) {
     return true;
   }
-  if (!SD.exists(kCompressedDir)) {
-    SD.mkdir(kCompressedDir);
+  if (!storage::card().exists(kCompressedDir)) {
+    storage::card().mkdir(kCompressedDir);
   }
 
   char temp_path[100];
@@ -125,14 +125,14 @@ bool compress_file(const storage::FileInfo& info) {
     return false;
   }
 
-  File in = SD.open(info.path, FILE_READ);
+  File in = storage::card().open(info.path, FILE_READ);
   if (!in) {
     return false;
   }
-  if (SD.exists(temp_path)) {
-    SD.remove(temp_path);
+  if (storage::card().exists(temp_path)) {
+    storage::card().remove(temp_path);
   }
-  File out = SD.open(temp_path, FILE_WRITE);
+  File out = storage::card().open(temp_path, FILE_WRITE);
   if (!out) {
     in.close();
     return false;
@@ -144,7 +144,7 @@ bool compress_file(const storage::FileInfo& info) {
   if (comp == nullptr) {
     in.close();
     out.close();
-    SD.remove(temp_path);
+    storage::card().remove(temp_path);
     return false;
   }
   const int flags = TDEFL_WRITE_ZLIB_HEADER | TDEFL_DEFAULT_MAX_PROBES;
@@ -152,7 +152,7 @@ bool compress_file(const storage::FileInfo& info) {
     free(comp);
     in.close();
     out.close();
-    SD.remove(temp_path);
+    storage::card().remove(temp_path);
     return false;
   }
 
@@ -187,15 +187,15 @@ bool compress_file(const storage::FileInfo& info) {
   out.close();
 
   if (!ok) {
-    SD.remove(temp_path);
+    storage::card().remove(temp_path);
     return false;
   }
 
-  if (SD.exists(out_path)) {
-    SD.remove(out_path);
+  if (storage::card().exists(out_path)) {
+    storage::card().remove(out_path);
   }
-  if (!SD.rename(temp_path, out_path)) {
-    SD.remove(temp_path);
+  if (!storage::card().rename(temp_path, out_path)) {
+    storage::card().remove(temp_path);
     return false;
   }
 
@@ -223,7 +223,7 @@ bool pick_next_candidate(storage::FileInfo* out) {
     if (!build_compressed_path(info.path, cmp_path, sizeof(cmp_path))) {
       continue;
     }
-    if (SD.exists(cmp_path)) {
+    if (storage::card().exists(cmp_path)) {
       continue;
     }
     *out = info;
@@ -321,7 +321,7 @@ Stats get_stats() {
     if (!build_compressed_path(info.path, cmp_path, sizeof(cmp_path))) {
       continue;
     }
-    if (SD.exists(cmp_path)) {
+    if (storage::card().exists(cmp_path)) {
       continue;
     }
     outstanding_files++;

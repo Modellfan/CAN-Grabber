@@ -4,7 +4,7 @@
 #include <ArduinoJson.h>
 #include <AsyncTCP.h>
 #include <ESPmDNS.h>
-#include <SD.h>
+#include <FS.h>
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <freertos/FreeRTOS.h>
@@ -993,7 +993,7 @@ public:
     result.server_code[0] = '\0';
     result.server_message[0] = '\0';
 
-    file_ = SD.open(info_.path, FILE_READ);
+    file_ = storage::card().open(info_.path, FILE_READ);
     if (!file_) {
       result.error = UploadError::kOpenFailed;
       return result;
@@ -1502,7 +1502,7 @@ UploadResult send_file_multipart(const storage::FileInfo& info) {
                 static_cast<unsigned long>(ESP.getFreeHeap()));
 #endif
 
-  if (!SD.exists(info.path)) {
+  if (!storage::card().exists(info.path)) {
     UploadResult missing{};
     missing.ok = false;
     missing.error = UploadError::kMissingFile;

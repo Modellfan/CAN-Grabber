@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#include <SD.h>
+#include <FS.h>
 #include <SPIFFS.h>
 #include <WiFi.h>
 #include <WebServer.h>
@@ -17,6 +17,7 @@
 #include "logging/log_writer.h"
 #include "net/net_manager.h"
 #include "storage/storage_manager.h"
+#include "rtc/rtc_clock.h"
 #include "upload/upload_manager.h"
 
 namespace rest {
@@ -397,9 +398,12 @@ void handle_status() {
   root["rssi_percent"] = net::rssi_percent();
   root["sta_mode_enabled"] = config::get().global.wifi_sta_enabled;
   root["ap_clients"] = net::ap_clients();
-  time_t now = time(nullptr);
+  const uint32_t now = rtc_clock::now_unix_sec();
   root["time_epoch"] = static_cast<int64_t>(now);
-  root["time_valid"] = now > 100000;
+  root["time_valid"] = rtc_clock::is_valid();
+  root["time_source"] = rtc_clock::source_name();
+  root["rtc_available"] = rtc_clock::is_available();
+  root["rtc_running"] = rtc_clock::is_running();
 
   logging::Stats log_stats = logging::get_stats();
   JsonObject log = root["logging"].to<JsonObject>();
@@ -571,10 +575,11 @@ void handle_time_set() {
     return;
   }
 
-  timeval tv{};
-  tv.tv_sec = static_cast<time_t>(epoch);
-  tv.tv_usec = 0;
-  settimeofday(&tv, nullptr);
+  if (epoch > 0xFFFFFFFFLL ||
+      !rtc_clock::set_unix_epoch(static_cast<uint32_t>(epoch), true)) {
+    s_server.send(500, "application/json", "{\"error\":\"time_set_failed\"}");
+    return;
+  }
 
   config::Config& cfg = config::get_mutable();
   cfg.global.manual_time_epoch = epoch;
@@ -766,13 +771,13 @@ void handle_file_download(size_t id) {
     return;
   }
 
-  if (!SD.exists(info.path)) {
+  if (!storage::card().exists(info.path)) {
     s_server.send(404, "application/json", "{\"error\":\"missing\"}");
     log_slow_request_if_needed("file_download", handler_start);
     return;
   }
 
-  File file = SD.open(info.path, FILE_READ);
+  File file = storage::card().open(info.path, FILE_READ);
   if (!file) {
     s_server.send(500, "application/json", "{\"error\":\"open_failed\"}");
     log_slow_request_if_needed("file_download", handler_start);

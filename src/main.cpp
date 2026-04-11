@@ -9,6 +9,7 @@
 #include "logging/log_writer.h"
 #include "net/net_manager.h"
 #include "rest/rest_api.h"
+#include "rtc/rtc_clock.h"
 #include "storage/storage_manager.h"
 #include "upload/upload_manager.h"
 #include "web/web_server.h"
@@ -29,6 +30,108 @@
 #if ENABLE_COMPRESSOR
 #include "compress/compressor.h"
 #endif
+
+namespace {
+
+char s_serial_command[64] = {};
+size_t s_serial_command_len = 0;
+uint32_t s_serial_ignore_until_ms = 0;
+constexpr const char* kDebugWifiSsid = "\xC3\x9C" "berlingen@Wohnzimmer";
+constexpr const char* kDebugWifiPassword = "Ueberlingen2019";
+
+void printWifiStatus() {
+  const config::Config& cfg = config::get();
+  Serial.printf("[serial] WiFi STA: enabled=%s count=%u\n",
+                cfg.global.wifi_sta_enabled ? "true" : "false",
+                cfg.global.wifi_count);
+  for (uint8_t i = 0; i < 3; ++i) {
+    const char* ssid = cfg.global.wifi[i].ssid;
+    if (ssid[0] == '\0') {
+      Serial.printf("[serial] WiFi[%u]: <empty>\n", i);
+      continue;
+    }
+    Serial.printf("[serial] WiFi[%u]: ssid=%s pass_len=%u\n",
+                  i,
+                  ssid,
+                  static_cast<unsigned>(strlen(cfg.global.wifi[i].password)));
+  }
+}
+
+void applyDebugWifiConfig() {
+  config::set_wifi(0, kDebugWifiSsid, kDebugWifiPassword);
+  config::set_wifi_count(1);
+  config::Config& cfg = config::get_mutable();
+  cfg.global.wifi_sta_enabled = true;
+  config::save();
+
+  Serial.printf("[serial] Debug WiFi stored in slot 0: %s\n", kDebugWifiSsid);
+  Serial.println("[serial] STA enabled, restarting to apply network config");
+  Serial.flush();
+  delay(50);
+  ESP.restart();
+}
+
+void executeSerialCommand(const char* command) {
+  if (command == nullptr || command[0] == '\0') {
+    return;
+  }
+
+  if (strcmp(command, "help") == 0) {
+    Serial.println("[serial] Commands: help, reset, wifi-status, wifi-debug");
+    return;
+  }
+
+  if (strcmp(command, "wifi-status") == 0) {
+    printWifiStatus();
+    return;
+  }
+
+  if (strcmp(command, "wifi-debug") == 0) {
+    applyDebugWifiConfig();
+    return;
+  }
+
+  if (strcmp(command, "reset") == 0 || strcmp(command, "reboot") == 0) {
+    Serial.println("[serial] Reset requested");
+    Serial.flush();
+    delay(50);
+    ESP.restart();
+    return;
+  }
+
+  Serial.printf("[serial] Unknown command: %s\n", command);
+}
+
+void handleSerialConsole() {
+  if (millis() < s_serial_ignore_until_ms) {
+    while (Serial.available() > 0) {
+      (void)Serial.read();
+    }
+    s_serial_command_len = 0;
+    return;
+  }
+
+  while (Serial.available() > 0) {
+    const char c = static_cast<char>(Serial.read());
+    if (c == '\r' || c == '\n') {
+      s_serial_command[s_serial_command_len] = '\0';
+      if (s_serial_command_len > 0) {
+        executeSerialCommand(s_serial_command);
+      }
+      s_serial_command_len = 0;
+      continue;
+    }
+
+    if (s_serial_command_len + 1 < sizeof(s_serial_command)) {
+      s_serial_command[s_serial_command_len++] = c;
+    } else {
+      s_serial_command_len = 0;
+      Serial.println("[serial] Command too long");
+    }
+  }
+}
+
+} // namespace
 
 static void printBuildInfo() {
   Serial.println();
@@ -62,8 +165,12 @@ void setup() {
   digitalWrite(STATUS_LED_PIN, LOW);
 
   printBuildInfo();
+  Serial.println("[serial] Type 'reset' to reboot the device");
+  Serial.println("[serial] Type 'wifi-debug' to store the default debug STA network");
+  s_serial_ignore_until_ms = millis() + 3000;
 
   config::init();
+  rtc_clock::init();
   storage::init();
   can::init();
   logging::init();
@@ -82,6 +189,7 @@ void setup() {
 }
 
 void loop() {
+  handleSerialConsole();
   net::loop();
   rest::loop();
   web::loop();

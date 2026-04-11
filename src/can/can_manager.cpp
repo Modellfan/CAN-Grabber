@@ -10,6 +10,7 @@
 
 #include "config/app_config.h"
 #include "hardware/hardware_config.h"
+#include "rtc/rtc_clock.h"
 
 namespace can {
 
@@ -283,6 +284,7 @@ void rx_task(void* param) {
     const uint32_t interval_us = 1000000UL / fps;
     static uint64_t next_tick_us[config::kMaxBuses] = {};
     const uint64_t now_us = static_cast<uint64_t>(esp_timer_get_time());
+    const uint64_t log_timestamp_us = rtc_clock::now_unix_us();
     if (next_tick_us[bus_id] == 0) {
       next_tick_us[bus_id] = now_us;
     }
@@ -309,7 +311,8 @@ void rx_task(void* param) {
     msg.data[6] = 0x5A;
     msg.data[7] = 0x01;
     char line[96];
-    const size_t len = format_savvy_line(bus_id, now_us, msg, line, sizeof(line));
+    const size_t len =
+        format_savvy_line(bus_id, log_timestamp_us, msg, line, sizeof(line));
     if (append_line_to_block(bus_id, line, len, now_us, msg.len)) {
       s_sim_produced[bus_id]++;
     }
@@ -327,8 +330,10 @@ void rx_task(void* param) {
     while (bus.driver->available()) {
       bus.driver->receive(msg);
       const uint64_t now_us = static_cast<uint64_t>(esp_timer_get_time());
+      const uint64_t log_timestamp_us = rtc_clock::now_unix_us();
       char line[96];
-      const size_t len = format_savvy_line(bus_id, now_us, msg, line, sizeof(line));
+      const size_t len =
+          format_savvy_line(bus_id, log_timestamp_us, msg, line, sizeof(line));
       if (append_line_to_block(bus_id, line, len, now_us, msg.len)) {
         any = true;
       }

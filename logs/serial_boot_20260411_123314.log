@@ -1,0 +1,56 @@
+2026-04-11 12:33:14.400 | opening COM15 at 115200 baud, duration=12.0s
+2026-04-11 12:33:14.401 | serial connected
+2026-04-11 12:33:18.402 | sent command: wifi-status
+2026-04-11 12:33:18.403 | memory �ESP-ROM:esp32s3-20210327
+2026-04-11 12:33:18.403 | Build:Mar 27 2021
+2026-04-11 12:33:18.405 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 12:33:18.405 | SPIWP:0xee
+2026-04-11 12:33:18.405 | mode:DIO, clock div:1
+2026-04-11 12:33:18.406 | load:0x3fce2820,len:0x10cc
+2026-04-11 12:33:18.407 | load:0x403c8700,len:0xc2c
+2026-04-11 12:33:18.408 | load:0x403cb700,len:0x30c0
+2026-04-11 12:33:18.408 | entry 0x403c88b8
+2026-04-11 12:33:18.408 | 
+2026-04-11 12:33:18.409 | App: CAN-Grabber
+2026-04-11 12:33:18.409 | Version: 0.0.1
+2026-04-11 12:33:18.410 | Build: Apr 11 2026 12:31:36
+2026-04-11 12:33:18.410 | PIO Env: esp32s3_debug
+2026-04-11 12:33:18.411 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 12:33:18.411 | PSRAM size/free: 0 / 0
+2026-04-11 12:33:18.412 | [serial] Type 'reset' to reboot the device
+2026-04-11 12:33:18.413 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 12:33:18.413 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 12:33:18.414 | [rtc] RTC_DS1307 detected
+2026-04-11 12:33:18.414 | [rtc] Startup epoch from RTC: 1775910799
+2026-04-11 12:33:18.415 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 12:33:18.415 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 12:33:18.417 | [  1080][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 12:33:18.417 | [UPLOAD] Startup delay active (30000ms)
+2026-04-11 12:33:18.417 | [net] Init, mode: 0
+2026-04-11 12:33:18.418 | [net] Event: 101
+2026-04-11 12:33:18.418 | [net] AP start: canlogger-setup
+2026-04-11 12:33:18.418 | [net] Event: 110
+2026-04-11 12:33:18.419 | [net] STA start
+2026-04-11 12:33:18.419 | [net] Event: 130
+2026-04-11 12:33:18.419 | [net] AP start event
+2026-04-11 12:33:18.419 | [net] AP IP: 192.168.4.1
+2026-04-11 12:33:18.420 | [net] STA candidate count: 1
+2026-04-11 12:33:18.420 | [net] Event: 131
+2026-04-11 12:33:18.421 | [net] AP stop event
+2026-04-11 12:33:18.421 | [net] Event: 130
+2026-04-11 12:33:18.421 | [net] AP start event
+2026-04-11 12:33:18.422 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-11 12:33:18.423 | [net] STA index: 0
+2026-04-11 12:33:18.423 | [net] Event: 113
+2026-04-11 12:33:18.423 | [net] STA disconnected
+2026-04-11 12:33:18.424 | [net] STA failure (disconnected) idx=0 count=1
+2026-04-11 12:33:18.424 | [net] Event: 113
+2026-04-11 12:33:18.424 | [net] STA disconnected
+2026-04-11 12:33:18.425 | [net] STA failure (disconnected) idx=0 count=2
+2026-04-11 12:33:18.426 | [net] STA mode disabled (exhausted)
+2026-04-11 12:33:18.427 | [net] STA mode changed: off
+2026-04-11 12:33:18.428 | [serial] WiFi STA: enabled=false count=1
+2026-04-11 12:33:18.429 | [serial] WiFi[0]: ssid=Überlingen@Wohnzimmer pass_len=15
+2026-04-11 12:33:18.430 | [serial] WiFi[1]: <empty>
+2026-04-11 12:33:18.431 | [serial] WiFi[2]: <empty>
+2026-04-11 12:33:26.494 | log saved to logs\serial_boot_20260411_123314.log
