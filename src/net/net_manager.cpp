@@ -3,9 +3,11 @@
 #include <Arduino.h>
 #include <ESPmDNS.h>
 #include <WiFi.h>
+#include <esp_heap_caps.h>
 #include <freertos/FreeRTOS.h>
 
 #include "config/app_config.h"
+#include "system/system_stats.h"
 
 namespace net {
 
@@ -18,6 +20,10 @@ constexpr uint32_t kConnectTimeoutMs = 12000;
 constexpr uint32_t kRetryIntervalMs = 5000;
 constexpr uint32_t kScanIntervalMs = 30000;
 constexpr uint32_t kScanCooldownMs = 10000;
+constexpr uint32_t kMdnsRetryIntervalMs = 5000;
+constexpr uint32_t kMdnsLowHeapRetryMs = 2000;
+constexpr uint32_t kMdnsMinInternalHeapBytes = 16UL * 1024UL;
+constexpr uint32_t kMdnsMinLargestBlockBytes = 7UL * 1024UL;
 constexpr uint8_t kMaxScanResults = 12;
 
 #if defined(STA_AP_TEST)
@@ -48,6 +54,20 @@ size_t s_scan_count = 0;
 bool s_sta_mode_cached = false;
 uint8_t s_sta_failures[3] = {0, 0, 0};
 uint32_t s_last_ap_client_ms = 0;
+uint32_t s_next_mdns_retry_ms = 0;
+
+struct HeapDiag {
+  uint32_t free_internal;
+  uint32_t largest_internal;
+};
+
+HeapDiag capture_heap_diag() {
+  HeapDiag heap{};
+  heap.free_internal = static_cast<uint32_t>(heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+  heap.largest_internal = static_cast<uint32_t>(
+      heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+  return heap;
+}
 
 uint8_t configured_wifi_count() {
   const config::Config& cfg = config::get();
@@ -99,6 +119,16 @@ bool station_mode_enabled() {
 
 uint8_t ap_client_count() {
   return WiFi.softAPgetStationNum();
+}
+
+bool should_keep_ap_active(bool sta_enabled) {
+  if (!sta_enabled) {
+    return true;
+  }
+  if (WiFi.status() != WL_CONNECTED) {
+    return true;
+  }
+  return ap_client_count() > 0;
 }
 
 void reset_sta_attempts() {
@@ -167,27 +197,55 @@ void start_mdns() {
   if (s_mdns_started) {
     return;
   }
+  const uint32_t now = millis();
+  if (s_next_mdns_retry_ms != 0 && now < s_next_mdns_retry_ms) {
+    return;
+  }
+
+  const HeapDiag heap = capture_heap_diag();
+  if (heap.free_internal < kMdnsMinInternalHeapBytes ||
+      heap.largest_internal < kMdnsMinLargestBlockBytes) {
+    system_stats::sample(system_stats::Component::kNet, "mdns_wait");
+    Serial.printf("[net] mDNS deferred: internal=%lu largest=%lu\n",
+                  static_cast<unsigned long>(heap.free_internal),
+                  static_cast<unsigned long>(heap.largest_internal));
+    s_next_mdns_retry_ms = now + kMdnsLowHeapRetryMs;
+    return;
+  }
+
   if (MDNS.begin(kHostname)) {
     MDNS.addService("http", "tcp", 80);
     s_mdns_started = true;
+    s_next_mdns_retry_ms = 0;
+    system_stats::sample(system_stats::Component::kNet, "mdns_ready");
     const String ip = WiFi.localIP().toString();
-    Serial.printf("[net] mDNS ready: %s.local -> %s (service http/tcp 80)\n",
+    Serial.printf(
+        "[net] mDNS ready: %s.local -> %s (service http/tcp 80, internal=%lu largest=%lu)\n",
                   kHostname,
-                  ip.c_str());
+                  ip.c_str(),
+                  static_cast<unsigned long>(heap.free_internal),
+                  static_cast<unsigned long>(heap.largest_internal));
 #if defined(STA_AP_TEST)
     NET_TEST_LOG("[net][test] mDNS started");
 #endif
   } else {
-    Serial.printf("[net] mDNS start failed for %s.local\n", kHostname);
+    system_stats::sample(system_stats::Component::kNet, "mdns_fail");
+    Serial.printf("[net] mDNS start failed for %s.local (internal=%lu largest=%lu)\n",
+                  kHostname,
+                  static_cast<unsigned long>(heap.free_internal),
+                  static_cast<unsigned long>(heap.largest_internal));
+    s_next_mdns_retry_ms = now + kMdnsRetryIntervalMs;
   }
 }
 
 void stop_mdns() {
   if (!s_mdns_started) {
+    s_next_mdns_retry_ms = 0;
     return;
   }
   MDNS.end();
   s_mdns_started = false;
+  s_next_mdns_retry_ms = 0;
 #if defined(STA_AP_TEST)
   NET_TEST_LOG("[net][test] mDNS stopped");
 #endif
@@ -310,24 +368,33 @@ void init() {
         const String ip = WiFi.localIP().toString();
         const String gateway = WiFi.gatewayIP().toString();
         const String subnet = WiFi.subnetMask().toString();
+        const HeapDiag heap = capture_heap_diag();
+        system_stats::sample(system_stats::Component::kNet, "sta_ip");
         Serial.printf("[net] STA connected: ssid=%s rssi=%d\n",
                       ssid.c_str(),
                       WiFi.RSSI());
-        Serial.printf("[net] STA IP: %s gateway=%s subnet=%s\n",
+        Serial.printf("[net] STA IP: %s gateway=%s subnet=%s internal=%lu largest=%lu\n",
                       ip.c_str(),
                       gateway.c_str(),
-                      subnet.c_str());
+                      subnet.c_str(),
+                      static_cast<unsigned long>(heap.free_internal),
+                      static_cast<unsigned long>(heap.largest_internal));
         s_connecting = false;
         s_attempt_start_ms = 0;
       } else if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {
-        Serial.println("[net] STA disconnected");
+        system_stats::sample(system_stats::Component::kNet, "sta_disc");
+        Serial.printf("[net] STA disconnected reason=%u\n",
+                      static_cast<unsigned>(info.wifi_sta_disconnected.reason));
         handle_sta_failure("disconnected");
       } else if (event == ARDUINO_EVENT_WIFI_STA_START) {
+        system_stats::sample(system_stats::Component::kNet, "sta_start");
         Serial.println("[net] STA start");
       } else if (event == ARDUINO_EVENT_WIFI_AP_START) {
+        system_stats::sample(system_stats::Component::kNet, "ap_start");
         Serial.println("[net] AP start event");
         s_ap_active = true;
       } else if (event == ARDUINO_EVENT_WIFI_AP_STOP) {
+        system_stats::sample(system_stats::Component::kNet, "ap_stop");
         Serial.println("[net] AP stop event");
         s_ap_active = false;
     } else if (event == ARDUINO_EVENT_WIFI_AP_STACONNECTED) {
@@ -418,9 +485,13 @@ void loop() {
   if ((WiFi.getMode() & WIFI_AP) == 0) {
     s_ap_active = false;
   }
-  if (!s_ap_active) {
+  const bool keep_ap = should_keep_ap_active(sta_enabled);
+  if (keep_ap && !s_ap_active) {
     WiFi.mode(WIFI_AP_STA);
     start_ap();
+  } else if (!keep_ap && s_ap_active) {
+    Serial.println("[net] AP idle, stopping while STA is connected");
+    stop_ap();
   }
 
   if (!sta_enabled) {

@@ -6,6 +6,7 @@
 #include <SPIFFS.h>
 #include <WiFi.h>
 #include <WebServer.h>
+#include <esp_heap_caps.h>
 #include <sys/time.h>
 #include <time.h>
 #include <string.h>
@@ -18,6 +19,7 @@
 #include "net/net_manager.h"
 #include "storage/storage_manager.h"
 #include "rtc/rtc_clock.h"
+#include "system/system_stats.h"
 #include "upload/upload_manager.h"
 
 namespace rest {
@@ -30,7 +32,41 @@ bool s_spiffs_ready = false;
 volatile uint32_t s_last_activity_ms = 0;
 constexpr uint32_t kSlowRequestThresholdMs = 120;
 constexpr uint32_t kSlowHandleClientThresholdMs = 40;
+constexpr size_t kFileReadChunkBytes = 256;
+constexpr size_t kFileWriteChunkBytes = 128;
+constexpr size_t kHeaderBufferBytes = 320;
+constexpr uint32_t kFileSendTimeoutMs = 4000;
+constexpr uint32_t kFileSendStallSampleMs = 400;
+constexpr uint32_t kFileWritePauseMs = 1;
 const char* http_method_name(HTTPMethod method);
+uint8_t s_file_send_buffer[kFileReadChunkBytes];
+
+struct HeapDiag {
+  uint32_t free_heap;
+  uint32_t free_internal;
+  uint32_t largest_internal;
+};
+
+struct FileSendDiag {
+  size_t total_sent;
+  uint32_t wait_count;
+  uint32_t zero_write_count;
+  uint32_t max_write_chunk;
+  uint32_t min_available_for_write;
+  uint32_t max_available_for_write;
+  bool timed_out;
+  bool disconnected;
+};
+
+HeapDiag capture_heap_diag() {
+  HeapDiag heap{};
+  heap.free_heap = static_cast<uint32_t>(ESP.getFreeHeap());
+  heap.free_internal =
+      static_cast<uint32_t>(heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+  heap.largest_internal = static_cast<uint32_t>(
+      heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
+  return heap;
+}
 
 void mark_activity() {
   s_last_activity_ms = millis();
@@ -123,9 +159,179 @@ bool is_cacheable_static_asset(const String& path) {
          path.endsWith(".gif") || path.endsWith(".svg") || path.endsWith(".ico");
 }
 
+bool write_client_buffer(WiFiClient& client,
+                         const uint8_t* data,
+                         size_t length,
+                         FileSendDiag* diag) {
+  if (data == nullptr || length == 0) {
+    return true;
+  }
+  if (diag == nullptr) {
+    return false;
+  }
+
+  size_t offset = 0;
+  uint32_t last_progress_ms = millis();
+  bool sampled_stall = false;
+  while (offset < length) {
+    if (!client.connected()) {
+      diag->disconnected = true;
+      if (diag->min_available_for_write == 0xFFFFFFFFu) {
+        diag->min_available_for_write = 0;
+      }
+      return false;
+    }
+
+    const int writable = client.availableForWrite();
+    const uint32_t writable_u32 = (writable > 0) ? static_cast<uint32_t>(writable) : 0;
+    if (writable_u32 < diag->min_available_for_write) {
+      diag->min_available_for_write = writable_u32;
+    }
+    if (writable_u32 > diag->max_available_for_write) {
+      diag->max_available_for_write = writable_u32;
+    }
+
+    if (writable <= 0) {
+      diag->wait_count++;
+    }
+
+    const size_t chunk = min(kFileWriteChunkBytes, length - offset);
+    const size_t written = client.write(data + offset, chunk);
+    if (written == 0) {
+      diag->zero_write_count++;
+      if (!sampled_stall && (millis() - last_progress_ms) >= kFileSendStallSampleMs) {
+        sampled_stall = true;
+        system_stats::sample(system_stats::Component::kRest, "static_zero");
+      }
+      if ((millis() - last_progress_ms) >= kFileSendTimeoutMs) {
+        diag->timed_out = true;
+        client.stop();
+        if (diag->min_available_for_write == 0xFFFFFFFFu) {
+          diag->min_available_for_write = 0;
+        }
+        return false;
+      }
+      delay(1);
+      continue;
+    }
+
+    offset += written;
+    diag->total_sent += written;
+    if (written > diag->max_write_chunk) {
+      diag->max_write_chunk = static_cast<uint32_t>(written);
+    }
+    last_progress_ms = millis();
+    sampled_stall = false;
+    delay(kFileWritePauseMs);
+  }
+
+  if (diag->min_available_for_write == 0xFFFFFFFFu) {
+    diag->min_available_for_write = 0;
+  }
+  return true;
+}
+
+bool send_ok_headers(WiFiClient& client,
+                     const char* content_type,
+                     size_t content_length,
+                     bool cacheable,
+                     bool use_gzip,
+                     const char* extra_header,
+                     FileSendDiag* diag) {
+  char header[kHeaderBufferBytes];
+  const char* type = (content_type != nullptr) ? content_type : "text/plain";
+  int offset = snprintf(header,
+                        sizeof(header),
+                        "HTTP/1.1 200 OK\r\n"
+                        "Content-Type: %s\r\n"
+                        "Content-Length: %lu\r\n",
+                        type,
+                        static_cast<unsigned long>(content_length));
+  if (offset <= 0 || static_cast<size_t>(offset) >= sizeof(header)) {
+    return false;
+  }
+  if (cacheable) {
+    const int written = snprintf(header + offset,
+                                 sizeof(header) - static_cast<size_t>(offset),
+                                 "Cache-Control: public, max-age=86400, immutable\r\n");
+    if (written <= 0 || static_cast<size_t>(offset + written) >= sizeof(header)) {
+      return false;
+    }
+    offset += written;
+  } else {
+    const int written = snprintf(header + offset,
+                                 sizeof(header) - static_cast<size_t>(offset),
+                                 "Cache-Control: no-cache\r\n");
+    if (written <= 0 || static_cast<size_t>(offset + written) >= sizeof(header)) {
+      return false;
+    }
+    offset += written;
+  }
+  if (use_gzip) {
+    const int written = snprintf(header + offset,
+                                 sizeof(header) - static_cast<size_t>(offset),
+                                 "Content-Encoding: gzip\r\n");
+    if (written <= 0 || static_cast<size_t>(offset + written) >= sizeof(header)) {
+      return false;
+    }
+    offset += written;
+  }
+  if (extra_header != nullptr && extra_header[0] != '\0') {
+    const int written = snprintf(header + offset,
+                                 sizeof(header) - static_cast<size_t>(offset),
+                                 "%s",
+                                 extra_header);
+    if (written <= 0 || static_cast<size_t>(offset + written) >= sizeof(header)) {
+      return false;
+    }
+    offset += written;
+  }
+  const int tail_written = snprintf(header + offset,
+                                    sizeof(header) - static_cast<size_t>(offset),
+                                    "Connection: close\r\n"
+                                    "\r\n");
+  if (tail_written <= 0 ||
+      static_cast<size_t>(offset + tail_written) >= sizeof(header)) {
+    return false;
+  }
+  offset += tail_written;
+  return write_client_buffer(client,
+                             reinterpret_cast<const uint8_t*>(header),
+                             static_cast<size_t>(offset),
+                             diag);
+}
+
+FileSendDiag send_file_body(File& file, WiFiClient& client, FileSendDiag diag) {
+  while (file.available()) {
+    const size_t to_read = file.read(s_file_send_buffer, sizeof(s_file_send_buffer));
+    if (to_read == 0) {
+      break;
+    }
+    if (!write_client_buffer(client, s_file_send_buffer, to_read, &diag)) {
+      return diag;
+    }
+  }
+  if (diag.min_available_for_write == 0xFFFFFFFFu) {
+    diag.min_available_for_write = 0;
+  }
+  return diag;
+}
+
+void close_response_client(WiFiClient& client, bool success) {
+  if (!client.connected()) {
+    client.stop();
+    return;
+  }
+  if (success) {
+    delay(kFileWritePauseMs);
+  }
+  client.stop();
+}
+
 void handle_static() {
   mark_activity();
   const uint32_t handler_start = millis();
+  system_stats::sample(system_stats::Component::kRest, "static_begin");
   if (!s_spiffs_ready) {
     s_server.send(500, "text/plain", "SPIFFS mount failed");
     log_slow_request_if_needed("static", handler_start);
@@ -176,25 +382,74 @@ void handle_static() {
     Serial.printf("[REST][SLOW] static open took %lums path=%s\n",
                   static_cast<unsigned long>(open_elapsed), file_path.c_str());
   }
-
-  WiFiClient client = s_server.client();
-  client.setNoDelay(true);
-  if (is_cacheable_static_asset(path)) {
-    s_server.sendHeader("Cache-Control", "public, max-age=86400, immutable");
-  } else {
-    s_server.sendHeader("Cache-Control", "no-cache");
-  }
-  if (use_gzip) {
-    s_server.sendHeader("Content-Encoding", "gzip");
-  }
+  system_stats::sample(system_stats::Component::kRest, "static_open");
 
   const uint32_t stream_start = millis();
-  s_server.streamFile(file, content_type_for_path(path));
+  const size_t file_size = file.size();
+  const IPAddress remote = s_server.client().remoteIP();
+  WiFiClient client = s_server.client();
+  client.setNoDelay(false);
+  client.setTimeout(kFileSendTimeoutMs);
+  FileSendDiag send_diag{};
+  send_diag.min_available_for_write = 0xFFFFFFFFu;
+  const bool headers_ok = send_ok_headers(client,
+                                          content_type_for_path(path),
+                                          file_size,
+                                          is_cacheable_static_asset(path),
+                                          use_gzip,
+                                          nullptr,
+                                          &send_diag);
+  const size_t header_bytes = send_diag.total_sent;
+  if (headers_ok) {
+    system_stats::sample(system_stats::Component::kRest, "static_head");
+    send_diag = send_file_body(file, client, send_diag);
+  }
+  const size_t sent =
+      (send_diag.total_sent >= header_bytes) ? (send_diag.total_sent - header_bytes) : 0;
   const uint32_t stream_elapsed = millis() - stream_start;
   if (stream_elapsed >= kSlowRequestThresholdMs) {
-    Serial.printf("[REST][SLOW] static stream took %lums path=%s\n",
-                  static_cast<unsigned long>(stream_elapsed), path.c_str());
+    Serial.printf("[REST][SLOW] static stream took %lums path=%s bytes=%lu/%lu\n",
+                  static_cast<unsigned long>(stream_elapsed),
+                  path.c_str(),
+                  static_cast<unsigned long>(sent),
+                  static_cast<unsigned long>(file_size));
   }
+  if (send_diag.wait_count > 0 || send_diag.zero_write_count > 0 || sent != file_size) {
+    const HeapDiag heap = capture_heap_diag();
+    Serial.printf(
+        "[REST] static send diag path=%s sent=%lu/%lu waits=%lu zero=%lu maxChunk=%lu "
+        "availMin=%lu availMax=%lu timeout=%d disconnected=%d heap=%lu internal=%lu largest=%lu\n",
+        path.c_str(),
+        static_cast<unsigned long>(sent),
+        static_cast<unsigned long>(file_size),
+        static_cast<unsigned long>(send_diag.wait_count),
+        static_cast<unsigned long>(send_diag.zero_write_count),
+        static_cast<unsigned long>(send_diag.max_write_chunk),
+        static_cast<unsigned long>(send_diag.min_available_for_write),
+        static_cast<unsigned long>(send_diag.max_available_for_write),
+        send_diag.timed_out ? 1 : 0,
+        send_diag.disconnected ? 1 : 0,
+        static_cast<unsigned long>(heap.free_heap),
+        static_cast<unsigned long>(heap.free_internal),
+        static_cast<unsigned long>(heap.largest_internal));
+  }
+  if (sent != file_size) {
+    system_stats::sample(system_stats::Component::kRest,
+                         send_diag.timed_out ? "static_to" : "static_part");
+    Serial.printf(
+        "[REST] static partial path=%s sent=%lu/%lu remote=%u.%u.%u.%u\n",
+        path.c_str(),
+        static_cast<unsigned long>(sent),
+        static_cast<unsigned long>(file_size),
+        remote[0],
+        remote[1],
+        remote[2],
+        remote[3]);
+    system_stats::print_summary("rest_static_partial");
+  } else {
+    system_stats::sample(system_stats::Component::kRest, "static_ok");
+  }
+  close_response_client(client, sent == file_size);
   file.close();
   log_slow_request_if_needed("static", handler_start);
 }
@@ -753,6 +1008,7 @@ bool parse_file_route(const String& uri, size_t* out_id, String* out_action) {
 void handle_file_download(size_t id) {
   mark_activity();
   const uint32_t handler_start = millis();
+  system_stats::sample(system_stats::Component::kRest, "file_begin");
   add_cors_headers();
   if (!ensure_auth()) {
     log_slow_request_if_needed("file_download", handler_start);
@@ -786,19 +1042,75 @@ void handle_file_download(size_t id) {
 
   const char* base = strrchr(info.path, '/');
   const char* name = base ? base + 1 : info.path;
-  String disposition = String("attachment; filename=\"") + name + "\"";
-  s_server.sendHeader("Content-Disposition", disposition);
   const uint32_t stream_start = millis();
-  const size_t sent = s_server.streamFile(file, "application/octet-stream");
+  const size_t file_size = file.size();
+  const IPAddress remote = s_server.client().remoteIP();
+  String disposition = String("Content-Disposition: attachment; filename=\"") +
+                       name + "\"\r\n";
+  WiFiClient client = s_server.client();
+  client.setNoDelay(false);
+  client.setTimeout(kFileSendTimeoutMs);
+  FileSendDiag send_diag{};
+  send_diag.min_available_for_write = 0xFFFFFFFFu;
+  const bool headers_ok = send_ok_headers(client,
+                                          "application/octet-stream",
+                                          file_size,
+                                          false,
+                                          false,
+                                          disposition.c_str(),
+                                          &send_diag);
+  const size_t header_bytes = send_diag.total_sent;
+  if (headers_ok) {
+    system_stats::sample(system_stats::Component::kRest, "file_head");
+    send_diag = send_file_body(file, client, send_diag);
+  }
+  const size_t sent =
+      (send_diag.total_sent >= header_bytes) ? (send_diag.total_sent - header_bytes) : 0;
   const uint32_t stream_elapsed = millis() - stream_start;
   if (stream_elapsed >= kSlowRequestThresholdMs) {
-    Serial.printf("[REST][SLOW] file_download stream took %lums path=%s bytes=%lu\n",
+    Serial.printf("[REST][SLOW] file_download stream took %lums path=%s bytes=%lu/%lu\n",
                   static_cast<unsigned long>(stream_elapsed),
                   info.path,
-                  static_cast<unsigned long>(sent));
+                  static_cast<unsigned long>(sent),
+                  static_cast<unsigned long>(file_size));
   }
+  if (send_diag.wait_count > 0 || send_diag.zero_write_count > 0 || sent != file_size) {
+    const HeapDiag heap = capture_heap_diag();
+    Serial.printf(
+        "[REST] file send diag path=%s sent=%lu/%lu waits=%lu zero=%lu maxChunk=%lu "
+        "availMin=%lu availMax=%lu timeout=%d disconnected=%d heap=%lu internal=%lu largest=%lu\n",
+        info.path,
+        static_cast<unsigned long>(sent),
+        static_cast<unsigned long>(file_size),
+        static_cast<unsigned long>(send_diag.wait_count),
+        static_cast<unsigned long>(send_diag.zero_write_count),
+        static_cast<unsigned long>(send_diag.max_write_chunk),
+        static_cast<unsigned long>(send_diag.min_available_for_write),
+        static_cast<unsigned long>(send_diag.max_available_for_write),
+        send_diag.timed_out ? 1 : 0,
+        send_diag.disconnected ? 1 : 0,
+        static_cast<unsigned long>(heap.free_heap),
+        static_cast<unsigned long>(heap.free_internal),
+        static_cast<unsigned long>(heap.largest_internal));
+  }
+  if (sent != file_size) {
+    system_stats::sample(system_stats::Component::kRest,
+                         send_diag.timed_out ? "file_to" : "file_part");
+    Serial.printf(
+        "[REST] file_download partial path=%s sent=%lu/%lu remote=%u.%u.%u.%u\n",
+        info.path,
+        static_cast<unsigned long>(sent),
+        static_cast<unsigned long>(file_size),
+        remote[0],
+        remote[1],
+        remote[2],
+        remote[3]);
+    system_stats::print_summary("rest_file_partial");
+  }
+  close_response_client(client, sent == file_size);
   file.close();
-  if (sent > 0) {
+  if (sent == file_size) {
+    system_stats::sample(system_stats::Component::kRest, "file_ok");
     storage::mark_downloaded(info.path);
   }
   log_slow_request_if_needed("file_download", handler_start);

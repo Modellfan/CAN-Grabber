@@ -18,6 +18,10 @@ namespace logging {
 
 namespace {
 
+bool bus_can_produce_logs(uint8_t bus_id) {
+  return can::rx_task_running(bus_id);
+}
+
 struct BusLogState {
   File file;
   bool active;
@@ -462,7 +466,7 @@ void start() {
   portEXIT_CRITICAL(&s_stats_mux);
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
     close_log_file(i);
-    if (!cfg.buses[i].enabled || !cfg.buses[i].logging) {
+    if (!cfg.buses[i].enabled || !cfg.buses[i].logging || !bus_can_produce_logs(i)) {
       continue;
     }
 
@@ -519,7 +523,7 @@ void rotate_files() {
   const config::Config& cfg = config::get();
   for (uint8_t i = 0; i < config::kMaxBuses; ++i) {
     close_log_file(i);
-    if (!cfg.buses[i].enabled || !cfg.buses[i].logging) {
+    if (!cfg.buses[i].enabled || !cfg.buses[i].logging || !bus_can_produce_logs(i)) {
       continue;
     }
     open_log_file(i);
@@ -534,7 +538,8 @@ void rotate_file(uint8_t bus_id) {
 
   const config::Config& cfg = config::get();
   close_log_file(bus_id);
-  if (!cfg.buses[bus_id].enabled || !cfg.buses[bus_id].logging) {
+  if (!cfg.buses[bus_id].enabled || !cfg.buses[bus_id].logging ||
+      !bus_can_produce_logs(bus_id)) {
     return;
   }
   open_log_file(bus_id);

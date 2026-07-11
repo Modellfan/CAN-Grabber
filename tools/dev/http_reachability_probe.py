@@ -1,4 +1,5 @@
 import argparse
+import http.client
 import json
 import re
 import sys
@@ -37,12 +38,25 @@ def fetch(url: str, timeout: float) -> dict:
         },
     )
     with urllib.request.urlopen(request, timeout=timeout) as response:
-        body = response.read(512)
+        body = response.read()
+        content_length_header = response.headers.get("Content-Length")
+        content_length = None
+        if content_length_header:
+            try:
+                content_length = int(content_length_header)
+            except ValueError:
+                content_length = None
+        complete = content_length is None or len(body) == content_length
         return {
-            "ok": True,
+            "ok": complete,
+            "http_ok": True,
             "status": response.status,
             "content_type": response.headers.get("Content-Type", ""),
-            "body_preview": body.decode("utf-8", errors="replace"),
+            "content_length": content_length,
+            "bytes_read": len(body),
+            "complete": complete,
+            "error": "" if complete else "short body",
+            "body_preview": body[:512].decode("utf-8", errors="replace"),
         }
 
 
@@ -53,14 +67,24 @@ def probe_ip(ip: str, port: int, timeout: float) -> dict:
         try:
             response = fetch(url, timeout)
             result["paths"][path] = response
+        except http.client.IncompleteRead as exc:
+            partial = exc.partial or b""
+            result["paths"][path] = {
+                "ok": False,
+                "http_ok": False,
+                "error": f"IncompleteRead({len(partial)} bytes)",
+                "bytes_read": len(partial),
+                "body_preview": partial[:512].decode("utf-8", errors="replace"),
+            }
         except urllib.error.HTTPError as exc:
             result["paths"][path] = {
                 "ok": False,
+                "http_ok": False,
                 "status": exc.code,
                 "error": f"HTTP {exc.code}",
             }
         except Exception as exc:  # noqa: BLE001
-            result["paths"][path] = {"ok": False, "error": str(exc)}
+            result["paths"][path] = {"ok": False, "http_ok": False, "error": str(exc)}
     return result
 
 
@@ -111,13 +135,16 @@ def main() -> int:
                 if path_result.get("ok"):
                     preview = path_result.get("body_preview", "").replace("\n", " ")[:120]
                     print(
-                        f"    {path}: OK status={path_result['status']} type={path_result['content_type']} preview={preview}"
+                        f"    {path}: OK status={path_result['status']} type={path_result['content_type']} bytes={path_result.get('bytes_read')} length={path_result.get('content_length')} preview={preview}"
                     )
                 else:
                     status = path_result.get("status")
                     error = path_result.get("error", "unknown")
                     suffix = f" status={status}" if status is not None else ""
-                    print(f"    {path}: FAIL{suffix} error={error}")
+                    extra = ""
+                    if path_result.get("bytes_read") is not None:
+                        extra = f" bytes={path_result.get('bytes_read')}"
+                    print(f"    {path}: FAIL{suffix}{extra} error={error}")
         if attempt < args.attempts:
             time.sleep(args.interval)
 

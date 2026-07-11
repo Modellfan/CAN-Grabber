@@ -10,6 +10,7 @@
 #include "net/net_manager.h"
 #include "rest/rest_api.h"
 #include "rtc/rtc_clock.h"
+#include "system/system_stats.h"
 #include "storage/storage_manager.h"
 #include "upload/upload_manager.h"
 #include "web/web_server.h"
@@ -36,6 +37,7 @@ namespace {
 char s_serial_command[64] = {};
 size_t s_serial_command_len = 0;
 uint32_t s_serial_ignore_until_ms = 0;
+uint32_t s_last_system_sample_ms = 0;
 constexpr const char* kDebugWifiSsid = "\xC3\x9C" "berlingen@Wohnzimmer";
 constexpr const char* kDebugWifiPassword = "Ueberlingen2019";
 
@@ -77,7 +79,7 @@ void executeSerialCommand(const char* command) {
   }
 
   if (strcmp(command, "help") == 0) {
-    Serial.println("[serial] Commands: help, reset, wifi-status, wifi-debug");
+    Serial.println("[serial] Commands: help, reset, wifi-status, wifi-debug, sys-stats");
     return;
   }
 
@@ -88,6 +90,11 @@ void executeSerialCommand(const char* command) {
 
   if (strcmp(command, "wifi-debug") == 0) {
     applyDebugWifiConfig();
+    return;
+  }
+
+  if (strcmp(command, "sys-stats") == 0) {
+    system_stats::print_summary("serial");
     return;
   }
 
@@ -167,30 +174,53 @@ void setup() {
   printBuildInfo();
   Serial.println("[serial] Type 'reset' to reboot the device");
   Serial.println("[serial] Type 'wifi-debug' to store the default debug STA network");
+  Serial.println("[serial] Type 'sys-stats' to print system diagnostics");
   s_serial_ignore_until_ms = millis() + 3000;
 
+  system_stats::init();
+  system_stats::sample(system_stats::Component::kBoot, "serial_ready");
   config::init();
+  system_stats::sample(system_stats::Component::kBoot, "config");
   rtc_clock::init();
+  system_stats::sample(system_stats::Component::kRtc, "init");
   storage::init();
+  system_stats::sample(system_stats::Component::kStorage, "init");
   can::init();
+  system_stats::sample(system_stats::Component::kCan, "init");
   logging::init();
+  system_stats::sample(system_stats::Component::kLogging, "init");
   logging::start();
+  system_stats::sample(system_stats::Component::kLogging, "start");
   upload::init();
+  system_stats::sample(system_stats::Component::kUpload, "init");
   upload::queue_pending();
+  system_stats::sample(system_stats::Component::kUpload, "queue");
 #if ENABLE_COMPRESSOR
   compressor::init();
 #endif
   net::init();
+  system_stats::sample(system_stats::Component::kNet, "init");
   net::connect();
+  system_stats::sample(system_stats::Component::kNet, "connect");
   rest::init();
+  system_stats::sample(system_stats::Component::kRest, "init");
   rest::start();
+  system_stats::sample(system_stats::Component::kRest, "start");
   web::init();
+  system_stats::sample(system_stats::Component::kWeb, "init");
   web::start();
+  system_stats::sample(system_stats::Component::kWeb, "start");
+  system_stats::print_summary("setup_complete");
 }
 
 void loop() {
   handleSerialConsole();
+  if ((millis() - s_last_system_sample_ms) >= 5000UL) {
+    s_last_system_sample_ms = millis();
+    system_stats::sample(system_stats::Component::kLoop, "tick");
+  }
   net::loop();
+  upload::loop();
   rest::loop();
   web::loop();
   delay(10);

@@ -18,6 +18,7 @@
 #include "config/app_config.h"
 #include "rest/rest_api.h"
 #include "storage/storage_manager.h"
+#include "system/system_stats.h"
 
 namespace upload {
 
@@ -1649,6 +1650,7 @@ bool queue_add_or_bump(const char* path, bool manual) {
 }
 
 void task_entry(void*) {
+  system_stats::sample(system_stats::Component::kUpload, "task_start");
   for (;;) {
     if (!s_initialized) {
       vTaskDelay(pdMS_TO_TICKS(1000));
@@ -1658,6 +1660,7 @@ void task_entry(void*) {
     const uint32_t now_boot = millis();
     if (now_boot < kStartupUploadDelayMs) {
       if (!s_startup_delay_logged) {
+        system_stats::sample(system_stats::Component::kUpload, "delay_wait");
         Serial.printf("[UPLOAD] Startup delay active (%lums)\n",
                       static_cast<unsigned long>(kStartupUploadDelayMs));
         s_startup_delay_logged = true;
@@ -1699,6 +1702,7 @@ void task_entry(void*) {
 
     const char* defer_reason = nullptr;
     if (should_defer_upload_work(&defer_reason)) {
+      system_stats::sample(system_stats::Component::kUpload, "deferred");
       portENTER_CRITICAL(&s_queue_mux);
       if (index < kQueueLen && s_queue[index].used) {
         s_queue[index].next_attempt_ms = millis() + kWebBusyPauseMs;
@@ -1755,6 +1759,7 @@ void task_entry(void*) {
     Serial.printf("[UPLOAD] Attempt path=%s try=%u\n",
                   info.path,
                   static_cast<unsigned>(item.retries + 1));
+    system_stats::sample(system_stats::Component::kUpload, "attempt");
     const UploadResult result = send_file_multipart(info);
 
     char error_message[sizeof(s_last_error_message)];
@@ -1840,6 +1845,7 @@ void task_entry(void*) {
     portEXIT_CRITICAL(&s_queue_mux);
 
     if (log_retry) {
+      system_stats::sample(system_stats::Component::kUpload, "retry");
       const HeapDiag heap = capture_heap_diag();
       Serial.printf(
           "[UPLOAD] Retry scheduled path=%s in=%lums err=%u status=%d code=%s msg=%s interrupted=%d connect=%d wifi=%d heap=%lu internal=%lu largestInternal=%lu\n",
@@ -1890,6 +1896,9 @@ void ensure_task_started_if_enabled() {
   if (s_task_started) {
     return;
   }
+  if (millis() < kStartupUploadDelayMs) {
+    return;
+  }
   xTaskCreatePinnedToCore(task_entry,
                           "upload_task",
                           8192,
@@ -1898,6 +1907,9 @@ void ensure_task_started_if_enabled() {
                           &s_task,
                           kUploadTaskCore);
   s_task_started = (s_task != nullptr);
+  if (s_task_started) {
+    system_stats::sample(system_stats::Component::kUpload, "task_create", s_task);
+  }
 }
 
 void init() {
@@ -1907,6 +1919,10 @@ void init() {
   }
   memset(s_queue, 0, sizeof(s_queue));
   s_initialized = true;
+  ensure_task_started_if_enabled();
+}
+
+void loop() {
   ensure_task_started_if_enabled();
 }
 

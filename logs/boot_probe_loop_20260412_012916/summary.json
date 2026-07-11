@@ -1,0 +1,258 @@
+{
+  "started_at": "2026-04-12T01:29:16.637444",
+  "loops": [
+    {
+      "iteration": 1,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_012916\\boot_01.log",
+        "candidates": [
+          {
+            "label": "sta",
+            "ip": "192.168.3.45"
+          },
+          {
+            "label": "ap",
+            "ip": "192.168.4.1"
+          }
+        ],
+        "results": [
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": true,
+                "status": 200,
+                "content_type": "text/html",
+                "body_preview": ""
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "timed out"
+              }
+            },
+            "label": "sta",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "sta",
+            "attempt": 2
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 2
+          }
+        ]
+      },
+      "serial_capture_rc": 0
+    },
+    {
+      "iteration": 2,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_012916\\boot_02.log",
+        "candidates": [
+          {
+            "label": "sta",
+            "ip": "192.168.3.45"
+          },
+          {
+            "label": "ap",
+            "ip": "192.168.4.1"
+          }
+        ],
+        "results": [
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "timed out"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "timed out"
+              }
+            },
+            "label": "sta",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "sta",
+            "attempt": 2
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 2
+          }
+        ]
+      },
+      "serial_capture_rc": 0
+    },
+    {
+      "iteration": 3,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_012916\\boot_03.log",
+        "candidates": [
+          {
+            "label": "sta",
+            "ip": "192.168.3.45"
+          },
+          {
+            "label": "ap",
+            "ip": "192.168.4.1"
+          }
+        ],
+        "results": [
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": true,
+                "status": 200,
+                "content_type": "text/html",
+                "body_preview": ""
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "timed out"
+              }
+            },
+            "label": "sta",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "sta",
+            "attempt": 2
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 2
+          }
+        ]
+      },
+      "serial_capture_rc": 0
+    }
+  ]
+}

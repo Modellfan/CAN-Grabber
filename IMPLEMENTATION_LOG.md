@@ -35,6 +35,78 @@ This file is the permanent record for development work in this project.
 ### Notes
 - Optional blockers, follow-ups, or assumptions.
 
+## 2026-07-06 00:17:46 +02:00 - CAN Tool Subcommands And Simulation Features
+### Planned Steps
+- Refactor `tools/python_can_tool/slcan_tool.py` from flat options into subcommands for listen, tx, playback, echo, decode, and analyze.
+- Add shared helpers for profiles, filters, dry-run transmit, playback controls, DBC decoding, and JSON/CSV summaries.
+- Add pytest coverage, example config files, README updates, and run offline plus COM22 live validation.
+
+### Changes Made
+- `tools/python_can_tool/slcan_tool.py`: replaced flat CLI with subcommands `listen`, `tx`, `playback`, `echo`, `decode`, and `analyze`; added profiles, filters, playback windows/rewrite/loop gap, dry-run TX/playback/echo, JSON echo rules, offline decode/analyze, live decoded printing, and JSON/CSV summaries.
+- `tools/python_can_tool/README.md`: documented subcommands-only usage, profiles, filters, dry-run commands, playback controls, echo mode, offline decode/analyze, and summary outputs.
+- `tools/python_can_tool/profiles.json`: added repo-local `canable500` and `canable500_fd2m` profiles.
+- `tools/python_can_tool/examples/echo_rules.example.json`: added example echo response rule for observed `0x3E8` traffic.
+- `tools/python_can_tool/examples/test_3e8.dbc`: added small DBC fixture for `0x3E8` payload decoding.
+- `tools/python_can_tool/tests/test_slcan_tool.py`: added pytest coverage for fixed-message validation, SLCAN parsing, filters, ID rewrite parsing, subcommand requirement, and ASC reading.
+
+### Automated Tests Run
+- `python -m py_compile tools\python_can_tool\slcan_tool.py`: PASS
+- `python -m pytest tools\python_can_tool\tests`: PASS (`7 passed`)
+- `python tools\python_can_tool\slcan_tool.py --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py listen --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py tx --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py playback --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py echo --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py decode --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py analyze --help`: PASS
+- `python tools\python_can_tool\slcan_tool.py tx --tx-id 3E8 --tx-data 02 --dry-run`: PASS
+- `python tools\python_can_tool\slcan_tool.py playback --playback-log-file tools\python_can_tool\logs\slcan_com22_20260705_230752.asc --filter-id 3E8 --start-time 0 --end-time 0.2 --rewrite-id 3E8:3E9 --dry-run`: PASS
+- `python tools\python_can_tool\slcan_tool.py echo --rules-file tools\python_can_tool\examples\echo_rules.example.json --dry-run`: PASS
+- `python tools\python_can_tool\slcan_tool.py analyze --asc-file tools\python_can_tool\logs\slcan_com22_20260705_230752.asc --filter-id 3E8 --summary-prefix tools\python_can_tool\logs\offline_analyze_test`: PASS
+- `python tools\python_can_tool\slcan_tool.py decode --asc-file tools\python_can_tool\logs\slcan_com22_20260705_230752.asc --dbc-file tools\python_can_tool\examples\test_3e8.dbc --output-csv tools\python_can_tool\logs\offline_decode_test.csv --summary-prefix tools\python_can_tool\logs\offline_decode_test`: PASS
+- `python tools\python_can_tool\slcan_tool.py listen --port 22 --can-bitrate 500000 --duration 1 --listen-only`: PASS
+- `python tools\python_can_tool\slcan_tool.py listen --port 22 --can-bitrate 500000 --duration 1 --listen-only --filter-id 3E8`: PASS
+- `python tools\python_can_tool\slcan_tool.py listen --port 22 --can-bitrate 500000 --duration 1 --listen-only --dbc-file tools\python_can_tool\examples\test_3e8.dbc --print-decoded`: PASS
+- `python tools\python_can_tool\slcan_tool.py tx --port 22 --can-bitrate 500000 --tx-id 3E8 --tx-data 02 --tx-count 1 --tx-interval-ms 0`: PASS
+- `python tools\python_can_tool\slcan_tool.py playback --port 22 --can-bitrate 500000 --playback-log-file tools\python_can_tool\logs\slcan_com22_20260705_230752.asc --duration 0.05`: PASS
+- `python tools\python_can_tool\slcan_tool.py echo --port 22 --can-bitrate 500000 --rules-file tools\python_can_tool\examples\echo_rules.example.json --duration 1`: PASS
+- `python tools\python_can_tool\slcan_tool.py tx --profile canable500 --tx-id 3E8 --tx-data 02 --dry-run`: PASS
+
+### Result
+- `pytest_count: 7 passed`
+- `offline_analyze_frames: 100`
+- `offline_decode_frames: 100`
+- `offline_decode_signal_rows: 100`
+- `live_listen_frames: 10`
+- `live_filter_frames: 10`
+- `live_dbc_decoded_frames: 10`
+- `live_dbc_signal_rows: 10`
+- `live_tx_sent_frames: 1`
+- `live_playback_sent_frames: 1`
+- `live_echo_received_frames: 9`
+- `live_echo_matched_frames: 9`
+- `live_echo_sent_frames: 9`
+- `profile_smoke_frame: t3E8102`
+
+### Artifacts
+- [slcan_tool.py](tools/python_can_tool/slcan_tool.py)
+- [README.md](tools/python_can_tool/README.md)
+- [profiles.json](tools/python_can_tool/profiles.json)
+- [echo_rules.example.json](tools/python_can_tool/examples/echo_rules.example.json)
+- [test_3e8.dbc](tools/python_can_tool/examples/test_3e8.dbc)
+- [test_slcan_tool.py](tools/python_can_tool/tests/test_slcan_tool.py)
+- [offline_decode_test.csv](tools/python_can_tool/logs/offline_decode_test.csv)
+- [offline_decode_test_summary.json](tools/python_can_tool/logs/offline_decode_test_summary.json)
+- [offline_decode_test_ids.csv](tools/python_can_tool/logs/offline_decode_test_ids.csv)
+- [offline_decode_test_signals.csv](tools/python_can_tool/logs/offline_decode_test_signals.csv)
+- [offline_analyze_test_summary.json](tools/python_can_tool/logs/offline_analyze_test_summary.json)
+- [offline_analyze_test_ids.csv](tools/python_can_tool/logs/offline_analyze_test_ids.csv)
+- [offline_analyze_test_signals.csv](tools/python_can_tool/logs/offline_analyze_test_signals.csv)
+
+### Notes
+- Existing unrelated worktree changes are left untouched.
+- `tools/python_can_tool/` is still untracked as a directory in Git, so Git status reports it as `?? tools/python_can_tool/`.
+
 ## Stage Summary Table
 | Stage | Result State | Avg Upload MB/s | Latency P95 (ms) | Latency Max (ms) | Detailed Report |
 |---|---:|---:|---:|---:|---|

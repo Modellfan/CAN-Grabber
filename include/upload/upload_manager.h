@@ -28,6 +28,7 @@ struct Stats {
 };
 
 void init();
+void loop();
 void request_upload(const char* path);
 void request_upload_auto(const char* path);
 void queue_pending();

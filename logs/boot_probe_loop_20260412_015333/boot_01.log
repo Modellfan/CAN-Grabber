@@ -1,0 +1,78 @@
+2026-04-12 01:53:33.394 | opening COM15 at 115200 baud, duration=20.0s
+2026-04-12 01:53:33.396 | serial connected
+2026-04-12 01:53:34.397 | sent command: reset
+2026-04-12 01:53:34.397 | ESP-ROM:esp32s3-20210327
+2026-04-12 01:53:34.397 | Build:Mar 27 2021
+2026-04-12 01:53:34.398 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-12 01:53:34.399 | SPIWP:0xee
+2026-04-12 01:53:34.399 | mode:DIO, clock div:1
+2026-04-12 01:53:34.400 | load:0x3fce2820,len:0x10cc
+2026-04-12 01:53:34.400 | load:0x403c8700,len:0xc2c
+2026-04-12 01:53:34.401 | load:0x403cb700,len:0x30c0
+2026-04-12 01:53:34.401 | entry 0x403c88b8
+2026-04-12 01:53:34.401 | 
+2026-04-12 01:53:34.402 | App: CAN-Grabber
+2026-04-12 01:53:34.402 | Version: 0.0.1
+2026-04-12 01:53:34.403 | Build: Apr 12 2026 01:27:12
+2026-04-12 01:53:34.403 | PIO Env: esp32s3_debug
+2026-04-12 01:53:34.404 | Heap free/internal/largest: 182528 / 182528 / 126964
+2026-04-12 01:53:34.405 | PSRAM size/free: 0 / 0
+2026-04-12 01:53:34.405 | [serial] Type 'reset' to reboot the device
+2026-04-12 01:53:34.406 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-12 01:53:34.407 | [serial] Type 'sys-stats' to print system diagnostics
+2026-04-12 01:53:34.408 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-12 01:53:34.408 | [rtc] RTC_DS1307 detected
+2026-04-12 01:53:34.409 | [rtc] Startup epoch from RTC: 1775958822
+2026-04-12 01:53:34.410 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-12 01:53:34.411 | [storage] SD_MMC mounted at 40000 kHz (1-bit)
+2026-04-12 01:53:34.901 | [  1235][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-12 01:53:34.903 | [net] Init, mode: 0
+2026-04-12 01:53:34.915 | [net] Event: 101
+2026-04-12 01:53:34.960 | [net] AP start: canlogger-setup
+2026-04-12 01:53:34.961 | [net] Event: 110
+2026-04-12 01:53:34.965 | [net] STA start
+2026-04-12 01:53:34.966 | [net] Event: 130
+2026-04-12 01:53:34.966 | [net] AP start event
+2026-04-12 01:53:34.971 | [net] AP IP: 192.168.4.1
+2026-04-12 01:53:34.972 | [net] STA candidate count: [net] Event: 131
+2026-04-12 01:53:34.976 | [net] AP stop event
+2026-04-12 01:53:34.977 | [net] Event: 130
+2026-04-12 01:53:34.978 | [net] AP start event
+2026-04-12 01:53:34.978 | 1
+2026-04-12 01:53:34.981 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-12 01:53:34.981 | [net] STA index: 0
+2026-04-12 01:53:35.060 | [system] summary reason=setup_complete unixMs=1775958823121 uptimeMs=1390 rtc=rtc valid=true available=true running=true
+2026-04-12 01:53:35.081 | [system] component=boot samples=2 last=config heap=182528 internal=182528 largest=126964 minHeap=182528 minInternal=182528 minLargest=126964 task=loopTask stackWords=3708 minStackWords=3708 unixMs=0 uptimeMs=266
+2026-04-12 01:53:35.098 | [system] component=rtc samples=1 last=init heap=180244 internal=180244 largest=126964 minHeap=180244 minInternal=180244 minLargest=126964 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958822011 uptimeMs=280
+2026-04-12 01:53:35.120 | [system] component=storage samples=1 last=init heap=135848 internal=135848 largest=81908 minHeap=135848 minInternal=135848 minLargest=81908 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958822500 uptimeMs=769
+2026-04-12 01:53:35.121 | [net] Event: 112
+2026-04-12 01:53:35.138 | [system] component=can samples=1 last=init heap=121384 internal=121384 largest=77812 minHeap=121384 minInternal=121384 minLargest=77812 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958822505 uptimeMs=774
+2026-04-12 01:53:35.159 | [system] component=logging samples=2 last=start heap=106880 internal=106880 largest=65524 minHeap=106880 minInternal=106880 minLargest=65524 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958822965 uptimeMs=1234
+2026-04-12 01:53:35.177 | [system] component=upload samples=2 last=queue heap=106880 internal=106880 largest=65524 minHeap=106880 minInternal=106880 minLargest=65524 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958822965 uptimeMs=1234
+2026-04-12 01:53:35.198 | [system] component=net samples=6 last=connect heap=42776 internal=42776 largest=31732 minHeap=42288 minInternal=42288 minLargest=31732 task=loopTask stackWords=3708 minStackWords=2420 unixMs=1775958823054 uptimeMs=1323
+2026-04-12 01:53:35.215 | [system] component=rest samples=2 last=start heap=32060 internal=32060 largest=23540 minHeap=32060 minInternal=32060 minLargest=23540 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958823121 uptimeMs=1390
+2026-04-12 01:53:35.237 | [system] component=web samples=2 last=start heap=32060 internal=32060 largest=23540 minHeap=32060 minInternal=32060 minLargest=23540 task=loopTask stackWords=3708 minStackWords=3708 unixMs=1775958823121 uptimeMs=1390
+2026-04-12 01:53:35.242 | [system] task=loopTask samples=15 stackWords=3708 minStackWords=3708
+2026-04-12 01:53:35.244 | [system] task=arduino_events samples=4 stackWords=2420 minStackWords=2420
+2026-04-12 01:53:36.163 | [net] Event: 115
+2026-04-12 01:53:36.168 | [net] STA connected: ssid=Überlingen@Wohnzimmer rssi=-57
+2026-04-12 01:53:36.175 | [net] STA IP: 192.168.3.45 gateway=192.168.3.1 subnet=255.255.255.0 internal=30484 largest=20468
+2026-04-12 01:53:36.179 | [net] AP idle, stopping while STA is connected
+2026-04-12 01:53:36.180 | [net] AP stop
+2026-04-12 01:53:36.180 | [net] Event: 131
+2026-04-12 01:53:36.185 | [net] AP stop event
+2026-04-12 01:53:36.185 | [net] Event: 130
+2026-04-12 01:53:36.185 | [net] AP start event
+2026-04-12 01:53:36.190 | [net] Event: 131
+2026-04-12 01:53:36.191 | [net] AP stop event
+2026-04-12 01:53:36.197 | [net] mDNS ready: canlogger.local -> 192.168.3.45 (service http/tcp 80, internal=33992 largest=20468)
+2026-04-12 01:53:37.462 | [REST] static send diag path=/index.html sent=7739/7739 waits=62 zero=0 maxChunk=128 availMin=0 availMax=0 timeout=0 disconnected=0 heap=18132 internal=18132 largest=7668
+2026-04-12 01:53:37.467 | [REST][SLOW] static took 130ms method=GET uri=/ freeHeap=22604
+2026-04-12 01:53:37.470 | [REST][SLOW] handleClient took 132283us method=GET uri=
+2026-04-12 01:53:44.672 | [REST] static send diag path=/index.html sent=7739/7739 waits=62 zero=0 maxChunk=128 availMin=0 availMax=0 timeout=0 disconnected=0 heap=16336 internal=16336 largest=7668
+2026-04-12 01:53:44.678 | [REST][SLOW] static took 135ms method=GET uri=/ freeHeap=25356
+2026-04-12 01:53:44.680 | [REST][SLOW] handleClient took 136498us method=GET uri=
+2026-04-12 01:53:51.882 | [REST] static send diag path=/index.html sent=7739/7739 waits=62 zero=0 maxChunk=128 availMin=0 availMax=0 timeout=0 disconnected=0 heap=16824 internal=16824 largest=7668
+2026-04-12 01:53:51.887 | [REST][SLOW] static took 136ms method=GET uri=/ freeHeap=24860
+2026-04-12 01:53:51.890 | [REST][SLOW] handleClient took 138064us method=GET uri=
+2026-04-12 01:53:53.417 | log saved to logs\boot_probe_loop_20260412_015333\boot_01.log

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CAN Grabber Server</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">CG</div>
+          <div>
+            <p class="eyebrow">Local Server</p>
+            <h1>CAN Grabber Server</h1>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="Primary">
+          <button class="nav-item" data-panel-target="overview" type="button">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 13.2 12 5l8 8.2" />
+                <path d="M6.5 11.9V20h11V11.9" />
+              </svg>
+            </span>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item is-active" data-panel-target="dbc" type="button">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 5h12" />
+                <path d="M6 12h12" />
+                <path d="M6 19h12" />
+                <path d="M9 5v14" />
+              </svg>
+            </span>
+            <span>DBC Studio</span>
+          </button>
+          <button class="nav-item" data-panel-target="influx" type="button">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 18c2.3-6 4.7-9 7-9s4.7 3 7 9" />
+                <path d="M7 14h10" />
+                <path d="M9.5 10.5h5" />
+              </svg>
+            </span>
+            <span>InfluxDB</span>
+          </button>
+          <button class="nav-item" data-panel-target="upload" type="button">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 19V5" />
+                <path d="M6.5 10.5 12 5l5.5 5.5" />
+                <path d="M5 19h14" />
+              </svg>
+            </span>
+            <span>Upload Server</span>
+          </button>
+          <button class="nav-item" data-panel-target="roadmap" type="button">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 5h14v5H5z" />
+                <path d="M5 14h9v5H5z" />
+              </svg>
+            </span>
+            <span>Roadmap</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-foot">
+          <p>Local service state</p>
+          <span class="status-pill idle" id="sidebarStatus">Idle</span>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="message-banner is-hidden" id="messageBanner"></div>
+
+        <section class="panel" id="panel-overview">
+          <div class="hero-card">
+            <div>
+              <p class="eyebrow">Workspace</p>
+              <h2>Local server for CAN Grabber tools and uploads</h2>
+              <p class="hero-copy">
+                This process combines DBC editing, InfluxDB startup, and the ESP32 upload endpoint in one local server.
+              </p>
+            </div>
+            <div class="hero-orb"></div>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <p class="section-label">Current focus</p>
+              <h3>DBC editing + Influx bootstrap + uploads</h3>
+              <p class="muted">
+                CAN Grabber Server covers local DBC work, InfluxDB startup, and upload intake for device log files.
+              </p>
+            </article>
+            <article class="card">
+              <p class="section-label">Service state</p>
+              <h3 id="overviewRunState">Waiting for status</h3>
+              <p class="muted" id="overviewMessage">
+                The page polls the local backend and updates runtime state automatically.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel is-active" id="panel-dbc">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Second page</p>
+              <h2>DBC import, storage, and editor</h2>
+            </div>
+            <span class="status-pill idle" id="dbcStatus">Idle</span>
+          </div>
+
+          <div class="card-grid card-grid-wide">
+            <article class="card control-card">
+              <div class="card-heading">
+                <div>
+                  <p class="section-label">Open</p>
+                  <h3>Open a DBC into the persistent store</h3>
+                </div>
+                <button class="ghost-button" id="dbcRefreshButton" type="button">Refresh</button>
+              </div>
+
+              <label class="field">
+                <span>Select a DBC file</span>
+                <input id="dbcUploadInput" type="file" accept=".dbc,.DBC" />
+              </label>
+
+              <div class="button-row">
+                <button class="accent-button" id="dbcUploadOpenButton" type="button">Copy, open, and edit DBC</button>
+              </div>
+
+              <p class="helper-copy">
+                The selected file is copied into the persistent `dbc` folder first. Editing always happens on that
+                stored copy.
+              </p>
+
+              <div class="card-divider"></div>
+
+              <div>
+                <p class="section-label">Bulk Import</p>
+                <h3>Import a whole DBC folder</h3>
+              </div>
+
+              <label class="field">
+                <span>Import folder path</span>
+                <input
+                  id="dbcDirectoryInput"
+                  type="text"
+                  placeholder="C:\Users\...\Documents\DBC"
+                  spellcheck="false"
+                />
+              </label>
+
+              <div class="button-row">
+                <button class="primary-button" id="dbcUseFolderButton" type="button">Import DBC folder</button>
+                <button class="accent-button" id="dbcScanButton" type="button">Refresh persistent store</button>
+              </div>
+
+              <p class="helper-copy" id="dbcStorageMeta">Persistent store: loading...</p>
+
+              <div class="stats-grid">
+                <div class="stat-tile">
+                  <span class="stat-label">Stored DBC files</span>
+                  <strong id="dbcFileCount">0</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Selected file</span>
+                  <strong id="dbcSelectedFile">None</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Messages</span>
+                  <strong id="dbcMessageCount">0</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Persistence</span>
+                  <strong>.can-grabber/dbc</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Persistent DBC store</p>
+              <h3>Stored file list</h3>
+              <ul class="candidate-list" id="dbcFileList">
+                <li class="empty-state">No DBC files scanned yet.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Why this stack</p>
+              <h3>Simple Python-side editing path</h3>
+              <ul class="detail-list">
+                <li>You can now open a single DBC directly from the page. It is copied into persistent storage first.</li>
+                <li>`cantools` loads the DBC, exposes messages and signals, and can write the edited file back out.</li>
+                <li>Imported DBC files are copied into a persistent machine-local `.can-grabber/dbc` folder.</li>
+                <li>The architecture stays small: one app-home folder, one backend manager, one frontend page.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="card-grid card-grid-double">
+            <article class="card">
+              <p class="section-label">Opened file</p>
+              <h3 id="dbcOpenFileTitle">No DBC file opened</h3>
+              <p class="muted" id="dbcOpenFileMeta">
+                Pick a file from the list to inspect messages and signals.
+              </p>
+              <div class="message-tree" id="dbcMessageTree">
+                <div class="empty-state">Messages and signals will appear here.</div>
+              </div>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Editor</p>
+              <h3>Modify message and signal fields</h3>
+
+              <form class="editor-form" id="dbcMessageForm">
+                <div class="form-block">
+                  <p class="form-heading">Message</p>
+                  <label class="field">
+                    <span>Current message</span>
+                    <input id="dbcMessageCurrent" type="text" readonly />
+                  </label>
+                  <label class="field">
+                    <span>New message name</span>
+                    <input id="dbcMessageName" type="text" />
+                  </label>
+                  <label class="field">
+                    <span>Message comment</span>
+                    <textarea id="dbcMessageComment" rows="4"></textarea>
+                  </label>
+                  <button class="primary-button" id="dbcSaveMessageButton" type="submit">Save message</button>
+                </div>
+              </form>
+
+              <form class="editor-form" id="dbcSignalForm">
+                <div class="form-block">
+                  <p class="form-heading">Signal</p>
+                  <label class="field">
+                    <span>Current signal</span>
+                    <input id="dbcSignalCurrent" type="text" readonly />
+                  </label>
+                  <label class="field">
+                    <span>New signal name</span>
+                    <input id="dbcSignalName" type="text" />
+                  </label>
+                  <div class="inline-fields">
+                    <label class="field">
+                      <span>Gain / scale</span>
+                      <input id="dbcSignalScale" type="number" step="any" />
+                    </label>
+                    <label class="field">
+                      <span>Offset</span>
+                      <input id="dbcSignalOffset" type="number" step="any" />
+                    </label>
+                  </div>
+                  <label class="field">
+                    <span>Signal comment</span>
+                    <textarea id="dbcSignalComment" rows="4"></textarea>
+                  </label>
+                  <button class="accent-button" id="dbcSaveSignalButton" type="submit">Save signal</button>
+                </div>
+              </form>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-influx">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">First task</p>
+              <h2>Manage the local InfluxDB server</h2>
+            </div>
+            <span class="status-pill idle" id="topStatus">Idle</span>
+          </div>
+
+          <div class="card-grid card-grid-wide">
+            <article class="card control-card">
+              <div class="card-heading">
+                <div>
+                  <p class="section-label">Binary selection</p>
+                  <h3>Server executable</h3>
+                </div>
+                <button class="ghost-button" id="refreshStatusButton" type="button">Refresh</button>
+              </div>
+
+              <label class="field">
+                <span>InfluxDB path</span>
+                <input
+                  id="selectedPathInput"
+                  type="text"
+                  placeholder="C:\Program Files\InfluxData\influxdb3\influxdb3.exe"
+                  spellcheck="false"
+                />
+              </label>
+
+              <div class="button-row">
+                <button class="primary-button" id="searchButton" type="button">Scan installation</button>
+                <button class="secondary-button" id="savePathButton" type="button">Save path</button>
+                <button class="accent-button" id="startButton" type="button">Start InfluxDB</button>
+              </div>
+
+              <div class="stats-grid">
+                <div class="stat-tile">
+                  <span class="stat-label">Selected binary</span>
+                  <strong id="selectedBinaryState">Not set</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Install directory</span>
+                  <strong id="installDirState">Not available</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Last PID</span>
+                  <strong id="pidState">-</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Log file</span>
+                  <strong id="logPathState">&lt;app-home&gt;/runtime/influxd.log</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Discovered installs</p>
+              <h3>Candidate paths</h3>
+              <ul class="candidate-list" id="candidateList">
+                <li class="empty-state">No cached search results yet.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Runtime notes</p>
+              <h3>How this works</h3>
+              <ul class="detail-list">
+                <li>The scan checks `PATH`, common `InfluxData` install folders, Scoop locations, and shallow portable folders.</li>
+                <li>If auto-detection misses, paste the `influxd.exe` or `influxdb3.exe` path and save it manually.</li>
+                <li>The start action launches the selected binary and writes output to the local runtime log.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-upload">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Integrated endpoint</p>
+              <h2>ESP32 upload server</h2>
+            </div>
+            <span class="status-pill idle" id="uploadServerStatus">Idle</span>
+          </div>
+
+          <div class="card-grid card-grid-wide">
+            <article class="card control-card">
+              <div class="card-heading">
+                <div>
+                  <p class="section-label">Upload intake</p>
+                  <h3>Device upload target</h3>
+                </div>
+                <button class="ghost-button" id="uploadServerRefreshButton" type="button">Refresh</button>
+              </div>
+
+              <div class="stats-grid">
+                <div class="stat-tile">
+                  <span class="stat-label">LAN upload URL</span>
+                  <strong id="uploadServerLanUrl">Loading...</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Upload directory</span>
+                  <strong id="uploadServerDirectory">Loading...</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Bonjour</span>
+                  <strong id="uploadServerBonjour">Loading...</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Auth token</span>
+                  <strong id="uploadServerAuth">Loading...</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Max upload size</span>
+                  <strong id="uploadServerMaxBytes">Loading...</strong>
+                </div>
+                <div class="stat-tile">
+                  <span class="stat-label">Mounted UI</span>
+                  <strong>/upload-server/ui</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Endpoints</p>
+              <h3>Accepted upload routes</h3>
+              <ul class="candidate-list" id="uploadServerEndpoints">
+                <li class="empty-state">Upload endpoints will appear here.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <p class="section-label">Firmware target</p>
+              <h3>Use the integrated server process</h3>
+              <ul class="detail-list">
+                <li>Multipart uploads are accepted at `/edit` and `/upload`.</li>
+                <li>Raw stream uploads are accepted at `/edit-chunked` and `/upload-chunked`.</li>
+                <li>The original upload server UI remains available under `/upload-server/ui`.</li>
+                <li>Saved files use the upload server directory configured by `CAN_UPLOAD_DIR`.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-roadmap">
+          <div class="card">
+            <p class="section-label">Next pages</p>
+            <h3>Scaffold is ready for more modules</h3>
+            <p class="muted">
+              The left rail and panel routing are already in place, so more local tooling pages can be added without
+              changing the app shell.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+  </html>

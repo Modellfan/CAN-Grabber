@@ -21,9 +21,11 @@ bool s_ready = false;
 constexpr char kMetaDir[] = "/meta";
 constexpr char kStatusPath[] = "/meta/file_status.json";
 constexpr char kCompressedDir[] = "/cmp";
-constexpr uint8_t kSdMaxFiles = 12;
+// SD_MMC does not expose a direct transfer-buffer size knob in Arduino;
+// reducing the VFS file table is the practical mount-time memory lever.
+constexpr uint8_t kSdMaxFiles = 6;
 constexpr size_t kMaxEntries = 128;
-constexpr bool kUseOneBitMode = false;
+constexpr bool kUseOneBitMode = true;
 constexpr bool kFormatIfMountFailed = false;
 
 struct FileStatusEntry {
@@ -164,9 +166,10 @@ bool init_sd_mmc() {
     return false;
   }
 
-  Serial.printf("[storage] SD_MMC mounted at %lu kHz (%s)\n",
+  Serial.printf("[storage] SD_MMC mounted at %lu kHz (%s, maxFiles=%u)\n",
                 static_cast<unsigned long>(SDIO_CLOCK_KHZ),
-                kUseOneBitMode ? "1-bit" : "4-bit");
+                kUseOneBitMode ? "1-bit" : "4-bit",
+                static_cast<unsigned>(kSdMaxFiles));
   return true;
 }
 

@@ -1,0 +1,72 @@
+2026-04-11 16:33:16.775 | opening COM15 at 115200 baud, duration=15.0s
+2026-04-11 16:33:16.777 | serial connected
+2026-04-11 16:33:17.777 | sent command: reset
+2026-04-11 16:33:17.778 | ESP-ROM:esp32s3-20210327
+2026-04-11 16:33:17.779 | Build:Mar 27 2021
+2026-04-11 16:33:17.780 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 16:33:17.781 | SPIWP:0xee
+2026-04-11 16:33:17.782 | mode:DIO, clock div:1
+2026-04-11 16:33:17.782 | load:0x3fce2820,len:0x10cc
+2026-04-11 16:33:17.783 | load:0x403c8700,len:0xc2c
+2026-04-11 16:33:17.784 | load:0x403cb700,len:0x30c0
+2026-04-11 16:33:17.785 | entry 0x403c88b8
+2026-04-11 16:33:17.785 | 
+2026-04-11 16:33:17.786 | App: CAN-Grabber
+2026-04-11 16:33:17.786 | Version: 0.0.1
+2026-04-11 16:33:17.789 | Build: Apr 11 2026 15:38:15
+2026-04-11 16:33:17.789 | PIO Env: esp32s3_debug
+2026-04-11 16:33:17.790 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 16:33:17.790 | PSRAM size/free: 0 / 0
+2026-04-11 16:33:17.791 | [serial] Type 'reset' to reboot the device
+2026-04-11 16:33:17.792 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 16:33:17.793 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 16:33:17.793 | [rtc] RTC_DS1307 detected
+2026-04-11 16:33:17.794 | [rtc] Startup epoch from RTC: 1775925203
+2026-04-11 16:33:17.795 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 16:33:17.797 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 16:33:18.125 | [  1078][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 16:33:18.126 | [net] Init, mode: 0
+2026-04-11 16:33:18.139 | [net] Event: 101
+2026-04-11 16:33:18.180 | [net] AP start: canlogger-setup
+2026-04-11 16:33:18.181 | [net] Event: 110
+2026-04-11 16:33:18.185 | [net] STA start
+2026-04-11 16:33:18.185 | [net] Event: 130
+2026-04-11 16:33:18.186 | [net] AP start event
+2026-04-11 16:33:18.190 | [net] AP IP: 192.168.4.1
+2026-04-11 16:33:18.191 | [net] STA candidate count: 1
+2026-04-11 16:33:18.192 | [net] Event: 131
+2026-04-11 16:33:18.196 | [net] AP stop event
+2026-04-11 16:33:18.197 | [net] Event: 130
+2026-04-11 16:33:18.197 | [net] AP start event
+2026-04-11 16:33:18.201 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-11 16:33:18.202 | [net] STA index: 0
+2026-04-11 16:33:18.274 | [net] Event: 112
+2026-04-11 16:33:19.353 | [net] Event: 115
+2026-04-11 16:33:19.359 | [net] STA connected: ssid=Überlingen@Wohnzimmer rssi=-65
+2026-04-11 16:33:19.365 | [net] STA IP: 192.168.3.45 gateway=192.168.3.1 subnet=255.255.255.0 internal=15552 largest=7668
+2026-04-11 16:33:19.370 | [net] AP idle, stopping while STA is connected
+2026-04-11 16:33:19.370 | [net] AP stop
+2026-04-11 16:33:19.371 | [net] Event: 131
+2026-04-11 16:33:19.375 | [net] AP stop event
+2026-04-11 16:33:19.376 | [net] Event: 130
+2026-04-11 16:33:19.376 | [net] AP start event
+2026-04-11 16:33:19.381 | [net] Event: 131
+2026-04-11 16:33:19.382 | [net] AP stop event
+2026-04-11 16:33:19.387 | [net] mDNS ready: canlogger.local -> 192.168.3.45 (service http/tcp 80, internal=19060 largest=7668)
+2026-04-11 16:33:20.692 | [  3647][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:20.800 | [  3755][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:21.391 | [  4346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:22.391 | [  5346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:23.391 | [  6346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:24.391 | [  7346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:25.391 | [  8346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:26.391 | [  9346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:27.391 | [ 10346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:28.391 | [ 11346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:29.391 | [ 12346][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-11 16:33:29.402 | [REST][SLOW] static stream took 8711ms path=/index.html bytes=1460/7739
+2026-04-11 16:33:29.407 | [ 12354][E][NetworkClient.cpp:609] remoteIP(): NetworkClient::remoteIP Not AF_INET or AF_INET6?
+2026-04-11 16:33:29.417 | [REST] static partial path=/index.html sent=1460/7739 remote=0.0.0.0
+2026-04-11 16:33:29.423 | [REST][SLOW] static took 8758ms method=GET uri=/ freeHeap=7616
+2026-04-11 16:33:29.424 | [REST][SLOW] handleClient took 8759920us method=GET uri=
+2026-04-11 16:33:31.958 | log saved to logs\boot_probe_loop_20260411_163243\boot_03.log

@@ -1,0 +1,23 @@
+{
+  "started_at": "2026-04-12T01:33:52.730329",
+  "loops": [
+    {
+      "iteration": 1,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_013352\\boot_01.log",
+        "candidates": [],
+        "results": []
+      },
+      "serial_capture_rc": 0
+    },
+    {
+      "iteration": 2,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_013352\\boot_02.log",
+        "candidates": [],
+        "results": []
+      },
+      "serial_capture_rc": 0
+    }
+  ]
+}

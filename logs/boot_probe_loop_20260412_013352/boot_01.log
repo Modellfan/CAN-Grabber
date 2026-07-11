@@ -1,0 +1,1905 @@
+2026-04-12 01:33:52.885 | opening COM15 at 115200 baud, duration=18.0s
+2026-04-12 01:33:52.887 | serial connected
+2026-04-12 01:33:53.887 | sent command: reset
+2026-04-12 01:33:53.888 | ESP-ROM:esp32s3-20210327
+2026-04-12 01:33:53.888 | Build:Mar 27 2021
+2026-04-12 01:33:53.889 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-12 01:33:53.889 | SPIWP:0xee
+2026-04-12 01:33:53.890 | mode:DIO, clock div:1
+2026-04-12 01:33:53.890 | load:0x3fce2820,len:0x10cc
+2026-04-12 01:33:53.891 | load:0x403c8700,len:0xc2c
+2026-04-12 01:33:53.891 | load:0x403cb700,len:0x30c0
+2026-04-12 01:33:53.892 | entry 0x403c88b8
+2026-04-12 01:33:53.892 | 
+2026-04-12 01:33:53.892 | App: CAN-Grabber
+2026-04-12 01:33:53.892 | Version: 0.0.1
+2026-04-12 01:33:53.935 | Build: Apr 12 2026 01:27:12
+2026-04-12 01:33:53.936 | PIO Env: esp32s3_debug
+2026-04-12 01:33:53.938 | Heap free/internal/largest: 182272 / 182272 / 126964
+2026-04-12 01:33:53.938 | PSRAM size/free: 0 / 0
+2026-04-12 01:33:53.940 | [serial] Type 'reset' to reboot the device
+2026-04-12 01:33:53.942 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-12 01:33:53.944 | [serial] Type 'sys-stats' to print system diagnostics
+2026-04-12 01:33:53.945 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-12 01:33:53.946 | [rtc] RTC_DS1307 detected
+2026-04-12 01:33:53.947 | [rtc] Startup epoch from RTC: 1775957641
+2026-04-12 01:33:53.949 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-12 01:33:53.950 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-12 01:33:54.249 | [  1092][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-12 01:33:54.254 | [net] WiFi static buffers: on
+2026-04-12 01:33:54.255 | [net] Init, mode: 0
+2026-04-12 01:33:54.268 | E (2456) wifi:Expected to init 8 rx buffer, actual is 1
+2026-04-12 01:33:54.274 | E (2458) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.279 | E (2458) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.285 | [  1117][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.301 | E (2489) wifi:Expected to init 8 rx buffer, actual is 0
+2026-04-12 01:33:54.306 | E (2491) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.312 | E (2491) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.318 | [  1149][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.320 | [net] AP start: canlogger-setup
+2026-04-12 01:33:54.334 | E (2522) wifi:Expected to init 8 rx buffer, actual is 0
+2026-04-12 01:33:54.340 | E (2524) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.345 | E (2524) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.351 | [  1182][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.355 | [  1201][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:54.360 | [net] AP start failed
+2026-04-12 01:33:54.360 | [net] STA candidate count: 1
+2026-04-12 01:33:54.365 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-12 01:33:54.365 | [net] STA index: 0
+2026-04-12 01:33:54.371 | E (2560) wifi:Expected to init 8 rx buffer, actual is 0
+2026-04-12 01:33:54.377 | E (2562) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.382 | E (2562) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.388 | [  1220][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.393 | [  1239][E][STA.cpp:302] begin(): STA enable failed!
+2026-04-12 01:33:54.472 | [system] summary reason=setup_complete unixMs=1775957642042 uptimeMs=1311 rtc=rtc valid=true available=true running=true
+2026-04-12 01:33:54.493 | [system] component=boot samples=2 last=config heap=182272 internal=182272 largest=126964 minHeap=182272 minInternal=182272 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=0 uptimeMs=266
+2026-04-12 01:33:54.511 | [system] component=rtc samples=1 last=init heap=179988 internal=179988 largest=126964 minHeap=179988 minInternal=179988 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957641011 uptimeMs=280
+2026-04-12 01:33:54.532 | [system] component=storage samples=1 last=init heap=119192 internal=119192 largest=65524 minHeap=119192 minInternal=119192 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957641438 uptimeMs=707
+2026-04-12 01:33:54.550 | [system] component=can samples=1 last=init heap=104732 internal=104732 largest=63476 minHeap=104732 minInternal=104732 minLargest=63476 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957641443 uptimeMs=712
+2026-04-12 01:33:54.571 | [system] component=logging samples=2 last=start heap=90212 internal=90212 largest=49140 minHeap=90212 minInternal=90212 minLargest=49140 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957641822 uptimeMs=1091
+2026-04-12 01:33:54.588 | [system] component=upload samples=2 last=queue heap=90212 internal=90212 largest=49140 minHeap=90212 minInternal=90212 minLargest=49140 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957641823 uptimeMs=1092
+2026-04-12 01:33:54.605 | [system] component=net samples=2 last=connect heap=70136 internal=70136 largest=28660 minHeap=70136 minInternal=70136 minLargest=28660 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957641975 uptimeMs=1244
+2026-04-12 01:33:54.626 | [system] component=rest samples=2 last=start heap=59236 internal=59236 largest=28660 minHeap=59236 minInternal=59236 minLargest=28660 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957642042 uptimeMs=1311
+2026-04-12 01:33:54.644 | [system] component=web samples=2 last=start heap=59236 internal=59236 largest=28660 minHeap=59236 minInternal=59236 minLargest=28660 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957642042 uptimeMs=1311
+2026-04-12 01:33:54.648 | [system] task=loopTask samples=15 stackWords=3752 minStackWords=3752
+2026-04-12 01:33:54.665 | E (2853) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.670 | E (2853) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.677 | [  1510][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.695 | E (2883) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.700 | E (2883) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.706 | [  1540][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.710 | [net] AP start: canlogger-setup
+2026-04-12 01:33:54.726 | E (2913) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.731 | E (2913) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.737 | [  1570][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.741 | [  1588][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:54.743 | [net] AP start failed
+2026-04-12 01:33:54.771 | E (2959) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.776 | E (2959) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.783 | [  1616][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.802 | E (2989) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.807 | E (2989) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.813 | [  1646][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.816 | [net] AP start: canlogger-setup
+2026-04-12 01:33:54.831 | E (3019) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.836 | E (3019) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.843 | [  1676][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.848 | [  1694][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:54.849 | [net] AP start failed
+2026-04-12 01:33:54.878 | E (3065) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.882 | E (3065) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.889 | [  1722][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.908 | E (3095) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.913 | E (3095) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.919 | [  1752][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.921 | [net] AP start: canlogger-setup
+2026-04-12 01:33:54.937 | E (3125) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.942 | E (3125) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.948 | [  1782][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:54.954 | [  1800][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:54.955 | [net] AP start failed
+2026-04-12 01:33:54.983 | E (3171) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:54.988 | E (3171) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:54.995 | [  1828][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.013 | E (3201) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.019 | E (3201) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.025 | [  1858][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.027 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.043 | E (3231) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.049 | E (3231) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.055 | [  1888][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.059 | [  1906][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.061 | [net] AP start failed
+2026-04-12 01:33:55.089 | E (3277) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.094 | E (3277) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.100 | [  1934][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.119 | E (3307) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.124 | E (3307) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.130 | [  1964][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.134 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.150 | E (3337) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.155 | E (3337) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.160 | [  1994][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.166 | [  2012][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.167 | [net] AP start failed
+2026-04-12 01:33:55.196 | E (3383) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.200 | E (3383) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.206 | [  2040][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.225 | E (3413) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.231 | E (3413) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.236 | [  2070][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.240 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.256 | E (3443) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.261 | E (3443) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.267 | [  2100][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.272 | [  2118][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.273 | [net] AP start failed
+2026-04-12 01:33:55.301 | E (3489) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.307 | E (3489) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.313 | [  2146][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.331 | E (3519) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.337 | E (3519) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.342 | [  2176][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.345 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.361 | E (3549) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.366 | E (3549) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.373 | [  2206][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.378 | [  2224][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.379 | [net] AP start failed
+2026-04-12 01:33:55.407 | E (3595) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.412 | E (3595) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.418 | [  2252][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.437 | E (3625) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.442 | E (3625) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.448 | [  2282][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.452 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.467 | E (3655) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.472 | E (3655) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.479 | [  2312][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.484 | [  2330][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.485 | [net] AP start failed
+2026-04-12 01:33:55.513 | E (3701) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.519 | E (3701) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.525 | [  2358][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.543 | E (3731) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.549 | E (3731) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.554 | [  2388][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.558 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.573 | E (3761) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.578 | E (3761) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.584 | [  2418][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.590 | [  2436][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.591 | [net] AP start failed
+2026-04-12 01:33:55.619 | E (3807) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.624 | E (3807) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.631 | [  2464][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.649 | E (3837) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.654 | E (3837) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.661 | [  2494][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.664 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.679 | E (3867) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.684 | E (3867) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.691 | [  2524][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.696 | [  2542][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.697 | [net] AP start failed
+2026-04-12 01:33:55.725 | E (3913) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.730 | E (3913) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.736 | [  2570][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.755 | E (3943) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.760 | E (3943) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.766 | [  2600][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.770 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.784 | E (3973) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.790 | E (3973) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.796 | [  2630][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.801 | [  2648][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.803 | [net] AP start failed
+2026-04-12 01:33:55.831 | E (4019) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.836 | E (4019) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.843 | [  2676][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.861 | E (4049) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.867 | E (4049) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.873 | [  2706][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.876 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.891 | E (4079) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.896 | E (4079) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.902 | [  2736][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.908 | [  2754][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:55.909 | [net] AP start failed
+2026-04-12 01:33:55.937 | E (4125) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.942 | E (4125) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.949 | [  2782][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.967 | E (4155) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:55.972 | E (4155) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:55.978 | [  2812][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:55.981 | [net] AP start: canlogger-setup
+2026-04-12 01:33:55.997 | E (4185) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.002 | E (4185) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.008 | [  2842][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.013 | [  2860][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.015 | [net] AP start failed
+2026-04-12 01:33:56.043 | E (4231) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.048 | E (4231) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.054 | [  2888][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.073 | E (4261) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.078 | E (4261) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.084 | [  2918][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.088 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.103 | E (4291) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.108 | E (4291) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.114 | [  2948][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.119 | [  2966][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.121 | [net] AP start failed
+2026-04-12 01:33:56.149 | E (4337) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.155 | E (4337) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.161 | [  2994][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.179 | E (4367) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.185 | E (4367) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.191 | [  3024][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.194 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.209 | E (4397) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.214 | E (4397) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.221 | [  3054][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.226 | [  3072][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.227 | [net] AP start failed
+2026-04-12 01:33:56.255 | E (4443) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.260 | E (4443) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.266 | [  3100][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.285 | E (4473) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.290 | E (4473) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.296 | [  3130][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.300 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.315 | E (4503) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.320 | E (4503) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.327 | [  3160][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.332 | [  3178][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.333 | [net] AP start failed
+2026-04-12 01:33:56.361 | E (4549) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.366 | E (4549) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.373 | [  3206][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.391 | E (4579) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.396 | E (4579) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.403 | [  3236][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.406 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.421 | E (4609) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.426 | E (4609) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.433 | [  3266][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.438 | [  3284][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.439 | [net] AP start failed
+2026-04-12 01:33:56.467 | E (4655) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.472 | E (4655) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.478 | [  3312][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.497 | E (4685) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.502 | E (4685) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.509 | [  3342][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.512 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.527 | E (4715) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.532 | E (4715) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.539 | [  3372][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.544 | [  3390][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.545 | [net] AP start failed
+2026-04-12 01:33:56.573 | E (4761) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.578 | E (4761) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.584 | [  3418][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.602 | E (4791) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.609 | E (4791) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.614 | [  3448][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.617 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.633 | E (4821) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.638 | E (4821) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.644 | [  3478][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.649 | [  3496][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.651 | [net] AP start failed
+2026-04-12 01:33:56.679 | E (4867) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.684 | E (4867) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.690 | [  3524][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.709 | E (4897) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.714 | E (4897) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.720 | [  3554][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.723 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.739 | E (4927) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.745 | E (4927) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.751 | [  3584][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.756 | [  3602][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.757 | [net] AP start failed
+2026-04-12 01:33:56.786 | E (4973) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.790 | E (4973) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.797 | [  3630][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.816 | E (5003) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.820 | E (5003) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.827 | [  3660][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.830 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.845 | E (5033) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.851 | E (5033) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.856 | [  3690][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.862 | [  3708][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.863 | [net] AP start failed
+2026-04-12 01:33:56.891 | E (5079) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.896 | E (5079) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.902 | [  3736][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.921 | E (5109) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.927 | E (5109) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.932 | [  3766][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.936 | [net] AP start: canlogger-setup
+2026-04-12 01:33:56.951 | E (5139) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:56.957 | E (5139) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:56.963 | [  3796][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:56.967 | [  3814][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:56.969 | [net] AP start failed
+2026-04-12 01:33:56.997 | E (5185) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.003 | E (5185) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.009 | [  3842][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.027 | E (5215) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.033 | E (5215) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.038 | [  3872][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.042 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.057 | E (5245) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.063 | E (5245) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.069 | [  3902][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.073 | [  3920][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.075 | [net] AP start failed
+2026-04-12 01:33:57.103 | E (5291) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.109 | E (5291) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.114 | [  3948][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.133 | E (5321) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.138 | E (5321) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.144 | [  3978][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.147 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.163 | E (5351) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.169 | E (5351) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.174 | [  4008][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.180 | [  4026][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.181 | [net] AP start failed
+2026-04-12 01:33:57.209 | E (5397) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.214 | E (5397) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.220 | [  4054][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.239 | E (5427) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.244 | E (5427) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.251 | [  4084][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.253 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.269 | E (5457) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.274 | E (5457) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.280 | [  4114][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.285 | [  4132][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.287 | [net] AP start failed
+2026-04-12 01:33:57.315 | E (5503) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.321 | E (5503) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.327 | [  4160][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.345 | E (5533) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.351 | E (5533) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.357 | [  4190][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.359 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.375 | E (5563) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.380 | E (5563) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.387 | [  4220][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.392 | [  4238][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.393 | [net] AP start failed
+2026-04-12 01:33:57.421 | E (5609) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.427 | E (5609) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.432 | [  4266][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.451 | E (5639) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.456 | E (5639) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.463 | [  4296][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.466 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.481 | E (5669) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.486 | E (5669) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.493 | [  4326][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.498 | [  4344][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.499 | [net] AP start failed
+2026-04-12 01:33:57.527 | E (5715) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.533 | E (5715) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.539 | [  4372][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.557 | E (5745) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.562 | E (5745) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.569 | [  4402][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.572 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.587 | E (5775) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.592 | E (5775) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.599 | [  4432][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.603 | [  4450][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.605 | [net] AP start failed
+2026-04-12 01:33:57.633 | E (5821) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.638 | E (5821) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.645 | [  4478][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.663 | E (5851) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.669 | E (5851) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.675 | [  4508][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.678 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.693 | E (5881) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.699 | E (5881) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.704 | [  4538][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.709 | [  4556][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.711 | [net] AP start failed
+2026-04-12 01:33:57.739 | E (5927) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.744 | E (5927) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.751 | [  4584][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.769 | E (5957) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.774 | E (5957) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.780 | [  4614][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.784 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.799 | E (5987) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.804 | E (5987) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.810 | [  4644][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.816 | [  4662][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.817 | [net] AP start failed
+2026-04-12 01:33:57.845 | E (6033) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.850 | E (6033) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.856 | [  4690][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.875 | E (6063) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.880 | E (6063) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.886 | [  4720][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.890 | [net] AP start: canlogger-setup
+2026-04-12 01:33:57.905 | E (6093) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.910 | E (6093) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.916 | [  4750][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.921 | [  4768][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:57.923 | [net] AP start failed
+2026-04-12 01:33:57.951 | E (6139) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.956 | E (6139) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.962 | [  4796][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.981 | E (6169) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:57.987 | E (6169) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:57.992 | [  4826][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:57.996 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.011 | E (6199) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.016 | E (6199) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.022 | [  4856][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.027 | [  4874][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.029 | [net] AP start failed
+2026-04-12 01:33:58.058 | E (6245) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.063 | E (6245) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.069 | [  4902][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.087 | E (6275) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.092 | E (6275) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.098 | [  4932][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.102 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.117 | E (6305) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.122 | E (6305) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.129 | [  4962][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.133 | [  4980][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.135 | [net] AP start failed
+2026-04-12 01:33:58.163 | E (6351) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.168 | E (6351) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.175 | [  5008][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.193 | E (6381) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.199 | E (6381) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.205 | [  5038][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.208 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.223 | E (6411) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.228 | E (6411) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.234 | [  5068][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.239 | [  5086][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.241 | [net] AP start failed
+2026-04-12 01:33:58.269 | E (6457) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.274 | E (6457) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.281 | [  5114][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.300 | E (6487) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.304 | E (6487) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.310 | [  5144][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.313 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.329 | E (6517) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.334 | E (6517) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.341 | [  5174][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.346 | [  5192][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.347 | [net] AP start failed
+2026-04-12 01:33:58.375 | E (6563) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.380 | E (6563) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.386 | [  5220][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.405 | E (6593) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.410 | E (6593) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.417 | [  5250][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.420 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.435 | E (6623) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.440 | E (6623) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.446 | [  5280][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.451 | [  5298][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.453 | [net] AP start failed
+2026-04-12 01:33:58.481 | E (6669) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.486 | E (6669) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.493 | [  5326][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.511 | E (6699) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.516 | E (6699) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.522 | [  5356][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.525 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.541 | E (6729) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.546 | E (6729) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.552 | [  5386][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.558 | [  5404][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.559 | [net] AP start failed
+2026-04-12 01:33:58.587 | E (6775) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.592 | E (6775) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.599 | [  5432][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.617 | E (6805) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.622 | E (6805) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.628 | [  5462][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.632 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.647 | E (6835) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.652 | E (6835) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.658 | [  5492][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.663 | [  5510][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.665 | [net] AP start failed
+2026-04-12 01:33:58.693 | E (6881) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.698 | E (6881) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.705 | [  5538][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.723 | E (6911) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.728 | E (6911) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.734 | [  5568][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.737 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.753 | E (6941) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.758 | E (6941) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.764 | [  5598][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.769 | [  5616][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.771 | [net] AP start failed
+2026-04-12 01:33:58.799 | E (6987) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.804 | E (6987) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.810 | [  5644][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.829 | E (7017) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.835 | E (7017) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.841 | [  5674][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.843 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.859 | E (7047) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.882 | E (7047) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.883 | [  5704][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.884 | [  5722][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.885 | [net] AP start failed
+2026-04-12 01:33:58.905 | E (7093) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.910 | E (7093) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.917 | [  5750][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.935 | E (7123) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.941 | E (7123) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.947 | [  5780][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.949 | [net] AP start: canlogger-setup
+2026-04-12 01:33:58.965 | E (7153) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:58.970 | E (7153) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:58.976 | [  5810][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:58.981 | [  5828][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:58.983 | [net] AP start failed
+2026-04-12 01:33:59.011 | E (7199) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.016 | E (7199) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.023 | [  5856][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.041 | E (7229) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.047 | E (7229) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.052 | [  5886][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.055 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.071 | E (7259) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.076 | E (7259) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.082 | [  5916][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.088 | [  5934][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.089 | [net] AP start failed
+2026-04-12 01:33:59.117 | E (7305) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.122 | E (7305) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.128 | [  5962][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.147 | E (7335) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.152 | E (7335) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.158 | [  5992][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.161 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.177 | E (7365) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.182 | E (7365) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.189 | [  6022][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.193 | [  6040][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.195 | [net] AP start failed
+2026-04-12 01:33:59.223 | E (7411) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.229 | E (7411) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.235 | [  6068][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.253 | E (7441) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.258 | E (7441) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.264 | [  6098][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.267 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.283 | E (7471) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.288 | E (7471) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.294 | [  6128][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.299 | [  6146][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.301 | [net] AP start failed
+2026-04-12 01:33:59.329 | E (7517) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.334 | E (7517) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.340 | [  6174][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.359 | E (7547) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.364 | E (7547) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.370 | [  6204][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.373 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.389 | E (7577) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.394 | E (7577) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.400 | [  6234][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.406 | [  6252][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.407 | [net] AP start failed
+2026-04-12 01:33:59.435 | E (7623) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.440 | E (7623) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.446 | [  6280][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.465 | E (7653) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.470 | E (7653) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.476 | [  6310][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.479 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.496 | E (7683) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.500 | E (7683) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.507 | [  6340][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.511 | [  6358][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.513 | [net] AP start failed
+2026-04-12 01:33:59.541 | E (7729) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.546 | E (7729) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.552 | [  6386][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.571 | E (7759) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.576 | E (7759) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.582 | [  6416][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.585 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.601 | E (7789) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.606 | E (7789) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.613 | [  6446][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.617 | [  6464][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.619 | [net] AP start failed
+2026-04-12 01:33:59.647 | E (7835) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.652 | E (7835) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.659 | [  6492][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.677 | E (7865) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.683 | E (7865) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.689 | [  6522][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.692 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.706 | E (7895) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.713 | E (7895) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.718 | [  6552][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.723 | [  6570][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.725 | [net] AP start failed
+2026-04-12 01:33:59.753 | E (7941) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.758 | E (7941) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.765 | [  6598][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.783 | E (7971) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.788 | E (7971) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.795 | [  6628][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.798 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.813 | E (8001) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.818 | E (8001) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.825 | [  6658][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.830 | [  6676][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.831 | [net] AP start failed
+2026-04-12 01:33:59.858 | E (8047) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.864 | E (8047) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.870 | [  6704][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.888 | E (8077) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.894 | E (8077) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.900 | [  6734][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.904 | [net] AP start: canlogger-setup
+2026-04-12 01:33:59.919 | E (8107) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.924 | E (8107) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.930 | [  6764][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.936 | [  6782][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:33:59.937 | [net] AP start failed
+2026-04-12 01:33:59.965 | E (8153) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:33:59.970 | E (8153) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:33:59.977 | [  6810][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:33:59.994 | E (8183) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.001 | E (8183) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.007 | [  6840][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.010 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.024 | E (8213) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.030 | E (8213) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.037 | [  6870][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.041 | [  6888][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.043 | [net] AP start failed
+2026-04-12 01:34:00.071 | E (8259) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.076 | E (8259) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.082 | [  6916][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.101 | E (8289) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.106 | E (8289) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.112 | [  6946][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.115 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.131 | E (8319) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.136 | E (8319) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.142 | [  6976][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.147 | [  6994][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.149 | [net] AP start failed
+2026-04-12 01:34:00.177 | E (8365) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.182 | E (8365) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.188 | [  7022][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.207 | E (8395) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.212 | E (8395) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.219 | [  7052][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.222 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.264 | E (8425) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.265 | E (8425) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.266 | [  7082][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.267 | [  7100][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.268 | [net] AP start failed
+2026-04-12 01:34:00.282 | E (8471) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.288 | E (8471) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.294 | [  7128][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.313 | E (8501) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.318 | E (8501) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.325 | [  7158][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.327 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.343 | E (8531) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.349 | E (8531) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.355 | [  7188][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.360 | [  7206][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.361 | [net] AP start failed
+2026-04-12 01:34:00.388 | E (8577) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.394 | E (8577) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.401 | [  7234][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.419 | E (8607) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.424 | E (8607) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.431 | [  7264][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.433 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.449 | E (8637) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.454 | E (8637) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.461 | [  7294][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.465 | [  7312][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.467 | [net] AP start failed
+2026-04-12 01:34:00.495 | E (8683) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.500 | E (8683) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.507 | [  7340][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.524 | E (8713) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.530 | E (8713) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.536 | [  7370][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.539 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.555 | E (8743) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.560 | E (8743) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.567 | [  7400][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.572 | [  7418][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.573 | [net] AP start failed
+2026-04-12 01:34:00.601 | E (8789) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.606 | E (8789) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.613 | [  7446][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.631 | E (8819) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.636 | E (8819) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.643 | [  7476][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.645 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.661 | E (8849) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.667 | E (8849) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.672 | [  7506][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.677 | [  7524][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.679 | [net] AP start failed
+2026-04-12 01:34:00.707 | E (8895) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.712 | E (8895) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.718 | [  7552][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.737 | E (8925) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.742 | E (8925) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.748 | [  7582][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.752 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.767 | E (8955) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.773 | E (8955) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.778 | [  7612][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.783 | [  7630][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.785 | [net] AP start failed
+2026-04-12 01:34:00.813 | E (9001) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.818 | E (9001) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.825 | [  7658][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.843 | E (9031) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.848 | E (9031) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.854 | [  7688][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.857 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.873 | E (9061) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.878 | E (9061) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.884 | [  7718][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.889 | [  7736][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.891 | [net] AP start failed
+2026-04-12 01:34:00.919 | E (9107) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.925 | E (9107) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.930 | [  7764][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.949 | E (9137) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.954 | E (9137) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.960 | [  7794][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.963 | [net] AP start: canlogger-setup
+2026-04-12 01:34:00.979 | E (9167) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:00.984 | E (9167) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:00.991 | [  7824][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:00.996 | [  7842][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:00.997 | [net] AP start failed
+2026-04-12 01:34:01.025 | E (9213) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.030 | E (9213) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.037 | [  7870][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.055 | E (9243) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.060 | E (9243) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.067 | [  7900][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.070 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.084 | E (9273) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.090 | E (9273) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.097 | [  7930][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.102 | [  7948][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.103 | [net] AP start failed
+2026-04-12 01:34:01.131 | E (9319) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.136 | E (9319) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.142 | [  7976][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.161 | E (9349) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.166 | E (9349) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.172 | [  8006][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.175 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.191 | E (9379) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.196 | E (9379) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.202 | [  8036][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.207 | [  8054][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.209 | [net] AP start failed
+2026-04-12 01:34:01.236 | E (9425) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.242 | E (9425) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.248 | [  8082][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.267 | E (9455) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.272 | E (9455) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.279 | [  8112][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.281 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.297 | E (9485) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.302 | E (9485) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.309 | [  8142][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.314 | [  8160][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.315 | [net] AP start failed
+2026-04-12 01:34:01.343 | E (9531) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.348 | E (9531) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.355 | [  8188][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.373 | E (9561) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.378 | E (9561) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.385 | [  8218][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.388 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.403 | E (9591) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.408 | E (9591) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.415 | [  8248][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.420 | [  8266][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.421 | [net] AP start failed
+2026-04-12 01:34:01.449 | E (9637) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.454 | E (9637) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.460 | [  8294][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.479 | E (9667) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.484 | E (9667) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.490 | [  8324][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.494 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.509 | E (9697) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.514 | E (9697) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.521 | [  8354][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.526 | [  8372][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.527 | [net] AP start failed
+2026-04-12 01:34:01.556 | E (9743) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.560 | E (9743) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.566 | [  8400][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.585 | E (9773) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.590 | E (9773) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.596 | [  8430][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.600 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.615 | E (9803) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.620 | E (9803) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.626 | [  8460][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.631 | [  8478][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.633 | [net] AP start failed
+2026-04-12 01:34:01.661 | E (9849) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.666 | E (9849) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.673 | [  8506][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.691 | E (9879) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.696 | E (9879) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.703 | [  8536][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.705 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.720 | E (9909) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.726 | E (9909) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.732 | [  8566][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.737 | [  8584][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.739 | [net] AP start failed
+2026-04-12 01:34:01.767 | E (9955) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.772 | E (9955) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.779 | [  8612][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.797 | E (9985) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.802 | E (9985) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.809 | [  8642][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.812 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.827 | E (10015) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.832 | E (10015) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.839 | [  8672][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.843 | [  8690][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.845 | [net] AP start failed
+2026-04-12 01:34:01.872 | E (10061) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.878 | E (10061) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.884 | [  8718][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.903 | E (10091) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.909 | E (10091) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.914 | [  8748][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.917 | [net] AP start: canlogger-setup
+2026-04-12 01:34:01.933 | E (10121) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.938 | E (10121) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.944 | [  8778][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:01.950 | [  8796][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:01.951 | [net] AP start failed
+2026-04-12 01:34:01.979 | E (10167) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:01.984 | E (10167) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:01.991 | [  8824][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.009 | E (10197) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.015 | E (10197) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.020 | [  8854][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.024 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.038 | E (10227) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.044 | E (10227) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.051 | [  8884][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.055 | [  8902][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.057 | [net] AP start failed
+2026-04-12 01:34:02.085 | E (10273) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.090 | E (10273) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.096 | [  8930][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.115 | E (10303) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.120 | E (10303) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.126 | [  8960][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.129 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.145 | E (10333) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.150 | E (10333) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.156 | [  8990][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.162 | [  9008][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.163 | [net] AP start failed
+2026-04-12 01:34:02.191 | E (10379) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.196 | E (10379) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.203 | [  9036][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.221 | E (10409) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.227 | E (10409) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.233 | [  9066][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.235 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.251 | E (10439) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.256 | E (10439) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.262 | [  9096][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.268 | [  9114][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.269 | [net] AP start failed
+2026-04-12 01:34:02.297 | E (10485) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.303 | E (10485) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.308 | [  9142][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.326 | E (10515) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.332 | E (10515) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.338 | [  9172][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.341 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.357 | E (10545) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.363 | E (10545) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.369 | [  9202][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.374 | [  9220][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.375 | [net] AP start failed
+2026-04-12 01:34:02.403 | E (10591) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.408 | E (10591) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.414 | [  9248][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.434 | E (10621) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.438 | E (10621) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.444 | [  9278][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.448 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.463 | E (10651) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.468 | E (10651) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.475 | [  9308][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.480 | [  9326][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.481 | [net] AP start failed
+2026-04-12 01:34:02.509 | E (10697) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.515 | E (10697) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.521 | [  9354][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.539 | E (10727) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.545 | E (10727) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.550 | [  9384][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.553 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.569 | E (10757) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.574 | E (10757) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.580 | [  9414][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.586 | [  9432][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.587 | [net] AP start failed
+2026-04-12 01:34:02.615 | E (10803) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.621 | E (10803) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.627 | [  9460][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.645 | E (10833) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.650 | E (10833) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.656 | [  9490][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.659 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.675 | E (10863) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.681 | E (10863) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.687 | [  9520][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.691 | [  9538][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.693 | [net] AP start failed
+2026-04-12 01:34:02.720 | E (10909) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.726 | E (10909) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.732 | [  9566][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.751 | E (10939) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.756 | E (10939) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.762 | [  9596][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.766 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.781 | E (10969) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.786 | E (10969) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.792 | [  9626][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.797 | [  9644][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.799 | [net] AP start failed
+2026-04-12 01:34:02.827 | E (11015) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.832 | E (11015) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.839 | [  9672][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.857 | E (11045) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.862 | E (11045) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.868 | [  9702][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.872 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.887 | E (11075) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.892 | E (11075) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.899 | [  9732][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.903 | [  9750][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:02.905 | [net] AP start failed
+2026-04-12 01:34:02.933 | E (11121) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.938 | E (11121) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.945 | [  9778][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.963 | E (11151) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.968 | E (11151) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:02.974 | [  9808][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:02.977 | [net] AP start: canlogger-setup
+2026-04-12 01:34:02.993 | E (11181) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:02.998 | E (11181) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.004 | [  9838][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.009 | [  9856][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.011 | [net] AP start failed
+2026-04-12 01:34:03.039 | E (11227) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.044 | E (11227) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.051 | [  9884][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.069 | E (11257) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.074 | E (11257) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.081 | [  9914][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.084 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.099 | E (11287) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.105 | E (11287) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.111 | [  9944][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.116 | [  9962][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.117 | [net] AP start failed
+2026-04-12 01:34:03.145 | E (11333) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.151 | E (11333) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.157 | [  9990][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.175 | E (11363) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.180 | E (11363) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.187 | [ 10020][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.190 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.205 | E (11393) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.211 | E (11393) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.216 | [ 10050][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.221 | [ 10068][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.223 | [net] AP start failed
+2026-04-12 01:34:03.251 | E (11439) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.256 | E (11439) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.262 | [ 10096][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.281 | E (11469) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.286 | E (11469) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.293 | [ 10126][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.295 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.311 | E (11499) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.317 | E (11499) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.323 | [ 10156][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.327 | [ 10174][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.329 | [net] AP start failed
+2026-04-12 01:34:03.356 | E (11545) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.363 | E (11545) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.368 | [ 10202][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.387 | E (11575) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.392 | E (11575) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.398 | [ 10232][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.402 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.417 | E (11605) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.422 | E (11605) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.428 | [ 10262][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.434 | [ 10280][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.435 | [net] AP start failed
+2026-04-12 01:34:03.463 | E (11651) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.468 | E (11651) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.474 | [ 10308][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.492 | E (11681) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.499 | E (11681) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.505 | [ 10338][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.508 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.523 | E (11711) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.528 | E (11711) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.534 | [ 10368][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.539 | [ 10386][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.541 | [net] AP start failed
+2026-04-12 01:34:03.569 | E (11757) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.574 | E (11757) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.581 | [ 10414][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.598 | E (11787) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.604 | E (11787) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.610 | [ 10444][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.614 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.629 | E (11817) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.634 | E (11817) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.640 | [ 10474][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.645 | [ 10492][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.647 | [net] AP start failed
+2026-04-12 01:34:03.674 | E (11863) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.680 | E (11863) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.687 | [ 10520][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.705 | E (11893) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.711 | E (11893) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.717 | [ 10550][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.720 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.734 | E (11923) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.741 | E (11923) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.746 | [ 10580][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.752 | [ 10598][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.753 | [net] AP start failed
+2026-04-12 01:34:03.781 | E (11969) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.787 | E (11969) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.792 | [ 10626][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.811 | E (11999) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.816 | E (11999) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.822 | [ 10656][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.826 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.841 | E (12029) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.847 | E (12029) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.852 | [ 10686][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.857 | [ 10704][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.859 | [net] AP start failed
+2026-04-12 01:34:03.887 | E (12075) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.892 | E (12075) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.898 | [ 10732][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.917 | E (12105) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.922 | E (12105) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.929 | [ 10762][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.932 | [net] AP start: canlogger-setup
+2026-04-12 01:34:03.947 | E (12135) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.953 | E (12135) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:03.958 | [ 10792][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:03.963 | [ 10810][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:03.965 | [net] AP start failed
+2026-04-12 01:34:03.993 | E (12181) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:03.998 | E (12181) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.005 | [ 10838][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.023 | E (12211) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.029 | E (12211) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.035 | [ 10868][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.038 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.053 | E (12241) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.058 | E (12241) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.064 | [ 10898][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.070 | [ 10916][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.071 | [net] AP start failed
+2026-04-12 01:34:04.099 | E (12287) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.104 | E (12287) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.110 | [ 10944][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.129 | E (12317) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.135 | E (12317) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.141 | [ 10974][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.144 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.159 | E (12347) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.164 | E (12347) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.170 | [ 11004][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.176 | [ 11022][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.177 | [net] AP start failed
+2026-04-12 01:34:04.205 | E (12393) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.210 | E (12393) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.217 | [ 11050][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.234 | E (12423) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.241 | E (12423) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.247 | [ 11080][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.249 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.265 | E (12453) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.271 | E (12453) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.276 | [ 11110][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.281 | [ 11128][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.283 | [net] AP start failed
+2026-04-12 01:34:04.311 | E (12499) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.317 | E (12499) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.323 | [ 11156][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.341 | E (12529) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.346 | E (12529) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.352 | [ 11186][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.355 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.371 | E (12559) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.376 | E (12559) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.382 | [ 11216][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.388 | [ 11234][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.389 | [net] AP start failed
+2026-04-12 01:34:04.416 | E (12605) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.423 | E (12605) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.429 | [ 11262][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.447 | E (12635) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.452 | E (12635) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.458 | [ 11292][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.462 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.477 | E (12665) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.482 | E (12665) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.488 | [ 11322][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.493 | [ 11340][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.495 | [net] AP start failed
+2026-04-12 01:34:04.523 | E (12711) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.528 | E (12711) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.534 | [ 11368][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.553 | E (12741) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.558 | E (12741) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.564 | [ 11398][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.568 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.583 | E (12771) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.588 | E (12771) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.594 | [ 11428][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.600 | [ 11446][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.601 | [net] AP start failed
+2026-04-12 01:34:04.629 | E (12817) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.634 | E (12817) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.641 | [ 11474][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.659 | E (12847) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.664 | E (12847) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.671 | [ 11504][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.674 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.689 | E (12877) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.695 | E (12877) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.700 | [ 11534][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.706 | [ 11552][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.707 | [net] AP start failed
+2026-04-12 01:34:04.734 | E (12923) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.741 | E (12923) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.746 | [ 11580][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.765 | E (12953) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.771 | E (12953) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.776 | [ 11610][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.779 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.794 | E (12983) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.801 | E (12983) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.807 | [ 11640][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.811 | [ 11658][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.813 | [net] AP start failed
+2026-04-12 01:34:04.840 | E (13029) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.846 | E (13029) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.852 | [ 11686][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.871 | E (13059) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.876 | E (13059) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.882 | [ 11716][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.885 | [net] AP start: canlogger-setup
+2026-04-12 01:34:04.900 | E (13089) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.907 | E (13089) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.913 | [ 11746][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.917 | [ 11764][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:04.919 | [net] AP start failed
+2026-04-12 01:34:04.947 | E (13135) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.952 | E (13135) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.958 | [ 11792][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.977 | E (13165) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:04.982 | E (13165) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:04.988 | [ 11822][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:04.991 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.007 | E (13195) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.013 | E (13195) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.019 | [ 11852][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.024 | [ 11870][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.025 | [net] AP start failed
+2026-04-12 01:34:05.053 | E (13241) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.058 | E (13241) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.064 | [ 11898][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.083 | E (13271) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.089 | E (13271) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.095 | [ 11928][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.098 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.113 | E (13301) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.118 | E (13301) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.125 | [ 11958][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.129 | [ 11976][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.132 | [net] AP start failed
+2026-04-12 01:34:05.159 | E (13347) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.164 | E (13347) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.170 | [ 12004][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.189 | E (13377) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.195 | E (13377) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.200 | [ 12034][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.203 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.219 | E (13407) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.224 | E (13407) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.230 | [ 12064][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.236 | [ 12082][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.237 | [net] AP start failed
+2026-04-12 01:34:05.264 | E (13453) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.270 | E (13453) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.276 | [ 12110][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.294 | E (13483) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.300 | E (13483) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.306 | [ 12140][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.310 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.325 | E (13513) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.330 | E (13513) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.336 | [ 12170][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.342 | [ 12188][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.343 | [net] AP start failed
+2026-04-12 01:34:05.370 | E (13559) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.377 | E (13559) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.382 | [ 12216][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.401 | E (13589) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.406 | E (13589) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.413 | [ 12246][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.415 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.431 | E (13619) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.437 | E (13619) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.442 | [ 12276][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.448 | [ 12294][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.449 | [net] AP start failed
+2026-04-12 01:34:05.476 | E (13665) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.482 | E (13665) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.488 | [ 12322][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.507 | E (13695) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.512 | E (13695) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.518 | [ 12352][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.521 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.537 | E (13725) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.542 | E (13725) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.548 | [ 12382][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.553 | [ 12400][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.555 | [net] AP start failed
+2026-04-12 01:34:05.583 | E (13771) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.589 | E (13771) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.595 | [ 12428][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.613 | E (13801) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.618 | E (13801) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.625 | [ 12458][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.628 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.644 | E (13831) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.648 | E (13831) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.654 | [ 12488][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.660 | [ 12506][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.661 | [net] AP start failed
+2026-04-12 01:34:05.689 | E (13877) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.714 | E (13877) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.716 | [ 12534][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.719 | E (13907) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.724 | E (13907) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.730 | [ 12564][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.733 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.749 | E (13937) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.755 | E (13937) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.760 | [ 12594][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.765 | [ 12612][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.767 | [net] AP start failed
+2026-04-12 01:34:05.795 | E (13983) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.801 | E (13983) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.806 | [ 12640][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.825 | E (14013) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.831 | E (14013) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.837 | [ 12670][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.840 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.854 | E (14043) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.861 | E (14043) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.867 | [ 12700][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.872 | [ 12718][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.873 | [net] AP start failed
+2026-04-12 01:34:05.901 | E (14089) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.907 | E (14089) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.912 | [ 12746][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.931 | E (14119) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.936 | E (14119) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.942 | [ 12776][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.945 | [net] AP start: canlogger-setup
+2026-04-12 01:34:05.960 | E (14149) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:05.966 | E (14149) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:05.972 | [ 12806][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:05.977 | [ 12824][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:05.979 | [net] AP start failed
+2026-04-12 01:34:06.007 | E (14195) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.012 | E (14195) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.020 | [ 12852][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.036 | E (14225) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.042 | E (14225) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.048 | [ 12882][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.052 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.067 | E (14255) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.073 | E (14255) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.078 | [ 12912][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.084 | [ 12930][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.085 | [net] AP start failed
+2026-04-12 01:34:06.112 | E (14301) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.118 | E (14301) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.124 | [ 12958][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.143 | E (14331) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.149 | E (14331) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.154 | [ 12988][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.158 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.173 | E (14361) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.178 | E (14361) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.185 | [ 13018][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.190 | [ 13036][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.191 | [net] AP start failed
+2026-04-12 01:34:06.219 | E (14407) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.224 | E (14407) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.231 | [ 13064][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.249 | E (14437) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.254 | E (14437) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.261 | [ 13094][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.264 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.278 | E (14467) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.284 | E (14467) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.291 | [ 13124][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.296 | [ 13142][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.297 | [net] AP start failed
+2026-04-12 01:34:06.325 | E (14513) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.331 | E (14513) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.337 | [ 13170][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.355 | E (14543) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.360 | E (14543) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.367 | [ 13200][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.369 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.385 | E (14573) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.390 | E (14573) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.397 | [ 13230][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.402 | [ 13248][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.403 | [net] AP start failed
+2026-04-12 01:34:06.430 | E (14619) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.436 | E (14619) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.442 | [ 13276][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.460 | E (14649) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.466 | E (14649) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.473 | [ 13306][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.475 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.491 | E (14679) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.496 | E (14679) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.502 | [ 13336][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.508 | [ 13354][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.512 | [net] AP start failed
+2026-04-12 01:34:06.513 | [net] STA connect timeout
+2026-04-12 01:34:06.515 | [net] STA failure (timeout) idx=0 count=1
+2026-04-12 01:34:06.537 | E (14725) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.542 | E (14725) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.549 | [ 13382][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.566 | E (14755) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.572 | E (14755) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.578 | [ 13412][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.582 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.596 | E (14785) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.602 | E (14785) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.609 | [ 13442][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.613 | [ 13460][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.615 | [net] AP start failed
+2026-04-12 01:34:06.642 | E (14831) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.648 | E (14831) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.655 | [ 13488][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.673 | E (14861) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.678 | E (14861) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.684 | [ 13518][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.687 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.703 | E (14891) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.709 | E (14891) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.715 | [ 13548][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.720 | [ 13566][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.721 | [net] AP start failed
+2026-04-12 01:34:06.750 | E (14937) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.755 | E (14937) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.761 | [ 13594][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.779 | E (14967) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.784 | E (14967) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.791 | [ 13624][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.794 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.809 | E (14997) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.815 | E (14997) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.820 | [ 13654][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.826 | [ 13672][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.827 | [net] AP start failed
+2026-04-12 01:34:06.854 | E (15043) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.860 | E (15043) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.866 | [ 13700][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.885 | E (15073) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.890 | E (15073) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.896 | [ 13730][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.899 | [net] AP start: canlogger-setup
+2026-04-12 01:34:06.915 | E (15103) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.920 | E (15103) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.927 | [ 13760][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.931 | [ 13778][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:06.933 | [net] AP start failed
+2026-04-12 01:34:06.961 | E (15149) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.966 | E (15149) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:06.972 | [ 13806][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:06.990 | E (15179) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:06.996 | E (15179) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.002 | [ 13836][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.005 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.020 | E (15209) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.026 | E (15209) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.033 | [ 13866][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.038 | [ 13884][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.039 | [net] AP start failed
+2026-04-12 01:34:07.067 | E (15255) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.072 | E (15255) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.078 | [ 13912][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.097 | E (15285) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.102 | E (15285) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.108 | [ 13942][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.111 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.127 | E (15315) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.133 | E (15315) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.139 | [ 13972][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.144 | [ 13990][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.145 | [net] AP start failed
+2026-04-12 01:34:07.173 | E (15361) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.179 | E (15361) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.184 | [ 14018][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.202 | E (15391) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.208 | E (15391) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.214 | [ 14048][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.217 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.233 | E (15421) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.238 | E (15421) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.244 | [ 14078][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.249 | [ 14096][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.251 | [net] AP start failed
+2026-04-12 01:34:07.278 | E (15467) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.285 | E (15467) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.291 | [ 14124][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.309 | E (15497) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.314 | E (15497) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.321 | [ 14154][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.323 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.339 | E (15527) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.344 | E (15527) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.350 | [ 14184][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.356 | [ 14202][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.357 | [net] AP start failed
+2026-04-12 01:34:07.385 | E (15573) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.390 | E (15573) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.396 | [ 14230][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.414 | E (15603) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.420 | E (15603) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.426 | [ 14260][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.430 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.445 | E (15633) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.450 | E (15633) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.456 | [ 14290][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.461 | [ 14308][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.463 | [net] AP start failed
+2026-04-12 01:34:07.490 | E (15679) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.496 | E (15679) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.504 | [ 14336][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.521 | E (15709) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.526 | E (15709) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.532 | [ 14366][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.536 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.551 | E (15739) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.556 | E (15739) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.562 | [ 14396][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.567 | [ 14414][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.569 | [net] AP start failed
+2026-04-12 01:34:07.596 | E (15785) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.602 | E (15785) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.608 | [ 14442][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.627 | E (15815) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.632 | E (15815) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.638 | [ 14472][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.641 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.657 | E (15845) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.662 | E (15845) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.668 | [ 14502][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.673 | [ 14520][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.675 | [net] AP start failed
+2026-04-12 01:34:07.704 | E (15891) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.708 | E (15891) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.715 | [ 14548][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.734 | E (15921) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.738 | E (15921) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.744 | [ 14578][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.748 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.763 | E (15951) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.768 | E (15951) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.774 | [ 14608][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.780 | [ 14626][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.781 | [net] AP start failed
+2026-04-12 01:34:07.808 | E (15997) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.814 | E (15997) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.821 | [ 14654][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.839 | E (16027) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.845 | E (16027) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.850 | [ 14684][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.853 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.869 | E (16057) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.874 | E (16057) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.880 | [ 14714][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.886 | [ 14732][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.887 | [net] AP start failed
+2026-04-12 01:34:07.915 | E (16103) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.920 | E (16103) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.926 | [ 14760][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.944 | E (16133) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.950 | E (16133) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.956 | [ 14790][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.959 | [net] AP start: canlogger-setup
+2026-04-12 01:34:07.974 | E (16163) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:07.981 | E (16163) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:07.987 | [ 14820][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:07.991 | [ 14838][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:07.993 | [net] AP start failed
+2026-04-12 01:34:08.021 | E (16209) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.026 | E (16209) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.032 | [ 14866][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.050 | E (16239) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.056 | E (16239) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.062 | [ 14896][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.065 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.081 | E (16269) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.086 | E (16269) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.093 | [ 14926][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.098 | [ 14944][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.099 | [net] AP start failed
+2026-04-12 01:34:08.126 | E (16315) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.133 | E (16315) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.138 | [ 14972][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.157 | E (16345) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.162 | E (16345) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.168 | [ 15002][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.171 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.187 | E (16375) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.192 | E (16375) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.199 | [ 15032][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.204 | [ 15050][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.205 | [net] AP start failed
+2026-04-12 01:34:08.233 | E (16421) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.238 | E (16421) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.245 | [ 15078][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.263 | E (16451) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.268 | E (16451) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.275 | [ 15108][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.278 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.293 | E (16481) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.299 | E (16481) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.304 | [ 15138][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.310 | [ 15156][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.311 | [net] AP start failed
+2026-04-12 01:34:08.338 | E (16527) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.344 | E (16527) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.350 | [ 15184][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.369 | E (16557) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.374 | E (16557) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.380 | [ 15214][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.383 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.399 | E (16587) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.404 | E (16587) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.411 | [ 15244][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.415 | [ 15262][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.417 | [net] AP start failed
+2026-04-12 01:34:08.444 | E (16633) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.450 | E (16633) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.456 | [ 15290][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.475 | E (16663) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.480 | E (16663) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.486 | [ 15320][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.490 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.505 | E (16693) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.510 | E (16693) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.516 | [ 15350][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.522 | [ 15368][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.523 | [net] AP start failed
+2026-04-12 01:34:08.550 | E (16739) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.556 | E (16739) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.562 | [ 15396][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.580 | E (16769) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.586 | E (16769) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.592 | [ 15426][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.596 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.611 | E (16799) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.616 | E (16799) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.623 | [ 15456][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.628 | [ 15474][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.629 | [net] AP start failed
+2026-04-12 01:34:08.657 | E (16845) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.662 | E (16845) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.669 | [ 15502][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.687 | E (16875) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.692 | E (16875) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.698 | [ 15532][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.702 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.717 | E (16905) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.722 | E (16905) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.729 | [ 15562][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.733 | [ 15580][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.735 | [net] AP start failed
+2026-04-12 01:34:08.763 | E (16951) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.768 | E (16951) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.774 | [ 15608][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.792 | E (16981) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.798 | E (16981) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.804 | [ 15638][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.807 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.823 | E (17011) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.828 | E (17011) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.834 | [ 15668][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.839 | [ 15686][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.841 | [net] AP start failed
+2026-04-12 01:34:08.869 | E (17057) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.875 | E (17057) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.881 | [ 15714][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.898 | E (17087) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.904 | E (17087) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.910 | [ 15744][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.914 | [net] AP start: canlogger-setup
+2026-04-12 01:34:08.929 | E (17117) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.934 | E (17117) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.941 | [ 15774][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:08.946 | [ 15792][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:08.947 | [net] AP start failed
+2026-04-12 01:34:08.975 | E (17163) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:08.980 | E (17163) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:08.986 | [ 15820][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.005 | E (17193) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.010 | E (17193) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.016 | [ 15850][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.020 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.034 | E (17223) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.040 | E (17223) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.046 | [ 15880][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.051 | [ 15898][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.053 | [net] AP start failed
+2026-04-12 01:34:09.081 | E (17269) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.086 | E (17269) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.092 | [ 15926][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.110 | E (17299) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.116 | E (17299) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.122 | [ 15956][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.125 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.140 | E (17329) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.147 | E (17329) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.152 | [ 15986][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.158 | [ 16004][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.159 | [net] AP start failed
+2026-04-12 01:34:09.187 | E (17375) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.193 | E (17375) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.198 | [ 16032][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.217 | E (17405) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.223 | E (17405) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.229 | [ 16062][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.232 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.247 | E (17435) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.252 | E (17435) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.259 | [ 16092][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.264 | [ 16110][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.265 | [net] AP start failed
+2026-04-12 01:34:09.292 | E (17481) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.298 | E (17481) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.305 | [ 16138][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.323 | E (17511) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.329 | E (17511) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.334 | [ 16168][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.338 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.353 | E (17541) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.358 | E (17541) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.364 | [ 16198][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.370 | [ 16216][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.371 | [net] AP start failed
+2026-04-12 01:34:09.399 | E (17587) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.404 | E (17587) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.410 | [ 16244][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.429 | E (17617) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.434 | E (17617) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.441 | [ 16274][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.444 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.459 | E (17647) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.465 | E (17647) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.471 | [ 16304][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.475 | [ 16322][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.477 | [net] AP start failed
+2026-04-12 01:34:09.505 | E (17693) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.510 | E (17693) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.516 | [ 16350][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.535 | E (17723) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.540 | E (17723) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.547 | [ 16380][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.550 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.564 | E (17753) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.571 | E (17753) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.577 | [ 16410][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.582 | [ 16428][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.583 | [net] AP start failed
+2026-04-12 01:34:09.610 | E (17799) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.616 | E (17799) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.623 | [ 16456][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.641 | E (17829) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.646 | E (17829) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.653 | [ 16486][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.656 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.671 | E (17859) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.676 | E (17859) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.682 | [ 16516][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.687 | [ 16534][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.689 | [net] AP start failed
+2026-04-12 01:34:09.717 | E (17905) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.722 | E (17905) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.728 | [ 16562][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.747 | E (17935) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.752 | E (17935) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.758 | [ 16592][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.761 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.777 | E (17965) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.782 | E (17965) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.788 | [ 16622][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.793 | [ 16640][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.795 | [net] AP start failed
+2026-04-12 01:34:09.823 | E (18011) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.828 | E (18011) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.835 | [ 16668][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.853 | E (18041) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.858 | E (18041) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.864 | [ 16698][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.868 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.883 | E (18071) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.888 | E (18071) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.894 | [ 16728][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.899 | [ 16746][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:09.901 | [net] AP start failed
+2026-04-12 01:34:09.929 | E (18117) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.935 | E (18117) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.941 | [ 16774][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.959 | E (18147) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.965 | E (18147) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:09.970 | [ 16804][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:09.974 | [net] AP start: canlogger-setup
+2026-04-12 01:34:09.989 | E (18177) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:09.994 | E (18177) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.000 | [ 16834][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.005 | [ 16852][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.007 | [net] AP start failed
+2026-04-12 01:34:10.035 | E (18223) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.040 | E (18223) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.046 | [ 16880][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.064 | E (18253) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.070 | E (18253) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.076 | [ 16910][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.080 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.095 | E (18283) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.100 | E (18283) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.106 | [ 16940][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.112 | [ 16958][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.113 | [net] AP start failed
+2026-04-12 01:34:10.141 | E (18329) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.146 | E (18329) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.152 | [ 16986][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.171 | E (18359) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.176 | E (18359) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.183 | [ 17016][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.186 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.201 | E (18389) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.206 | E (18389) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.212 | [ 17046][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.217 | [ 17064][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.219 | [net] AP start failed
+2026-04-12 01:34:10.246 | E (18435) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.253 | E (18435) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.258 | [ 17092][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.277 | E (18465) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.283 | E (18465) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.289 | [ 17122][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.292 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.307 | E (18495) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.312 | E (18495) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.318 | [ 17152][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.324 | [ 17170][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.325 | [net] AP start failed
+2026-04-12 01:34:10.353 | E (18541) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.359 | E (18541) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.364 | [ 17198][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.382 | E (18571) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.388 | E (18571) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.394 | [ 17228][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.397 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.413 | E (18601) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.418 | E (18601) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.424 | [ 17258][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.430 | [ 17276][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.431 | [net] AP start failed
+2026-04-12 01:34:10.458 | E (18647) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.464 | E (18647) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.470 | [ 17304][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.489 | E (18677) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.494 | E (18677) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.500 | [ 17334][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.503 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.518 | E (18707) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.524 | E (18707) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.530 | [ 17364][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.535 | [ 17382][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.537 | [net] AP start failed
+2026-04-12 01:34:10.565 | E (18753) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.570 | E (18753) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.577 | [ 17410][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.595 | E (18783) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.601 | E (18783) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.606 | [ 17440][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.610 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.626 | E (18813) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.630 | E (18813) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.636 | [ 17470][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.641 | [ 17488][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.643 | [net] AP start failed
+2026-04-12 01:34:10.671 | E (18859) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.677 | E (18859) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.683 | [ 17516][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.701 | E (18889) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.706 | E (18889) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.712 | [ 17546][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.715 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.731 | E (18919) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.737 | E (18919) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.742 | [ 17576][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.747 | [ 17594][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.749 | [net] AP start failed
+2026-04-12 01:34:10.777 | E (18965) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.782 | E (18965) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.788 | [ 17622][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.807 | E (18995) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.812 | E (18995) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.819 | [ 17652][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.821 | [net] AP start: canlogger-setup
+2026-04-12 01:34:10.836 | E (19025) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.842 | E (19025) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.848 | [ 17682][E][WiFiGeneric.cpp:284] wifiLowLevelInit(): esp_wifi_init 0x101: ESP_ERR_NO_MEM
+2026-04-12 01:34:10.854 | [ 17700][E][AP.cpp:190] begin(): AP enable failed!
+2026-04-12 01:34:10.855 | [net] AP start failed
+2026-04-12 01:34:10.883 | E (19071) wifi_init: Failed to deinit Wi-Fi driver (0x3001)
+2026-04-12 01:34:10.888 | E (19071) wifi_init: Failed to deinit Wi-Fi (0x3001)
+2026-04-12 01:34:10.907 | log saved to logs\boot_probe_loop_20260412_013352\boot_01.log

@@ -1,0 +1,88 @@
+{
+  "started_at": "2026-04-12T01:42:41.720771",
+  "loops": [
+    {
+      "iteration": 1,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_014241\\boot_01.log",
+        "candidates": [
+          {
+            "label": "sta",
+            "ip": "192.168.3.45"
+          },
+          {
+            "label": "ap",
+            "ip": "192.168.4.1"
+          }
+        ],
+        "results": [
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "timed out"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "sta",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "sta",
+            "attempt": 2
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 2
+          }
+        ]
+      },
+      "serial_capture_rc": 0
+    }
+  ]
+}

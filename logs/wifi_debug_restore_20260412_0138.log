@@ -1,0 +1,56 @@
+2026-04-12 01:38:44.820 | opening COM15 at 115200 baud, duration=8.0s
+2026-04-12 01:38:44.821 | serial connected
+2026-04-12 01:38:45.822 | sent command: wifi-debug
+2026-04-12 01:38:45.822 | ESP-ROM:esp32s3-20210327
+2026-04-12 01:38:45.823 | Build:Mar 27 2021
+2026-04-12 01:38:45.824 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-12 01:38:45.824 | SPIWP:0xee
+2026-04-12 01:38:45.824 | mode:DIO, clock div:1
+2026-04-12 01:38:45.824 | load:0x3fce2820,len:0x10cc
+2026-04-12 01:38:45.825 | load:0x403c8700,len:0xc2c
+2026-04-12 01:38:45.825 | load:0x403cb700,len:0x30c0
+2026-04-12 01:38:45.868 | entry 0x403c88b8
+2026-04-12 01:38:45.868 | 
+2026-04-12 01:38:45.868 | App: CAN-Grabber
+2026-04-12 01:38:45.868 | Version: 0.0.1
+2026-04-12 01:38:45.869 | Build: Apr 12 2026 01:27:12
+2026-04-12 01:38:45.869 | PIO Env: esp32s3_debug
+2026-04-12 01:38:45.871 | Heap free/internal/largest: 182272 / 182272 / 126964
+2026-04-12 01:38:45.871 | PSRAM size/free: 0 / 0
+2026-04-12 01:38:45.872 | [serial] Type 'reset' to reboot the device
+2026-04-12 01:38:45.874 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-12 01:38:45.876 | [serial] Type 'sys-stats' to print system diagnostics
+2026-04-12 01:38:45.876 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-12 01:38:45.877 | [rtc] RTC_DS1307 detected
+2026-04-12 01:38:45.878 | [rtc] Startup epoch from RTC: 1775957933
+2026-04-12 01:38:45.879 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-12 01:38:45.880 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-12 01:38:46.180 | [  1089][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-12 01:38:46.182 | [net] Init, mode: 0
+2026-04-12 01:38:46.195 | [net] Event: 101
+2026-04-12 01:38:46.237 | [net] AP start: canlogger-setup
+2026-04-12 01:38:46.237 | [net] Event: 110
+2026-04-12 01:38:46.242 | [net] STA start
+2026-04-12 01:38:46.242 | [net] Event: 130
+2026-04-12 01:38:46.243 | [net] AP start event
+2026-04-12 01:38:46.247 | [net] AP IP: 192.168.4.1
+2026-04-12 01:38:46.249 | [net] STA mode disabled; AP only[net] Event: 131
+2026-04-12 01:38:46.253 | [net] AP stop event
+2026-04-12 01:38:46.253 | [net] Event: 130
+2026-04-12 01:38:46.254 | [net] AP start event
+2026-04-12 01:38:46.254 | 
+2026-04-12 01:38:46.255 | [net] Started async scan
+2026-04-12 01:38:46.325 | [system] summary reason=setup_complete unixMs=1775957933962 uptimeMs=1231 rtc=rtc valid=true available=true running=true
+2026-04-12 01:38:46.347 | [system] component=boot samples=2 last=config heap=182272 internal=182272 largest=126964 minHeap=182272 minInternal=182272 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=0 uptimeMs=266
+2026-04-12 01:38:46.364 | [system] component=rtc samples=1 last=init heap=179988 internal=179988 largest=126964 minHeap=179988 minInternal=179988 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933011 uptimeMs=280
+2026-04-12 01:38:46.386 | [system] component=storage samples=1 last=init heap=119192 internal=119192 largest=65524 minHeap=119192 minInternal=119192 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933434 uptimeMs=703
+2026-04-12 01:38:46.403 | [system] component=can samples=1 last=init heap=104732 internal=104732 largest=63476 minHeap=104732 minInternal=104732 minLargest=63476 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933439 uptimeMs=708
+2026-04-12 01:38:46.425 | [system] component=logging samples=2 last=start heap=90212 internal=90212 largest=49140 minHeap=90212 minInternal=90212 minLargest=49140 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933819 uptimeMs=1088
+2026-04-12 01:38:46.442 | [system] component=upload samples=2 last=queue heap=90212 internal=90212 largest=49140 minHeap=90212 minInternal=90212 minLargest=49140 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933820 uptimeMs=1089
+2026-04-12 01:38:46.459 | [system] component=net samples=6 last=connect heap=26104 internal=26104 largest=17396 minHeap=25940 minInternal=25940 minLargest=17396 task=loopTask stackWords=3752 minStackWords=2532 unixMs=1775957933894 uptimeMs=1163
+2026-04-12 01:38:46.480 | [system] component=rest samples=2 last=start heap=15156 internal=15156 largest=7668 minHeap=15156 minInternal=15156 minLargest=7668 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933961 uptimeMs=1230
+2026-04-12 01:38:46.498 | [system] component=web samples=2 last=start heap=15156 internal=15156 largest=7668 minHeap=15156 minInternal=15156 minLargest=7668 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775957933962 uptimeMs=1231
+2026-04-12 01:38:46.503 | [system] task=loopTask samples=15 stackWords=3752 minStackWords=3752
+2026-04-12 01:38:46.508 | [system] task=arduino_events samples=4 stackWords=2532 minStackWords=2532
+2026-04-12 01:38:49.462 | [net] Event: 102
+2026-04-12 01:38:53.002 | log saved to logs\wifi_debug_restore_20260412_0138.log

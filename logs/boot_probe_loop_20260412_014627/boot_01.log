@@ -1,0 +1,112 @@
+2026-04-12 01:46:27.778 | opening COM15 at 115200 baud, duration=20.0s
+2026-04-12 01:46:27.780 | serial connected
+2026-04-12 01:46:28.781 | sent command: reset
+2026-04-12 01:46:28.782 | ESP-ROM:esp32s3-20210327
+2026-04-12 01:46:28.782 | Build:Mar 27 2021
+2026-04-12 01:46:28.783 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-12 01:46:28.783 | SPIWP:0xee
+2026-04-12 01:46:28.784 | mode:DIO, clock div:1
+2026-04-12 01:46:28.784 | load:0x3fce2820,len:0x10cc
+2026-04-12 01:46:28.785 | load:0x403c8700,len:0xc2c
+2026-04-12 01:46:28.785 | load:0x403cb700,len:0x30c0
+2026-04-12 01:46:28.786 | entry 0x403c88b8
+2026-04-12 01:46:28.786 | 
+2026-04-12 01:46:28.786 | App: CAN-Grabber
+2026-04-12 01:46:28.786 | Version: 0.0.1
+2026-04-12 01:46:28.830 | Build: Apr 12 2026 01:27:12
+2026-04-12 01:46:28.831 | PIO Env: esp32s3_debug
+2026-04-12 01:46:28.832 | Heap free/internal/largest: 182272 / 182272 / 126964
+2026-04-12 01:46:28.833 | PSRAM size/free: 0 / 0
+2026-04-12 01:46:28.834 | [serial] Type 'reset' to reboot the device
+2026-04-12 01:46:28.836 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-12 01:46:28.837 | [serial] Type 'sys-stats' to print system diagnostics
+2026-04-12 01:46:28.838 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-12 01:46:28.839 | [rtc] RTC_DS1307 detected
+2026-04-12 01:46:28.840 | [rtc] Startup epoch from RTC: 1775958396
+2026-04-12 01:46:28.841 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-12 01:46:28.842 | [storage] SD_MMC mounted at 40000 kHz (1-bit)
+2026-04-12 01:46:29.285 | [  1234][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-12 01:46:29.286 | [net] Init, mode: 0
+2026-04-12 01:46:29.299 | [net] Event: 101
+2026-04-12 01:46:29.340 | [net] AP start: canlogger-setup
+2026-04-12 01:46:29.341 | [net] Event: 110
+2026-04-12 01:46:29.345 | [net] STA start
+2026-04-12 01:46:29.345 | [net] Event: 130
+2026-04-12 01:46:29.346 | [net] AP start event
+2026-04-12 01:46:29.350 | [net] AP IP: 192.168.4.1
+2026-04-12 01:46:29.351 | [net] STA candidate count: 1[net] Event: 131
+2026-04-12 01:46:29.356 | [net] AP stop event
+2026-04-12 01:46:29.356 | [net] Event: 130
+2026-04-12 01:46:29.357 | [net] AP start event
+2026-04-12 01:46:29.357 | 
+2026-04-12 01:46:29.360 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-12 01:46:29.361 | [net] STA index: 0
+2026-04-12 01:46:29.440 | [system] summary reason=setup_complete unixMs=1775958397117 uptimeMs=1386 rtc=rtc valid=true available=true running=true
+2026-04-12 01:46:29.462 | [system] component=boot samples=2 last=config heap=182272 internal=182272 largest=126964 minHeap=182272 minInternal=182272 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=0 uptimeMs=266
+2026-04-12 01:46:29.462 | [net] Event: 112
+2026-04-12 01:46:29.480 | [system] component=rtc samples=1 last=init heap=179988 internal=179988 largest=126964 minHeap=179988 minInternal=179988 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396011 uptimeMs=280
+2026-04-12 01:46:29.501 | [system] component=storage samples=1 last=init heap=135592 internal=135592 largest=81908 minHeap=135592 minInternal=135592 minLargest=81908 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396499 uptimeMs=768
+2026-04-12 01:46:29.518 | [system] component=can samples=1 last=init heap=121128 internal=121128 largest=77812 minHeap=121128 minInternal=121128 minLargest=77812 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396504 uptimeMs=773
+2026-04-12 01:46:29.540 | [system] component=logging samples=2 last=start heap=106624 internal=106624 largest=65524 minHeap=106624 minInternal=106624 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396965 uptimeMs=1234
+2026-04-12 01:46:29.557 | [system] component=upload samples=2 last=queue heap=106624 internal=106624 largest=65524 minHeap=106624 minInternal=106624 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396965 uptimeMs=1234
+2026-04-12 01:46:29.578 | [system] component=net samples=6 last=connect heap=42520 internal=42520 largest=31732 minHeap=42356 minInternal=42356 minLargest=31732 task=loopTask stackWords=3752 minStackWords=2420 unixMs=1775958397049 uptimeMs=1318
+2026-04-12 01:46:29.596 | [system] component=rest samples=2 last=start heap=31448 internal=31448 largest=22516 minHeap=31448 minInternal=31448 minLargest=22516 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958397117 uptimeMs=1386
+2026-04-12 01:46:29.617 | [system] component=web samples=2 last=start heap=31448 internal=31448 largest=22516 minHeap=31448 minInternal=31448 minLargest=22516 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958397117 uptimeMs=1386
+2026-04-12 01:46:29.623 | [system] task=loopTask samples=15 stackWords=3752 minStackWords=3752
+2026-04-12 01:46:29.625 | [system] task=arduino_events samples=4 stackWords=2420 minStackWords=2420
+2026-04-12 01:46:30.498 | [net] Event: 115
+2026-04-12 01:46:30.503 | [net] STA connected: ssid=Überlingen@Wohnzimmer rssi=-59
+2026-04-12 01:46:30.509 | [net] STA IP: 192.168.3.45 gateway=192.168.3.1 subnet=255.255.255.0 internal=30216 largest=19444
+2026-04-12 01:46:30.515 | [net] AP idle, stopping while STA is connected
+2026-04-12 01:46:30.515 | [net] AP stop
+2026-04-12 01:46:30.515 | [net] Event: 131
+2026-04-12 01:46:30.520 | [net] AP stop event
+2026-04-12 01:46:30.521 | [net] Event: 130
+2026-04-12 01:46:30.521 | [net] AP start event
+2026-04-12 01:46:30.526 | [net] Event: 131
+2026-04-12 01:46:30.526 | [net] AP stop event
+2026-04-12 01:46:30.532 | [net] mDNS ready: canlogger.local -> 192.168.3.45 (service http/tcp 80, internal=33720 largest=19444)
+2026-04-12 01:46:31.800 | [  3749][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 104, "Connection reset by peer"
+2026-04-12 01:46:31.818 | [REST] static send diag path=/index.html sent=2670/7739 waits=17 zero=1 maxChunk=256 availMin=0 availMax=0 timeout=0 disconnected=1 heap=18628 internal=18628 largest=9204
+2026-04-12 01:46:31.823 | [REST] static partial path=/index.html sent=2670/7739 remote=192.168.3.2
+2026-04-12 01:46:31.835 | [system] summary reason=rest_static_partial unixMs=1775958399501 uptimeMs=3770 rtc=rtc valid=true available=true running=true
+2026-04-12 01:46:31.856 | [system] component=boot samples=2 last=config heap=182272 internal=182272 largest=126964 minHeap=182272 minInternal=182272 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=0 uptimeMs=266
+2026-04-12 01:46:31.874 | [system] component=rtc samples=1 last=init heap=179988 internal=179988 largest=126964 minHeap=179988 minInternal=179988 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396011 uptimeMs=280
+2026-04-12 01:46:31.895 | [system] component=storage samples=1 last=init heap=135592 internal=135592 largest=81908 minHeap=135592 minInternal=135592 minLargest=81908 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396499 uptimeMs=768
+2026-04-12 01:46:31.912 | [system] component=can samples=1 last=init heap=121128 internal=121128 largest=77812 minHeap=121128 minInternal=121128 minLargest=77812 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396504 uptimeMs=773
+2026-04-12 01:46:31.929 | [system] component=logging samples=2 last=start heap=106624 internal=106624 largest=65524 minHeap=106624 minInternal=106624 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396965 uptimeMs=1234
+2026-04-12 01:46:31.951 | [system] component=upload samples=2 last=queue heap=106624 internal=106624 largest=65524 minHeap=106624 minInternal=106624 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396965 uptimeMs=1234
+2026-04-12 01:46:31.968 | [system] component=net samples=11 last=ap_stop heap=27940 internal=27940 largest=15860 minHeap=27652 minInternal=27652 minLargest=15860 task=arduino_events stackWords=1768 minStackWords=1768 unixMs=1775958398206 uptimeMs=2475
+2026-04-12 01:46:31.990 | [system] component=rest samples=6 last=static_part heap=18628 internal=18628 largest=9204 minHeap=11080 minInternal=11080 minLargest=7668 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958399501 uptimeMs=3770
+2026-04-12 01:46:32.007 | [system] component=web samples=2 last=start heap=31448 internal=31448 largest=22516 minHeap=31448 minInternal=31448 minLargest=22516 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958397117 uptimeMs=1386
+2026-04-12 01:46:32.013 | [system] task=loopTask samples=20 stackWords=3752 minStackWords=3752
+2026-04-12 01:46:32.023 | [system] task=arduino_events samples=8 stackWords=1768 minStackWords=1768
+2026-04-12 01:46:32.028 | [REST][SLOW] static took 281ms method=GET uri=/ freeHeap=23276
+2026-04-12 01:46:32.030 | [REST][SLOW] handleClient took 292192us method=GET uri=
+2026-04-12 01:46:36.646 | [REST] static send diag path=/index.html sent=2158/7739 waits=14 zero=0 maxChunk=256 availMin=0 availMax=0 timeout=0 disconnected=1 heap=9660 internal=9660 largest=5108
+2026-04-12 01:46:36.652 | [REST] static partial path=/index.html sent=2158/7739 remote=192.168.3.2
+2026-04-12 01:46:36.663 | [system] summary reason=rest_static_partial unixMs=1775958404329 uptimeMs=8598 rtc=rtc valid=true available=true running=true
+2026-04-12 01:46:36.684 | [system] component=boot samples=2 last=config heap=182272 internal=182272 largest=126964 minHeap=182272 minInternal=182272 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=0 uptimeMs=266
+2026-04-12 01:46:36.702 | [system] component=rtc samples=1 last=init heap=179988 internal=179988 largest=126964 minHeap=179988 minInternal=179988 minLargest=126964 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396011 uptimeMs=280
+2026-04-12 01:46:36.719 | [system] component=storage samples=1 last=init heap=135592 internal=135592 largest=81908 minHeap=135592 minInternal=135592 minLargest=81908 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396499 uptimeMs=768
+2026-04-12 01:46:36.740 | [system] component=can samples=1 last=init heap=121128 internal=121128 largest=77812 minHeap=121128 minInternal=121128 minLargest=77812 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396504 uptimeMs=773
+2026-04-12 01:46:36.758 | [system] component=logging samples=2 last=start heap=106624 internal=106624 largest=65524 minHeap=106624 minInternal=106624 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396965 uptimeMs=1234
+2026-04-12 01:46:36.779 | [system] component=upload samples=2 last=queue heap=106624 internal=106624 largest=65524 minHeap=106624 minInternal=106624 minLargest=65524 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958396965 uptimeMs=1234
+2026-04-12 01:46:36.796 | [system] component=net samples=11 last=ap_stop heap=27940 internal=27940 largest=15860 minHeap=27652 minInternal=27652 minLargest=15860 task=arduino_events stackWords=1768 minStackWords=1768 unixMs=1775958398206 uptimeMs=2475
+2026-04-12 01:46:36.818 | [system] component=rest samples=10 last=static_part heap=6164 internal=6164 largest=2548 minHeap=6164 minInternal=6164 minLargest=2548 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958404329 uptimeMs=8598
+2026-04-12 01:46:36.835 | [system] component=web samples=2 last=start heap=31448 internal=31448 largest=22516 minHeap=31448 minInternal=31448 minLargest=22516 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958397117 uptimeMs=1386
+2026-04-12 01:46:36.857 | [system] component=loop samples=1 last=tick heap=26888 internal=26888 largest=15860 minHeap=26888 minInternal=26888 minLargest=15860 task=loopTask stackWords=3752 minStackWords=3752 unixMs=1775958400731 uptimeMs=5000
+2026-04-12 01:46:36.862 | [system] task=loopTask samples=25 stackWords=3752 minStackWords=3752
+2026-04-12 01:46:36.868 | [system] task=arduino_events samples=8 stackWords=1768 minStackWords=1768
+2026-04-12 01:46:36.874 | [REST][SLOW] static took 284ms method=GET uri=/ freeHeap=8248
+2026-04-12 01:46:36.875 | [REST][SLOW] handleClient took 296192us method=GET uri=
+2026-04-12 01:46:36.954 | [  8904][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:36.999 | [REST][SLOW] handleClient took 58499us method=GET uri=
+2026-04-12 01:46:41.593 | [ 13543][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:42.321 | [ 14271][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:43.321 | [ 15271][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:44.321 | [ 16271][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:45.320 | [ 17271][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:46.321 | [ 18271][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:47.322 | [ 19272][E][NetworkClient.cpp:435] write(): fail on fd 49, errno: 11, "No more processes"
+2026-04-12 01:46:47.844 | log saved to logs\boot_probe_loop_20260412_014627\boot_01.log

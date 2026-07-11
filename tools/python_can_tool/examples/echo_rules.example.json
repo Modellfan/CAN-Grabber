@@ -1,0 +1,13 @@
+{
+  "rules": [
+    {
+      "match_id": "3E8",
+      "match_data_prefix": "02",
+      "extended": false,
+      "response_id": "3E9",
+      "response_data": "03",
+      "response_extended": false,
+      "delay_ms": 0
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "canable500": {
+    "port": 22,
+    "serial_baudrate": 115200,
+    "can_bitrate": 500000,
+    "data_bitrate": 0
+  },
+  "canable500_fd2m": {
+    "port": 22,
+    "serial_baudrate": 115200,
+    "can_bitrate": 500000,
+    "data_bitrate": 2000000
+  }
+}

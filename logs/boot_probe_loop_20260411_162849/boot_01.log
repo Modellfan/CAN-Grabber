@@ -1,0 +1,56 @@
+2026-04-11 16:28:49.884 | opening COM15 at 115200 baud, duration=20.0s
+2026-04-11 16:28:49.886 | serial connected
+2026-04-11 16:28:50.889 | sent command: reset
+2026-04-11 16:28:50.890 | ESP-ROM:esp32s3-20210327
+2026-04-11 16:28:50.891 | Build:Mar 27 2021
+2026-04-11 16:28:50.893 | rst:0x1 (POWERON),boot:0xb (SPI_FAST_FLASH_BOOT)
+2026-04-11 16:28:50.893 | SPIWP:0xee
+2026-04-11 16:28:50.894 | mode:DIO, clock div:1
+2026-04-11 16:28:50.895 | load:0x3fce2820,len:0x10cc
+2026-04-11 16:28:50.895 | load:0x403c8700,len:0xc2c
+2026-04-11 16:28:50.896 | load:0x403cb700,len:0x30c0
+2026-04-11 16:28:50.897 | entry 0x403c88b8
+2026-04-11 16:28:50.897 | 
+2026-04-11 16:28:50.898 | App: CAN-Grabber
+2026-04-11 16:28:50.898 | Version: 0.0.1
+2026-04-11 16:28:50.942 | Build: Apr 11 2026 15:38:15
+2026-04-11 16:28:50.943 | PIO Env: esp32s3_debug
+2026-04-11 16:28:50.945 | Heap free/internal/largest: 184016 / 184016 / 126964
+2026-04-11 16:28:50.945 | PSRAM size/free: 0 / 0
+2026-04-11 16:28:50.947 | [serial] Type 'reset' to reboot the device
+2026-04-11 16:28:50.949 | [serial] Type 'wifi-debug' to store the default debug STA network
+2026-04-11 16:28:50.950 | [rtc] I2C started on SDA=38, SCL=40
+2026-04-11 16:28:50.951 | [rtc] RTC_DS1307 detected
+2026-04-11 16:28:50.952 | [rtc] Startup epoch from RTC: 1775924936
+2026-04-11 16:28:50.954 | [storage] SDIO pins CLK=15 CMD=1 D0=16 D1=42 D2=41 D3=2
+2026-04-11 16:28:50.955 | [storage] SD_MMC mounted at 40000 kHz (4-bit)
+2026-04-11 16:28:51.234 | [  1078][E][STA.cpp:530] disconnect(): STA disconnect failed! 0x3001: ESP_ERR_WIFI_NOT_INIT
+2026-04-11 16:28:51.236 | [net] Init, mode: 0
+2026-04-11 16:28:51.248 | [net] Event: 101
+2026-04-11 16:28:51.353 | [net] AP start: canlogger-setup
+2026-04-11 16:28:51.353 | [net] Event: 110
+2026-04-11 16:28:51.357 | [net] STA start
+2026-04-11 16:28:51.358 | [net] Event: 130
+2026-04-11 16:28:51.359 | [net] AP start event
+2026-04-11 16:28:51.363 | [net] AP IP: 192.168.4.1
+2026-04-11 16:28:51.364 | [net] STA candidate count: 1[net] Event: 131
+2026-04-11 16:28:51.369 | [net] AP stop event
+2026-04-11 16:28:51.369 | [net] Event: 130
+2026-04-11 16:28:51.370 | [net] AP start event
+2026-04-11 16:28:51.370 | 
+2026-04-11 16:28:51.374 | [net] STA connect: Überlingen@Wohnzimmer
+2026-04-11 16:28:51.375 | [net] STA index: 0
+2026-04-11 16:28:51.448 | [net] Event: 112
+2026-04-11 16:28:52.497 | [net] Event: 115
+2026-04-11 16:28:52.502 | [net] STA connected: ssid=Überlingen@Wohnzimmer rssi=-64
+2026-04-11 16:28:52.509 | [net] STA IP: 192.168.3.45 gateway=192.168.3.1 subnet=255.255.255.0 internal=15536 largest=7668
+2026-04-11 16:28:52.513 | [net] AP idle, stopping while STA is connected
+2026-04-11 16:28:52.514 | [net] AP stop
+2026-04-11 16:28:52.514 | [net] Event: 131
+2026-04-11 16:28:52.519 | [net] AP stop event
+2026-04-11 16:28:52.520 | [net] Event: 130
+2026-04-11 16:28:52.520 | [net] AP start event
+2026-04-11 16:28:52.524 | [net] Event: 131
+2026-04-11 16:28:52.525 | [net] AP stop event
+2026-04-11 16:28:52.531 | [net] mDNS ready: canlogger.local -> 192.168.3.45 (service http/tcp 80, internal=19040 largest=7668)
+2026-04-11 16:29:09.907 | log saved to logs\boot_probe_loop_20260411_162849\boot_01.log

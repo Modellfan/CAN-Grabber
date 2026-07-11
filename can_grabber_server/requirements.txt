@@ -1,0 +1,6 @@
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+cantools>=41.3.0
+python-multipart>=0.0.9
+zeroconf>=0.132.2
+httpx>=0.27.0

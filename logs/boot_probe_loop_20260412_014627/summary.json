@@ -1,0 +1,128 @@
+{
+  "started_at": "2026-04-12T01:46:27.634906",
+  "loops": [
+    {
+      "iteration": 1,
+      "probe": {
+        "log": "logs\\boot_probe_loop_20260412_014627\\boot_01.log",
+        "candidates": [
+          {
+            "label": "sta",
+            "ip": "192.168.3.45"
+          },
+          {
+            "label": "ap",
+            "ip": "192.168.4.1"
+          }
+        ],
+        "results": [
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": true,
+                "status": 200,
+                "content_type": "text/html",
+                "body_preview": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>CAN-Grabber</title>\n  <link rel=\"stylesheet\" href=\"/style.css?v=20260220a\">\n</head>\n<body>\n  <div id=\"content\">\n    <aside id=\"navbar\" class=\"navbar\">\n      <div id=\"logo\">\n        <img src=\"logo.png\" alt=\"OpenInverter\" />\n      </div>\n      <div>\n        <a class=\"tablink\" data-view=\"status\" href=\"#status\">\n          <img class=\"navimg\" src=\"news.svg\" alt=\"\">\n    "
+              },
+              "/api/status": {
+                "ok": true,
+                "status": 200,
+                "content_type": "application/json",
+                "body_preview": "{\"uptime_sec\":3,\"wifi_connected\":true,\"ip\":\"192.168.3.45\",\"ssid\":\"\u00dcberlingen@Wohnzimmer\",\"rssi_dbm\":-58,\"rssi_percent\":84,\"sta_mode_enabled\":true,\"ap_clients\":0,\"time_epoch\":1775958399,\"time_valid\":true,\"time_source\":\"rtc\",\"rtc_available\":true,\"rtc_running\":true,\"logging\":{\"total_bytes\":58,\"bytes_per_sec\":0,\"active_buses\":2,\"started\":true,\"open_failures\":0,\"write_failures\":0,\"last_write_ms\":1204},\"storage\":{\"ready\":true,\"total_bytes\":63847792640,\"free_bytes\":62267654144,\"log_files\":2},\"uploader\":{\"enabled\""
+              }
+            },
+            "label": "sta",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 1
+          },
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": true,
+                "status": 200,
+                "content_type": "text/html",
+                "body_preview": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>CAN-Grabber</title>\n  <link rel=\"stylesheet\" href=\"/style.css?v=20260220a\">\n</head>\n<body>\n  <div id=\"content\">\n    <aside id=\"navbar\" class=\"navbar\">\n      <div id=\"logo\">\n        <img src=\"logo.png\" alt=\"OpenInverter\" />\n      </div>\n      <div>\n        <a class=\"tablink\" data-view=\"status\" href=\"#status\">\n          <img class=\"navimg\" src=\"news.svg\" alt=\"\">\n    "
+              },
+              "/api/status": {
+                "ok": true,
+                "status": 200,
+                "content_type": "application/json",
+                "body_preview": "{\"uptime_sec\":8,\"wifi_connected\":true,\"ip\":\"192.168.3.45\",\"ssid\":\"\u00dcberlingen@Wohnzimmer\",\"rssi_dbm\":-58,\"rssi_percent\":84,\"sta_mode_enabled\":true,\"ap_clients\":0,\"time_epoch\":1775958404,\"time_valid\":true,\"time_source\":\"rtc\",\"rtc_available\":true,\"rtc_running\":true,\"logging\":{\"total_bytes\":58,\"bytes_per_sec\":0,\"active_buses\":2,\"started\":true,\"open_failures\":0,\"write_failures\":0,\"last_write_ms\":1204},\"storage\":{\"ready\":true,\"total_bytes\":63847792640,\"free_bytes\":62267654144,\"log_files\":2},\"uploader\":{\"enabled\""
+              }
+            },
+            "label": "sta",
+            "attempt": 2
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 2
+          },
+          {
+            "ip": "192.168.3.45",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "timed out"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "sta",
+            "attempt": 3
+          },
+          {
+            "ip": "192.168.4.1",
+            "port": 80,
+            "paths": {
+              "/": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              },
+              "/api/status": {
+                "ok": false,
+                "error": "<urlopen error timed out>"
+              }
+            },
+            "label": "ap",
+            "attempt": 3
+          }
+        ]
+      },
+      "serial_capture_rc": 0
+    }
+  ]
+}
