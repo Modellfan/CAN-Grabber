@@ -24,8 +24,9 @@ CAN-Grabber firmware and related tools.
 
 ## Testing
 
-- [Hardware Test Stubs](testing/hardware-test-stubs.md)
-- [Upload UI v5 Test Architecture](testing/upload-ui-v5.md)
+- [Hardware Experiment Guide](testing/hardware-test-stubs.md)
+- [Experiment Catalog](../experiments/README.md)
+- [Upload UI Experiment](../experiments/upload-ui/README.md)
 
 ## History
 
@@ -41,5 +42,5 @@ flowchart TD
   Docs --> Testing[testing/*.md]
   Docs --> History[history/*.md]
   Arch --> Runtime[runtime_shared_state_architecture.md]
-  Testing --> UploadV5[upload-ui-v5.md]
+  Testing --> Experiments[../experiments/README.md]
 ```

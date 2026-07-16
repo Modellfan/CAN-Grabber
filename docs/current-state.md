@@ -17,7 +17,7 @@ Snapshot date: 2026-07-07
   - `src/rest/rest_api.cpp`
   - `src/storage/storage_manager.cpp`
   - `src/upload/upload_manager.cpp`
-  - `tools/dev/http_reachability_probe.py`
+  - `experiments/boot-network-diagnostics/tools/http_reachability_probe.py`
   - `tools/esp32-arduino-lib-builder` submodule/worktree marker
 - Major untracked additions:
   - `can_grabber_server/`
@@ -25,8 +25,8 @@ Snapshot date: 2026-07-07
   - `include/system/`
   - `src/system/`
   - `tools/python_can_tool/`
-  - new boot, WiFi, and SD/MMC test logs under `logs/`
-  - `tools/dev/boot_probe_loop.py`
+  - boot, WiFi, and SD/MMC evidence under the owning `experiments/*/results/raw/`
+  - `experiments/boot-network-diagnostics/tools/boot_probe_loop.py`
 
 ## Project Shape
 
@@ -171,9 +171,9 @@ http://127.0.0.1:8787
 Additional tooling is present:
 
 - `tools/python_can_tool/`: Python SLCAN command-line tool for listening, logging, DBC decoding, transmit, playback, echo rules, and offline analysis.
-- `tools/can-upload-mock/`: upload mock server.
-- `tools/dev/boot_probe_loop.py`: boot probe automation.
-- `tools/upload_ui_tester_v5.py` and related scripts: upload UI/hardware test support.
+- `experiments/upload-ui/tools/can-upload-mock/`: upload mock server.
+- `experiments/boot-network-diagnostics/tools/boot_probe_loop.py`: boot probe automation.
+- `experiments/upload-ui/tools/upload_ui_tester_v5.py` and related scripts: upload UI/hardware test support.
 
 ## Verification State
 
@@ -182,7 +182,7 @@ No build, server startup, browser check, or test run was performed for this snap
 Known verification gaps:
 
 - `platformio run -e esp32s3` should be run before firmware changes are considered stable.
-- `platformio run -e sd_http_upload_ui_test_v5` should be run before upload UI work is considered stable.
+- `platformio run -d experiments -e sd_http_upload_ui_test_v5` should be run before upload UI work is considered stable.
 - The CAN Grabber Server should be started locally and checked at `http://127.0.0.1:8787`.
 - DBC upload/edit/save should be tested with a real `.dbc` file.
 - InfluxDB detection/start should be tested on the target Windows machine.
@@ -191,8 +191,8 @@ Known verification gaps:
 ## Immediate Risks
 
 - The working tree contains many uncommitted changes and untracked files, so future edits should be scoped carefully.
-- Some logs and generated cache files are untracked; decide what should be kept before committing.
-- `tools/dev/__pycache__/http_reachability_probe.cpython-314.pyc` is untracked generated output and likely should not be committed.
+- Experiment evidence is organized below the owning experiment; generated
+  `__pycache__` and local captures must remain untracked.
 - CAN Grabber Server startup writes to the machine-local app home folder, not the repository.
 - The desktop DBC editor rewrites DBC files via `cantools`; real file round-trip behavior needs validation.
 - InfluxDB startup uses `subprocess.Popen`; process lifecycle management is minimal.

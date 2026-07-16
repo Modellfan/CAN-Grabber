@@ -11,7 +11,7 @@
 #include "storage/storage_manager.h"
 #include "upload/upload_manager.h"
 #ifdef RX_LOAD_TEST
-#include "dev/load_test_control.h"
+#include "load_test_control.h"
 #endif
 
 namespace logging {

@@ -1,76 +1,26 @@
-# Hardware Test Stubs
+# Hardware Experiment Guide
 
-## Purpose
+Hardware experiments verify real ESP32-S3, SD, CAN, Wi-Fi, RTC, and upload
+behavior. They are deliberately separated from production firmware under
+[`experiments/`](../../experiments/README.md).
 
-Hardware test stubs verify real ESP32-S3, SD, CAN, WiFi, and upload behavior.
-They should be separate PlatformIO environments when they stress hardware or
-change runtime scheduling assumptions.
+The root `platformio.ini` contains production environments only. Build an
+experiment from the repository root with:
 
-## Existing Test Environments
-
-| Env | Source | Purpose |
-| --- | --- | --- |
-| `sd_speed_test` | `src/dev/sd_speed_test.cpp` | Raw SPI SD write sweep |
-| `sd_sdio_speed_test` | `src/dev/sd_sdio_speed_test.cpp` | Raw SD_MMC/SDIO write sweep |
-| `rx_load_test` | `src/dev/rx_load_test.cpp` | Synthetic CAN/log-writer/storage pressure |
-| `sd_http_post_speed_test` | `src/dev/sd_http_post_speed_test.cpp` | SD-to-HTTP upload transport benchmarking |
-| `sd_http_upload_ui_test_v5` | `src/dev/sd_http_upload_ui_test_v5.cpp` | Upload UI, queue, retry, and responsiveness tests |
-
-## Planned Storage Write Performance Stub
-
-Name:
-
-- Env: `sd_storage_write_perf_test`
-- Source: `src/dev/sd_storage_write_perf_test.cpp`
-
-Intent:
-
-- Exercise the production storage layer, not a separate test-only SD object.
-- Use `storage::init()` and `storage::card()`.
-- Write deterministic pseudo-random data blocks.
-- Measure write throughput, flush time, file size, and checksum/readback.
-- Print machine-readable serial output.
-
-Expected serial result format:
-
-```text
-RESULT test=sd_storage_write_perf mounted=1 bytes=16777216 block=4096 write_ms=1234 flush_ms=12 mb_s=12.97 checksum=0x12345678 verify=1
+```powershell
+pio run -d experiments -e <environment>
 ```
 
-Recommended checks:
+The central [experiment catalog](../../experiments/README.md) lists every
+environment and links to its code, prerequisites, acceptance criteria, tools,
+and historical evidence. Integration experiments such as `rx_load_test` compile
+the current production modules directly rather than keeping copies.
 
-- SD mounted successfully.
-- Written byte count equals requested byte count.
-- File size matches written bytes.
-- Readback checksum matches write checksum.
-- No write or flush failures.
+## Evidence Rules
 
-## Log Writer Integration Testing
-
-Do not test log-writer throughput through `logging::enqueue()`. That API is a
-legacy placeholder in the current block-based design.
-
-Use `rx_load_test` for the production-like path:
-
-```mermaid
-flowchart LR
-  Synthetic[RX load producer] --> Blocks[Log blocks]
-  Blocks --> Writer[logging::log_task]
-  Writer --> Storage[storage::card]
-  Writer --> Meta[storage metadata]
-```
-
-Important metrics:
-
-- Target FPS per bus
-- Produced and consumed frame counts
-- Queue depth
-- Dropped frames
-- `logging::Stats.bytes_per_sec`
-- Write failures
-- Open/reopen failures
-
-## Evidence Handling
-
-Preserve serial logs, JSONL files, and summary files under `logs/` until the
-repository cleanup pass moves them into a structured artifact area.
+- Store meaningful summaries with the owning experiment.
+- Store raw files up to 5 MiB in `results/raw/`.
+- Store larger local captures in ignored `results/local/` and record their
+  path and checksum in the summary.
+- Commit only example credential files.
+- Use Git commits instead of creating new stage snapshots.

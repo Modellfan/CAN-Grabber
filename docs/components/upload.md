@@ -56,4 +56,4 @@ flowchart TD
 - `sd_http_post_speed_test` for transport profile and throughput tuning.
 - `sd_http_upload_ui_test_v5` for queue, retry, reset, bookkeeping, probe, and
   UI responsiveness behavior.
-- Mock server tests with `tools/can-upload-mock`.
+- Mock server tests with `experiments/upload-ui/tools/can-upload-mock`.
